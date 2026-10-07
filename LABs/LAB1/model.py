@@ -19,10 +19,10 @@ class LinearRegressionModel:
             N = len(y)
             return 2.0 / N * Phi.T @ residual + lambda1 * np.sign(w) + 2.0 * lambda2 * w  , np.float64(2.0)/ N * np.sum(residual)
         
-        epochs = 1000
+        epochs = 10000
         lr = 0.001
-        lambda1 = np.float64(1.0)
-        lambda2 = np.float64(1.0)
+        lambda1 = np.float64(0.01)
+        lambda2 = np.float64(0.01)
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
@@ -31,9 +31,10 @@ class LinearRegressionModel:
             grad_w, grad_b = cal_grad(features, targets, w, b, lambda1, lambda2)
             if not np.all(np.isfinite(grad_w) and np.isfinite(grad_b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
+                break
             w = w - lr * grad_w
             b = b - lr * grad_b
-            if not np.all(np.isfinite(w)):
+            if not np.all(np.isfinite(w) and np.isfinite(b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
@@ -48,8 +49,8 @@ class LinearRegressionModel:
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         # 提示：使用矩阵乘法和偏置，返回形状为 (N,) 的预测值。
+        return features @ self.weights + self.bias
 
-        raise NotImplementedError
 
 
 class LogisticRegressionModel:
