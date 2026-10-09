@@ -47,6 +47,10 @@ class LinearRegressionModel:
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
+            if not np.isfinite(loss):
+                # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
+                print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
                 print(f"Training converged at epoch {epoch}, loss={loss:.8f}")
                 break
@@ -112,6 +116,10 @@ class LogisticRegressionModel:
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
+            if not np.isfinite(loss):
+                # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
+                print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
                 print(f"Training converged at epoch {epoch}, loss={loss:.8f}")
                 break
