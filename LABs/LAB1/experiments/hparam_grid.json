@@ -1,0 +1,89 @@
+{
+  "_readme": [
+    "分组超参数配置。每个 group 只改变一个超参数（vary），其余参数由 fixed 固定为控制变量，",
+    "从而保证同一组内的对比是单变量、公平的。base 是所有组共享的默认值，fixed 覆盖 base。",
+    "运行时：python experiments/run_grid.py --config experiments/hparam_grid.json",
+    "可用 --groups truth_lr,world_lr 只跑指定组；--out 指定结果文件。",
+    "注意：这些范围是在『未标准化』特征上探测得到的，world 任务 lr 必须 <= 0.0005 否则溢出。"
+  ],
+  "base": {
+    "lr": 0.001,
+    "epochs": 10000,
+    "lambda1": 0.01,
+    "lambda2": 0.01
+  },
+  "groups": [
+    {
+      "name": "truth_lr",
+      "task": "truth",
+      "layer": 11,
+      "note": "truth 上学习率的影响，其余固定",
+      "fixed": {"epochs": 500, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"lr": [0.01, 0.005, 0.002, 0.001, 0.0005]}
+    },
+    {
+      "name": "truth_epochs",
+      "task": "truth",
+      "layer": 11,
+      "note": "truth 上训练轮数的影响，其余固定",
+      "fixed": {"lr": 0.005, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"epochs": [200, 500, 1000, 2000]}
+    },
+    {
+      "name": "truth_lambda1",
+      "task": "truth",
+      "layer": 11,
+      "note": "truth 上 L1 正则系数的影响，其余固定",
+      "fixed": {"lr": 0.005, "epochs": 500, "lambda2": 0.001},
+      "vary": {"lambda1": [0.0, 0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "truth_lambda2",
+      "task": "truth",
+      "layer": 11,
+      "note": "truth 上 L2 正则系数的影响，其余固定",
+      "fixed": {"lr": 0.005, "epochs": 500, "lambda1": 0.001},
+      "vary": {"lambda2": [0.0, 0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "truth_layer",
+      "task": "truth",
+      "layer": null,
+      "note": "truth 上不同隐表征层的影响，超参固定",
+      "fixed": {"lr": 0.0005, "epochs": 500, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"layer": [11, 23, 35]}
+    },
+    {
+      "name": "world_lr",
+      "task": "world",
+      "layer": 11,
+      "note": "world 上学习率的影响（lr>0.0005 会梯度溢出）",
+      "fixed": {"epochs": 2000, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"lr": [0.0005, 0.0002, 0.0001, 0.00005]}
+    },
+    {
+      "name": "world_epochs",
+      "task": "world",
+      "layer": 11,
+      "note": "world 上训练轮数的影响，其余固定",
+      "fixed": {"lr": 0.0005, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"epochs": [500, 1000, 2000, 4000]}
+    },
+    {
+      "name": "world_lambda2",
+      "task": "world",
+      "layer": 11,
+      "note": "world 上 L2 正则系数的影响，其余固定",
+      "fixed": {"lr": 0.0005, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.0, 0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "world_layer",
+      "task": "world",
+      "layer": null,
+      "note": "world 上不同隐表征层的影响，超参固定",
+      "fixed": {"lr": 0.0002, "epochs": 2000, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"layer": [11, 23, 35]}
+    }
+  ]
+}
