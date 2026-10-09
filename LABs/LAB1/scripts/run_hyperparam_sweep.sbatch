@@ -52,7 +52,7 @@ if [[ ! -f "${RUNNER}" ]]; then
   exit 1
 fi
 
-CONDA_SH="${HOME}/miniforge3/etc/profile.d/conda.sh"
+CONDA_SH="${HOME}/miniconda3/etc/profile.d/conda.sh"
 if [[ ! -f "${CONDA_SH}" ]]; then
   echo "ERROR: conda init script not found: ${CONDA_SH}" >&2
   exit 1
