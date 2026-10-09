@@ -25,7 +25,8 @@ set -uo pipefail
 REPO_DIR="${HOME}/USTC-AI3002-26fall"
 LAB_DIR="${REPO_DIR}/LABs/LAB1"
 
-CONFIG="${LAB_DIR}/experiments/hparam_grid.json"
+# 默认跑 hparam_grid.json；用 GRID_CONFIG=hparam_grid_std.json 可切换到其他配置
+CONFIG="${LAB_DIR}/experiments/${GRID_CONFIG:-hparam_grid.json}"
 RUNNER="${LAB_DIR}/experiments/run_grid.py"
 OUTPUT_ROOT="${LAB_DIR}/results/slurm_grid"
 

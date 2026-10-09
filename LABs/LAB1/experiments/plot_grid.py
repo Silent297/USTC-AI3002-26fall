@@ -60,9 +60,15 @@ def group_records(records: list[dict]) -> dict[str, list[dict]]:
     return groups
 
 
+def is_usable(rec: dict) -> bool:
+    # 'finite' 由 run_grid 判定（含训练发散检测）；metric 是有限数的发散 run（如 1e251）
+    # 也要排除，否则会毁掉 y 轴
+    return bool(rec.get("finite", True)) and np.isfinite(rec["metric"])
+
+
 def best_finite(recs: list[dict]) -> dict | None:
-    # 只用有限点选最优；'finite' 字段在发散 run 上不可靠，直接检查 metric
-    finite = [rec for rec in recs if np.isfinite(rec["metric"])]
+    # 只用可用点选最优
+    finite = [rec for rec in recs if is_usable(rec)]
     if not finite:
         return None
     if finite[0]["metric_name"] == "mse":
@@ -111,7 +117,7 @@ def draw_panel(ax, recs: list[dict]) -> None:
     positions = setup_xaxis(ax, recs, vary)
 
     finite = sorted(
-        (rec for rec in recs if np.isfinite(rec["metric"])),
+        (rec for rec in recs if is_usable(rec)),
         key=lambda rec: rec[vary],
     )
     xs = [positions[rec[vary]] for rec in finite]
@@ -140,17 +146,17 @@ def draw_panel(ax, recs: list[dict]) -> None:
         ax.set_ylim(vmin - 0.08 * span, vmax + 0.30 * span)
     ax.set_ylabel(f"validation {metric_name}")
 
-    # 发散 run（metric=inf）：不连线，在面板顶部标出
+    # 发散 run：不连线，在面板顶部标出
     blend = blended_transform_factory(ax.transData, ax.transAxes)
     for rec in recs:
-        if np.isfinite(rec["metric"]):
+        if is_usable(rec):
             continue
         x = positions[rec[vary]]
         ax.scatter([x], [0.90], transform=blend, marker="^", s=55, color="0.5", zorder=5)
         ax.text(
             x,
             0.855,
-            f"diverged\n({metric_name}=inf)",
+            "diverged",
             transform=blend,
             ha="center",
             va="top",
@@ -223,6 +229,8 @@ def save_figure(fig, stem: Path) -> list[Path]:
 
 def figure_task(records: list[dict], task: str, out_dir: Path) -> list[Path]:
     task_records = [rec for rec in records if rec["task"] == task]
+    if not task_records:
+        return []
     by_vary: dict[str, list[dict]] = {}
     for rec in task_records:
         by_vary.setdefault(rec["vary"], []).append(rec)
@@ -280,8 +288,8 @@ def main() -> None:
 
     for task in ("truth", "world"):
         task_records = [rec for rec in records if rec["task"] == task]
-        diverged = sum(1 for rec in task_records if not np.isfinite(rec["metric"]))
-        print(f"{task}: {len(task_records)} runs, {diverged} diverged")
+        unusable = sum(1 for rec in task_records if not is_usable(rec))
+        print(f"{task}: {len(task_records)} runs, {unusable} diverged")
 
     saved: list[Path] = []
     for task in ("truth", "world"):

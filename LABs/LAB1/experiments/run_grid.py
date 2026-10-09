@@ -23,9 +23,33 @@ def safe_component(value: object) -> str:
     return "".join(ch if ch.isalnum() or ch in "._=-" else "-" for ch in text)
 
 
-def evaluate(task: str, layer: int, params: dict, weights_path: Path | None = None) -> dict:
+def unstandardize_weights(
+    weights: np.ndarray, bias: np.float64, mu: np.ndarray, sd: np.ndarray
+) -> tuple[np.ndarray, np.float64]:
+    # 把标准化空间训练出的参数折回原始特征空间：
+    # pred = ((X - mu)/sd) @ w + b = X @ (w/sd) + (b - mu @ (w/sd))
+    raw_weights = weights / sd
+    raw_bias = np.float64(bias - mu @ raw_weights)
+    return raw_weights, raw_bias
+
+
+def evaluate(
+    task: str,
+    layer: int,
+    params: dict,
+    weights_path: Path | None = None,
+    standardize: bool = False,
+) -> dict:
     train_x, train_y = load_split(task, "train", layer)
     valid_x, valid_y = load_split(task, "valid", layer)
+    mu = sd = None
+    if standardize:
+        # z-score 只允许用 train split 的统计量，避免验证集信息泄漏
+        mu = train_x.mean(axis=0)
+        sd = train_x.std(axis=0)
+        sd = np.where(sd == 0, 1.0, sd)
+        train_x = (train_x - mu) / sd
+        valid_x = (valid_x - mu) / sd
     fit_kwargs = {
         "lr": params["lr"],
         "epochs": params["epochs"],
@@ -45,28 +69,44 @@ def evaluate(task: str, layer: int, params: dict, weights_path: Path | None = No
             and np.all(np.isfinite(lon.weights))
             and np.isfinite(lat.bias)
             and np.isfinite(lon.bias)
+            and np.isfinite(metric)
+            and not lat.diverged
+            and not lon.diverged
         )
         metric_name = "mse"
         if weights_path is not None:
+            lat_weights, lon_weights = lat.weights, lon.weights
+            lat_bias, lon_bias = lat.bias, lon.bias
+            if standardize:
+                lat_weights, lat_bias = unstandardize_weights(lat_weights, lat_bias, mu, sd)
+                lon_weights, lon_bias = unstandardize_weights(lon_weights, lon_bias, mu, sd)
             weights_path.parent.mkdir(parents=True, exist_ok=True)
             np.savez(
                 weights_path,
-                weights=np.asarray(np.stack((lat.weights, lon.weights)), dtype=np.float64),
-                bias=np.asarray(np.array((lat.bias, lon.bias)), dtype=np.float64),
+                weights=np.asarray(np.stack((lat_weights, lon_weights)), dtype=np.float64),
+                bias=np.asarray(np.array((lat_bias, lon_bias)), dtype=np.float64),
             )
     else:
         model = LogisticRegressionModel(train_x.shape[1])
         model.fit(train_x, train_y, **fit_kwargs)
         prob = model.predict(valid_x)
         metric = float(np.mean((prob >= 0.5) == valid_y))
-        finite = bool(np.all(np.isfinite(model.weights)) and np.isfinite(model.bias))
+        finite = bool(
+            np.all(np.isfinite(model.weights))
+            and np.isfinite(model.bias)
+            and np.isfinite(metric)
+            and not model.diverged
+        )
         metric_name = "accuracy"
         if weights_path is not None:
+            model_weights, model_bias = model.weights, model.bias
+            if standardize:
+                model_weights, model_bias = unstandardize_weights(model_weights, model_bias, mu, sd)
             weights_path.parent.mkdir(parents=True, exist_ok=True)
             np.savez(
                 weights_path,
-                weights=np.asarray(model.weights, dtype=np.float64),
-                bias=np.asarray(model.bias, dtype=np.float64),
+                weights=np.asarray(model_weights, dtype=np.float64),
+                bias=np.asarray(model_bias, dtype=np.float64),
             )
 
     return {"metric_name": metric_name, "metric": metric, "finite": finite}
@@ -94,6 +134,7 @@ def main() -> None:
         print(f"\n=== group: {group['name']} ({group['task']}, layer={group['layer']}) ===")
         vary_key = next(iter(group["vary"]))
         vary_values = group["vary"][vary_key]
+        standardize = bool(group.get("standardize", False))
         for value in vary_values:
             params = dict(base)
             params.update(group["fixed"])
@@ -106,7 +147,9 @@ def main() -> None:
                 weights_path = args.artifacts_dir / run_id / "weights.npz"
 
             t0 = time.time()
-            outcome = evaluate(group["task"], layer, params, weights_path=weights_path)
+            outcome = evaluate(
+                group["task"], layer, params, weights_path=weights_path, standardize=standardize
+            )
             elapsed = time.time() - t0
             record = {
                 "group": group["name"],
@@ -114,6 +157,7 @@ def main() -> None:
                 "layer": layer,
                 "vary": vary_key,
                 vary_key: value,
+                "standardize": standardize,
                 **{k: params[k] for k in ("lr", "epochs", "lambda1", "lambda2")},
                 **outcome,
                 "seconds": round(elapsed, 2),

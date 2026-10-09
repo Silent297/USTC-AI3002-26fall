@@ -8,6 +8,7 @@ class LinearRegressionModel:
         # 一个连续目标只需要一个权重向量和一个标量偏置。
         self.weights = np.zeros(n_features, dtype=np.float64)
         self.bias = np.float64(0.0)
+        self.diverged = False
 
     def fit(
         self,
@@ -35,21 +36,25 @@ class LinearRegressionModel:
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
+        diverged = False
 
         for epoch in range(epochs):
             grad_w, grad_b = cal_grad(features, targets, w, b, lambda1, lambda2)
             if not (np.all(np.isfinite(grad_w)) and np.isfinite(grad_b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
+                diverged = True
                 break
             w = w - lr * grad_w
             b = b - lr * grad_b
             if not (np.all(np.isfinite(w)) and np.isfinite(b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
+                diverged = True
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
             if not np.isfinite(loss):
                 # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                diverged = True
                 break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
                 print(f"Training converged at epoch {epoch}, loss={loss:.8f}")
@@ -58,6 +63,7 @@ class LinearRegressionModel:
 
         self.weights = w
         self.bias = b
+        self.diverged = diverged
 
 
     def predict(self, features: np.ndarray) -> np.ndarray:
@@ -73,6 +79,7 @@ class LogisticRegressionModel:
         # 提示：单个二分类任务只需要一个权重向量和一个标量偏置。
         self.weights = np.zeros(n_features, dtype=np.float64)
         self.bias = np.float64(0.0)
+        self.diverged = False
 
     def fit(
         self,
@@ -104,21 +111,25 @@ class LogisticRegressionModel:
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
+        diverged = False
 
         for epoch in range(epochs):
             grad_w, grad_b = cal_grad(features, targets, w, b, lambda1, lambda2)
             if not (np.all(np.isfinite(grad_w)) and np.isfinite(grad_b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
+                diverged = True
                 break
             w = w - lr * grad_w
             b = b - lr * grad_b
             if not (np.all(np.isfinite(w)) and np.isfinite(b)):
                 print(f"nan/inf occuered in epoch {epoch}, training has stopped")
+                diverged = True
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
             if not np.isfinite(loss):
                 # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                diverged = True
                 break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
                 print(f"Training converged at epoch {epoch}, loss={loss:.8f}")
@@ -127,6 +138,7 @@ class LogisticRegressionModel:
 
         self.weights = w
         self.bias = b
+        self.diverged = diverged
 
     def predict(self, features: np.ndarray) -> np.ndarray:
         # 提示：返回形状为 (N,) 的真类概率，不要在此处做 0.5 阈值化。"""

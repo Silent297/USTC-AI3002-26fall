@@ -1,0 +1,53 @@
+{
+  "_readme": [
+    "world 标准化重扫配置。每组只改变一个超参数（vary），其余由 fixed 固定为控制变量。",
+    "features 先按 train split 统计量做 z-score（run_grid.py 的 standardize 开关），",
+    "标准化后各层全批量 GD 稳定学习率统一到约 3e-3（实测界：L11 3.6e-3 / L23 3.2e-3 / L35 4.8e-3），",
+    "同一 lr 可在所有层安全训练，层间对比才公平；lr=0.005 预期越过稳定界发散（用于验证 finite 修复）。",
+    "运行：python experiments/run_grid.py --config experiments/hparam_grid_std.json"
+  ],
+  "base": {
+    "lr": 0.003,
+    "epochs": 2000,
+    "lambda1": 0.001,
+    "lambda2": 1.0
+  },
+  "groups": [
+    {
+      "name": "world_std_lr",
+      "task": "world",
+      "layer": 11,
+      "standardize": true,
+      "note": "标准化后学习率的影响（0.005 越过稳定界，预期发散并触发 finite=False）",
+      "fixed": {"epochs": 2000, "lambda1": 0.001, "lambda2": 1.0},
+      "vary": {"lr": [0.0005, 0.001, 0.002, 0.003, 0.005]}
+    },
+    {
+      "name": "world_std_lambda2",
+      "task": "world",
+      "layer": 11,
+      "standardize": true,
+      "note": "标准化后 L2 的影响（p>>N，弱正则会过拟合）",
+      "fixed": {"lr": 0.003, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.1, 0.3, 1.0, 3.0]}
+    },
+    {
+      "name": "world_std_epochs",
+      "task": "world",
+      "layer": 11,
+      "standardize": true,
+      "note": "标准化后训练轮数的影响（lambda2=1.0 下约 1k 轮收敛）",
+      "fixed": {"lr": 0.003, "lambda1": 0.001, "lambda2": 1.0},
+      "vary": {"epochs": [250, 500, 1000, 2000]}
+    },
+    {
+      "name": "world_std_layer",
+      "task": "world",
+      "layer": null,
+      "standardize": true,
+      "note": "标准化后不同隐表征层的影响，同一 lr 对所有层均在稳定界内",
+      "fixed": {"lr": 0.003, "epochs": 2000, "lambda1": 0.001, "lambda2": 1.0},
+      "vary": {"layer": [11, 23, 35]}
+    }
+  ]
+}
