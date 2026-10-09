@@ -9,8 +9,17 @@ class LinearRegressionModel:
         self.weights = np.zeros(n_features, dtype=np.float64)
         self.bias = np.float64(0.0)
 
-    def fit(self, features: np.ndarray, targets: np.ndarray) -> None:
+    def fit(
+        self,
+        features: np.ndarray,
+        targets: np.ndarray,
+        lr: float = 0.001,
+        epochs: int = 10000,
+        lambda1: float = 0.01,
+        lambda2: float = 0.01,
+    ) -> None:
         # 训练模型；features 为 (N, D)，targets 为 (N,)。
+        # lr 为学习率，epochs 为训练轮数，lambda1/lambda2 为 L1/L2 正则化系数。
         def cal_loss(Phi:np.ndarray, y:np.ndarray ,w:np.ndarray, b:np.float64, lambda1:np.float64, lambda2:np.float64) -> np.float64:
             residual = Phi @ w + b - y
             return np.sum(residual ** 2) / len(y) + lambda1 * np.sum(np.abs(w)) + lambda2 * np.dot(w,w)
@@ -18,11 +27,11 @@ class LinearRegressionModel:
             residual = Phi @ w + b - y
             N = len(y)
             return 2.0 / N * Phi.T @ residual + lambda1 * np.sign(w) + 2.0 * lambda2 * w  , np.float64(2.0)/ N * np.sum(residual)
-        
-        epochs = 10000
-        lr = 0.001
-        lambda1 = np.float64(0.01)
-        lambda2 = np.float64(0.01)
+
+        # 允许传入 int/float，统一成 numpy 标量便于后续计算。
+        lr = np.float64(lr)
+        lambda1 = np.float64(lambda1)
+        lambda2 = np.float64(lambda2)
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
@@ -61,8 +70,17 @@ class LogisticRegressionModel:
         self.weights = np.zeros(n_features, dtype=np.float64)
         self.bias = np.float64(0.0)
 
-    def fit(self, features: np.ndarray, targets: np.ndarray) -> None:
+    def fit(
+        self,
+        features: np.ndarray,
+        targets: np.ndarray,
+        lr: float = 0.001,
+        epochs: int = 10000,
+        lambda1: float = 0.01,
+        lambda2: float = 0.01,
+    ) -> None:
         # 训练模型；features 为 (N, 2560)，targets 为 (N,) 的 0/1 标签。
+        # lr 为学习率，epochs 为训练轮数，lambda1/lambda2 为 L1/L2 正则化系数。
         def sigmoid(z):
             z = np.asarray(z, dtype=float)
             return np.exp(-np.logaddexp(0.0, -z))
@@ -75,10 +93,10 @@ class LogisticRegressionModel:
             N = len(y)
             return 1.0 / N * Phi.T @ residual + lambda1 * np.sign(w) + 2.0 * lambda2 * w  , np.float64(1.0)/ N * np.sum(residual)
 
-        epochs = 10000
-        lr = 0.001
-        lambda1 = np.float64(0.01)
-        lambda2 = np.float64(0.01)
+        # 允许传入 int/float，统一成 numpy 标量便于后续计算。
+        lr = np.float64(lr)
+        lambda1 = np.float64(lambda1)
+        lambda2 = np.float64(lambda2)
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf

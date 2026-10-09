@@ -34,12 +34,28 @@ def main() -> None:
     parser.add_argument("task", choices=("world", "truth"))
     parser.add_argument("layer", type=int)
     parser.add_argument("output", type=Path, help="Path to the output .npz file")
-    # 你可以在此处加入更多的命令行参数，例如学习率、训练轮数等
+    # 训练超参数；不传则采用这里的默认值
+    parser.add_argument("--lr", type=float, default=0.001, help="learning rate (default 0.001)")
+    parser.add_argument("--epochs", type=int, default=10000, help="number of epochs (default 10000)")
+    parser.add_argument("--lambda1", type=float, default=0.01, help="L1 regularization (default 0.01)")
+    parser.add_argument("--lambda2", type=float, default=0.01, help="L2 regularization (default 0.01)")
     args = parser.parse_args()
 
     # 加载数据
     train_x, train_y = load_split(args.task, "train", args.layer)
     valid_x, valid_y = load_split(args.task, "valid", args.layer)
+
+    # 收集超参数，统一传给 fit
+    fit_kwargs = {
+        "lr": args.lr,
+        "epochs": args.epochs,
+        "lambda1": args.lambda1,
+        "lambda2": args.lambda2,
+    }
+    print(
+        f"Hyperparameters: lr={args.lr}, epochs={args.epochs}, "
+        f"lambda1={args.lambda1}, lambda2={args.lambda2}"
+    )
 
     if args.task == "world":
         # 纬度和经度各训练一个一维线性回归模型。
@@ -48,8 +64,8 @@ def main() -> None:
 
         latitude_model = LinearRegressionModel(train_x.shape[1])
         longitude_model = LinearRegressionModel(train_x.shape[1])
-        latitude_model.fit(train_x, latitude_targets)
-        longitude_model.fit(train_x, longitude_targets)
+        latitude_model.fit(train_x, latitude_targets, **fit_kwargs)
+        longitude_model.fit(train_x, longitude_targets, **fit_kwargs)
 
         latitude_predictions = latitude_model.predict(valid_x)
         longitude_predictions = longitude_model.predict(valid_x)
@@ -58,7 +74,7 @@ def main() -> None:
         bias = np.array((latitude_model.bias, longitude_model.bias))
     else:
         model = LogisticRegressionModel(train_x.shape[1])
-        model.fit(train_x, train_y)
+        model.fit(train_x, train_y, **fit_kwargs)
         prediction = model.predict(valid_x)
         weights = model.weights
         bias = model.bias
