@@ -1,0 +1,54 @@
+{
+  "_readme": [
+    "LAB1 最终分层训练的超参数列表：world / truth 各 13 个已提取隐表征层各训练一次。",
+    "world：z-score（train 统计量）后全批量 GD 稳定界各层统一到约 3.2e-3~4.8e-3（实测 L11 3.6e-3 / L23 3.2e-3 / L35 4.8e-3），",
+    "  同一 lr 可在所有层安全训练；取 lr=0.002（距实测界至少 1.6 倍余量，L11 上 0.001~0.003 的 MSE 差异在噪声内，约 700-1000 轮收敛）；",
+    "  lambda2=1.0（89085 标准化重扫：0.1/0.3/1.0/3.0 → MSE 209/181/167/185）；lambda1 沿用 0.001。",
+    "truth：未标准化特征；lr=0.005（88653 L11 扫描最优 0.6867，0.01 已回落至 0.63）；",
+    "  epochs=5000（200/500/1000/2000 → 0.677/0.687/0.703/0.730 仍单调升；loss 收敛自停兜底，通常跑满）；",
+    "  lambda1=lambda2=0.001（lambda1=0 的增益在噪声内；lambda2 在 0/0.001/0.01/0.1 无差异）。",
+    "任一 (task, layer) 训练发散或数值非有限时，脚本自动把 lr × lr_fallback.factor 重试（最多 max_attempts 次），",
+    "并在记录里保留 initial_lr / attempts —— 2026-10-09 两轮发散事故的教训，深层对 lr 更敏感。",
+    "逐层微调可用 overrides：键为层号字符串，如 \"overrides\": {\"11\": {\"lr\": 0.001}}，与 base 参数合并。",
+    "extra_runs：world 原始特征 L11（lr=5e-4, ep2000, lambda2=0.1）是 88653 的历史最优（MSE 150.43，优于标准化系），",
+    "  保留为最终 .npz 候选一并复现（原始特征仅此浅层可用，深层会发散）。",
+    "运行（集群由 scripts/run_layer_train.sbatch 调用；本地冒烟可加 --tasks world --layers 11 --dry-run）：",
+    "python experiments/train_layers.py --config experiments/train_layers.json --out-dir results/slurm_layers/<run>/"
+  ],
+  "lr_fallback": {
+    "factor": 0.5,
+    "max_attempts": 4
+  },
+  "tasks": {
+    "world": {
+      "standardize": true,
+      "lr": 0.002,
+      "epochs": 2000,
+      "lambda1": 0.001,
+      "lambda2": 1.0,
+      "layers": [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 34, 35],
+      "overrides": {}
+    },
+    "truth": {
+      "standardize": false,
+      "lr": 0.005,
+      "epochs": 5000,
+      "lambda1": 0.001,
+      "lambda2": 0.001,
+      "layers": [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 34, 35],
+      "overrides": {}
+    }
+  },
+  "extra_runs": [
+    {
+      "task": "world",
+      "layer": 11,
+      "standardize": false,
+      "lr": 0.0005,
+      "epochs": 2000,
+      "lambda1": 0.001,
+      "lambda2": 0.1,
+      "note": "world 历史最优（88653, MSE 150.43），最终 .npz 候选"
+    }
+  ]
+}

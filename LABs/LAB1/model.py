@@ -36,6 +36,7 @@ class LinearRegressionModel:
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
+        loss0 = None
         diverged = False
 
         for epoch in range(epochs):
@@ -54,6 +55,16 @@ class LinearRegressionModel:
             if not np.isfinite(loss):
                 # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                diverged = True
+                break
+            if loss0 is None:
+                loss0 = loss
+            elif loss > 1e6 * loss0:
+                # 发散早期 loss 还没到 inf，仅靠 isfinite 检测不到，按初始 loss 的 1e6 倍视为爆炸
+                print(
+                    f"loss exploded at epoch {epoch} (loss={loss:.3e} vs initial {loss0:.3e}), "
+                    "training has stopped"
+                )
                 diverged = True
                 break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
@@ -111,6 +122,7 @@ class LogisticRegressionModel:
         w = np.zeros(features.shape[1])
         b = np.float64(0.0)
         pre_loss = np.inf
+        loss0 = None
         diverged = False
 
         for epoch in range(epochs):
@@ -129,6 +141,16 @@ class LogisticRegressionModel:
             if not np.isfinite(loss):
                 # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
+                diverged = True
+                break
+            if loss0 is None:
+                loss0 = loss
+            elif loss > 1e6 * loss0:
+                # 发散早期 loss 还没到 inf，仅靠 isfinite 检测不到，按初始 loss 的 1e6 倍视为爆炸
+                print(
+                    f"loss exploded at epoch {epoch} (loss={loss:.3e} vs initial {loss0:.3e}), "
+                    "training has stopped"
+                )
                 diverged = True
                 break
             if np.isclose(loss, pre_loss, rtol=1e-6, atol=1e-10):
