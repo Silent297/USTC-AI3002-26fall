@@ -18,6 +18,7 @@
 # 输出落在 CSV 旁边：datasets/<task>/<split>.layer<L>.npy，
 # 与 train23.py:load_split 及 run_grid.py 的读取约定一致。
 # 可重复提交：已存在的 .npy 会被跳过，不会重算。
+# 日志集中存放：results/slurm_extract/<时间戳>_<jobid>/ 下含 extract.log 与 .out/.err。
 
 set -uo pipefail
 
@@ -73,6 +74,18 @@ if ! mkdir -p "${run_root}"; then
   exit 1
 fi
 extract_log="${run_root}/extract.log"
+
+# Slurm 的 %x_%j.out/.err 默认落在「提交目录」，随提交位置漂移；
+# 建好本次运行目录后立刻把它们移进来，使所有日志集中一处
+# （重命名不影响已打开的 fd，后续输出仍会写进本文件）。
+if [[ -n "${SLURM_JOB_ID:-}" && -n "${SLURM_SUBMIT_DIR:-}" ]]; then
+  for stream in out err; do
+    slurm_stream="${SLURM_SUBMIT_DIR}/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.${stream}"
+    if [[ -f "${slurm_stream}" ]]; then
+      mv "${slurm_stream}" "${run_root}/" || echo "WARNING: failed to archive ${slurm_stream}" >&2
+    fi
+  done
+fi
 
 cd "${LAB_DIR}"
 

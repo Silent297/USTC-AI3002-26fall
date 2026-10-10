@@ -15,6 +15,7 @@
 # - grouped hyperparameters live in experiments/hparam_grid.json
 # - experiments/run_grid.py runs one controlled variable per group
 # - LAB1 only uses numpy/pandas, so this job does not request a GPU.
+# 日志集中存放：results/slurm_grid/<时间戳>_<jobid>/ 下含 grid.log 与 .out/.err。
 
 set -uo pipefail
 
@@ -82,6 +83,18 @@ grid_log="${run_root}/grid.log"
 if ! mkdir -p "${weights_dir}"; then
   echo "ERROR: failed to create output directory: ${run_root}" >&2
   exit 1
+fi
+
+# Slurm 的 %x_%j.out/.err 默认落在「提交目录」，随提交位置漂移；
+# 建好本次运行目录后立刻把它们移进来，使所有日志集中一处
+# （重命名不影响已打开的 fd，后续输出仍会写进本文件）。
+if [[ -n "${SLURM_JOB_ID:-}" && -n "${SLURM_SUBMIT_DIR:-}" ]]; then
+  for stream in out err; do
+    slurm_stream="${SLURM_SUBMIT_DIR}/${SLURM_JOB_NAME}_${SLURM_JOB_ID}.${stream}"
+    if [[ -f "${slurm_stream}" ]]; then
+      mv "${slurm_stream}" "${run_root}/" || echo "WARNING: failed to archive ${slurm_stream}" >&2
+    fi
+  done
 fi
 
 cd "${LAB_DIR}"
