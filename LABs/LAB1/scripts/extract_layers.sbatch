@@ -82,6 +82,25 @@ echo "Splits: ${SPLITS}"
 echo "Log: ${extract_log}"
 echo
 
+# GPU 环境自检：把节点/驱动/torch 信息写进日志；CUDA 不可用则立即失败，
+# 避免 40 次无效尝试（典型故障：torch 的 CUDA 版本比节点驱动新，报 error 804）。
+echo "==== GPU environment ===="
+hostname
+nvidia-smi || echo "WARNING: nvidia-smi failed"
+if ! python - <<'PY'
+import torch
+
+print(f"torch {torch.__version__} (built for CUDA {torch.version.cuda})")
+if not torch.cuda.is_available():
+    raise SystemExit("torch cannot see a CUDA GPU")
+print(f"CUDA device: {torch.cuda.get_device_name(0)}")
+PY
+then
+  echo "ERROR: no usable CUDA GPU; fix the ai26 environment before extracting (see README appendix B.3)" >&2
+  exit 2
+fi
+echo
+
 # truth 取句末 token；world 取国家 token
 token_selection() {
   case "$1" in
