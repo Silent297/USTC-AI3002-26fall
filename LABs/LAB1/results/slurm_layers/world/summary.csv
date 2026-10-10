@@ -1,0 +1,15 @@
+task,layer,kind,standardize,lr,initial_lr,attempts,reused,epochs,lambda1,lambda2,metric_name,metric,finite,seconds,weights_path,note
+world,2,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,157.57087905356968,True,0.0,results\slurm_layers\world\weights\world_layer2\weights.npz,
+world,5,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,163.0192463015746,True,0.0,results\slurm_layers\world\weights\world_layer5\weights.npz,
+world,8,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,159.13839151040816,True,0.0,results\slurm_layers\world\weights\world_layer8\weights.npz,
+world,11,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,167.04130708058523,True,0.0,results\slurm_layers\world\weights\world_layer11\weights.npz,
+world,14,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,213.6689006099402,True,0.0,results\slurm_layers\world\weights\world_layer14\weights.npz,
+world,17,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,227.13115219125567,True,0.0,results\slurm_layers\world\weights\world_layer17\weights.npz,
+world,20,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,241.8260490880495,True,0.0,results\slurm_layers\world\weights\world_layer20\weights.npz,
+world,23,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,241.1447845333811,True,0.0,results\slurm_layers\world\weights\world_layer23\weights.npz,
+world,26,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,226.24586039999085,True,0.0,results\slurm_layers\world\weights\world_layer26\weights.npz,
+world,29,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,209.98803726142842,True,0.0,results\slurm_layers\world\weights\world_layer29\weights.npz,
+world,32,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,180.3089516778867,True,0.0,results\slurm_layers\world\weights\world_layer32\weights.npz,
+world,34,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,196.4603525638868,True,0.0,results\slurm_layers\world\weights\world_layer34\weights.npz,
+world,35,layer,True,0.002,0.002,0,True,2000,0.001,1.0,mse,204.9074646462061,True,0.0,results\slurm_layers\world\weights\world_layer35\weights.npz,
+world,11,extra,False,0.0005,0.0005,1,False,2000,0.001,0.1,mse,150.42772354798632,True,18.28,results\slurm_layers\world\weights\world_layer11_extra0\weights.npz,"world 历史最优（88653, MSE 150.43），最终 .npz 候选"

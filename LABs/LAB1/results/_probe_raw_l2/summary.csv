@@ -1,0 +1,2 @@
+task,layer,kind,standardize,lr,initial_lr,attempts,reused,epochs,lambda1,lambda2,metric_name,metric,finite,seconds,weights_path,note
+world,2,extra,False,0.0005,0.0005,1,False,2000,0.001,0.1,mse,198.78224714775553,True,16.22,results\_probe_raw_l2\weights\world_layer2_extra0\weights.npz,探针：raw L2 对照历史最优 raw L11=150.43

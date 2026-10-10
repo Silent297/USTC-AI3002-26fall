@@ -1,0 +1,21 @@
+[
+  {
+    "task": "world",
+    "layer": 2,
+    "kind": "extra",
+    "note": "\u63a2\u9488\uff1araw L2 \u5bf9\u7167\u5386\u53f2\u6700\u4f18 raw L11=150.43",
+    "standardize": false,
+    "lr": 0.0005,
+    "initial_lr": 0.0005,
+    "attempts": 1,
+    "reused": false,
+    "epochs": 2000,
+    "lambda1": 0.001,
+    "lambda2": 0.1,
+    "metric_name": "mse",
+    "metric": 198.78224714775553,
+    "finite": true,
+    "seconds": 16.22,
+    "weights_path": "results\\_probe_raw_l2\\weights\\world_layer2_extra0\\weights.npz"
+  }
+]

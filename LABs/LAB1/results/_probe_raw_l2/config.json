@@ -1,0 +1,24 @@
+{
+  "_readme": [
+    "一次性探针：world raw L2 用历史最优 extra 配置（与 raw L11 extra 完全同参），",
+    "对照 raw L11 = 150.43 / std L2 = 157.57，看浅层 raw 是否也有增益。",
+    "不属于 train_layers.json 的正式列表，产物仅作决策参考。"
+  ],
+  "lr_fallback": {
+    "factor": 0.5,
+    "max_attempts": 4
+  },
+  "tasks": {},
+  "extra_runs": [
+    {
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "lr": 0.0005,
+      "epochs": 2000,
+      "lambda1": 0.001,
+      "lambda2": 0.1,
+      "note": "探针：raw L2 对照历史最优 raw L11=150.43"
+    }
+  ]
+}
