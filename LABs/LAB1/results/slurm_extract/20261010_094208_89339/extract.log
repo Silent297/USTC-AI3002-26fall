@@ -1,0 +1,480 @@
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 2 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 5 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 8 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 14 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 17 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 20 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 26 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 29 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 32 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/train layer 34 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 2 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 5 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 8 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 14 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 17 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 20 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 26 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 29 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 32 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  truth/valid layer 34 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 2 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 5 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 8 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 14 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 17 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 20 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 26 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 29 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 32 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/train layer 34 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 2 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 5 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 8 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 14 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 17 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 20 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 26 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 29 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 32 (exit 1)
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: Unexpected error from cudaGetDeviceCount(). Did you run some cuda functions before calling NumCudaDevices() that might have already set an error? Error 804: forward compatibility was attempted on non supported HW (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 176, in <module>
+    main()
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 165, in main
+    tokenizer, model = load_model(args.model_dir)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/extract_intrep.py", line 90, in load_model
+    raise RuntimeError("A CUDA GPU is required; run this script in a GPU job")
+RuntimeError: A CUDA GPU is required; run this script in a GPU job
+FAIL  world/valid layer 34 (exit 1)

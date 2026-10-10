@@ -1,0 +1,51 @@
+/home/scc/pb25030753/miniconda3/envs/ai26/lib/python3.12/site-packages/numpy/_core/fromnumeric.py:83: RuntimeWarning: overflow encountered in reduce
+  return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+
+=== group: world_std_lr (world, layer=11) ===
+  lr=0.0005   mse=169.0276 finite=True (7.4s)
+Training converged at epoch 1874, loss=364.94400860
+  lr=0.001    mse=166.9683 finite=True (7.0s)
+Training converged at epoch 1369, loss=33.90923733
+Training converged at epoch 1022, loss=364.89880392
+  lr=0.002    mse=167.0413 finite=True (4.4s)
+Training converged at epoch 945, loss=33.90784648
+Training converged at epoch 714, loss=364.88379248
+  lr=0.003    mse=167.0595 finite=True (3.0s)
+loss became non-finite at epoch 596 (loss=inf), training has stopped
+loss became non-finite at epoch 597 (loss=inf), training has stopped
+  lr=0.005    mse=388525537542472278429648920371022403115878603972932512854927899465750128689429415148126849281116578447435340776290537816933826146358224317090353051968744772172056157577208227583073240766381867947117212632562354867239250267646578379401357847580707763365582636852485205923583972925760157695621723255612637184.0000 finite=False (2.2s)
+
+=== group: world_std_lambda2 (world, layer=11) ===
+  lambda2=0.1      mse=209.1267 finite=True (7.2s)
+Training converged at epoch 1306, loss=17.32995493
+Training converged at epoch 1298, loss=186.26540375
+  lambda2=0.3      mse=181.3992 finite=True (4.7s)
+Training converged at epoch 945, loss=33.90784648
+Training converged at epoch 714, loss=364.88379248
+  lambda2=1.0      mse=167.0595 finite=True (3.0s)
+Training converged at epoch 893, loss=63.48837834
+Training converged at epoch 662, loss=660.05523739
+  lambda2=3.0      mse=184.5687 finite=True (2.8s)
+
+=== group: world_std_epochs (world, layer=11) ===
+  epochs=250      mse=174.2465 finite=True (0.9s)
+  epochs=500      mse=166.9971 finite=True (1.8s)
+Training converged at epoch 945, loss=33.90784648
+Training converged at epoch 714, loss=364.88379248
+  epochs=1000     mse=167.0595 finite=True (3.0s)
+Training converged at epoch 945, loss=33.90784648
+Training converged at epoch 714, loss=364.88379248
+  epochs=2000     mse=167.0595 finite=True (3.0s)
+
+=== group: world_std_layer (world, layer=None) ===
+Training converged at epoch 945, loss=33.90784648
+Training converged at epoch 714, loss=364.88379248
+  layer=11       mse=167.0595 finite=True (3.0s)
+Training converged at epoch 923, loss=44.14451387
+Training converged at epoch 706, loss=405.61993278
+  layer=23       mse=241.1225 finite=True (3.0s)
+Training converged at epoch 947, loss=33.00616050
+Training converged at epoch 714, loss=360.86692427
+  layer=35       mse=204.9823 finite=True (3.1s)
+
+Wrote 16 runs to /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_grid/20261009_215412_89085/results.json
