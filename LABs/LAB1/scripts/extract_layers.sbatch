@@ -4,7 +4,9 @@
 #SBATCH --error=%x_%j.err
 #SBATCH --partition=Students
 #SBATCH --qos=qos_stu_default
-#SBATCH --gres=gpu:1
+# Students 分区混部 RTX5090（anode01-15）与 A100（anode16-26）：
+# 5090 节点上 ai26 的 torch cu130 触发 CUDA error 804，钉死已验证可用的 A100。
+#SBATCH --gres=gpu:A100:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
 #SBATCH --time=4:00:00
