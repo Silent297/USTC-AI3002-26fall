@@ -1,0 +1,4 @@
+Repository: /home/scc/pb25030753/USTC-AI3002-26fall
+Config: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/experiments/train_layers.json
+Output root: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/20261010_164449_89700
+
