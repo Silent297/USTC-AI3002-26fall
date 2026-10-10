@@ -5,9 +5,12 @@
 lr_fallback.factor 重试（最多 max_attempts 次），记录最终 lr 与尝试次数。
 
 输出（全部落在 --out-dir 下）：
-- results.json    每次运行的完整记录
-- summary.csv     扁平表格，便于画层数曲线
+- results.json    每次运行的完整记录（每完成一个 run 立即重写，作业被超时杀掉也不丢已完成部分）
+- summary.csv     扁平表格，便于画层数曲线（同上，实时重写）
 - weights/<run>/weights.npz  权重（已折回原始特征空间，可直接提交）
+
+加 --skip-existing 时，已存在 weights.npz 的 run 只复算验证指标、不重训，用于超时后的
+断点续跑（假定同一输出目录里的权重来自同一配置）。
 
 训练/评估逻辑复用 run_grid.evaluate（train split 统计量做 z-score，无验证集泄漏）。
 """
@@ -19,8 +22,11 @@ import sys
 import time
 from pathlib import Path
 
+import numpy as np
+
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from run_grid import evaluate  # noqa: E402
+from train23 import load_split  # noqa: E402
 
 
 def build_runs(config: dict, tasks_filter: set | None, layers_filter: set | None) -> list:
@@ -71,6 +77,35 @@ def build_runs(config: dict, tasks_filter: set | None, layers_filter: set | None
     return runs
 
 
+def evaluate_saved(task: str, layer: int, weights_path: Path) -> dict:
+    """从已保存的权重（原始特征空间）复算验证指标，不重新训练。"""
+    valid_x, valid_y = load_split(task, "valid", layer)
+    saved = np.load(weights_path)
+    weights = saved["weights"]
+    bias = saved["bias"]
+    if task == "world":
+        prediction = valid_x @ weights.T + bias
+        metric = float(np.mean((prediction - valid_y) ** 2))
+        metric_name = "mse"
+    else:
+        z = valid_x @ weights + float(bias)
+        prob = np.exp(-np.logaddexp(0.0, -z))
+        metric = float(np.mean((prob >= 0.5) == valid_y))
+        metric_name = "accuracy"
+    finite = bool(
+        np.all(np.isfinite(weights)) and np.all(np.isfinite(bias)) and np.isfinite(metric)
+    )
+    return {"metric_name": metric_name, "metric": metric, "finite": finite}
+
+
+def write_outputs(results_path: Path, summary_path: Path, records: list, fieldnames: list) -> None:
+    results_path.write_text(json.dumps(records, indent=2), encoding="utf-8")
+    with summary_path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(records)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -88,6 +123,11 @@ def main() -> None:
     parser.add_argument("--tasks", default=None, help="逗号分隔，只跑指定任务（如 world,truth）")
     parser.add_argument("--layers", default=None, help="逗号分隔，只跑指定层（如 11,23）")
     parser.add_argument("--dry-run", action="store_true", help="只列出将要运行的条目，不训练")
+    parser.add_argument(
+        "--skip-existing",
+        action="store_true",
+        help="weights/<run_id>/weights.npz 已存在则复算指标直接复用（断点续跑用）",
+    )
     args = parser.parse_args()
 
     config = json.loads(args.config.read_text(encoding="utf-8"))
@@ -117,6 +157,27 @@ def main() -> None:
 
     weights_root = args.out_dir / "weights"
     args.out_dir.mkdir(parents=True, exist_ok=True)
+    results_path = args.out_dir / "results.json"
+    summary_path = args.out_dir / "summary.csv"
+    fieldnames = [
+        "task",
+        "layer",
+        "kind",
+        "standardize",
+        "lr",
+        "initial_lr",
+        "attempts",
+        "reused",
+        "epochs",
+        "lambda1",
+        "lambda2",
+        "metric_name",
+        "metric",
+        "finite",
+        "seconds",
+        "weights_path",
+        "note",
+    ]
 
     records = []
     failed = 0
@@ -131,8 +192,23 @@ def main() -> None:
         initial_lr = params["lr"]
         attempts = 0
         elapsed = 0.0
+        reused = False
         outcome = None
-        while True:
+        if args.skip_existing and weights_path.exists():
+            try:
+                outcome = evaluate_saved(task, layer, weights_path)
+            except Exception as exc:  # 半截/损坏的 npz：删掉重训
+                print(f"  {label}: 读取既有 weights.npz 失败（{exc}），改为重新训练")
+                outcome = None
+            if outcome is not None and not outcome["finite"]:
+                print(f"  {label}: 既有权重非有限，删除后重新训练")
+                outcome = None
+            if outcome is None:
+                weights_path.unlink(missing_ok=True)
+            else:
+                reused = True
+
+        while not reused:
             attempts += 1
             t0 = time.time()
             outcome = evaluate(task, layer, params, weights_path=weights_path, standardize=standardize)
@@ -151,6 +227,7 @@ def main() -> None:
             "lr": params["lr"],
             "initial_lr": initial_lr,
             "attempts": attempts,
+            "reused": reused,
             "epochs": params["epochs"],
             "lambda1": params["lambda1"],
             "lambda2": params["lambda2"],
@@ -165,38 +242,14 @@ def main() -> None:
                 weights_path.unlink()
             record["weights_path"] = ""
             failed += 1
+        # 每完成一个 run 立即落盘，作业被超时杀掉时已完成记录不丢
+        write_outputs(results_path, summary_path, records, fieldnames)
+        detail = "reused" if reused else f"attempts={attempts}"
         print(
             f"{label:<26} {outcome['metric_name']}={outcome['metric']:.4f} "
-            f"finite={outcome['finite']} lr={params['lr']:g} attempts={attempts} "
+            f"finite={outcome['finite']} lr={params['lr']:g} {detail} "
             f"({elapsed:.1f}s)"
         )
-
-    results_path = args.out_dir / "results.json"
-    results_path.write_text(json.dumps(records, indent=2), encoding="utf-8")
-
-    summary_path = args.out_dir / "summary.csv"
-    fieldnames = [
-        "task",
-        "layer",
-        "kind",
-        "standardize",
-        "lr",
-        "initial_lr",
-        "attempts",
-        "epochs",
-        "lambda1",
-        "lambda2",
-        "metric_name",
-        "metric",
-        "finite",
-        "seconds",
-        "weights_path",
-        "note",
-    ]
-    with summary_path.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(records)
 
     print()
     print("=== 汇总（按层升序）===")
@@ -205,16 +258,18 @@ def main() -> None:
         rows.sort(key=lambda r: r["layer"])
         for r in rows:
             flag = "" if r["finite"] else "  <-- FAIL"
+            detail = "reused" if r.get("reused") else f"attempts={r['attempts']}"
             print(
                 f"{task:<6} layer {r['layer']:<3} {r['metric_name']}={r['metric']:.4f} "
-                f"lr={r['lr']:g} attempts={r['attempts']}{flag}"
+                f"lr={r['lr']:g} {detail}{flag}"
             )
     for r in records:
         if r["kind"] == "extra":
             flag = "" if r["finite"] else "  <-- FAIL"
+            detail = "reused" if r.get("reused") else f"attempts={r['attempts']}"
             print(
                 f"extra  {r['task']}/layer{r['layer']} {r['metric_name']}={r['metric']:.4f} "
-                f"lr={r['lr']:g} attempts={r['attempts']} ({r['note']}){flag}"
+                f"lr={r['lr']:g} {detail} ({r['note']}){flag}"
             )
 
     print()

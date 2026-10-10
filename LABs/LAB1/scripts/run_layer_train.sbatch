@@ -6,9 +6,9 @@
 #SBATCH --qos=qos_stu_default
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --time=6:00:00
+#SBATCH --time=4:00:00
 
-# Submit from the repository root:
+# Submit from the repository root（推荐用 scripts/submit_layer_train.sh 一次提交全部块）：
 #   sbatch LABs/LAB1/scripts/run_layer_train.sbatch
 #
 # 按 experiments/train_layers.json 的超参数列表，对 world/truth 的 13 个隐表征层逐层训练：
@@ -18,7 +18,16 @@
 # - extra_runs 复现 world 历史最优（原始 L11, lr=5e-4, λ2=0.1）
 # LAB1 只用 numpy/pandas，不需要 GPU；可用 TRAIN_CONFIG=... 切换配置文件。
 #
-# 日志集中存放：results/slurm_layers/<时间戳>_<jobid>/ 下含 train.log 与 .out/.err。
+# 分块提交与断点续跑（2026-10-10 首次整跑 4h 超时的修复）：
+# - 环境变量 RUN_TAG=名字 时输出目录固定为 results/slurm_layers/<名字>/；
+#   配合 --skip-existing：已有 weights.npz 的 (task, layer) 复算指标直接复用、不重训。
+#   整块超时/被杀后用同样命令重投即可续跑（进度不丢）。
+# - 环境变量 TRAIN_ARGS='--tasks truth --layers 2,5,8,11' 原样传给 python（按空格拆分）。
+# - 不带 RUN_TAG 时退回「时间戳_作业号」目录（一次性运行，行为同以前）。
+# - --time 改为平台上限 4h：分块后每块远低于此；超时被 SIGTERM 时已完成 run 的
+#   results.json / npz 都已落盘，损失仅限正在训练的那一层。
+#
+# 日志集中存放：results/slurm_layers/<run>/ 下含 train.log（追加写）与 .out/.err。
 
 set -uo pipefail
 
@@ -69,9 +78,17 @@ conda activate ai26 || {
 set -u
 
 export PYTHONIOENCODING="utf-8"
+# 共享节点上 numpy 默认按整机核数开 BLAS 线程会互相抢占，钉成与 cpus-per-task 一致
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
+export OPENBLAS_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
+export MKL_NUM_THREADS="${SLURM_CPUS_PER_TASK:-4}"
 
-timestamp="$(date +%Y%m%d_%H%M%S)"
-run_root="${OUTPUT_ROOT}/${timestamp}_${SLURM_JOB_ID:-$$}"
+if [[ -n "${RUN_TAG:-}" ]]; then
+  run_root="${OUTPUT_ROOT}/${RUN_TAG}"
+else
+  timestamp="$(date +%Y%m%d_%H%M%S)"
+  run_root="${OUTPUT_ROOT}/${timestamp}_${SLURM_JOB_ID:-$$}"
+fi
 run_log="${run_root}/train.log"
 results_json="${run_root}/results.json"
 summary_csv="${run_root}/summary.csv"
@@ -98,11 +115,16 @@ cd "${LAB_DIR}"
 echo "Repository: ${REPO_DIR}"
 echo "Config: ${CONFIG}"
 echo "Output root: ${run_root}"
+echo "Run tag: ${RUN_TAG:-<none>}"
+echo "Train args: ${TRAIN_ARGS:-<none>}"
 echo
 
-python "${RUNNER}" \
+# -u：stdout 不缓冲，作业被杀时 train.log 里已完成的进度不丢
+# shellcheck disable=SC2086  # TRAIN_ARGS 需要按空格拆成多个参数
+python -u "${RUNNER}" \
   --config "${CONFIG}" \
-  --out-dir "${run_root}" 2>&1 | tee "${run_log}"
+  --out-dir "${run_root}" \
+  --skip-existing ${TRAIN_ARGS:-} 2>&1 | tee -a "${run_log}"
 train_status="${PIPESTATUS[0]}"
 
 echo
