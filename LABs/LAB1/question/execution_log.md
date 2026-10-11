@@ -1,0 +1,91 @@
+# LAB1 思考题执行日志（Question Execution Log）
+
+> 目录约定：`data/` 数据集 · `code/` 脚本 · `figures/` 图表
+> 本文件记录 9 道思考题的数据、代码、实验过程与结论，随进度更新。
+
+## 1. 数据集来源表
+
+| 编号 | 数据集 | 用于 | 规模 | 本仓库副本 | 原始来源 | 许可 | 备注 |
+|---|---|---|---|---|---|---|---|
+| D1 | King County 房屋销售（kc_house_data） | Q1 系数路径复现；Q2 特征选择案例（主数据） | 21613 行 × 21 列 | `data/kc_house_data.csv`（md5 `b782e80f040246c885d674bb16304979`） | Kaggle: [harlfoxem/housesalesprediction "House Sales in King County, USA"](https://www.kaggle.com/datasets/harlfoxem/housesalesprediction) | CC0: Public Domain | 已与 OpenML `house_sales` v1/v2 全表对拍，见 §1.2 |
+| D2 | California Housing | 备选 / 稳健性检查 | 20640 行 × 8 特征 | 运行时代取（暂未使用） | `sklearn.datasets.fetch_california_housing` ← StatLib（Pace & Barry, 1997） | 公开数据 | 需要时再拉取 |
+| D3 | 合成数据（人工构造高相关特征） | Q2 教材式对照实验 | 自定 | `code/` 内生成 | 自建 | — | 按需 |
+
+### 1.1 与课件图的对应
+
+- 课件 p20 / p42 / p48 图的 8 个特征（`bedrooms, bathrooms, sqft_living, sqft_lot, floors, yr_built, yr_renovated, waterfront`）与 D1 的列名完全一致 ⇒ 判定课件系数路径图的数据来源为 **King County 房屋销售数据**；Q1 复现将取相同 8 列子集（y = price）。
+- 课件 p20 手写批注 "all features normalized so coeff. on same scale" ⇒ 复现前必须**先标准化特征**，否则各特征系数不在同一尺度、路径不可比；λ=0 处即最小二乘解 ŵ_LS。
+- 课件对应页：p42 = ridge（ℓ2）路径；p48 = 同图 + 批注 "everything has ŵⱼ ≠ 0, but all ŵⱼ small for large λ"（岭回归不产生精确 0）；p49 = lasso（ℓ1）路径（系数随 λ 增大精确归零）；p43–45 = 阈值化 ridge 系数的问题（Q2 依据）。
+
+### 1.2 获取途径与对拍记录（2026-10-11）
+
+- Kaggle 原始页面（下载需登录）：https://www.kaggle.com/datasets/harlfoxem/housesalesprediction
+- 本仓库副本下载自 GitHub 镜像（IBM 课程同款 `housing.csv`）：
+  `https://raw.githubusercontent.com/Willie-Conway/House-Sales-Price-Prediction-King-County-USA-Project/main/House-Sales-Price-Prediction/housing.csv`
+- OpenML 官方镜像（作者本人上传，可编程获取；推荐复现时用）：
+  - `sklearn.datasets.fetch_openml(data_id=42092, as_frame=True)`
+  - ARFF v2: https://openml.org/data/v1/download/21578898/house_sales.arff
+  - ARFF v1: https://openml.org/data/v1/download/21553045/house_sales.arff
+- **对拍结论**：镜像副本与 OpenML v1/v2 按 `id` 对齐后，除 `bedrooms`/`bathrooms` 两列的 23 个单元格（bedrooms 13 个、bathrooms 10 个；镜像为**空值**，OpenML 被填成 **0**）外，其余 20 列逐位一致。
+- **采用口径**：保留空值（镜像口径），实验中剔除含缺失的 16 行（共 23 个缺失单元格，占 0.07%），在报告/代码中注明。
+- 副本清洗：仅去除镜像文件自带的 pandas 行号索引列，未做任何数值改动。
+
+## 2. 进度总览
+
+| 题 | 主题 | 状态 | 数据 | 代码 | 图表 | 结论要点 |
+|---|---|---|---|---|---|---|
+| Q1 | 复现 ℓ1/ℓ2 系数路径 + 解释数据来源 | 实验完成 ✅ / 待成文 | D1 | `code/q1_coefficient_paths.py` | `figures/q1_{ridge,lasso,both}_paths.{png,pdf}` | 与课件 p42/p49 趋势、量级一致，见 §3 |
+| Q2 | ℓ2 阈值化做特征选择不好的案例 | 实验完成 ✅ / 待成文 | D1（9 列）+ D3 | `code/q2_ridge_thresholding.py` | `figures/q2_*.{png,pdf}`（5 张） | τ/λ 扫描选择 5→2→0；共线平摊→整组删（R² −0.0003）；lasso 嵌套保留代表 |
+| Q3 | 与 sklearn 实现的拟合差异 | 素材已有 / 形式待定 | world + truth | — | — | 可在真实数据上对比 |
+| Q4 | world 各层效果对比与选层 | 素材齐 ✅ | datasets/world | results/slurm_layers/* | world_layers.png | raw L11 最优（150.43） |
+| Q5 | world 正则化选择 | 素材齐 ✅ | 同上 | 扫描报告 §8 + 稳定界说明 | world_grid.png | 标准化 + λ2 稳定界分析 |
+| Q6 | valid 预测可视化到地图 | 未做 | datasets/world valid | — | — | 注意不含国界线（合规红线） |
+| Q7 | 坐标表征 vs 国家识别 | 未做（思路已有） | 同上 | — | — | 国家分组均坐标基线待做 |
+| Q8 | truth 训练/验证集分布差异 | 未做 | datasets/truth | — | — | 两份现有报告均未覆盖 |
+| Q9 | truth 选层 + 正则化 | 素材齐 ✅ | datasets/truth | results/slurm_layers/* | truth_layers.png | L20 峰值（0.8967） |
+
+Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
+
+## 3. 逐题执行记录
+
+### Q1 系数路径（ℓ1、ℓ2）
+
+- **题面**：重现课件（第 42、48 页）中 ℓ1、ℓ2 正则化的"系数路径"，并解释数据来源。
+- **课件依据**：p20 定义 + 标准化批注；p42 ridge 路径；p49 lasso 路径（本版课件页码：见 §1.1）。
+- **数据**：D1，取 8 列 + price，剔除 16 个含缺失行（共 23 个缺失单元格），特征标准化。
+- **方案（草案）**：λ 网格（含 0）→ 逐个拟合 Ridge/Lasso（sklearn 为主，可用 2.1 节自实现代码交叉验证）→ 画 ŵⱼ(λ)；λ=0 标出 LS 解；对照课件结论（ℓ2 只缩不归零 / ℓ1 精确归零）解释数据来源（Kaggle King County，CC0）。
+- **记录**：
+  - 2026-10-11：数据集落盘并完成来源对拍（§1.2）。
+  - 2026-10-11：**系数路径复现完成**（`code/q1_coefficient_paths.py`，21597 行，特征 z-score，λ 网格 0–2e5 共 201 点；Ridge 用 SVD 闭式解并与 sklearn 对拍 max|Δ|≈1e-9；Lasso 用坐标下降 + warm start）。产物：`figures/q1_ridge_path.*`、`q1_lasso_path.*`、`q1_both_paths.*`。
+  - 关键数值（λ=0 最小二乘解，与课件量级一致）：sqft_living 268160、waterfront 63307、bathrooms 49137、floors 28399、yr_renovated 3397、sqft_lot −12378、bedrooms −56868、yr_built −92382。
+  - 行为对照：**Ridge** 全部系数只缩不归零；bedrooms（−5.7e4）与 bathrooms（+4.9e4）在 λ≲2e4 先升后降（相关特征的补偿效应），与课件黑/红曲线形态一致。**Lasso** 归零顺序（λ*）：sqft_lot 9k → yr_renovated 13k → bedrooms 21k → floors 23k → bathrooms 26k → yr_built 45k → waterfront 79k；**sqft_living 至 2e5 仍非零**（57.7k）——即"只剩一个特征"，对应课件 p49 "only features in our model"。
+  - 结论：课件系数路径图的数据来源判定为 **King County 8 特征 + z-score 标准化 + RSS+λ 口径**，本次复现趋势与量级吻合（个别系数数值有小差，源于数据版本/预处理细节）。
+
+### Q2 ℓ2 阈值化特征选择的反例
+
+- **题面**：用案例说明 ℓ2 正则化在回归中将很小的系数设为 0 进行特征选择是不好的（相比 ℓ1，课件第 44 页）。
+- **课件依据**：p43/44（人为阈值 → 结果高度依赖阈值，不稳定）；p45（相关特征在 ridge 下同时收缩 → 阈值化整组删除，"Nothing measuring bathrooms!"）。
+- **数据**：D1 取 9 列 = Q1 的 8 列 + `sqft_above`（与 `sqft_living` r=0.876 组成共线对；次级对 bathrooms~sqft_living r=0.756）；合成复制特征用 D3（脚本内生成，x2 ≡ x1）。
+- **代码**：`code/q2_ridge_thresholding.py`（Ridge 用 SVD 闭式解并与 sklearn 对拍 4e-10；Lasso 坐标下降 + warm start；含 bootstrap 稳定性与 train/valid 预测代价）。
+- **产出图**：`figures/q2_corr_matrix.*`（相关矩阵）、`q2_ridge_band_path.*`（路径+阈值带+保留计数）、`q2_selection_matrix.*`（ridge 阈值化 vs lasso 零模式选择矩阵）、`q2_collinear_case.*`（共线减半 + 复制特征对照）、`q2_bars_story.*`（课件 p43 式条形图+阈值带）。
+- **记录**（2026-10-11）：
+  - **① 选择高度依赖阈值 τ（p43/44）**：同一 ridge 拟合（λ=2e4），τ 从 2e4 → 5e4 → 1e5，选中特征数 **5 → 2 → 0**（τ=1e5 时"全删"，sqft_living 也落选）。沿 λ 看（τ=1e4）：选择集跳变 **11 次**，且 **bedrooms、floors 离开后又回归**（共线补偿使系数幅度先减后增），而 lasso 的零模式沿 λ 严格嵌套（违例 0 次）。bootstrap（40 次半样本重抽，τ=1e4）中 `yr_renovated` 仅 92% 保持选中；τ=1e5 下 40 次全部"选空"。
+  - **② 共线组被"平摊"后整组删除（p45）**：`sqft_living` 单特征 ridge(λ=2e4) 系数 **133,791**；加入兄弟特征 `sqft_above` 后变为 **86,578 + 59,449 = 146,027**（近似对半切，和≈单特征值）。保守阈值 τ=1e5 下：单特征模型保留（133,791 > 1e5），9 特征模型两个成员都被删（86,578 / 59,449 < 1e5）→ 整个 living-area 组从"必选"变"全删"。
+  - **③ 合成复制特征（D3）**：x2 ≡ x1 时 ridge 最小范数解精确对半切 (88,067, 88,067)，任何 τ∈(w/2, w) 都会删掉整组；lasso 保留一个代表 **(237,689, 0)**，组信号完整。
+  - **④ 对比 lasso（p46–49）**：零入场 λ*：sqft_lot 10k → yr_renovated 13k → **sqft_above 17k** → bedrooms 21k → floors 23k → bathrooms 26k → yr_built 45k → waterfront 79k；sqft_living 至 2e5 非零。lasso 自动把共线组压成一个代表（sqft_above 精确归零、sqft_living 保留）；λ=1e5 时 lasso 只留 sqft_living（=157,689）仍代表整组，bootstrap 40/40 稳定。
+  - **⑤ 预测代价**（train/valid 7:3，按选中特征重拟合 OLS 的 valid R²）：全 9 特征 0.5972；ridge+τ=1e4（7 特征）0.5806；τ=5e4（2 特征）0.5032；**τ=1e5（0 特征，退化为常数模型）−0.0003**；lasso@2e4（7 特征）0.5950；lasso@1e5（仅 sqft_living）0.5033。合成复制特征阈值化删整组后 R² −0.0003（同一信号单独就有 0.5033 的 R²）。
+- **解释原因（为什么 ℓ2 阈值化不好、ℓ1 好）**：
+  1. **ridge 的解没有稀疏性**：ŵ(λ)=(XᵀX+λI)⁻¹Xᵀy 恒非零、随 λ 连续收缩；"系数小"只说明收缩程度大（λ 大时全体都小，课件 p48），不等于"特征不重要"——阈值化把"收缩量"误当"重要性"。
+  2. **共线时 |ŵⱼ| 不是特征重要性的可识别度量**：共线方向的权重可在组内任意重新分配而不改变拟合（预测只依赖组内系数之和），ridge 的最小范数准则把权重平摊（复制 k 份 → 每个 ≈ w/k）。于是加入一个共线兄弟就能把一份重要信号的每个系数压到阈值之下 → 阈值化把整个组删除（课件 p45 的 #bathrooms/#showers；本数据 sqft_living/sqft_above）。
+  3. **阈值 τ 是人为的第二个超参数**：选择集随 τ、λ、数据扰动跳变（本例沿 λ 跳 11 次、含非单调回归；bootstrap 下边界特征进进出出），没有任何目标函数可供优化 τ；"先选后拟合"两阶段也失去原估计的名义统计保证。
+  4. **ℓ1 的零来自优化本身**：KKT/软阈值给出精确 0；零集沿 λ 单调嵌套、仅由单一超参数 λ 控制；对相关组通常保留一个代表（本数据：sqft_above 在 λ*=17k 归零、sqft_living 一直保留），组信号不丢——这些都是阈值化 ridge 不具备的。
+
+### Q3 – Q9
+
+见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
+
+## 4. 变更日志
+
+- 2026-10-11：创建 `question/{data,code}`；D1 落盘 + 来源对拍（§1.2）；建立本文件。
+- 2026-10-11：Q1 系数路径复现完成（Ridge/Lasso 图与数值表，见 §3）。
+- 2026-10-11：Q2 完成：阈值化 ridge 反例（5 图 + bootstrap 稳定性 + 预测代价），§3 含原因解释。
