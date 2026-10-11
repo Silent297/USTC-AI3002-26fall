@@ -1,0 +1,4 @@
+task,layer,kind,standardize,lr,initial_lr,attempts,reused,epochs,lambda1,lambda2,metric_name,metric,finite,seconds,weights_path,note
+truth,23,layer,False,0.005,0.005,1,False,5000,0.001,0.001,accuracy,0.89,True,221.18,/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/weights/truth_layer23/weights.npz,
+truth,26,layer,False,0.005,0.005,1,False,5000,0.001,0.001,accuracy,0.86,True,222.98,/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/weights/truth_layer26/weights.npz,
+truth,29,layer,False,0.005,0.005,1,False,5000,0.001,0.001,accuracy,0.86,True,222.42,/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/weights/truth_layer29/weights.npz,

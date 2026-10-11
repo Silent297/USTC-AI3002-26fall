@@ -1,0 +1,12 @@
+truth_layer23              accuracy=0.8900 finite=True lr=0.005 attempts=1 (221.2s)
+truth_layer26              accuracy=0.8600 finite=True lr=0.005 attempts=1 (223.0s)
+truth_layer29              accuracy=0.8600 finite=True lr=0.005 attempts=1 (222.4s)
+
+=== 汇总（按层升序）===
+truth  layer 23  accuracy=0.8900 lr=0.005 attempts=1
+truth  layer 26  accuracy=0.8600 lr=0.005 attempts=1
+truth  layer 29  accuracy=0.8600 lr=0.005 attempts=1
+
+results.json: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/results.json
+summary.csv:  /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/summary.csv
+weights:      /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_c/weights

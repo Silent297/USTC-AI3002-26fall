@@ -1,0 +1,24 @@
+Repository: /home/scc/pb25030753/USTC-AI3002-26fall
+Config: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/experiments/train_layers.json
+Output root: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d
+Run tag: truth_d
+Train args: --tasks truth --layers 32,34,35
+
+truth_layer32              accuracy=0.8367 finite=True lr=0.005 attempts=1 (316.0s)
+Training converged at epoch 4082, loss=12.52986414
+truth_layer34              accuracy=0.7867 finite=True lr=0.005 attempts=1 (369.9s)
+truth_layer35              accuracy=0.6867 finite=True lr=0.005 attempts=1 (585.4s)
+
+=== 汇总（按层升序）===
+truth  layer 32  accuracy=0.8367 lr=0.005 attempts=1
+truth  layer 34  accuracy=0.7867 lr=0.005 attempts=1
+truth  layer 35  accuracy=0.6867 lr=0.005 attempts=1
+
+results.json: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/results.json
+summary.csv:  /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/summary.csv
+weights:      /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/weights
+
+Layer training complete.
+Results JSON: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/results.json
+Summary CSV: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/summary.csv
+Weights: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_layers/truth_d/weights/
