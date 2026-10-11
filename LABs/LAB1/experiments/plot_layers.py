@@ -43,10 +43,33 @@ def load_records(paths: list[Path]) -> list[dict]:
     return list(merged.values())
 
 
+REPO_ROOT = Path(__file__).resolve().parent.parent
+
+
+def resolve_weights_path(raw: str | None) -> Path | None:
+    """把 results.json 里的 weights_path 解析成本机路径。
+
+    集群写入的记录是 Linux 绝对路径（/home/scc/.../LABs/LAB1/results/...），
+    本机不存在：按 "LABs/LAB1/" 标记截取尾部，重新锚定到本仓库根目录。
+    """
+    if not raw:
+        return None
+    path = Path(raw)
+    if path.exists():
+        return path
+    marker = "LABs/LAB1/"
+    tail = raw.replace("\\", "/")
+    index = tail.find(marker)
+    if index == -1:
+        return None
+    candidate = REPO_ROOT / tail[index + len(marker):]
+    return candidate if candidate.exists() else None
+
+
 def per_element_scores(record: dict) -> np.ndarray | None:
     """每个验证样本（world 为每坐标）的误差贡献；缺权重返回 None。"""
-    weights_path = record.get("weights_path")
-    if not weights_path or not Path(weights_path).exists():
+    weights_path = resolve_weights_path(record.get("weights_path"))
+    if weights_path is None:
         return None
     valid_x, valid_y = load_split(record["task"], "valid", record["layer"])
     saved = np.load(weights_path)
@@ -200,9 +223,13 @@ def plot_task(records: list[dict], task: str, out_dir: Path) -> list[Path]:
     for (rec, scores), delta, ci in zip(std_scores, deltas, delta_cis):
         metric, se = summarize(scores)
         reused_note = " (reused)" if rec.get("reused") else ""
+        if metric_name == "mse":
+            delta_text = f"{delta:+7.1f} ± {ci:4.1f}"
+        else:
+            delta_text = f"{delta * 100:+6.2f}pp ± {ci * 100:4.2f}pp"
         print(
             f"  layer {rec['layer']:<3} {metric_name}={metric:.6g} ± {se:.3g}"
-            f"   Δ={delta:+7.1f} ± {ci:4.1f}{reused_note}"
+            f"   Δ={delta_text}{reused_note}"
         )
     for rec, scores in extra_scores:
         metric, se = summarize(scores)
