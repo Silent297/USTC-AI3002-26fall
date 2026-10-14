@@ -39,7 +39,7 @@
 | Q3 | 与 sklearn 实现的拟合差异 | 实验完成 ✅ / 待成文 | world L11 + truth L20 | `code/q3_sklearn_compare.py` | `figures/q3_{convergence,weight_parity,valid_bars}.{png,pdf}` | 目标函数对齐后同解（cos=1.00000）；表面差异=优化器/收敛预算/换算口径，见 §3 |
 | Q4 | world 各层效果对比与选层 | 素材齐 ✅ | datasets/world | results/slurm_layers/* | world_layers.png | raw L11 最优（150.43） |
 | Q5 | world 正则化选择 | 素材齐 ✅ | 同上 | 扫描报告 §8 + 稳定界说明 | world_grid.png | 标准化 + λ2 稳定界分析 |
-| Q6 | valid 预测可视化到地图 | 未做 | datasets/world valid | — | — | 注意不含国界线（合规红线） |
+| Q6 | valid 预测可视化到地图 | 实验完成 ✅ / 待成文 | datasets/world valid | `code/q6_valid_map.py` | `figures/q6_valid_map.{png,pdf}` | 复算 MSE 150.43 = 训练锚点；大洲级定位（中位 9.5°）、经度误差 ≫ 纬度；仅海岸线无国界线，见 §3 |
 | Q7 | 坐标表征 vs 国家识别 | 未做（思路已有） | 同上 | — | — | 国家分组均坐标基线待做 |
 | Q8 | truth 训练/验证集分布差异 | 未做 | datasets/truth | — | — | 两份现有报告均未覆盖 |
 | Q9 | truth 选层 + 正则化 | 素材齐 ✅ | datasets/truth | results/slurm_layers/* | truth_layers.png | L20 峰值（0.8967） |
@@ -68,6 +68,7 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - **数据**：D1 取 9 列 = Q1 的 8 列 + `sqft_above`（与 `sqft_living` r=0.876 组成共线对；次级对 bathrooms~sqft_living r=0.756）；合成复制特征用 D3（脚本内生成，x2 ≡ x1）。
 - **代码**：`code/q2_ridge_thresholding.py`（Ridge 用 SVD 闭式解并与 sklearn 对拍 4e-10；Lasso 坐标下降 + warm start；含 bootstrap 稳定性与 train/valid 预测代价）。
 - **产出图**：`figures/q2_corr_matrix.*`（相关矩阵）、`q2_ridge_band_path.*`（路径+阈值带+保留计数）、`q2_selection_matrix.*`（ridge 阈值化 vs lasso 零模式选择矩阵）、`q2_collinear_case.*`（共线减半 + 复制特征对照）、`q2_bars_story.*`（课件 p43 式条形图+阈值带）。
+- **逐图说明**：`figures/q2_figure_notes.md` —— 5 张图的"是什么/精确读数/证明了什么/报告用法"逐图整理（读数按脚本同口径重算核对，2026-10-13）。
 - **记录**（2026-10-11）：
   - **① 选择高度依赖阈值 τ（p43/44）**：同一 ridge 拟合（λ=2e4），τ 从 2e4 → 5e4 → 1e5，选中特征数 **5 → 2 → 0**（τ=1e5 时"全删"，sqft_living 也落选）。沿 λ 看（τ=1e4）：选择集跳变 **11 次**，且 **bedrooms、floors 离开后又回归**（共线补偿使系数幅度先减后增），而 lasso 的零模式沿 λ 严格嵌套（违例 0 次）。bootstrap（40 次半样本重抽，τ=1e4）中 `yr_renovated` 仅 92% 保持选中；τ=1e5 下 40 次全部"选空"。
   - **② 共线组被"平摊"后整组删除（p45）**：`sqft_living` 单特征 ridge(λ=2e4) 系数 **133,791**；加入兄弟特征 `sqft_above` 后变为 **86,578 + 59,449 = 146,027**（近似对半切，和≈单特征值）。保守阈值 τ=1e5 下：单特征模型保留（133,791 > 1e5），9 特征模型两个成员都被删（86,578 / 59,449 < 1e5）→ 整个 living-area 组从"必选"变"全删"。
@@ -87,6 +88,7 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - **换算（ours 目标 = (1/N)·loss + λ1‖w‖₁ + λ2‖w‖²₂）**：Ridge α=N·λ2；Lasso α=λ1/2；ElasticNet αρ=λ1/2、α(1−ρ)=λ2；逻辑回归 l2 C=1/(2Nλ2)（truth N=5088、λ2=1e-3 → **C≈0.098**；注意 sklearn 默认 C=1 是另一个正则强度）。
 - **数据**：world 层 11（A 组 z-score / B 组原始特征，N=500）；truth 层 20（原始特征，N=5088）。
 - **代码**：`code/q3_sklearn_compare.py`；**图**：`figures/q3_convergence.*`（收敛曲线）、`q3_weight_parity.*`（权重一致散点）、`q3_valid_bars.*`（valid 指标条形）。
+- **逐图说明**：`figures/q3_figure_notes.md` —— 3 张图的读数、结论与报告用法逐一整理（数字取自 run 2 日志核对，2026-10-13）。
 - **结果——world**（valid MSE = lat/lon 均值；cos/relL2 = 两坐标权重拼接后与 sklearn 的相似度）：
 
 | 行 | 设置（ours 口径） | sklearn 等价 | ours valid | sk valid | cos | relL2 |
@@ -119,6 +121,18 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   3. **正则口径**：不换算直接比（如 sklearn 默认 C=1 vs 匹配 C≈0.098）会把"超参不同"误读成"实现差异"。
   一句话：差异是**优化差异**（步长/求解器/预算/早停），不是**模型或实现差异**。
 
+### Q6 验证集预测可视化（地图）
+
+- **题面**：给出你的模型在验证集上的预测结果，并可视化在地图上（推荐不含国界线）。
+- **模型与数据**：world raw L11 历史最优探针（`results/slurm_layers/world/weights/world_layer11_extra0/weights.npz`，standardize=false，权重已折回原始特征空间，推理时不再 z-score）；`datasets/world/valid.layer11.npy`（130×2560）+ `valid.csv` 真值 (lat, lon)。推理为纯矩阵乘，无需集群（权重当年本地 18.3s 训练）。
+- **代码**：`code/q6_valid_map.py`（复算 MSE 自检 + cartopy PlateCarree 全球地图，110m 海岸线，**无国界线**——合规红线）。
+- **产出图**：`figures/q6_valid_map.{png,pdf}`；**逐图说明**：`figures/q6_figure_notes.md`。
+- **记录**（2026-10-13）：
+  - 复算锚点：valid MSE = **150.4277**，与 `results.json` 历史最优记录 **完全一致**（口径闭环：权重折回、列序 (lat,lon)、dtype 均正确）；R² = **0.9545**。
+  - 单点定位误差 √(Δlat²+Δlon²)：平均 **12.44°**、中位 **9.52°**（四分位 4.96 / 9.52 / 15.34°），>30° 仅 7/130。
+  - 误差结构：**纬度 MAE 4.25° vs 经度 MAE 10.85°**（约 2.5 倍）——模型对气候带式纬度线索敏感、具体经度定位弱；最准样本 <1.1°（Denmark 0.79°）；最差为南极洲 2 条（89.59° / 73.79°，预测均落到 ~28–34°E 的南大洋；valid 南极样本共 2 条，全部进入 top-2；valid 覆盖 78 国）。
+  - 结论：模型具备**大洲级**定位能力（中位误差约千公里量级），高纬/孤立岛屿样本失败，与训练样本覆盖直接相关（Q7/Q8 伏笔）。图合规：仅海岸线、无国界线。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -129,3 +143,6 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-11：Q1 系数路径复现完成（Ridge/Lasso 图与数值表，见 §3）。
 - 2026-10-11：Q2 完成：阈值化 ridge 反例（5 图 + bootstrap 稳定性 + 预测代价），§3 含原因解释。
 - 2026-10-11：Q3 完成：与 sklearn 全口径对比（world 7 行 + truth 4 行 + 3 图；含正则换算与发散演示），结论：对齐目标函数后同解、差异归于优化器/收敛预算/换算口径，见 §3。
+- 2026-10-13：新增 Q2 逐图解释说明 `figures/q2_figure_notes.md`（约定：此后每批图都配 `<题号>_figure_notes.md`，格式同）。
+- 2026-10-13：新增 Q3 逐图解释说明 `figures/q3_figure_notes.md`（收敛/权重一致/valid 条形 3 图）。
+- 2026-10-13：Q6 完成：最优 world 探针（raw L11）验证集预测地图（`figures/q6_valid_map.{png,pdf}`，cartopy 110m 海岸线、无国界线；本地推理无需集群）；复算 MSE=150.4277 与训练锚点一致；逐图说明 `figures/q6_figure_notes.md`。
