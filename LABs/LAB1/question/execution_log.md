@@ -46,6 +46,8 @@
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
 
+附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，代码/评估就绪待集群运行）、**A1–A3** 见 `experiments/` 各自目录。
+
 ## 3. 逐题执行记录
 
 ### Q1 系数路径（ℓ1、ℓ2）
@@ -150,7 +152,7 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 
 - **题面**：仔细阅读训练集和验证集，模型的训练集和验证集存在哪些分布上的差异？你是如何应对的？
 - **设计（四组分布统计 + 分层稳健性 + CV 对照）**：① 错拼检测（pyspellchecker 字典 + 相邻字母交换判定）；② 主体新颖度（句首连续大写词组识别首实体，valid 实测 vs 从 train 随机抽 300 的零假设 200 次重抽）；③ 模板/句长；④ world 对照（新国家/新地点字符串/真正空间远离）；⑤ L20 探针在 valid 上的分层 acc（typo/主体×标签，bootstrap CI）；⑥ 13 层 typo 敏感度；⑦ train 内部 3 折 CV 随机 vs 按主体分组。
-- **范围说明**：经确认不做 CREAK 逐句对拍（外部数据集获取受限；本页四组统计 + 分层评估 + CV 已完整回答题面）。
+- **范围说明**：本页未做 CREAK 逐句对拍（当时外部数据集未获取）；2026-10-16 已由 **B1** 补齐（`experiments/B1/`，见下文「附录 B1」）：truth 语料 100% 来自 CREAK，Q8 检出的错拼绝大部分为课程注入。
 - **代码**：`code/q8_split_analysis.py`；**图**：`figures/q8_{split_diff,stratified_acc,cv_gap}.{png,pdf}`；**逐图说明**：`figures/q8_figure_notes.md`（含 §1-3 读数与"报告怎么用"）。
 - **记录**（2026-10-16）：
   - **差异①拼写噪声**：相邻字母换位型错拼句率 truth **valid 24.7%（74/300） vs train 7.0%（354/5088）= 3.5×**，标签内均衡（25.3/24.0 与 7.1/6.8）；world 两侧 0.8%/0.8% 且全为地名假阳性（centre/rila/iber 等）⇒ 错拼是 truth 特有的、只在 valid 侧加重。错误类型形近交换（mkaes、fihgters、connectiuct）。
@@ -160,6 +162,19 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **分层稳健性（L20，锚点 0.8967 逐位复算一致）**：clean 0.885 [0.841,0.925] vs typo 0.932 [0.865,0.986]（diff −0.047，CI 含 0）；seen 0.917 vs unseen 0.884（diff +0.033 ns）。**逐层**：浅层怕错拼（L5/L8/L11 干净−typo 差 +5.2/+6.4/+6.7pp），中深层反向（L17 −6.1pp）——深层表征抗噪。
   - **应对实验（CV）**：train 内部 3 折（n=3785 可识别主体行、同配置 lr=5e-3/5000ep）：随机均值 0.869（0.867/0.858/0.883） vs 分组均值 0.877（0.871/0.880/0.881），**gap −0.8pp 在折间噪声内**；分组折测试主体 100% 未见。⇒ **"随机划分高估"假设未被证实**：L20 不依赖主体记忆，valid 的 0.8967 无主体记忆注水；与分层结果两条独立路径同结论（如实报告负结果）。
   - **结论**：truth 的 valid 是"轻量 OOD 挑战集"（加噪 + 主体轮换 + 长度截断），world 的难在空间外推——两个数据集 OOD 设计维度不同；我们的应对 = 不向 valid 泄漏（固定预算、不按 valid 早停）+ 分层 CI 读数 + 文本不清洗（保持口径一致，深层选层天然抗噪）+ 同分布口径用 train 内部 CV 对照。
+
+### 附录 B1 CREAK 逐句对拍（可选实验，Q8 增强证据）
+
+- **来源**：《可做实验清单》B1（指南3 §3.1，同学参考报告非官方）；2026-10-16 指派执行。属**附加探究**（不进课程必交内容）；若报告篇幅允许，可作为 Q8 的"来源级证据"引用。
+- **设计**：本地 truth 5388 句对 CREAK 公开数据（Onoe et al. 2021, NeurIPS Datasets & Benchmarks；`github.com/yasumasaonoe/creak`，本地 clone rev `5e892b28`，train/dev/test_without_labels/contrast_set = 10176/1371/1371/500 行）三层匹配：direct（whitespace 归一化逐字相等；**不使用标签检索**）→ near（rapidfuzz fuzz.ratio ≥ 90 最优候选，候选按归一化去重、margin=top1−top2）→ none；标签一致性匹配**之后**单独核对；编辑按 candidate→local 单 token 替换分类（剥 token 首尾标点）。
+- **代码**：`experiments/B1/b1_creak_match.py`（22 项锚点内置自检，~12–30 s）；**图**：`experiments/B1/figures/b1_{match_tiers,source_attribution,perturbation_dist,q8_cross}.{png,pdf}`；**逐图说明**：`experiments/B1/b1_figure_notes.md`；明细数字：`experiments/B1/b1_metrics.json`（818 个 near 对逐条 + 全部统计；CREAK 数据不入 git，`data/` 已 ignore，revision+md5 记在 metrics）。
+- **记录**（2026-10-16 完成）：
+  - **匹配 100% 覆盖**：train 4380 direct（86.1%）+ 708 near（13.9%）；valid 190（63.3%）+ 110（36.7%）；**none 两侧 = 0**。direct 率与 guide3 §3.1 逐位一致（86.08% / 63.33%）；near 分数中位 97.5/97.0、margin 中位 38.3/35.2、无并列 ⇒ 全部可追溯且无歧义。
+  - **来源归属**：train **全部**来自 CREAK train.json；valid 全部来自 dev（269）/contrast_set（27）/test（2）——**与 train.json 零重叠**（课程复刻了 CREAK 自己的训练/留存划分）。
+  - **标签**：5388 条匹配后核对，与 CREAK 标签 **0 冲突**（继承无损）。
+  - **扰动分类**：846 处编辑 = 相邻字母交换错拼 **415**（train 318 / valid 97；如 mkaes、tehir、conutry、Fihgters、Nrivana）+ 主谓一致翻转 **431**（is↔are 252、has↔have 99、was↔were 69、do↔does 11；train 390 / valid 41），**无第三类**（无实体替换/内容词改写/标点编辑）；28 个 valid 对含双错拼。⇒ 课程扰动 = 两类**语义保值**编辑（词面级），与"深层探针抗噪、浅层怕噪"（Q8 §3）机理一致。
+  - **Q8 交叉**：Q8 检出的 typo 句 train 354 = **307 课程注入**（字典还原交换后与 CREAK 原文逐字一致，修复率 96.5%）+ 40 CREAK 自带（专名假阳性：Pharoah/Niels/Ewan/Paula Deen/Dwyane Wade）+ 7 其他；valid 74 = 65 注入（94.2%）+ 6 自带 + 3。⇒ Q8 的 valid 错拼率 24.7% 基本全部是课程注入；另发现字典修复器会误伤实体名（MOBA→MOAB、Elon→Leon、Loni→Loin）——"不做文本清洗"的又一警示。
+  - **结论**：课程语料 = CREAK 原文 + 两类扰动、valid 用 CREAK 保留文件换源——Q8"valid 是设计过的轻量 OOD 挑战集"获得**来源级证据**（统计推断 → 逐句证据闭环）。
 
 ### Q4 – Q9
 
@@ -176,3 +191,4 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-13：Q6 完成：最优 world 探针（raw L11）验证集预测地图（`figures/q6_valid_map.{png,pdf}`，cartopy 110m 海岸线、无国界线；本地推理无需集群）；复算 MSE=150.4277 与训练锚点一致；逐图说明 `figures/q6_figure_notes.md`。
 - 2026-10-14：Q7 完成：坐标表征 vs 国家识别（三层证据 + oracle 国家均值/全局均值双基线 + paired bootstrap CI）；unseen 20 条 +1024 大胜全局基线、seen 上 oracle 反超 −35、同国 lat r=0.20 弱显著——结论定性为"中等强度证据"；3 图 + 逐图说明 `figures/q7_figure_notes.md`（含论文 [3] §4.1/§5 对应）。
 - 2026-10-16：Q8 完成：分布差异四维统计（typo 3.5×、主体新颖 77.4% vs 零假设 20.8%、模板/长度、world 对照）+ L20 分层稳健性（差异不显著、浅层怕错拼）+ CV 对照（随机 vs 分组 −0.8pp，负结果如实报告）；3 图 + 逐图说明 `figures/q8_figure_notes.md`。
+- 2026-10-16：**B1 完成**（CREAK 逐句对拍，可选实验）：truth 100% 可追溯（direct 86.08%/63.33% 与 guide3 一致，near 层补全到 100%）、valid 来源 = dev/contrast/test 与 train.json 零重叠、标签 0 冲突、扰动仅两族（错拼 415 + 主谓翻转 431 处，无第三类）；Q8 错拼检出来源还原（注入 307/354 与 65/74、自带专名假阳性 40/6）。产物 `experiments/B1/`（脚本 22 锚点 + 4 图 + `b1_figure_notes.md` + `b1_metrics.json`）；Q8 小节"范围说明"同步更新。
