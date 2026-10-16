@@ -40,7 +40,7 @@
 | Q4 | world 各层效果对比与选层 | 素材齐 ✅ | datasets/world | results/slurm_layers/* | world_layers.png | raw L11 最优（150.43） |
 | Q5 | world 正则化选择 | 素材齐 ✅ | 同上 | 扫描报告 §8 + 稳定界说明 | world_grid.png | 标准化 + λ2 稳定界分析 |
 | Q6 | valid 预测可视化到地图 | 实验完成 ✅ / 待成文 | datasets/world valid | `code/q6_valid_map.py` | `figures/q6_valid_map.{png,pdf}` | 复算 MSE 150.43 = 训练锚点；大洲级定位（中位 9.5°）、经度误差 ≫ 纬度；仅海岸线无国界线，见 §3 |
-| Q7 | 坐标表征 vs 国家识别 | 未做（思路已有） | 同上 | — | — | 国家分组均坐标基线待做 |
+| Q7 | 坐标表征 vs 国家识别 | 实验完成 ✅ / 待成文 | datasets/world train+valid | `code/q7_country_baseline.py` | `figures/q7_{baseline_bars,within_country,unseen_map}.{png,pdf}` | unseen 国家模型 +1024 大胜全局基线（查表不可能）；seen 上 oracle 国家均值反超 −35；同国 lat r=0.20 弱显著 / lon ns；中等强度证据，见 §3 |
 | Q8 | truth 训练/验证集分布差异 | 未做 | datasets/truth | — | — | 两份现有报告均未覆盖 |
 | Q9 | truth 选层 + 正则化 | 素材齐 ✅ | datasets/truth | results/slurm_layers/* | truth_layers.png | L20 峰值（0.8967） |
 
@@ -133,6 +133,19 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - 误差结构：**纬度 MAE 4.25° vs 经度 MAE 10.85°**（约 2.5 倍）——模型对气候带式纬度线索敏感、具体经度定位弱；最准样本 <1.1°（Denmark 0.79°）；最差为南极洲 2 条（89.59° / 73.79°，预测均落到 ~28–34°E 的南大洋；valid 南极样本共 2 条，全部进入 top-2；valid 覆盖 78 国）。
   - 结论：模型具备**大洲级**定位能力（中位误差约千公里量级），高纬/孤立岛屿样本失败，与训练样本覆盖直接相关（Q7/Q8 伏笔）。图合规：仅海岸线、无国界线。
 
+### Q7 坐标表征 vs 国家识别
+
+- **题面**：从训练集和验证集的表现，是否能够强烈说明模型内部存在地理坐标的表征，而不是仅仅识别了输入中的国家？（可参考论文 [3]，可与按训练集国家分组的平均坐标基线比较，考察同一国家内不同地点。）
+- **设计（三层证据 + 双基线）**：① **oracle 国家均值基线**——每国取训练集该国坐标均值，用真实国家标签查找（对基线有利；未见国家回落全局均值 3311.27）；② **同国中心化**——真值/预测相对该国训练均值的偏差，检验"仅国家识别"预测的"常数预测"假设；③ **unseen 国家**——训练集未出现（查表不可能）；另测数据重叠（valid→同国最近 train 点距离）。集合分层：all 130 / seen 110 / multi 73 / single 37 / unseen 20（19 国）。CI 为 paired bootstrap（10k，seed 0）。
+- **代码**：`code/q7_country_baseline.py`；**图**：`figures/q7_{baseline_bars,within_country,unseen_map}.{png,pdf}`；**逐图说明**：`figures/q7_figure_notes.md`（含论文 [3] §4.1/§5 对应表）。
+- **记录**（2026-10-14）：
+  - 复算锚点：valid MSE = **150.4277**（= 训练锚点，口径闭环）；train MSE 116.9279；全局均值基线 3311.27（= Q6 锚点）。
+  - **分层基线**（improvement = base − model，>0 模型更好）：all 130：150.43 vs 278.24，**+127.81 [27.24, 253.03]**；seen 110：148.89 vs **113.77**，**−35.12 [−60.90, −7.08]**（oracle 反超）；multi 73：−45.39 [−82.22, −6.94]；single 37：−14.85 [−39.79, 14.07]（ns）；unseen 20：158.90 vs 全局 1182.83，**+1023.93 [513.94, 1654.14]**。稳健性：multi 去南极洲（n=71）115.87 vs 65.24，方向不变。
+  - **数据重叠侦察**（解释 oracle 为何强）：valid→同国最近 train 点距离中位 **2.03°**，40/130 <1°、89/130 <3°——大量验证地点与训练地点重合/邻近；极端例 Jamaica base MSE=0.01。
+  - **同国中心化（n=73）**：lat r=**0.201 [0.021, 0.389]**（弱显著），slope 0.115；lon r=**0.046 [−0.152, 0.214]**（ns），slope 0.027——方向对但幅度强烈收缩。US（n=8）放大：中心化 r=0.69/0.60（lat/lon），方向大体正确。
+  - **unseen 逐条**：最差 Mauritius 38.03（经度掉到非洲大陆）、Estonia/Russia 31.60、Finland 24.53；最好 Denmark **0.79**；预测整体落对区域（欧洲→欧洲、中美→中美）。
+  - **结论（分层回答题面）**：Ⅰ "不仅识别国家"——unseen 上查表不可能却 +1024（强）、同国 lat 弱显著（弱-中）、all-130 胜 oracle（由 unseen 驱动）；Ⅱ 限度——seen 上 oracle 反超（−35，CI 不含 0）、经度国内无信号、valid↔train 重叠大。**综合为"中等强度"表征证据**，与论文 §4.1 自评 "weak evidence"/"relative position correct, absolute wrong" 一致；"生成时使用"的强证据（论文 §5 神经元+干预）超出本实验范围（无权重），只能引用；并须注明 README §1.2"可解码 ≠ 使用"。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -146,3 +159,4 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-13：新增 Q2 逐图解释说明 `figures/q2_figure_notes.md`（约定：此后每批图都配 `<题号>_figure_notes.md`，格式同）。
 - 2026-10-13：新增 Q3 逐图解释说明 `figures/q3_figure_notes.md`（收敛/权重一致/valid 条形 3 图）。
 - 2026-10-13：Q6 完成：最优 world 探针（raw L11）验证集预测地图（`figures/q6_valid_map.{png,pdf}`，cartopy 110m 海岸线、无国界线；本地推理无需集群）；复算 MSE=150.4277 与训练锚点一致；逐图说明 `figures/q6_figure_notes.md`。
+- 2026-10-14：Q7 完成：坐标表征 vs 国家识别（三层证据 + oracle 国家均值/全局均值双基线 + paired bootstrap CI）；unseen 20 条 +1024 大胜全局基线、seen 上 oracle 反超 −35、同国 lat r=0.20 弱显著——结论定性为"中等强度证据"；3 图 + 逐图说明 `figures/q7_figure_notes.md`（含论文 [3] §4.1/§5 对应）。
