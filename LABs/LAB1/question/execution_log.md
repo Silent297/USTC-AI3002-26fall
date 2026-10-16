@@ -41,7 +41,7 @@
 | Q5 | world 正则化选择 | 素材齐 ✅ | 同上 | 扫描报告 §8 + 稳定界说明 | world_grid.png | 标准化 + λ2 稳定界分析 |
 | Q6 | valid 预测可视化到地图 | 实验完成 ✅ / 待成文 | datasets/world valid | `code/q6_valid_map.py` | `figures/q6_valid_map.{png,pdf}` | 复算 MSE 150.43 = 训练锚点；大洲级定位（中位 9.5°）、经度误差 ≫ 纬度；仅海岸线无国界线，见 §3 |
 | Q7 | 坐标表征 vs 国家识别 | 实验完成 ✅ / 待成文 | datasets/world train+valid | `code/q7_country_baseline.py` | `figures/q7_{baseline_bars,within_country,unseen_map}.{png,pdf}` | unseen 国家模型 +1024 大胜全局基线（查表不可能）；seen 上 oracle 国家均值反超 −35；同国 lat r=0.20 弱显著 / lon ns；中等强度证据，见 §3 |
-| Q8 | truth 训练/验证集分布差异 | 未做 | datasets/truth | — | — | 两份现有报告均未覆盖 |
+| Q8 | truth 训练/验证集分布差异 | 实验完成 ✅ / 待成文 | datasets/truth (+world 对照) | `code/q8_split_analysis.py` | `figures/q8_{split_diff,stratified_acc,cv_gap}.{png,pdf}` | valid=轻量 OOD（typo 3.5×、77.4% 新主体）；L20 对差异稳健；CV 随机 vs 分组无差（−0.8pp），见 §3 |
 | Q9 | truth 选层 + 正则化 | 素材齐 ✅ | datasets/truth | results/slurm_layers/* | truth_layers.png | L20 峰值（0.8967） |
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
@@ -146,6 +146,21 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **unseen 逐条**：最差 Mauritius 38.03（经度掉到非洲大陆）、Estonia/Russia 31.60、Finland 24.53；最好 Denmark **0.79**；预测整体落对区域（欧洲→欧洲、中美→中美）。
   - **结论（分层回答题面）**：Ⅰ "不仅识别国家"——unseen 上查表不可能却 +1024（强）、同国 lat 弱显著（弱-中）、all-130 胜 oracle（由 unseen 驱动）；Ⅱ 限度——seen 上 oracle 反超（−35，CI 不含 0）、经度国内无信号、valid↔train 重叠大。**综合为"中等强度"表征证据**，与论文 §4.1 自评 "weak evidence"/"relative position correct, absolute wrong" 一致；"生成时使用"的强证据（论文 §5 神经元+干预）超出本实验范围（无权重），只能引用；并须注明 README §1.2"可解码 ≠ 使用"。
 
+### Q8 truth 训练/验证集分布差异与应对
+
+- **题面**：仔细阅读训练集和验证集，模型的训练集和验证集存在哪些分布上的差异？你是如何应对的？
+- **设计（四组分布统计 + 分层稳健性 + CV 对照）**：① 错拼检测（pyspellchecker 字典 + 相邻字母交换判定）；② 主体新颖度（句首连续大写词组识别首实体，valid 实测 vs 从 train 随机抽 300 的零假设 200 次重抽）；③ 模板/句长；④ world 对照（新国家/新地点字符串/真正空间远离）；⑤ L20 探针在 valid 上的分层 acc（typo/主体×标签，bootstrap CI）；⑥ 13 层 typo 敏感度；⑦ train 内部 3 折 CV 随机 vs 按主体分组。
+- **范围说明**：经确认不做 CREAK 逐句对拍（外部数据集获取受限；本页四组统计 + 分层评估 + CV 已完整回答题面）。
+- **代码**：`code/q8_split_analysis.py`；**图**：`figures/q8_{split_diff,stratified_acc,cv_gap}.{png,pdf}`；**逐图说明**：`figures/q8_figure_notes.md`（含 §1-3 读数与"报告怎么用"）。
+- **记录**（2026-10-16）：
+  - **差异①拼写噪声**：相邻字母换位型错拼句率 truth **valid 24.7%（74/300） vs train 7.0%（354/5088）= 3.5×**，标签内均衡（25.3/24.0 与 7.1/6.8）；world 两侧 0.8%/0.8% 且全为地名假阳性（centre/rila/iber 等）⇒ 错拼是 truth 特有的、只在 valid 侧加重。错误类型形近交换（mkaes、fihgters、connectiuct）。
+  - **差异②主体新颖度**：valid 212 条可识别主体中 **164 条（77.4%）未在 train 出现**；零假设（train 随机抽 300，200 次重抽）mean 20.8%、97.5% 分位 25.6%——远超。头部新主体 Dave Grohl×8、Dwyane Wade×7、The Offspring×6。稳健性：typo 落在主体内部的仅 8 条、修正后仍全部"未见"⇒ 不受错拼污染。
+  - **差异③模板/长度**：train 特有 "One can"（129，2.5%）/"If one"（24）在 valid 几乎消失（2/0）；句长 train mean 61.0/max 487 vs valid 54.2/162。
+  - **差异④world 对照**：无噪声差异；valid 20/130 未见国家、126/130 地点字符串未见，但多数空间邻近（89/130 距同国最近 train 点 <3°），真正远离（≥3°）仅 **41** 条——字符串新颖 ≠ 空间新颖。
+  - **分层稳健性（L20，锚点 0.8967 逐位复算一致）**：clean 0.885 [0.841,0.925] vs typo 0.932 [0.865,0.986]（diff −0.047，CI 含 0）；seen 0.917 vs unseen 0.884（diff +0.033 ns）。**逐层**：浅层怕错拼（L5/L8/L11 干净−typo 差 +5.2/+6.4/+6.7pp），中深层反向（L17 −6.1pp）——深层表征抗噪。
+  - **应对实验（CV）**：train 内部 3 折（n=3785 可识别主体行、同配置 lr=5e-3/5000ep）：随机均值 0.869（0.867/0.858/0.883） vs 分组均值 0.877（0.871/0.880/0.881），**gap −0.8pp 在折间噪声内**；分组折测试主体 100% 未见。⇒ **"随机划分高估"假设未被证实**：L20 不依赖主体记忆，valid 的 0.8967 无主体记忆注水；与分层结果两条独立路径同结论（如实报告负结果）。
+  - **结论**：truth 的 valid 是"轻量 OOD 挑战集"（加噪 + 主体轮换 + 长度截断），world 的难在空间外推——两个数据集 OOD 设计维度不同；我们的应对 = 不向 valid 泄漏（固定预算、不按 valid 早停）+ 分层 CI 读数 + 文本不清洗（保持口径一致，深层选层天然抗噪）+ 同分布口径用 train 内部 CV 对照。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -160,3 +175,4 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-13：新增 Q3 逐图解释说明 `figures/q3_figure_notes.md`（收敛/权重一致/valid 条形 3 图）。
 - 2026-10-13：Q6 完成：最优 world 探针（raw L11）验证集预测地图（`figures/q6_valid_map.{png,pdf}`，cartopy 110m 海岸线、无国界线；本地推理无需集群）；复算 MSE=150.4277 与训练锚点一致；逐图说明 `figures/q6_figure_notes.md`。
 - 2026-10-14：Q7 完成：坐标表征 vs 国家识别（三层证据 + oracle 国家均值/全局均值双基线 + paired bootstrap CI）；unseen 20 条 +1024 大胜全局基线、seen 上 oracle 反超 −35、同国 lat r=0.20 弱显著——结论定性为"中等强度证据"；3 图 + 逐图说明 `figures/q7_figure_notes.md`（含论文 [3] §4.1/§5 对应）。
+- 2026-10-16：Q8 完成：分布差异四维统计（typo 3.5×、主体新颖 77.4% vs 零假设 20.8%、模板/长度、world 对照）+ L20 分层稳健性（差异不显著、浅层怕错拼）+ CV 对照（随机 vs 分组 −0.8pp，负结果如实报告）；3 图 + 逐图说明 `figures/q8_figure_notes.md`。

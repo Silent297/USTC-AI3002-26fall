@@ -1,2 +1,11 @@
 guide/
 .qoder-credits/
+
+# LaTeX 编译中间产物（报告源码在 report/；report.pdf 为产物，保留可提交）
+report/*.aux
+report/*.fls
+report/*.fdb_latexmk
+report/*.xdv
+report/*.out
+report/*.log
+report/*.synctex.gz

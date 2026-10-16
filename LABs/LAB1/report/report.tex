@@ -1,0 +1,521 @@
+% LAB1 实验报告（骨架版）——由 report.template.tex 派生
+% 编译（二选一，产物均落在 report/，根目录保持干净）：
+%   cd report && latexmk -xelatex report.tex
+%   latexmk -cd -xelatex report/report.tex      （在仓库根目录执行）
+% 约定：红色【骨架】标注 = 待扩写为正文的结论要点；灰色小字 = 成文素材出处。定稿前删除标记即可。
+\documentclass[UTF8,a4paper]{ctexart}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{anyfontsize}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{xcolor}
+
+% 图片相对仓库根（本文件在 report/ 下时走 ../，从根编译时回落到 ./）
+\graphicspath{{../}{./}}
+
+% 圈号 ①②③ 与罗马数字 ⅠⅡ 走 CJK 字体（xmroman 无此字形）
+\xeCJKDeclareCharClass{CJK}{"2460 -> "24FF, "2160 -> "217F}
+% 长 \texttt 路径的断行余量
+\emergencystretch=2.5em
+
+\newcommand{\skeleton}[1]{\textcolor{red}{\textbf{【骨架·#1】}}}
+\newcommand{\srcnote}[1]{\par\smallskip\noindent{\small 成文素材：#1}\par}
+
+\title{FAIML Lab1 实验报告}
+\author{【姓名】 \\ 【学号】}   % TODO：填写姓名与学号
+\date{2026 年 10 月}            % TODO：按提交日期修改
+
+\begin{document}
+\maketitle
+
+\section{思考题}
+
+% ======================================================================
+\subsection*{1. 复现 $\ell_1$ / $\ell_2$ 系数路径与数据来源}
+
+\textbf{题面：}重现课件（第 42、48 页）中 $\ell_1$、$\ell_2$ 正则化的“系数路径”，并解释数据来源。
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{数据来源判定}：课件图的 8 个特征列名（bedrooms、bathrooms、sqft\_living、sqft\_lot、floors、yr\_built、yr\_renovated、waterfront）与 King County 房屋销售数据集列名完全一致 $\Rightarrow$ 判定课件系数路径的数据来源为该数据集（Kaggle \texttt{harlfoxem/housesalesprediction}，CC0）；$y=$ price。本仓库副本已与 OpenML 版本按 \texttt{id} 对拍（仅 23 个缺失单元格口径不同，对拍记录见 §附录~\ref{app:repro}）。
+  \item \textbf{预处理}：8 特征 + price，剔除 16 个含缺失行（21613 $\to$ 21597 行）；特征 z-score（依据课件批注 “all features normalized so coeff. on same scale”）；$\lambda$ 网格 $0$–$2\times10^5$ 共 201 点。
+  \item \textbf{实现}：Ridge 用 SVD 闭式解并与 sklearn 对拍（$\max|\Delta|\approx10^{-9}$）；Lasso 用坐标下降 + warm start（推导见 §附录~\ref{app:math}）。
+  \item \textbf{读数（$\lambda=0$ 最小二乘解，单位 美元/$\sigma$）}：sqft\_living 268\,160、waterfront 63\,307、bathrooms 49\,137、floors 28\,399、yr\_renovated 3\,397、sqft\_lot $-12\,378$、bedrooms $-56\,868$、yr\_built $-92\,382$（与课件量级一致）。
+  \item \textbf{$\ell_2$ 行为}：全部系数只缩不归零（课件 p48 批注“所有 $\hat w_j\neq 0$ 但大 $\lambda$ 下都很小”）；bedrooms 与 bathrooms 先升后降（相关特征的补偿效应），与课件曲线形态一致。
+  \item \textbf{$\ell_1$ 行为}：归零顺序 $\lambda^*$：sqft\_lot 9k $\to$ yr\_renovated 13k $\to$ bedrooms 21k $\to$ floors 23k $\to$ bathrooms 26k $\to$ yr\_built 45k $\to$ waterfront 79k；sqft\_living 至 $2\times10^5$ 仍非零（57.7k）——“只剩一个特征”，对应课件 p49 “only features in our model”。
+  \item \textbf{结论}：复现的趋势与量级与课件一致（个别系数有小差，源于数据版本/预处理细节）。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q1_both_paths.pdf}
+  \caption{King County 数据（8 特征 z-score、price 中心化）的系数路径。左：Ridge（$\ell_2$）——只缩不归零；右：Lasso（$\ell_1$）——精确归零，sqft\_living 保留到最后。}
+\end{figure}
+
+\srcnote{\texttt{question/code/q1\_coefficient\_paths.py}；\texttt{execution\_log.md} §3 Q1；对拍记录 \texttt{execution\_log.md} §1.2。}
+
+% ======================================================================
+\subsection*{2. 用案例说明 $\ell_2$ 阈值化做特征选择为什么不好}
+
+\textbf{题面：}请用案例说明 $\ell_2$ 正则化在回归中将很小的系数设为 0 进行特征选择是不好的（相比 $\ell_1$ 正则化，课件第 44 页）。
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{数据}：King County 取 9 特征（Q1 的 8 列 + sqft\_above，与 sqft\_living 相关 $r=0.876$）；z-score + price 中心化；主阈值 $\tau=10^4$（美元/$\sigma$）。
+  \item \textbf{① 选择高度依赖阈值 $\tau$}：同一拟合（$\lambda=2\times10^4$）下 $\tau=10^4\to5\times10^4\to10^5$，选中特征数 $7\to5\to2\to0$（$\tau=10^5$ 时“全删”）；沿 $\lambda$ 看保留集跳变 11 次、含 3 次回归（bedrooms、floors 离开后又回归；yr\_renovated 在 $\lambda=0$ 反而在带内）——而 lasso 零模式严格嵌套（违例 0 次）。
+  \item \textbf{② bootstrap（40 次半样本）}：边界特征 yr\_renovated 仅 92\% 保持选中；$\tau=10^5$ 下 40/40 全“选空”。
+  \item \textbf{③ 共线平摊 $\to$ 整组删除（核心机制）}：sqft\_living 单特征 ridge$(\lambda=2\times10^4)$ 系数 133\,791；加入兄弟特征 sqft\_above 后为 86\,578 + 59\,449（$\approx$ 对半切，和 $\approx$ 单特征值）。$\tau=10^5$：单特征模型保留、成对模型两个成员都被删 $\Rightarrow$ 整个 living-area 组从“必选”变“全删”。合成复制特征（$x_2\equiv x_1$）下 ridge 精确对半 $(88\,067,\,88\,067)$，任何 $\tau\in(88\,067,\ 176\,134)$ 都删整组；lasso 保留一个代表 $(237\,689,\,0)$。
+  \item \textbf{④ 预测代价}（train/valid 7:3，按选中特征重拟合 OLS 的 valid $R^2$）：全 9 特征 0.5972；$\tau=10^4$（7 特征）0.5806；$\tau=5\times10^4$（2 特征）0.5032；$\tau=10^5$（0 特征，常数模型）$-0.0003$；对照 lasso@$10^5$（仅 sqft\_living 一个代表）仍 0.5033——组信号被完整保留。
+  \item \textbf{⑤ 原因归纳}：(a) ridge 解没有稀疏性，$|w_j|$ 小只代表被收缩多，不代表不重要；(b) 共线时 $|w_j|$ 不是可识别的重要性度量——权重可在组内任意重分配而拟合不变，ridge 最小范数解把权重“平摊”；(c) 阈值 $\tau$ 是人为的第二个超参数，无目标函数可优化；(d) $\ell_1$ 的零来自优化本身（KKT/软阈值），零集沿 $\lambda$ 单调嵌套、由单一超参数控制。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q2_ridge_band_path.pdf}
+  \caption{阈值化 ridge 的“选择路径”连单调性都不满足：$\tau=10^4$ 时保留计数沿 $\lambda$ 跳变 11 次（含 3 次回归）；lasso 非零数严格单调。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q2_collinear_case.pdf}
+  \caption{共线案例：加入一个共线兄弟即可让每个系数减半、$\tau=10^5$ 下整组被删（133\,791 $\to$ 86\,578 + 59\,449）；lasso 组内保留一个代表（237\,689, 0）。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q2_selection_matrix.pdf}
+  \caption{结构判据：ridge 阈值化选择集不嵌套（bedrooms、floors 离而复返）；lasso 零模式严格嵌套，每特征仅一个连续非零窗口 $[0,\lambda^*]$。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q2_bars_story.pdf}
+  \caption{同一 $\lambda=2\times10^4$ 截面（p43 画风）：阈值化 ridge 与 lasso 的保留集在 bedrooms、yr\_renovated、sqft\_above 三个特征上互相矛盾；$\tau$ 从 $10^4$ 扫到 $10^5$，ridge 保留数 $7\to5\to2\to0$。}
+\end{figure}
+
+\srcnote{\texttt{question/\allowbreak code/\allowbreak q2\_\allowbreak ridge\_\allowbreak thresholding.py}；\allowbreak 逐图说明 \texttt{figures/\allowbreak q2\_\allowbreak figure\_\allowbreak notes.md}；\allowbreak \texttt{execution\_\allowbreak log.md} §3 Q2。}
+
+% ======================================================================
+\subsection*{3. 与 sklearn 实现有拟合效果差异吗}
+
+\textbf{题面：}你的模型相比于 sklearn 的实现有拟合效果上的差异吗？（简要说明即可）
+（提示：可以在做完后两项实验后回答该题。）
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{换算对齐}（否则比较的是两个不同目标函数）：Ridge $\alpha=N\lambda_2$；Lasso $\alpha=\lambda_1/2$；ElasticNet $\alpha\rho=\lambda_1/2$ 且 $\alpha(1-\rho)=\lambda_2$；逻辑回归 $C=1/(2N\lambda_2)$（truth $N=5088$、$\lambda_2=10^{-3}$ $\Rightarrow$ $C\approx0.098$）。
+  \item \textbf{结论：没有本质差异}。同一目标函数 + 充分收敛时两者同解（A2/A4 $\cos=1.00000$、relL2 $=0.002$；B2b $\cos$ 0.997）。观察到的差异全部可归为非模型因素：优化器机制、收敛预算（$\approx$ 隐式早停正则）、正则口径。
+  \item \textbf{① 优化器机制}：固定步长全批量 GD 受稳定界约束——B3 raw L11 无正则 lr$=10^{-3}$（界 $\approx5.4\times10^{-4}$）第 8 轮 loss 爆炸自动停；sklearn 用精确求解器无此问题。
+  \item \textbf{② 收敛预算 $\approx$ 隐式早停正则}：有限轮 GD 停在更小范数点、valid 反而更好（A1 306.55 $<$ 311.56；B1 223.58 $<$ 395.02；T2 ours 0.8867 $>$ 0.8600）；延长训练向 sklearn 靠拢（cos 0.897$\to$0.997）但 valid 可能回落（B2b 162.4 vs B2 150.4）。
+  \item \textbf{③ 正则口径}：sklearn 默认 $C=1$（更强正则）valid 0.8500；不换算直接比会把“超参不同”误读成“实现差异”。
+  \item 一句话：差异是\textbf{优化差异}（步长/求解器/预算/早停），不是模型或实现差异。
+\end{itemize}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{llrrrrr}
+    \toprule
+    行 & 设置（ours 口径） & sklearn 等价 & ours valid & sk valid & $\cos$ & relL2 \\
+    \midrule
+    A1 & world z-score，无正则，ep20000 & LinearRegression & 306.55 & 311.56 & 0.99929 & 0.039 \\
+    A2 & world z-score，$\lambda_2=1.0$ & Ridge $\alpha=500$ & 167.06 & 167.17 & 1.00000 & 0.002 \\
+    A3 & world z-score，$\lambda_1=10^{-3}$ & Lasso $\alpha=5\times10^{-4}$\textsuperscript{a} & 238.36 & 598.47 & 0.594 & 0.814 \\
+    A4 & world z-score，$\lambda_1=10^{-3}+\lambda_2=1.0$ & ElasticNet & 167.04 & 167.16 & 1.00000 & 0.002 \\
+    B1 & world raw，无正则，ep20000 & LinearRegression & 223.58 & 395.02 & 0.871 & 0.573 \\
+    B2 & world raw，历史最优，ep2000 & ElasticNet & 150.43 & 165.34 & 0.897 & 0.475 \\
+    B2b & world raw，历史最优，ep20000 & ElasticNet & 162.36 & 165.34 & 0.997 & 0.082 \\
+    \bottomrule
+  \end{tabular}
+  \caption[world L11 与 sklearn 逐配置对比]{world（L11，valid MSE；小者好）与 sklearn 逐配置对比。\textsuperscript{a}：A3 的 sklearn Lasso 未收敛到 tol（dual gap $\gg$ tol），数值仅供参考。}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{llrrrrr}
+    \toprule
+    行 & 设置 & ours acc & sk acc & ours ll & sk ll & $\cos$ \\
+    \midrule
+    T1 & 无正则，ep4000 & 0.8867 & 0.8533 & 0.255 & 27.77 & 0.772 \\
+    T2 & $\lambda_2=10^{-3}$（sk $C\approx0.098$），ep5000 & 0.8867 & 0.8600 & 0.257 & 0.383 & 0.802 \\
+    T2b & 同 T2，ep10000 & 0.8733 & 0.8600 & 0.269 & 0.383 & 0.883 \\
+    T3 & 最优配置 $\lambda_1=\lambda_2=10^{-3}$，ep5000 & 0.8967 & 0.8600 & 0.259 & 0.383 & 0.712 \\
+    \bottomrule
+  \end{tabular}
+  \caption{truth（L20，valid 准确率；大者好）与 sklearn 对比。T1 行 sklearn 无正则的 ll$=27.77$ 灾难：可分数据上 MLE 在无穷远。参考：sklearn 默认 $C=1$（更强正则）$\to$ valid 0.8500。}
+\end{table}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q3_weight_parity.pdf}
+  \caption{对齐正则口径后权重逐点比对：world（$\lambda_2=1.0$）落在对角线上（$\cos=1.00000$）——同一目标函数充分收敛 $\Rightarrow$ 同解；truth 未充分收敛时权重整体压向 0（relL2 $=0.794$）。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q3_convergence.pdf}
+  \caption{收敛曲线：world（$p\gg n$ 病态）GD 20000 轮仅到 0.0047（精确 LS$=0$）；truth GD 5000 轮停于 0.181，未达 lbfgs 最优 0.066——有限预算 GD 天然早停、起正则化作用。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q3_valid_bars.pdf}
+  \caption{valid 指标总览：world raw 早停的 223.6 $\ll$ 精确 LS 的 395.0；lr$=10^{-3}$ 超稳定界第 8 轮发散（红叉）。truth：ours 全面不低于 lbfgs；灰线为 $C=1$ 口径陷阱。}
+\end{figure}
+
+\srcnote{\texttt{question/code/q3\_sklearn\_compare.py}；逐图说明 \texttt{figures/q3\_figure\_notes.md}；\texttt{execution\_log.md} §3 Q3。}
+
+% ======================================================================
+\subsection*{4. world：不同层中间表征的预测效果对比与选层}
+
+\textbf{题面：}对比不同层中间表征的预测效果，并分析原因；你在最终模型提交中是如何选择特征选取层次的？
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{设置}：13 个层（$2,5,8,\dots,35$，步长 3）在统一配置下训练（z-score + lr$=0.002$ + 2000 轮 + $\lambda_2=1.0$），外加 raw L11 的历史最优配置（extra）。统计：单层 $\pm1$ SE；层间比较用同批验证样本的配对差 95\% CI。
+  \item \textbf{曲线形状（U 形）}：浅层平台 L2–L11（157.6 / 163.0 / 159.1 / 167.0，两两配对差均不显著）$\to$ 中层低谷 L14–L29（L20/L23 $\approx$241，$+84$ 显著）$\to$ 深层回升 L32 180.3（与 L11 差 $-13.3\pm56.2$，不显著）。
+  \item \textbf{全场最低} raw L11 extra $\mathbf{150.43}$（与 std L2 差 7.1，不显著）$\Rightarrow$ world 水平锁定在 150–167（$R^2\approx0.955$），继续调参无显著收益。
+  \item \textbf{原因分析（写作时展开）}：world 的位置/坐标信息在\textbf{浅层}最线性可分；随层深增加，表征经更多非线性变换、语义抽象增强，坐标的线性可读性下降；深层（L32+）“回升”的机制尚无定论——如实报告为观察（本实验范围内无法归因）。跨任务对照见下题与 §附录~\ref{app:repr}。
+  \item \textbf{最终提交的选层：raw L11}（层号 11）。理由：点估计最低（150.43）+ 与 std L2/L5/L8/L11 统计上不可区分（$n_{\text{valid}}=130$、SE $\approx$13--19，平台内差异不可信）+ 11 层为课程预提取层（不需自行提特征）。备选 std L2（157.57）。\textbf{不要用} L14–L29。
+  \item 附：raw L2 探针为负结果（198.78，显著更差）——raw 增益是 L11 特有的组合，不是“浅层普遍现象”。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{results/slurm_layers/world/plots/world_layers.pdf}
+  \caption{world 各层验证 MSE（上：$\pm1$ SE，红圈 = 最优 std 层，红星 = raw L11 extra；下：与 L2 的配对差 95\% CI）。浅层平台—中层低谷—深层回升的 U 形。}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{rrrrrl}
+    \toprule
+    层 & 配置 & MSE & $\pm$SE & $\Delta$ vs L2（95\% CI） & 判定 \\
+    \midrule
+    2 & std & \textbf{157.57} & 40.7 & 参考 & 最优 \\
+    5 & std & 163.02 & 40.9 & $+5.4\pm30.5$ & 不显著 \\
+    8 & std & 159.14 & 40.5 & $+1.6\pm33.5$ & 不显著 \\
+    11 & std & 167.04 & 42.9 & $+9.5\pm41.1$ & 不显著 \\
+    14 & std & 213.67 & 53.1 & $+56.1\pm56.2$ & 边缘 \\
+    17 & std & 227.13 & 52.4 & $+69.6\pm62.7$ & 显著 \\
+    20 & std & 241.83 & 55.9 & $+84.3\pm76.9$ & 显著 \\
+    23 & std & 241.14 & 48.6 & $+83.6\pm54.8$ & 显著 \\
+    26 & std & 226.25 & 52.0 & $+68.7\pm70.8$ & 边缘 \\
+    29 & std & 209.99 & 48.3 & $+52.4\pm66.5$ & 不显著 \\
+    32 & std & 180.31 & 42.1 & $+22.7\pm54.1$ & 不显著 \\
+    34 & std & 196.46 & 41.6 & $+38.9\pm61.9$ & 不显著 \\
+    35 & std & 204.91 & 41.5 & $+47.3\pm63.9$ & 不显著 \\
+    11 & raw（extra） & \textbf{150.43} & 38.4 & — & 全场最低 \\
+    \bottomrule
+  \end{tabular}
+  \caption{world 13 层验证 MSE 全表（含 raw extra）。}
+\end{table}
+
+\srcnote{\texttt{results/slurm\_layers/world/}（results.json + summary.csv + plots/）；《LAB1 分层训练结果分析报告.md》§2/§6；训练配置 \texttt{experiments/train\_layers.json}。}
+
+% ======================================================================
+\subsection*{5. world：正则化与学习率的选择}
+
+\textbf{题面：}你在最终模型提交中是怎么选择正则化的？请说明理由；
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{问题背景}：world 为 $N=500 \ll D=2560$ 的欠定问题，必须正则化；且原始特征尺度不齐，固定学习率的稳定界随层深暴跌（$1800\times$，详见 §附录~\ref{app:math}）——不先解决数值问题，扫正则没有意义。
+  \item \textbf{① 特征标准化（z-score，统计量只取 train）}：把各界稳定界拉平到 $3.1$–$4.8\times10^{-3}$（仅 1.5 倍差距），同一 lr 对所有层公平；$\lambda_2$ 的真实作用在标准化后才显形。
+  \item \textbf{② $\lambda_2$ 呈 U 形}：$\lambda_2=0.1$ 时训练残差 $\approx3$ 但 valid MSE 209（严重过拟合）；$\lambda_2=1.0$ 最优（167.06）；$3.0$ 回升（184.57）。标准化版扫描固定 lr$=3\times10^{-3}$。
+  \item \textbf{③ $\lambda_1$}：truth 的扫描显示 $\lambda_1$ 对大表征有害（稠密表征，见 Q9）；world 提交沿用 $\lambda_1=0.001$（小量、与扫描一致，未观察到收益）。
+  \item \textbf{④ 学习率在稳定界内选取}：raw L11 界 $5.4\times10^{-4}$ $\Rightarrow$ lr$=5\times10^{-4}$（贴线，MSE 150.43）；z-score 版 L11 界 $3.6\times10^{-3}$ $\Rightarrow$ lr$=3\times10^{-3}$（0.83 倍余量，167.06）。训练脚本另有发散兜底（lr$\times$0.5 重试 $\le$4 次）。
+  \item \textbf{最终选择}：raw L11，lr$=5\times10^{-4}$，ep2000，$\lambda_2=0.1$（MSE \textbf{150.43}）；备选 z-score L11，lr$=3\times10^{-3}$，$\lambda_2=1.0$（167.06）。两者差 17 不显著（SE 13–19）$\Rightarrow$ 按简单性（权重直接可用、无须再标准化）选 raw。
+  \item 论据链：稳定界公式与对拍表见 §附录~\ref{app:math}；扫描全表见 §附录~\ref{app:exp}。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{results/slurm_grid/20261009_215412_89085/plots/world_grid.pdf}
+  \caption{world 修复重扫（标准化后 16 次）：lr、epochs、$\lambda_2$、layer 四组超参数对 valid MSE 的影响；lr$=5\times10^{-3}$ 被正确标记为发散（finite=False）。}
+\end{figure}
+
+\srcnote{《LAB1 超参数扫描实验报告.md》§8（job 89085）；\texttt{experiments/稳定界说明.md}；\texttt{results/\allowbreak slurm\_grid/\allowbreak 20261009\_215412\_89085/}。}
+
+% ======================================================================
+\subsection*{6. 验证集预测的地图可视化}
+
+\textbf{题面：}给出你的模型在验证集上的预测结果，并可视化在地图上（推荐不含国界线）。
+（提示：此题推荐使用 AI 工具辅助可视化程序的编写。）
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{模型}：world raw L11 最终探针（\texttt{world\_layer11\_extra0/weights.npz}，权重已折回原始特征空间，推理直接 $x@w^{\top}+b$）。
+  \item \textbf{口径闭环}：本地推理复算 valid MSE $=150.4277$，与训练记录逐位一致；$R^2=0.9545$。
+  \item \textbf{定位能力}：单点误差（$\sqrt{\Delta lat^2+\Delta lon^2}$）平均 12.44$^\circ$、中位 9.52$^\circ$（千公里量级的“大洲级”定位）；$>30^\circ$ 仅 7/130。
+  \item \textbf{误差结构}：纬度 MAE 4.25$^\circ$ vs 经度 MAE 10.85$^\circ$（$\approx2.5$ 倍）——对“气候带式”纬度线索敏感、具体经度定位弱；最差样本为南极洲 2 条（89.6$^\circ$ / 73.8$^\circ$，预测均落到 $\sim$28–34$^\circ$E 的南大洋）。
+  \item \textbf{覆盖决定精度}：欧洲/东非/中美等训练覆盖密集区误差 $<5^\circ$（Denmark 0.79$^\circ$）；高纬、孤立岛屿失败（加拿大纽芬兰经度差 40.7$^\circ$）。
+  \item \textbf{合规}：仅绘 110m 海岸线，\textbf{无国界线}（课程红线：不合规地图可扣全部报告规范分）。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{question/figures/q6_valid_map.pdf}
+  \caption{130 个验证样本的定位：灰空心圆 = 真值，彩点 = 预测（颜色 = 单点定位误差）。valid MSE $=150.4$（$R^2=0.955$）；中位误差 9.5$^\circ$，纬度误差显著小于经度；高纬与孤立岛屿样本误差最大。仅海岸线，无国界线。}
+\end{figure}
+
+\srcnote{\texttt{question/code/q6\_valid\_map.py}；逐图说明 \texttt{figures/q6\_figure\_notes.md}。}
+
+% ======================================================================
+\subsection*{7. 是地理坐标表征，还是仅仅识别了国家？}
+
+\textbf{题面：}从训练集和验证集的表现，是否能够强烈说明模型内部存在地理坐标的表征，而不是仅仅识别了输入中的国家？对于该题可以参考原始论文 [3] 的部分结论和上一题的可视化结果；也可与按训练集国家分组的平均坐标基线比较，考察同一国家内不同地点的预测。
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{设计（三层证据 + 双基线）}：① oracle 国家均值基线——每国取训练集该国坐标均值、用\textbf{真实国家标签}查找（对基线有利；未见国家回落全局均值，MSE 3311.27）；② 同国中心化——真值/预测相对该国训练均值的偏差，检验“仅国家识别”的常数预测假设；③ unseen 国家——查表原理上不可能。集合分层：all 130 / seen 110 / multi 73 / single 37 / unseen 20（19 国）。CI 为 paired bootstrap。
+  \item \textbf{证据 Ⅰ（不是“仅仅识别国家”）}：unseen 20 条上模型 MSE 158.90 vs 全局基线 1182.83，improvement $\mathbf{+1023.93\ [513.94,\ 1654.14]}$；同国中心化 lat $r=0.201\ [0.021,\ 0.389]$（弱显著）、slope 0.115。
+  \item \textbf{证据 Ⅱ（限度）}：seen 110 上 oracle 反超（$148.89$ vs $\mathbf{113.77}$，imp $-35.12\ [-60.90,\ -7.08]$）；经度国内 $r=0.046$（ns）；valid$\to$同国最近 train 点距离中位 \textbf{2.03$^\circ$}（40/130 $<1^\circ$、89/130 $<3^\circ$）——大量地点重叠，“记住常见地点”贡献可观（极端例 Jamaica 基线 MSE $=0.01$）。
+  \item \textbf{结论定性：中等强度}——强于“纯国家分类器”（unseen 上查表不可能却大胜全局基线），弱于论文 [3] §5 的神经元/干预级证据（超出本实验范围）；与论文 §4.1 自评 “weak evidence” 以及 README §1.2 “可解码 $\neq$ 使用时一定使用” 的警示一致。
+  \item 与 Q6 呼应：误差的经度/小岛屿集中与“相对位置对、绝对位置偏”（论文术语）结构一致。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q7_baseline_bars.pdf}
+  \caption{模型 vs oracle 国家均值基线的分层 valid MSE。左：seen 国家按样本数分层；右：19 个训练未见国家。improvement $=$ 基线 $-$ 模型；误差棒为 paired bootstrap 95\% CI。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q7_within_country.pdf}
+  \caption{同国内分辨力：73 条多样本国家样本相对该国训练均值的偏差（纬度 $r=0.20$ 弱显著，经度 $r=0.05$ ns）；右：美国 8 条样本真值$\to$预测箭头（方向大体正确、幅度收缩）。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q7_unseen_map.pdf}
+  \caption{19 个未见国家 20 条样本：模型 MSE 159 vs 全局均值基线 1183（imp $+1024$）。预测整体落对区域（欧洲$\to$欧洲、中美$\to$中美），最差 Mauritius 38.0$^\circ$。仅海岸线，无国界线。}
+\end{figure}
+
+\srcnote{\texttt{question/\allowbreak code/\allowbreak q7\_country\_baseline.py}；逐图说明 \texttt{figures/q7\_figure\_notes.md}（含与论文 [3] §4.1/§5 对应表）。}
+
+% ======================================================================
+\subsection*{8. truth：训练集/验证集的分布差异与应对}
+
+\textbf{题面：}仔细阅读训练集和验证集，模型的训练集和验证集存在哪些分布上的差异？你是如何应对的？
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{差异 ① 拼写噪声}：相邻字母换位型错拼句率 truth \textbf{valid 24.7\% vs train 7.0\%}（标签对称：25.3\%/24.0\% 与 7.1\%/6.8\%）；world 无此差异（0.8\% vs 0.8\%，均为地名误报）。
+  \item \textbf{差异 ② 主体新颖度}：valid 可识别首实体 212 条中 \textbf{77.4\% 未在 train 出现}；随机划分零假设（从 train 随机抽 300 条）仅 20.8\% [15.6, 25.6]——远在零假设外。头部实体（Dave Grohl、Dwyane Wade、The Offspring）train 计数 0。
+  \item \textbf{差异 ③ 模板/长度}：train 含 “One can” 2.5\% vs valid 0.7\%、“If one” 0.5\% vs 0；句长上界 487 vs 162 字符。
+  \item \textbf{差异 ④ world 对照}：无噪声差异；但 valid 20/130 来自 19 个未见国家、126/130 地点字符串未见过（其中 41 条距同国 train 点 $>3^\circ$）——字符串新颖 $\neq$ 空间新颖。
+  \item \textbf{探针在 OOD valid 上的表现}（L20，总体 0.8967）：typo 子集 0.932 [0.865, 0.986] vs clean 0.885 [0.841, 0.925]（差 $-0.047$，CI 含 0——错拼不伤害）；主体 unseen 0.884 vs seen 0.917（ns）。逐层看，中深层（L17–L29）typo 子集甚至更高——文本级噪声被表征部分“平滑吸收”。
+  \item \textbf{我们的应对}（写作时打磨口径）：(a) 设"同分布口径"对照：train 内部 3 折 CV 随机 vs 按主体分组（分组折测试主体 100\% 未见）——0.869 vs 0.877（差 $-0.8$pp 在折间噪声内）$\Rightarrow$ L20 不依赖"记住主体"，valid 成绩无主体记忆注水；(b) 全流程只用官方固定 train/valid 划分，且不向 valid 泄漏（训练固定预算、不按 valid 早停）；(c) 把 valid 视为部署分布代理（文档明示"测试集分布更接近验证集"），选层/正则以 valid 稳健为准；用分层指标（typo/主体）确认 valid 上的成绩不被噪声主导。数据来源线索：valid 是构造性 OOD（拼写扰动 + 主体轮换），该指纹与公开数据集 CREAK 的对拍为中。% TODO：CREAK 对拍（进行中/可选）完成后补一句。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q8_split_diff.pdf}
+  \caption{分布差异总览：(a) 拼写噪声 valid $\approx$3.5$\times$ train；(b) 主体新颖度 77.4\% 远在零假设分布之外；(c) 长度 ECDF 与模板差异；(d) world 对照——字符串新颖而非空间新颖。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{question/figures/q8_stratified_acc.pdf}
+  \caption{L20 探针在 OOD valid 上的分层表现：(a) 主分层准确率；(b) typo $\times$ 主体交叉；(c) 13 层探针的 typo 敏感度。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.85\linewidth]{question/figures/q8_cv_gap.pdf}
+  \caption{train 内部 3 折 CV 对照（L20、仓库 model.py 同配置、n$=$3785）：随机 vs 按主体分组划分（测试折主体未见比例 38\% vs 100\%）的 held-out 准确率——均值 0.869 vs 0.877（差 $-0.8$pp，在折间噪声内）；灰点线为实际 valid 0.8967。两种划分口径几乎无差 $\Rightarrow$ L20 探针不依赖主体记忆。}
+\end{figure}
+
+\srcnote{\texttt{question/code/q8\_split\_analysis.py}；预调查 \texttt{execution\_log.md} §3 Q8 相关记录；CREAK 路线 \texttt{guide/指南综述与可做实验清单.md} §3-B1。}
+
+% ======================================================================
+\subsection*{9. truth：选层与正则化的理由}
+
+\textbf{题面：}你在最终模型提交中是怎么选择特征选取层次和正则化的？请说明理由。
+
+\skeleton{结论要点，待扩写}
+\begin{itemize}
+  \item \textbf{13 层曲线（倒 U 形）}：L2 0.567 单调爬升至 \textbf{L20 峰值 0.8967}，L26 起显著回落（L35 0.687）；L17–L23 为统计等价平台（$-2.33$pp $\pm$ 2.84pp、$-0.67$pp $\pm$ 2.45pp，均含 0）——不要过度解读 0.67pp 的峰差，但 L20 数值最高、峰位居中。
+  \item \textbf{选层理由}：中层（L17–L23）是“真假语义”最线性可分的层带；与 world（浅层最优）形成鲜明对照——两任务的最优层不同、说明两类信息在不同深度；选择 \textbf{L20}（备选 L23）。对比 88653 的三层扫描（当时 lr 偏小、轮数偏少）：L23 一枝独秀的结论在 13 层全扫后修正为“中层平台、峰位 L20”。
+  \item \textbf{正则化}：扫描结论（L11 口径）$\lambda_1$ 有害（$0\to70.0\%$、$0.001\to68.7\%$、$0.01\to67.0\%$、$0.1\to50.0\%$）——表征稠密（2560 维全非零），$\ell_1$ 的精确零摧毁可分方向；$\lambda_2$ 在 test 范围内无差异（0/0.001/0.01/0.1 全 68.7\%）。最终 $\lambda_1=\lambda_2=10^{-3}$（平衡、两侧都留余量）。
+  \item \textbf{为什么不干脆无正则}：可分数据上 MLE 在无穷远（Q3 T1：sklearn penalty=None valid ll$=27.77$ 灾难；ours 靠早停 0.255）——弱正则 + 有限轮预算共同起稳定作用。
+  \item \textbf{收敛预算}：5000 轮；13 层中仅 L2/L32 触发早停，其余跑满——单层再精调或有 1–3pp 空间，但收益/代价比一般（如实说明）。
+  \item \textbf{最终提交}：raw L20，lr$=5\times10^{-3}$，ep5000，$\lambda_1=\lambda_2=10^{-3}$ $\Rightarrow$ valid acc \textbf{0.8967}；备选 L23（0.8900）。\textbf{不要用} L14 及以下、L26 及以上。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{results/slurm_layers/truth/plots/truth_layers.pdf}
+  \caption{truth 各层验证准确率（上：$\pm1$ SE，红圈 = L20；下：与 L20 的配对差 95\% CI）。倒 U 形、中层平台。随机水平 $=$ 多数类 $=0.50$。}
+\end{figure}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{rrrl}
+    \toprule
+    层 & acc & $\pm$SE & $\Delta$ vs L20（95\% CI）/判定 \\
+    \midrule
+    2 & 0.5667 & 0.0287 & $-33.00$pp $\pm$ 6.36pp 显著 \\
+    5 & 0.5933 & 0.0284 & $-30.33$pp $\pm$ 6.32pp 显著 \\
+    8 & 0.6567 & 0.0275 & $-24.00$pp $\pm$ 5.88pp 显著 \\
+    11 & 0.7400 & 0.0254 & $-15.67$pp $\pm$ 5.30pp 显著 \\
+    14 & 0.7900 & 0.0236 & $-10.67$pp $\pm$ 4.47pp 显著 \\
+    17 & 0.8733 & 0.0192 & $-2.33$pp $\pm$ 2.84pp 不显著 \\
+    20 & \textbf{0.8967} & 0.0176 & 参考（最优） \\
+    23 & 0.8900 & 0.0181 & $-0.67$pp $\pm$ 2.45pp 不显著 \\
+    26 & 0.8600 & 0.0201 & $-3.67$pp $\pm$ 3.25pp 刚好显著 \\
+    29 & 0.8600 & 0.0201 & $-3.67$pp $\pm$ 3.62pp 边缘 \\
+    32 & 0.8367 & 0.0214 & $-6.00$pp $\pm$ 3.98pp 显著 \\
+    34 & 0.7867 & 0.0237 & $-11.00$pp $\pm$ 4.50pp 显著 \\
+    35 & 0.6867 & 0.0268 & $-21.00$pp $\pm$ 5.84pp 显著 \\
+    \bottomrule
+  \end{tabular}
+  \caption{truth 13 层验证准确率全表（raw，lr$=5\times10^{-3}$，5000 轮，$n=300$）。}
+\end{table}
+
+\srcnote{\texttt{results/slurm\_layers/truth/}（合并 results.json + plots/）；《LAB1 分层训练结果分析报告.md》§3/§6；truth 扫描 §2。}
+
+% ======================================================================
+\newpage
+\appendix
+
+% ======================================================================
+\section{背景知识：线性探测、Qwen3-4B 与两个任务}\label{app:background}
+
+\skeleton{背景素材，成文时自由组织（附录不直接记分，建议 0.5–1 页）}
+\begin{itemize}
+  \item \textbf{线性探测（linear probing）}：冻结 LLM，在某一中间层的表征上训练简单线性模型（回归/分类），以判断目标信息在该层是否\textbf{线性可分地存在}（Alain \& Bengio, 2018 [1]）。本实验考察 Qwen3-4B-Base 的\textbf{空间坐标}（论文 [3]）与\textbf{句子真假}（论文 [4]）两类表征。
+  \item \textbf{特征口径}：$0$–$35$ 共 36 个解码器块的输出（final RMSNorm 之前），$D=2560$；world 取“国家名最后一个 token”，truth 取“句子最后一个 token”；训练时 \texttt{float16}$\to$\texttt{float64}。
+  \item \textbf{两任务规模}：world train 500 / valid 130（回归，目标 lat+lon）；truth train 5088 / valid 300（二分类，标签对称）。world 为热身（$N\ll D$）；truth 为效果主考察。
+  \item \textbf{提交物}：world \texttt{weights} $(2,2560)$ + \texttt{bias} $(2,)$；truth \texttt{weights} $(2560,)$ + \texttt{bias} 标量；均 \texttt{float64}，另有输入层号（整数）。
+  \item \textbf{本实验两个任务的数据集不公布构造方式}（world），truth 的来源经我们反推与对拍做了解释（见 Q8 / §\ref{app:exp}）。
+\end{itemize}
+
+% ======================================================================
+\section{有意思的实验：超参数扫描、稳定界与工程实践}\label{app:exp}
+
+\skeleton{附加内容（报告 §2.4）素材，成文时压缩为 1–2 页}
+\begin{itemize}
+  \item \textbf{超参数扫描（job 88653，9 组 35 run）}：两任务在 L11 上分别扫 lr / epochs / $\lambda_1$ / $\lambda_2$，L11/23/35 扫 layer。要点：truth lr$=0.005$（68.7\%）、ep$\ge$2000；world lr$=5\times10^{-4}$（150.94）、ep2000、$\lambda_2=0.1$（150.43）；truth layer 23（84.3\%）；world layer 23/35 直接发散（inf）——引出数值修复。
+  \item \textbf{world 数值修复 + 重扫（job 89085，16 run）}：根因 = 学习率越过\textbf{按层稳定界}（§\ref{app:math}）；z-score 后 lr$=3\times10^{-3}$ 三层均安全、$\lambda_2$ 呈 U 形（1.0 最优 167.06）；lr$=5\times10^{-3}$ 被正确判为发散。三条独立路径交叉验证“L11 是 world 最优层、深层收敛后确实更差”。
+  \item \textbf{稳定界（数值问题的数学根因）}：lr $< 2/\lambda_{\max}(H) = N/\|X\|_2^2$，只依赖特征矩阵；13 层 $\times$ 两任务 $\times$ raw/z-score 全表见 §\ref{app:math}。raw 界随深度暴跌 1800$\times$、z-score 后拉平到 1.5$\times$。
+  \item \textbf{集群工程（分块提交 + 断点续跑）}：13 层训练在 4h 平台上限内跑不完（首跑 89700 超时）$\to$ truth 拆 4 分块 + \texttt{-{}-skip-existing} 复用 + \texttt{python -u} 实时日志 + BLAS 线程钉 4；90243–90246 全部成功、零发散，L5 撞慢节点（3390.5s $\approx$15$\times$）被分块吸收、零进度损失。本地与集群数值逐位一致（确定性代码）。
+  \item \textbf{统计方法}：层间比较用同批样本\textbf{配对 bootstrap 95\% CI}；world 的 MSE 重尾，单层 SE 40+ 而配对后 CI 显著收窄；truth 单样本 = 0.33pp。
+  \item \textbf{（可选补充：Q8 的随机 vs 分组 CV 对照）}。
+\end{itemize}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{results/slurm_grid/20261009_115559_88653/plots/world_grid.pdf}
+  \caption{首轮 world 超参数扫描（88653，未标准化特征）：lr 越大越好但上限被困在 $5\times10^{-4}$（更大即发散）；layer 23/35 的“inf”由数值问题造成，而非“深层无信息”。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{results/slurm_grid/20261009_115559_88653/plots/truth_grid.pdf}
+  \caption{首轮 truth 超参数扫描（88653）：lr、epochs、layer 的效应；$\lambda_1$ 增大有害、$\lambda_2$ 无差异。}
+\end{figure}
+
+\srcnote{《LAB1 超参数扫描实验报告.md》全文；\texttt{experiments/稳定界说明.md}；\texttt{results/slurm\_layers/LAB1 分层训练结果分析报告.md} §5（工程）。}
+
+% ======================================================================
+\section{有趣的表征：跨任务对照与现象观察}\label{app:repr}
+
+\skeleton{表征研究素材，成文时压缩为 1–2 页（图可复用正文）}
+\begin{itemize}
+  \item \textbf{两任务最优层带不同}：world 在\textbf{浅层} L2–L11、truth 在\textbf{中层} L17–L23，且都在 L32–L35 变差——位置/坐标信息与真假语义的“可线性解码深度”不同（对照论文 [3] 约 60\% 深度、论文 [4] 中层，我们 world 的浅层结果与之不同，如实报告）。
+  \item \textbf{raw 与 z-score 的相互作用}（一个非平凡的观察）：raw 特征的增益是 L11 特有的（raw L11 150.43 全场最低，但 raw L2 198.78 显著更差）——并非“浅层 + raw 普遍更好”；z-score 的意义不是“提点”而是\textbf{解锁深层}（把按层稳定界拉平、让深层可训）。
+  \item \textbf{深层信息“回升”观察}：world 在 L32 回到 180.3（与浅层不显著）；truth 在 L32/34/35 单调下降——两任务在尾部层的分离性不同，机制留作观察（不做超出证据的归因）。
+  \item \textbf{表征里有什么（Q7 汇总）}：坐标信息超越国家身份（unseen +1024）；同国内纬度弱可解码、经度近乎不可解码；结合 Q6 的“经度误差 $\gg$ 纬度”，指向“气候带式”粗粒度空间信息 + 有限的地名知识。
+  \item \textbf{噪声稳健性（Q8 汇总）}：中深层表征对字符级扰动不敏感（typo 子集 acc 不低于 clean）——与“表征是分布式语义编码”的直觉一致。
+  \item \textbf{token 口径备注}：world 的“国家名最后 token”意味着写入位置的就是国家实体处的状态；结果表明该状态同时编码了超越国名的坐标信息。
+\end{itemize}
+
+\srcnote{《LAB1 分层训练结果分析报告.md》§2/§3/§4；\texttt{execution\_log.md} Q6/Q7/Q8 各节；建议与正文交叉引用、不重复贴图。}
+
+% ======================================================================
+\section{数学原理：稳定界、闭式解与 KKT}\label{app:math}
+
+\skeleton{数学素材，成文时压缩为 1.5–2 页}
+\begin{itemize}
+  \item \textbf{全批量 GD 稳定界（world）}：$L=\|Xw+b\mathbf{1}-y\|^2/N$ 的 Hessian $H=2X^{\top}X/N$；误差传播 $e_{t+1}=(I-\mathrm{lr}\cdot H)e_t$ 收敛 $\Leftrightarrow$ $\mathrm{lr}<\dfrac{2}{\lambda_{\max}(H)}=\dfrac{N}{\|X\|_2^2}$——只依赖特征矩阵、与 $y$ 无关，每层一个值。越界后误差沿最大特征方向每轮 $\times|1-\mathrm{lr}\,\lambda_{\max}|>1$ 指数放大。
+  \item \textbf{logistic 的松弛}：$H_{\log}\preceq X^{\top}X/(4N)$，最坏情形充分界 $\approx 8N/\|X\|_2^2$；且梯度有界（$p-y\in[-1,1]$），越界表现为震荡/饱和而非爆炸——这是 truth 可以不标准化、lr$=0.005$ 的原因。
+  \item \textbf{13 层稳定界全表}（$N/\|X\|_2^2$，越小越危险）与实测对拍（节选：raw L11 界 $5.4\times10^{-4}$，lr$=5\times10^{-4}$ 稳定、$10^{-3}$ 溢出；std L35 界 $4.8\times10^{-3}$，lr$=4\times10^{-3}$ 稳定、$8\times10^{-3}$ 第 9 轮爆炸）。
+\end{itemize}
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{rrrrr}
+    \toprule
+    层 & world raw & world z-score & truth raw & truth z-score \\
+    \midrule
+    2 & $4.95\times10^{-3}$ & $4.07\times10^{-3}$ & $6.51\times10^{-3}$ & $2.67\times10^{-3}$ \\
+    5 & $1.14\times10^{-3}$ & $\mathbf{3.08\times10^{-3}}$ & $1.14\times10^{-3}$ & $4.85\times10^{-3}$ \\
+    8 & $6.90\times10^{-4}$ & $3.15\times10^{-3}$ & $1.09\times10^{-3}$ & $9.20\times10^{-3}$ \\
+    11 & $5.45\times10^{-4}$ & $3.59\times10^{-3}$ & $7.37\times10^{-4}$ & $9.74\times10^{-3}$ \\
+    14 & $4.47\times10^{-4}$ & $3.40\times10^{-3}$ & $6.10\times10^{-4}$ & $1.05\times10^{-2}$ \\
+    17 & $3.19\times10^{-4}$ & $3.48\times10^{-3}$ & $5.01\times10^{-4}$ & $1.03\times10^{-2}$ \\
+    20 & $1.93\times10^{-4}$ & $3.42\times10^{-3}$ & $3.04\times10^{-4}$ & $7.00\times10^{-3}$ \\
+    23 & $8.37\times10^{-5}$ & $3.16\times10^{-3}$ & $1.33\times10^{-4}$ & $5.38\times10^{-3}$ \\
+    26 & $3.94\times10^{-5}$ & $3.16\times10^{-3}$ & $4.08\times10^{-5}$ & $4.72\times10^{-3}$ \\
+    29 & $1.89\times10^{-5}$ & $3.46\times10^{-3}$ & $1.63\times10^{-5}$ & $5.42\times10^{-3}$ \\
+    32 & $7.48\times10^{-6}$ & $3.92\times10^{-3}$ & $6.17\times10^{-6}$ & $6.70\times10^{-3}$ \\
+    34 & $3.02\times10^{-6}$ & $4.40\times10^{-3}$ & $2.93\times10^{-6}$ & $7.25\times10^{-3}$ \\
+    35 & $2.77\times10^{-6}$ & $\mathbf{4.77\times10^{-3}}$ & $1.68\times10^{-6}$ & $5.84\times10^{-3}$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{13 层稳定界 $N/\|X\|_2^2$ 全表（SVD 精确值；raw 界随深度跨 1800$\times$，z-score 后压至 1.5$\times$）。}
+\end{table}
+
+\skeleton{数学要点续}
+\begin{itemize}
+  \item \textbf{Ridge 的 SVD 闭式解}（Q1/Q2 实现）：$X=U\Sigma V^{\top}$，$\hat w= V\,\mathrm{diag}\!\big(\sigma_i/(\sigma_i^2+\lambda)\big)\,U^{\top}y$；$\lambda=0$ 退化为最小范数最小二乘（伪逆解）。用于系数路径的精确计算（与 sklearn 对拍 $10^{-9}$）。
+  \item \textbf{Lasso 的 KKT / 软阈值}（Q1/Q2 实现）：$\partial L/\partial w_j=\frac{2}{N}[X^{\top}(Xw-y)]_j+\lambda_1\, \mathrm{sgn}(w_j)+2\lambda_2 w_j=0$；坐标下降 + warm start；精确零来自优化几何，零集沿 $\lambda$ 嵌套（与 Q2 的阈值化 ridge 对照）。
+  \item \textbf{逻辑回归梯度}（\texttt{model.py}）：$\nabla_w L=\frac{1}{N}X^{\top}(\hat y-y)+\lambda_1\,\mathrm{sgn}(w)+2\lambda_2 w$；数值稳定：$\log(1+e^{-z})=\mathrm{logaddexp}(0,-z)$。
+  \item \textbf{sklearn 换算表}：Ridge $\alpha=N\lambda_2$；Lasso $\alpha=\lambda_1/2$；ElasticNet $\alpha\rho=\lambda_1/2$、$\alpha(1-\rho)=\lambda_2$；Logistic $C=1/(2N\lambda_2)$。（量纲陷阱：sklearn 的 $\alpha$ 是“平方误差总和”口径。）
+  \item \textbf{基线口径与 $R^2$}：train-mean 基线的元素平均口径 MSE $=3311.27$（与模型同口径）；坐标求和口径 $=6622.54$。混用会把 $R^2$ 抬高约 2.3pp；统一后 world 最佳 $R^2=0.9546$（RMSE $\approx$ 12.3$^\circ$）。
+\end{itemize}
+
+\srcnote{\texttt{experiments/稳定界说明.md} + \texttt{experiments/stability\_bound.py}（一键复现全表，本机约 2.5 分钟）；\texttt{model.py} 实现即提交代码。}
+
+% ======================================================================
+\section{复现清单与文件结构}\label{app:repro}
+
+\skeleton{复现信息，成文时压缩为半页—1 页}
+\begin{itemize}
+  \item \textbf{仓库结构}：\texttt{model.py}（提交的手写模型）；\texttt{datasets/}（world/truth 各 13 层 npy）；\texttt{experiments/}（\texttt{train\_layers.py}、\texttt{run\_grid.py}、\texttt{plot\_layers.py}、\texttt{stability\_bound.py}、配置 json）；\texttt{scripts/}（集群 sbatch 与分块提交）；\texttt{question/code}（Q1–Q8 脚本）；\texttt{results/}（扫描/分层/提取的结果与图）；\texttt{report.tex}（本报告）。
+  \item \textbf{环境}：本地 \texttt{ai26}（numpy / sklearn / matplotlib / cartopy / pyspellchecker）；集群同环境 + A100（\texttt{-{}-gres=gpu:A100:1}，RTX5090 节点与当前 torch 驱动不兼容需避开）。
+  \item \textbf{关键命令}：训练 13 层 \texttt{python experiments/\allowbreak train\_\allowbreak layers.py --skip-\allowbreak existing}；\allowbreak 稳定界 \texttt{python experiments/\allowbreak stability\_\allowbreak bound.py}；\allowbreak 系数路径 \texttt{python question/\allowbreak code/\allowbreak q1\_\allowbreak coefficient\_\allowbreak paths.py}；\allowbreak 地图 \texttt{python question/\allowbreak code/\allowbreak q6\_\allowbreak valid\_\allowbreak map.py}；\allowbreak 等。
+  \item \textbf{提交产物（首选/备选）}：
+    \begin{itemize}
+      \item world：raw L11（\texttt{results/\allowbreak slurm\_layers/\allowbreak world/weights/\allowbreak world\_layer11\_extra0/\allowbreak weights.npz}，MSE 150.43）；备选 z-score L2（157.57）。
+      \item {\raggedright truth：raw L20（\texttt{results/\allowbreak slurm\_layers/\allowbreak truth\_b/weights/\allowbreak truth\_layer20/\allowbreak weights.npz}，acc 0.8967）；备选 L23（0.8900）。\par}
+    \end{itemize}
+  \item \textbf{数据来源对拍记录}：KC 房价（Q1/Q2）与 OpenML 全表对拍见 \texttt{question/execution\_log.md} §1.2；truth 来源指纹见 Q8。
+  \item \textbf{日志归档约定}：每轮集群运行的全部日志集中在 \texttt{results/slurm\_*} 对应时间戳目录。
+\end{itemize}
+
+% ======================================================================
+\section{实验反馈与建议}\label{app:feedback}
+
+\skeleton{以第一人称成文（1 段），以下为要点草稿}
+\begin{itemize}
+  \item 数据集构造不公布带来的“反推/对拍”过程（Q8）本身很有意思，建议以后在指南中提示“鼓励做来源调查”。
+  \item 算力平台 Students 分区混部 RTX5090/A100，当前 torch 与 RTX5090 驱动不兼容（CUDA error 804）一度让提取全 FAIL；建议在附录 B 明确“钉 A100”的坑。
+  \item 4h 时限对“13 层 $\times$ 5000 轮”级别实验需要分块与断点续跑设计——这本身是一次很好的工程训练，但建议在指南给出时间预算参考。
+  \item 报告要求“思考题回答为主、背景进附录、不设长度限制”的设定很好，让我们可以把扫描/稳定性等附加内容放进附录而不挤压正文。
+  \item 提示中“推荐 AI 工具辅助可视化”明确而友好；建议再补充一句“AI 辅助内容需能讲清原理”（验收提示已有类似要求）。
+\end{itemize}
+
+\end{document}
