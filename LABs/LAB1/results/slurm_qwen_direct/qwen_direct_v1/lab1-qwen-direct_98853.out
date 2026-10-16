@@ -1,0 +1,223 @@
+Repository: /home/scc/pb25030753/USTC-AI3002-26fall
+Model: /home/scc/pb25030753/models/Qwen3-4B-Base
+Run: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_v1
+C1 args: <none>
+Log: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_v1/c1.log
+
+==== GPU environment ====
+anode17
+Fri Oct 16 11:46:10 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.173.02             Driver Version: 580.173.02     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          Off |   00000000:27:00.0 Off |                    0 |
+| N/A   38C    P0             85W /  400W |       0MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.14.1+cu130 (built for CUDA 13.0)
+CUDA device: NVIDIA A100-SXM4-80GB
+
+Model fingerprints of /home/scc/pb25030753/models/Qwen3-4B-Base ...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5050.57it/s]
+Device: cuda (NVIDIA A100-SXM4-80GB); dtype=bfloat16
+Tokenizer: Qwen2Tokenizer, vocab=151643, chat_template=set, pad='<|endoftext|>'/151643, eos='<|endoftext|>'/151643
+[train] rows=500/500 existing=0 bad_lines=0 missing=500
+[train] 4/500 new rows, 2.0s
+[train] 8/500 new rows, 3.1s
+[train] 12/500 new rows, 4.0s
+[train] 16/500 new rows, 5.0s
+[train] 20/500 new rows, 6.2s
+[train] 24/500 new rows, 7.1s
+[train] 28/500 new rows, 8.1s
+[train] 32/500 new rows, 9.0s
+[train] 36/500 new rows, 10.0s
+[train] 40/500 new rows, 11.0s
+[train] 44/500 new rows, 12.0s
+[train] 48/500 new rows, 12.9s
+[train] 52/500 new rows, 13.9s
+[train] 56/500 new rows, 14.8s
+[train] 60/500 new rows, 15.7s
+[train] 64/500 new rows, 16.8s
+[train] 68/500 new rows, 17.6s
+[train] 72/500 new rows, 18.6s
+[train] 76/500 new rows, 19.5s
+[train] 80/500 new rows, 20.4s
+[train] 84/500 new rows, 21.3s
+[train] 88/500 new rows, 22.3s
+[train] 92/500 new rows, 23.2s
+[train] 96/500 new rows, 24.3s
+[train] 100/500 new rows, 25.1s
+[train] 104/500 new rows, 26.0s
+[train] 108/500 new rows, 26.8s
+[train] 112/500 new rows, 27.7s
+[train] 116/500 new rows, 28.6s
+[train] 120/500 new rows, 29.5s
+[train] 124/500 new rows, 30.4s
+[train] 128/500 new rows, 31.3s
+[train] 132/500 new rows, 32.1s
+[train] 136/500 new rows, 33.0s
+[train] 140/500 new rows, 33.9s
+[train] 144/500 new rows, 34.8s
+[train] 148/500 new rows, 35.7s
+[train] 152/500 new rows, 36.6s
+[train] 156/500 new rows, 38.2s
+[train] 160/500 new rows, 39.1s
+[train] 164/500 new rows, 40.1s
+[train] 168/500 new rows, 40.9s
+[train] 172/500 new rows, 41.8s
+[train] 176/500 new rows, 42.7s
+[train] 180/500 new rows, 43.6s
+[train] 184/500 new rows, 44.5s
+[train] 188/500 new rows, 45.4s
+[train] 192/500 new rows, 46.3s
+[train] 196/500 new rows, 47.3s
+[train] 200/500 new rows, 48.2s
+[train] 204/500 new rows, 49.1s
+[train] 208/500 new rows, 50.1s
+[train] 212/500 new rows, 50.9s
+[train] 216/500 new rows, 51.8s
+[train] 220/500 new rows, 52.7s
+[train] 224/500 new rows, 53.6s
+[train] 228/500 new rows, 54.5s
+[train] 232/500 new rows, 55.4s
+[train] 236/500 new rows, 56.4s
+[train] 240/500 new rows, 57.5s
+[train] 244/500 new rows, 58.4s
+[train] 248/500 new rows, 59.4s
+[train] 252/500 new rows, 60.3s
+[train] 256/500 new rows, 61.2s
+[train] 260/500 new rows, 62.2s
+[train] 264/500 new rows, 63.1s
+[train] 268/500 new rows, 64.0s
+[train] 272/500 new rows, 65.0s
+[train] 276/500 new rows, 66.0s
+[train] 280/500 new rows, 67.1s
+[train] 284/500 new rows, 68.0s
+[train] 288/500 new rows, 69.5s
+[train] 292/500 new rows, 70.4s
+[train] 296/500 new rows, 72.0s
+[train] 300/500 new rows, 73.6s
+[train] 304/500 new rows, 75.2s
+[train] 308/500 new rows, 76.1s
+[train] 312/500 new rows, 77.0s
+[train] 316/500 new rows, 77.9s
+[train] 320/500 new rows, 78.7s
+[train] 324/500 new rows, 79.7s
+[train] 328/500 new rows, 80.5s
+[train] 332/500 new rows, 81.4s
+[train] 336/500 new rows, 82.3s
+[train] 340/500 new rows, 83.2s
+[train] 344/500 new rows, 84.0s
+[train] 348/500 new rows, 84.9s
+[train] 352/500 new rows, 85.8s
+[train] 356/500 new rows, 86.8s
+[train] 360/500 new rows, 87.8s
+[train] 364/500 new rows, 88.7s
+[train] 368/500 new rows, 89.5s
+[train] 372/500 new rows, 90.4s
+[train] 376/500 new rows, 91.4s
+[train] 380/500 new rows, 92.4s
+[train] 384/500 new rows, 93.3s
+[train] 388/500 new rows, 94.1s
+[train] 392/500 new rows, 95.0s
+[train] 396/500 new rows, 96.0s
+[train] 400/500 new rows, 96.9s
+[train] 404/500 new rows, 97.8s
+[train] 408/500 new rows, 98.7s
+[train] 412/500 new rows, 99.6s
+[train] 416/500 new rows, 100.5s
+[train] 420/500 new rows, 101.3s
+[train] 424/500 new rows, 102.3s
+[train] 428/500 new rows, 103.2s
+[train] 432/500 new rows, 104.0s
+[train] 436/500 new rows, 104.8s
+[train] 440/500 new rows, 106.0s
+[train] 444/500 new rows, 107.0s
+[train] 448/500 new rows, 107.9s
+[train] 452/500 new rows, 109.0s
+[train] 456/500 new rows, 109.9s
+[train] 460/500 new rows, 111.5s
+[train] 464/500 new rows, 112.5s
+[train] 468/500 new rows, 113.6s
+[train] 472/500 new rows, 114.3s
+[train] 476/500 new rows, 115.3s
+[train] 480/500 new rows, 116.2s
+[train] 484/500 new rows, 117.1s
+[train] 488/500 new rows, 118.0s
+[train] 492/500 new rows, 118.9s
+[train] 496/500 new rows, 119.9s
+[train] 500/500 new rows, 121.5s
+[train] row 0 tier=json pred=(51.23,106.55) true=(53.5,108.0) raw=' {"latitude": 51.2300, "longitude": 106.5500}'
+[train] row 1 tier=json pred=(34.0522,-118.2437) true=(34.0522,-118.2437) raw=' {"latitude": 34.0522, "longitude": -118.2437}'
+[train] row 2 tier=json pred=(30.4414,110.3326) true=(30.8231,111.003) raw=' {"latitude": 30.4414, "longitude": 110.3326}'
+[train] row 3 tier=json pred=(-34.8888,18.52) true=(-34.3568,18.473) raw=' {"latitude": -34.8888, "longitude": 18.5200}'
+[train] row 4 tier=json pred=(19.076,72.8777) true=(19.07611,72.8775) raw=' {"latitude": 19.0760, "longitude": 72.8777}'
+[train] row 5 tier=json pred=(42.3601,-71.0589) true=(42.377,-71.1167) raw=' {"latitude": 42.3601, "longitude": -71.0589}'
+[train] row 6 tier=json pred=(38.895111,-77.036389) true=(38.8719,-77.0563) raw=' {"latitude": 38.895111, "longitude": -77.036389}'
+[train] row 7 tier=json pred=(41.902778,12.453333) true=(41.9029,12.4534) raw=' {"latitude": 41.902778, "longitude": 12.453333}'
+[train] tiers={'json': 499, 'out_of_range': 1}
+[valid] rows=130/130 existing=0 bad_lines=0 missing=130
+[valid] 4/130 new rows, 0.9s
+[valid] 8/130 new rows, 1.8s
+[valid] 12/130 new rows, 2.6s
+[valid] 16/130 new rows, 3.7s
+[valid] 20/130 new rows, 4.6s
+[valid] 24/130 new rows, 6.2s
+[valid] 28/130 new rows, 7.1s
+[valid] 32/130 new rows, 8.0s
+[valid] 36/130 new rows, 9.1s
+[valid] 40/130 new rows, 10.0s
+[valid] 44/130 new rows, 11.0s
+[valid] 48/130 new rows, 12.0s
+[valid] 52/130 new rows, 13.0s
+[valid] 56/130 new rows, 14.0s
+[valid] 60/130 new rows, 14.9s
+[valid] 64/130 new rows, 15.9s
+[valid] 68/130 new rows, 16.8s
+[valid] 72/130 new rows, 17.7s
+[valid] 76/130 new rows, 18.6s
+[valid] 80/130 new rows, 19.4s
+[valid] 84/130 new rows, 20.3s
+[valid] 88/130 new rows, 21.2s
+[valid] 92/130 new rows, 22.2s
+[valid] 96/130 new rows, 23.2s
+[valid] 100/130 new rows, 24.9s
+[valid] 104/130 new rows, 25.8s
+[valid] 108/130 new rows, 26.7s
+[valid] 112/130 new rows, 27.7s
+[valid] 116/130 new rows, 28.7s
+[valid] 120/130 new rows, 29.6s
+[valid] 124/130 new rows, 31.2s
+[valid] 128/130 new rows, 32.1s
+[valid] 130/130 new rows, 33.0s
+[valid] row 0 tier=json pred=(60.1699,24.9384) true=(60.1699,24.9384) raw=' {"latitude": 60.1699, "longitude": 24.9384}'
+[valid] row 1 tier=json pred=(26.2333,50.55) true=(26.2285,50.586) raw=' {"latitude": 26.2333, "longitude": 50.55}'
+[valid] row 2 tier=json pred=(15.4636,32.5113) true=(15.5007,32.5599) raw=' {"latitude": 15.4636, "longitude": 32.5113}'
+[valid] row 3 tier=json pred=(-33.8568,151.2153) true=(-33.8568,151.2153) raw=' {"latitude": -33.8568, "longitude": 151.2153}'
+[valid] row 4 tier=json pred=(-23.25,-67.55) true=(-22.9087,-68.1997) raw=' {"latitude": -23.25, "longitude": -67.55}'
+[valid] row 5 tier=json pred=(41.8781,-87.6298) true=(41.8781,-87.6298) raw=' {"latitude": 41.8781, "longitude": -87.6298}'
+[valid] row 6 tier=json pred=(3.139,101.6869) true=(3.14778,101.69528) raw=' {"latitude": 3.1390, "longitude": 101.6869}'
+[valid] row 7 tier=json pred=(-33.9249,18.4241) true=(-33.9249,18.4241) raw=' {"latitude": -33.9249, "longitude": 18.4241}'
+[valid] tiers={'json': 129, 'regex': 1}
+Wrote /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_v1/run_meta.json
+Done.
+
+==== validation ====
+train: 500 rows; tiers={'json': 499, 'out_of_range': 1}; valid(in_range)=499
+valid: 130 rows; tiers={'json': 129, 'regex': 1}; valid(in_range)=130
+Structural check passed (parse rates reported above; low rates are allowed).
+
+Done: C1 generation complete. Results in /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_v1.
+Next: commit + push this directory from the cluster, then run experiments/C1/c1_eval.py locally.

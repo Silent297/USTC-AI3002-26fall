@@ -1,0 +1,69 @@
+Repository: /home/scc/pb25030753/USTC-AI3002-26fall
+Model: /home/scc/pb25030753/models/Qwen3-4B-Base
+Run: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_smoke
+C1 args: --limit 8
+Log: /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_smoke/c1.log
+
+==== GPU environment ====
+anode17
+Fri Oct 16 11:44:11 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 580.173.02             Driver Version: 580.173.02     CUDA Version: 13.0     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100-SXM4-80GB          Off |   00000000:27:00.0 Off |                    0 |
+| N/A   36C    P0             59W /  400W |       0MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+torch 2.14.1+cu130 (built for CUDA 13.0)
+CUDA device: NVIDIA A100-SXM4-80GB
+
+Model fingerprints of /home/scc/pb25030753/models/Qwen3-4B-Base ...
+Loading weights:   0%|          | 0/398 [00:00<?, ?it/s]Loading weights: 100%|██████████| 398/398 [00:00<00:00, 5019.12it/s]
+Device: cuda (NVIDIA A100-SXM4-80GB); dtype=bfloat16
+Tokenizer: Qwen2Tokenizer, vocab=151643, chat_template=set, pad='<|endoftext|>'/151643, eos='<|endoftext|>'/151643
+[train] rows=8/500 existing=0 bad_lines=0 missing=8
+[train] 4/8 new rows, 5.6s
+[train] 8/8 new rows, 6.7s
+[train] row 0 tier=json pred=(51.23,106.55) true=(53.5,108.0) raw=' {"latitude": 51.2300, "longitude": 106.5500}'
+[train] row 1 tier=json pred=(34.0522,-118.2437) true=(34.0522,-118.2437) raw=' {"latitude": 34.0522, "longitude": -118.2437}'
+[train] row 2 tier=json pred=(30.4414,110.3326) true=(30.8231,111.003) raw=' {"latitude": 30.4414, "longitude": 110.3326}'
+[train] row 3 tier=json pred=(-34.8888,18.52) true=(-34.3568,18.473) raw=' {"latitude": -34.8888, "longitude": 18.5200}'
+[train] row 4 tier=json pred=(19.076,72.8777) true=(19.07611,72.8775) raw=' {"latitude": 19.0760, "longitude": 72.8777}'
+[train] row 5 tier=json pred=(42.3601,-71.0589) true=(42.377,-71.1167) raw=' {"latitude": 42.3601, "longitude": -71.0589}'
+[train] row 6 tier=json pred=(38.895111,-77.036389) true=(38.8719,-77.0563) raw=' {"latitude": 38.895111, "longitude": -77.036389}'
+[train] row 7 tier=json pred=(41.902778,12.453333) true=(41.9029,12.4534) raw=' {"latitude": 41.902778, "longitude": 12.453333}'
+[train] tiers={'json': 8}
+[valid] rows=8/130 existing=0 bad_lines=0 missing=8
+[valid] 4/8 new rows, 0.9s
+[valid] 8/8 new rows, 1.8s
+[valid] row 0 tier=json pred=(60.1699,24.9384) true=(60.1699,24.9384) raw=' {"latitude": 60.1699, "longitude": 24.9384}'
+[valid] row 1 tier=json pred=(26.2333,50.55) true=(26.2285,50.586) raw=' {"latitude": 26.2333, "longitude": 50.55}'
+[valid] row 2 tier=json pred=(15.4636,32.5113) true=(15.5007,32.5599) raw=' {"latitude": 15.4636, "longitude": 32.5113}'
+[valid] row 3 tier=json pred=(-33.8568,151.2153) true=(-33.8568,151.2153) raw=' {"latitude": -33.8568, "longitude": 151.2153}'
+[valid] row 4 tier=json pred=(-23.25,-67.55) true=(-22.9087,-68.1997) raw=' {"latitude": -23.25, "longitude": -67.55}'
+[valid] row 5 tier=json pred=(41.8781,-87.6298) true=(41.8781,-87.6298) raw=' {"latitude": 41.8781, "longitude": -87.6298}'
+[valid] row 6 tier=json pred=(3.139,101.6869) true=(3.14778,101.69528) raw=' {"latitude": 3.1390, "longitude": 101.6869}'
+[valid] row 7 tier=json pred=(-33.9249,18.4241) true=(-33.9249,18.4241) raw=' {"latitude": -33.9249, "longitude": 18.4241}'
+[valid] tiers={'json': 8}
+Wrote /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_smoke/run_meta.json
+Done.
+
+==== validation ====
+train: 8 rows; tiers={'json': 8}; valid(in_range)=8
+valid: 8 rows; tiers={'json': 8}; valid(in_range)=8
+Structural check passed (parse rates reported above; low rates are allowed).
+
+Done: C1 generation complete. Results in /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_qwen_direct/qwen_direct_smoke.
+Next: commit + push this directory from the cluster, then run experiments/C1/c1_eval.py locally.
