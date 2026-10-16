@@ -176,6 +176,18 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **Q8 交叉**：Q8 检出的 typo 句 train 354 = **307 课程注入**（字典还原交换后与 CREAK 原文逐字一致，修复率 96.5%）+ 40 CREAK 自带（专名假阳性：Pharoah/Niels/Ewan/Paula Deen/Dwyane Wade）+ 7 其他；valid 74 = 65 注入（94.2%）+ 6 自带 + 3。⇒ Q8 的 valid 错拼率 24.7% 基本全部是课程注入；另发现字典修复器会误伤实体名（MOBA→MOAB、Elon→Leon、Loni→Loin）——"不做文本清洗"的又一警示。
   - **结论**：课程语料 = CREAK 原文 + 两类扰动、valid 用 CREAK 保留文件换源——Q8"valid 是设计过的轻量 OOD 挑战集"获得**来源级证据**（统计推断 → 逐句证据闭环）。
 
+### 附录 C1 Qwen 直接输出坐标 vs 线性探针（附加实验）
+
+- **来源**：`guide/计划：C1 方案定稿…md`（参考报告为`指南3.pdf` §4，**非官方**）；属**附加实验**（不进课程必交内容），对照我们自己的最优探针（world raw L11）。
+- **设计**：Qwen3-4B-Base（本地克隆 rev `906bfd4b`）对 world 630 题（train 500 + valid 130）**零样本直接生成**经纬度——prompt 在原题面后追加 JSON 指令，贪心解码、max_new_tokens=64、bf16，集群 A100-80GB（学生分区钉卡）；本地 CPU 评估：解析分层（json/embedded/regex/out_of_range，in_range 过滤）→ MSE（原始 + 周期经度）+ haversine 距离分布 + hit100 → 与探针逐条配对 bootstrap → 单条平方误差 top-5 → Tomanivi 现象检查。探针锚点自检（valid 150.4277/953.8 km、train 116.9279/662.4 km，±1e-3）不符即中止。
+- **代码**：`experiments/C1/{c1_lib.py, c1_qwen_direct.py, c1_eval.py, run_c1_qwen_direct.sbatch}`；运行资产 `results/slurm_qwen_direct/qwen_direct_v1/`（jsonl + run_meta + c1_metrics.json）；**图**：`experiments/C1/figures/c1_{distance_cdf,valid_map,metric_bars}.{png,pdf}`；**逐图说明**：`experiments/C1/c1_figure_notes.md`（含与参考报告对拍表与注意事项）。
+- **记录**（2026-10-16 完成）：
+  - **解析稳健**：train 严格 499/500 = 99.8%（唯一失败 = Phnom Penh，输出纬度 115.24 越界、疑似经纬互换）；valid 宽松 130/130 = 100%（129 json + 1 regex = Yaoundé 输出度分秒、regex 只取首数）。
+  - **距离**：valid 中位 **43.8 km**（探针 953.8，≈22×）、均值 159.1（探针 1141.7）、P90 416.0（探针 2391.0）、hit100 **63.85%**（与参考报告完全相同）；train 中位 15.5 km、hit100 68.8%。逐条配对（n=130）：**直接更近 119/130**，距离差（探针−直接）**+982.5 km，CI95 [835.0, 1138.9]**。
+  - **MSE 易碎性**：valid 原始 MSE 505.76 的 **96.52%** 来自单条 Mount Tomanivi（斐济，预测 lon −178.25 落在±180° 另一侧，dlon_raw −356.265°，实际仅偏 397.0 km；预测值与参考报告逐位相同）→ 周期口径 17.64；train 原始 159.64（~92% 来自 5 条极地/海外属地）→ 周期 108.54；combined 231.18/89.75。**原始 MSE 下探针(150.4) 反而"更小"**——只报原始 MSE 会把结论讲反。
+  - **与参考报告（非官方）一致性**：valid hit100 完全相同（0.6385）、均值 159.1 vs 159.0、Tomanivi 预测逐位相同 ⇒ 同 revision + 贪心解码可复现；中位 43.8 vs 35.8 等小差异源于解析接受度（我们宽松收满 130/499 vs 参考 128/495）。
+  - **结论**："线性读出误差 ≠ 模型没有地理知识"（与 Q6/Q7 闭环）；附加实验口径，仅并列报告、不宣称"探针 < 生成式"；指标须捆周期 MSE + 距离分布一起报。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -192,3 +204,4 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-14：Q7 完成：坐标表征 vs 国家识别（三层证据 + oracle 国家均值/全局均值双基线 + paired bootstrap CI）；unseen 20 条 +1024 大胜全局基线、seen 上 oracle 反超 −35、同国 lat r=0.20 弱显著——结论定性为"中等强度证据"；3 图 + 逐图说明 `figures/q7_figure_notes.md`（含论文 [3] §4.1/§5 对应）。
 - 2026-10-16：Q8 完成：分布差异四维统计（typo 3.5×、主体新颖 77.4% vs 零假设 20.8%、模板/长度、world 对照）+ L20 分层稳健性（差异不显著、浅层怕错拼）+ CV 对照（随机 vs 分组 −0.8pp，负结果如实报告）；3 图 + 逐图说明 `figures/q8_figure_notes.md`。
 - 2026-10-16：**B1 完成**（CREAK 逐句对拍，可选实验）：truth 100% 可追溯（direct 86.08%/63.33% 与 guide3 一致，near 层补全到 100%）、valid 来源 = dev/contrast/test 与 train.json 零重叠、标签 0 冲突、扰动仅两族（错拼 415 + 主谓翻转 431 处，无第三类）；Q8 错拼检出来源还原（注入 307/354 与 65/74、自带专名假阳性 40/6）。产物 `experiments/B1/`（脚本 22 锚点 + 4 图 + `b1_figure_notes.md` + `b1_metrics.json`）；Q8 小节"范围说明"同步更新。
+- 2026-10-16：**C1 完成**（附加实验：Qwen3-4B-Base 直接输出坐标 vs L11 探针）：集群 A100 跑 630 题（严格解析 99.8%/99.2%、宽松 100%）、valid 距离中位 43.8 km（探针 953.8 的 22×）、逐条 119/130 直接更近（+982.5 km CI [835, 1139]）；原始 MSE 被单条日界线样本主导（Tomanivi 96.5%，周期口径 17.6）；与参考报告（非官方）逐项一致（hit100 相同）。产物 `experiments/C1/`（评估脚本 + 3 图 + `c1_figure_notes.md`）与 `results/slurm_qwen_direct/qwen_direct_v1/`。

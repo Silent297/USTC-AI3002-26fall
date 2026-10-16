@@ -295,8 +295,12 @@ def fig_valid_map(fig_dir, valid_records, valid_distances, top_items):
 
     for item in top_items:
         label = f"{entity_name(item['sentence'])}\n{item['distance_km']:.0f} km"
-        ax.annotate(label, xy=(item["pred_lon"], item["pred_lat"]), xytext=(12, -8),
-                    textcoords="offset points", fontsize=7,
+        if item["pred_lat"] < -55:  # near the bottom edge: box above-left to clear the colorbar
+            dx, dy, ha = -12, 10, "right"
+        else:
+            dx, dy, ha = 12, -8, "left"
+        ax.annotate(label, xy=(item["pred_lon"], item["pred_lat"]), xytext=(dx, dy),
+                    textcoords="offset points", fontsize=7, ha=ha,
                     bbox=dict(boxstyle="round,pad=0.25", fc="white", ec="0.5", alpha=0.85),
                     arrowprops=dict(arrowstyle="-", color="0.4", linewidth=0.7),
                     transform=ccrs.PlateCarree(), zorder=6)
