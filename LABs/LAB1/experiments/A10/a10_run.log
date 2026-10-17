@@ -1,0 +1,24 @@
+[A10] spherical gradient check OK (max abs err 3.85e-19)
+[A10] ridge anchor OK: MSE 167.1707, median 923.1206 km
+[mse] lr0.001_lam0: OOF MSE 490.2±17.8, mean km 2120.5±71.3, refl 0.2%, ep med 166, div 0 (6.2s)
+[mse] lr0.001_lam0.001: OOF MSE 493.7±17.1, mean km 2127.3±86.2, refl 0.2%, ep med 133, div 0 (4.5s)
+[mse] lr0.001_lam0.01: OOF MSE 489.3±19.7, mean km 2124.8±89.4, refl 0.2%, ep med 149, div 0 (4.9s)
+[mse] lr0.003_lam0: OOF MSE 476.5±13.3, mean km 1980.4±60.6, refl 0.2%, ep med 69, div 0 (3.5s)
+[mse] lr0.003_lam0.001: OOF MSE 476.2±13.7, mean km 2005.8±58.1, refl 0.2%, ep med 58, div 0 (3.3s)
+[mse] lr0.003_lam0.01: OOF MSE 472.5±17.9, mean km 1987.4±59.3, refl 0.2%, ep med 69, div 0 (3.3s)
+[sphere] lr0.001_lam0: OOF MSE 1785.0±36.4, mean km 1545.1±3.3, refl 6.8%, ep med 60, div 0 (4.8s)
+[sphere] lr0.001_lam0.001: OOF MSE 1784.9±36.4, mean km 1544.9±3.3, refl 6.8%, ep med 60, div 0 (5.0s)
+[sphere] lr0.001_lam0.01: OOF MSE 1782.7±34.9, mean km 1542.7±3.4, refl 6.8%, ep med 60, div 0 (4.8s)
+[sphere] lr0.003_lam0: OOF MSE 42847.9±3173.4, mean km 3728.6±213.0, refl 43.5%, ep med 56, div 0 (6.0s)
+[sphere] lr0.003_lam0.001: OOF MSE 42863.9±3091.9, mean km 3732.5±218.3, refl 43.7%, ep med 56, div 0 (5.0s)
+[sphere] lr0.003_lam0.01: OOF MSE 42709.1±3075.2, mean km 3733.9±223.2, refl 43.9%, ep med 55, div 0 (4.6s)
+[mse] selected lr0.003_lam0.01, final 69 ep: valid MSE 357.4±23.8, median 1718.4 km, mean 1977.3 km, refl 0.0
+[sphere] selected lr0.001_lam0.01, final 60 ep: valid MSE 1801.4±11.7, median 1157.0 km, mean 1395.7 km, refl 10.0
+[hybrid] beta0.01: OOF MSE 1771.0, mean km 1546.4, refl 6.8%, ep med 59, div 0 (5.0s)
+[hybrid] beta0.1: OOF MSE 1620.3, mean km 1586.1, refl 6.7%, ep med 58, div 0 (4.9s)
+[hybrid] beta0.2: OOF MSE 1275.9, mean km 1701.8, refl 5.6%, ep med 60, div 0 (5.1s)
+[hybrid] beta0.3: OOF MSE 769.6, mean km 1775.1, refl 2.6%, ep med 120, div 0 (7.0s)
+[hybrid] beta0.5: OOF MSE 484.7, mean km 1843.6, refl 0.0%, ep med 195, div 0 (9.7s)
+[hybrid] beta1: OOF MSE 513.9, mean km 1877.8, refl 0.0%, ep med 255, div 0 (19.5s)
+[hybrid] selected beta0.5 at lr=0.001 lam=0.01, final 195 ep: valid MSE 239.7, median 1187.5 km, refl 0.0
+[done] 108.9s; wrote C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiments\A10\a10_results.json
