@@ -1,0 +1,64 @@
+{
+  "orig_valid": 130,
+  "orig_valid_with_iso": 130,
+  "orig_train_with_iso": 496,
+  "train_matches": [
+    {
+      "place": "Melbourne",
+      "country": "Australia"
+    },
+    {
+      "place": "Jaffna",
+      "country": "Sri Lanka"
+    },
+    {
+      "place": "Bengaluru",
+      "country": "India"
+    },
+    {
+      "place": "Oaxaca",
+      "country": "Mexico"
+    },
+    {
+      "place": "Chicago",
+      "country": "United States"
+    },
+    {
+      "place": "Vientiane",
+      "country": "Laos"
+    },
+    {
+      "place": "Yaounde",
+      "country": "Cameroon"
+    },
+    {
+      "place": "Yangon",
+      "country": "Myanmar"
+    },
+    {
+      "place": "Kuala Lumpur",
+      "country": "Malaysia"
+    },
+    {
+      "place": "Monrovia",
+      "country": "Liberia"
+    },
+    {
+      "place": "Porto Alegre",
+      "country": "Brazil"
+    },
+    {
+      "place": "Cordoba",
+      "country": "Argentina"
+    },
+    {
+      "place": "Bratislava",
+      "country": "Slovakia"
+    },
+    {
+      "place": "New Orleans",
+      "country": "United States"
+    }
+  ],
+  "note": "name+ISO 精确匹配；未匹配的 landmark 名称不会进入审计。"
+}

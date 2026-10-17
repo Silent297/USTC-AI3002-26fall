@@ -1,0 +1,1051 @@
+sentence,country,latitude,longitude,geonameid,place,iso,match_orig_valid,match_orig_train
+"What's the longitude and latitude of Ripollet, Spain?",Spain,41.49686,2.15739,3111605,Ripollet,ES,False,False
+"What's the longitude and latitude of Pando, Uruguay?",Uruguay,-34.71716,-55.9584,3441354,Pando,UY,False,False
+"What's the longitude and latitude of Nuembrecht, Germany?",Germany,50.90427,7.54063,2861677,Nuembrecht,DE,False,False
+"What's the longitude and latitude of Bhopal, India?",India,23.25469,77.40289,1275841,Bhopal,IN,False,False
+"What's the longitude and latitude of Mukono, Uganda?",Uganda,0.35333,32.75528,228853,Mukono,UG,False,False
+"What's the longitude and latitude of Hindupur, India?",India,13.82807,77.49143,1270079,Hindupur,IN,False,False
+"What's the longitude and latitude of Cartagena, Spain?",Spain,37.60197,-0.98397,2520058,Cartagena,ES,False,False
+"What's the longitude and latitude of Lynnwood, United States?",United States,47.82093,-122.31513,5802049,Lynnwood,US,False,False
+"What's the longitude and latitude of Longfeng, China?",China,30.26816,106.02282,8417603,Longfeng,CN,False,False
+"What's the longitude and latitude of Artigas, Uruguay?",Uruguay,-30.40431,-56.46926,3443758,Artigas,UY,False,False
+"What's the longitude and latitude of Bramhapuri, India?",India,20.61107,79.86103,1275191,Bramhapuri,IN,False,False
+"What's the longitude and latitude of Kanke, India?",India,23.43478,85.32059,1268032,Kanke,IN,False,False
+"What's the longitude and latitude of Swietochlowice, Poland?",Poland,50.29636,18.91726,3083988,Swietochlowice,PL,False,False
+"What's the longitude and latitude of Kippax, United Kingdom?",United Kingdom,53.76687,-1.37099,2645347,Kippax,GB,False,False
+"What's the longitude and latitude of Yongxin, China?",China,28.96667,106.53333,1786249,Yongxin,CN,False,False
+"What's the longitude and latitude of Daugavpils, Latvia?",Latvia,55.88333,26.53333,460413,Daugavpils,LV,False,False
+"What's the longitude and latitude of Belgrano, Argentina?",Argentina,-34.5627,-58.45829,3436077,Belgrano,AR,False,False
+"What's the longitude and latitude of Bani Yas City, United Arab Emirates?",United Arab Emirates,24.30978,54.62944,12042052,Bani Yas City,AE,False,False
+"What's the longitude and latitude of Punahana, India?",India,27.86371,77.20432,1259244,Punahana,IN,False,False
+"What's the longitude and latitude of Boulder City, United States?",United States,35.97859,-114.83249,5500539,Boulder City,US,False,False
+"What's the longitude and latitude of Punch, India?",India,33.77033,74.09254,1167718,Punch,IN,False,False
+"What's the longitude and latitude of Al Battaliyah, Saudi Arabia?",Saudi Arabia,25.43333,49.63333,109915,Al Battaliyah,SA,False,False
+"What's the longitude and latitude of Whyalla, Australia?",Australia,-33.03268,137.56483,2058430,Whyalla,AU,False,False
+"What's the longitude and latitude of Solothurn, Switzerland?",Switzerland,47.20791,7.53714,2658564,Solothurn,CH,False,False
+"What's the longitude and latitude of Amozoc de Mota, Mexico?",Mexico,19.04611,-98.045,3532881,Amozoc de Mota,MX,False,False
+"What's the longitude and latitude of Valenca, Brazil?",Brazil,-22.24556,-43.70028,3445596,Valenca,BR,False,False
+"What's the longitude and latitude of Brighton, United States?",United States,43.14756,-77.55055,5110159,Brighton,US,False,False
+"What's the longitude and latitude of Marechal Deodoro, Brazil?",Brazil,-9.71028,-35.895,3395395,Marechal Deodoro,BR,False,False
+"What's the longitude and latitude of Grafton, United States?",United States,42.20704,-71.68562,4938048,Grafton,US,False,False
+"What's the longitude and latitude of Kety, Poland?",Poland,49.88214,19.22333,3096328,Kety,PL,False,False
+"What's the longitude and latitude of Aracariguama, Brazil?",Brazil,-23.43861,-47.06139,3471868,Aracariguama,BR,False,False
+"What's the longitude and latitude of Aurora, Italy?",Italy,45.0807,7.6873,11288660,Aurora,IT,False,False
+"What's the longitude and latitude of Metz, France?",France,49.11911,6.17269,2994160,Metz,FR,False,False
+"What's the longitude and latitude of Cranendonck, Netherlands?",Netherlands,51.30417,5.58889,2757890,Cranendonck,NL,False,False
+"What's the longitude and latitude of Pontedera, Italy?",Italy,43.66141,10.63067,3170272,Pontedera,IT,False,False
+"What's the longitude and latitude of Denai Alam, Malaysia?",Malaysia,3.16027,101.51501,12625525,Denai Alam,MY,False,False
+"What's the longitude and latitude of Rajakheri, India?",India,23.85931,78.7852,10530672,Rajakheri,IN,False,False
+"What's the longitude and latitude of Xuancheng, China?",China,30.9525,118.75528,1788081,Xuancheng,CN,False,False
+"What's the longitude and latitude of Presidente Medici, Brazil?",Brazil,-11.17528,-61.90139,3924872,Presidente Medici,BR,False,False
+"What's the longitude and latitude of Rwiimi, Uganda?",Uganda,0.37957,30.23039,8642874,Rwiimi,UG,False,False
+"What's the longitude and latitude of Lewes, United Kingdom?",United Kingdom,50.87398,0.0088,2644559,Lewes,GB,False,False
+"What's the longitude and latitude of Los Reyes de Salgado, Mexico?",Mexico,19.58854,-102.47333,3997211,Los Reyes de Salgado,MX,False,False
+"What's the longitude and latitude of Berga, Spain?",Spain,42.10429,1.84628,3128201,Berga,ES,False,False
+"What's the longitude and latitude of Anakapalle, India?",India,17.69134,83.00395,1278688,Anakapalle,IN,False,False
+"What's the longitude and latitude of Jelutong, Malaysia?",Malaysia,5.38998,100.31885,1772808,Jelutong,MY,False,False
+"What's the longitude and latitude of Mudon, Myanmar?",Myanmar,16.25624,97.7246,1308415,Mudon,MM,False,False
+"What's the longitude and latitude of New Kingston, Jamaica?",Jamaica,18.00747,-76.78319,3489297,New Kingston,JM,False,False
+"What's the longitude and latitude of Villa Yapacani, Bolivia?",Bolivia,-17.4,-63.83333,3901504,Villa Yapacani,BO,False,False
+"What's the longitude and latitude of Kamioi, Japan?",Japan,35.32003,139.1582,1907270,Kamioi,JP,False,False
+"What's the longitude and latitude of Zvenigorod, Russia?",Russia,55.73401,36.85918,461920,Zvenigorod,RU,False,False
+"What's the longitude and latitude of Pinamalayan, Philippines?",Philippines,13.04603,121.46205,1693618,Pinamalayan,PH,False,False
+"What's the longitude and latitude of Malanday, Philippines?",Philippines,14.7069,121.1306,1703116,Malanday,PH,False,False
+"What's the longitude and latitude of Gurue, Mozambique?",Mozambique,-15.46694,36.97778,1045512,Gurue,MZ,False,False
+"What's the longitude and latitude of Sinnar, India?",India,19.84505,73.99866,1256119,Sinnar,IN,False,False
+"What's the longitude and latitude of Shahrak-e Mohandesi-ye Zera'i, Iran?",Iran,35.772,50.956,41589,Shahrak-e Mohandesi-ye Zera'i,IR,False,False
+"What's the longitude and latitude of Shidui, China?",China,36.39333,119.30861,1795411,Shidui,CN,False,False
+"What's the longitude and latitude of Zhengxing, China?",China,29.45741,106.12926,1784669,Zhengxing,CN,False,False
+"What's the longitude and latitude of Fianarantsoa, Madagascar?",Madagascar,-21.45267,47.08569,1064890,Fianarantsoa,MG,False,False
+"What's the longitude and latitude of Hong Kah, Singapore?",Singapore,1.35944,103.72278,1880650,Hong Kah,SG,False,False
+"What's the longitude and latitude of Perth, United Kingdom?",United Kingdom,56.39522,-3.43139,2640358,Perth,GB,False,False
+"What's the longitude and latitude of Perico, Cuba?",Cuba,22.76889,-81.01845,3544393,Perico,CU,False,False
+"What's the longitude and latitude of Samobor, Croatia?",Croatia,45.80306,15.71806,3191316,Samobor,HR,False,False
+"What's the longitude and latitude of Cherepovets, Russia?",Russia,59.13333,37.9,569223,Cherepovets,RU,False,False
+"What's the longitude and latitude of Guapiara, Brazil?",Brazil,-24.185,-48.53278,3461951,Guapiara,BR,False,False
+"What's the longitude and latitude of Summerville, United States?",United States,33.0185,-80.17565,4597919,Summerville,US,False,False
+"What's the longitude and latitude of Buraydah, Saudi Arabia?",Saudi Arabia,26.32599,43.97497,107304,Buraydah,SA,False,False
+"What's the longitude and latitude of Marseille 12, France?",France,43.29614,5.43617,7284893,Marseille 12,FR,False,False
+"What's the longitude and latitude of Takenotsuka, Japan?",Japan,35.79357,139.7956,10987752,Takenotsuka,JP,False,False
+"What's the longitude and latitude of Airdrie, Canada?",Canada,51.30011,-114.03528,5882799,Airdrie,CA,False,False
+"What's the longitude and latitude of Rivas-Vaciamadrid, Spain?",Spain,40.32605,-3.51089,3107112,Rivas-Vaciamadrid,ES,False,False
+"What's the longitude and latitude of Kota Damansara, Malaysia?",Malaysia,3.15454,101.58022,12514556,Kota Damansara,MY,False,False
+"What's the longitude and latitude of Farmington, United States?",United States,44.64024,-93.14355,5026321,Farmington,US,False,False
+"What's the longitude and latitude of Bad Muender am Deister, Germany?",Germany,52.19551,9.46421,2953400,Bad Muender am Deister,DE,False,False
+"What's the longitude and latitude of Caroline Springs, Australia?",Australia,-37.74124,144.73631,7281805,Caroline Springs,AU,False,False
+"What's the longitude and latitude of Baependi, Brazil?",Brazil,-21.95889,-44.89,3471208,Baependi,BR,False,False
+"What's the longitude and latitude of Meleuz, Russia?",Russia,52.96467,55.93277,527717,Meleuz,RU,False,False
+"What's the longitude and latitude of Manoa, United States?",United States,21.31608,-157.80423,9409821,Manoa,US,False,False
+"What's the longitude and latitude of Viswanatham, India?",India,9.42952,77.80032,13494713,Viswanatham,IN,False,False
+"What's the longitude and latitude of Greenock, United Kingdom?",United Kingdom,55.94838,-4.76121,2647948,Greenock,GB,False,False
+"What's the longitude and latitude of Sanjiao, China?",China,29.48801,105.86765,1904094,Sanjiao,CN,False,False
+"What's the longitude and latitude of Moreni, Romania?",Romania,44.98301,25.64415,672862,Moreni,RO,False,False
+"What's the longitude and latitude of Albi, France?",France,43.9298,2.148,3038261,Albi,FR,False,False
+"What's the longitude and latitude of Losser, Netherlands?",Netherlands,52.26083,7.00417,2751424,Losser,NL,False,False
+"What's the longitude and latitude of Moreno, Argentina?",Argentina,-34.63401,-58.79138,7778796,Moreno,AR,False,False
+"What's the longitude and latitude of Yew Tee, Singapore?",Singapore,1.39665,103.74738,1880137,Yew Tee,SG,False,False
+"What's the longitude and latitude of Srimangal, Bangladesh?",Bangladesh,24.30652,91.72955,7646709,Srimangal,BD,False,False
+"What's the longitude and latitude of Kanpur Cantonment, India?",India,26.45942,80.37514,13645699,Kanpur Cantonment,IN,False,False
+"What's the longitude and latitude of Chandrapura, India?",India,23.74877,86.11955,11184814,Chandrapura,IN,False,False
+"What's the longitude and latitude of Limonar, Cuba?",Cuba,22.95002,-81.41113,3549835,Limonar,CU,False,False
+"What's the longitude and latitude of Manbij, Syria?",Syria,36.52815,37.95495,167357,Manbij,SY,False,False
+"What's the longitude and latitude of Iriveri, India?",India,11.85586,75.47362,10910231,Iriveri,IN,False,False
+"What's the longitude and latitude of Erlangen, Germany?",Germany,49.59099,11.00783,2929567,Erlangen,DE,False,False
+"What's the longitude and latitude of Bloomfield, United States?",United States,41.82649,-72.73009,5282526,Bloomfield,US,False,False
+"What's the longitude and latitude of Ayang-ni, North Korea?",North Korea,38.24719,125.79476,1879544,Ayang-ni,KP,False,False
+"What's the longitude and latitude of Maltby, United Kingdom?",United Kingdom,53.41667,-1.2,2643144,Maltby,GB,False,False
+"What's the longitude and latitude of Sh'iariah, Sudan?",Sudan,12.43883,25.58112,13132453,Sh'iariah,SD,False,False
+"What's the longitude and latitude of Addison, United States?",United States,41.9317,-87.98896,4882920,Addison,US,False,False
+"What's the longitude and latitude of Chirkunda, India?",India,23.74771,86.78804,11184827,Chirkunda,IN,False,False
+"What's the longitude and latitude of Borshchahivka, Ukraine?",Ukraine,50.4316,30.3899,11778464,Borshchahivka,UA,False,False
+"What's the longitude and latitude of Nowgong, India?",India,25.06136,79.44125,1261164,Nowgong,IN,False,False
+"What's the longitude and latitude of Blainville, Canada?",Canada,45.66678,-73.88249,5903510,Blainville,CA,False,False
+"What's the longitude and latitude of Lingcheng, China?",China,33.81639,118.11361,1803549,Lingcheng,CN,False,False
+"What's the longitude and latitude of Orchards, United States?",United States,45.66651,-122.56093,5805815,Orchards,US,False,False
+"What's the longitude and latitude of Navalcarnero, Spain?",Spain,40.28908,-4.01197,3115659,Navalcarnero,ES,False,False
+"What's the longitude and latitude of Jolo, Philippines?",Philippines,6.05222,121.00222,1710141,Jolo,PH,False,False
+"What's the longitude and latitude of Catarina, Brazil?",Brazil,-6.13083,-39.8775,3402538,Catarina,BR,False,False
+"What's the longitude and latitude of 'Ain Deheb, Algeria?",Algeria,34.84218,1.54697,2508225,'Ain Deheb,DZ,False,False
+"What's the longitude and latitude of Tessenderlo, Belgium?",Belgium,51.06513,5.08856,2785612,Tessenderlo,BE,False,False
+"What's the longitude and latitude of Lanxi, China?",China,29.21588,119.47156,1804442,Lanxi,CN,False,False
+"What's the longitude and latitude of Umuahia, Nigeria?",Nigeria,5.52491,7.49461,2320576,Umuahia,NG,False,False
+"What's the longitude and latitude of Modica, Italy?",Italy,36.85868,14.75966,2524119,Modica,IT,False,False
+"What's the longitude and latitude of Peine, Germany?",Germany,52.31928,10.2352,2855047,Peine,DE,False,False
+"What's the longitude and latitude of Singosari, Indonesia?",Indonesia,-7.8924,112.6658,1626899,Singosari,ID,False,False
+"What's the longitude and latitude of Rojas, Argentina?",Argentina,-34.19774,-60.7337,3838650,Rojas,AR,False,False
+"What's the longitude and latitude of Apple Valley, United States?",United States,44.73191,-93.21772,5016494,Apple Valley,US,False,False
+"What's the longitude and latitude of Mo i Rana, Norway?",Norway,66.31278,14.14278,3145614,Mo i Rana,NO,False,False
+"What's the longitude and latitude of Clifton, United States?",United States,39.09193,-108.44898,5417258,Clifton,US,False,False
+"What's the longitude and latitude of Taki, India?",India,22.58867,88.93253,1255211,Taki,IN,False,False
+"What's the longitude and latitude of Bermo, India?",India,23.78781,85.93526,11628557,Bermo,IN,False,False
+"What's the longitude and latitude of Padre Bernardo, Brazil?",Brazil,-15.16538,-48.28416,3455580,Padre Bernardo,BR,False,False
+"What's the longitude and latitude of Barreiro, Portugal?",Portugal,38.66314,-9.0724,2271071,Barreiro,PT,False,False
+"What's the longitude and latitude of Beverley, United Kingdom?",United Kingdom,53.84587,-0.42332,2655785,Beverley,GB,False,False
+"What's the longitude and latitude of Mosta, Malta?",Malta,35.90942,14.42566,2562704,Mosta,MT,False,False
+"What's the longitude and latitude of Ywar Ma West, Myanmar?",Myanmar,16.89672,96.09173,1284569,Ywar Ma West,MM,False,False
+"What's the longitude and latitude of Port Sudan, Sudan?",Sudan,19.61745,37.21644,377039,Port Sudan,SD,False,False
+"What's the longitude and latitude of Maple Valley, United States?",United States,47.39272,-122.04641,5802340,Maple Valley,US,False,False
+"What's the longitude and latitude of Jaisingpur, India?",India,16.77639,74.55361,1269502,Jaisingpur,IN,False,False
+"What's the longitude and latitude of Nagato, Japan?",Japan,34.38333,131.2,1899102,Nagato,JP,False,False
+"What's the longitude and latitude of Le Mee-sur-Seine, France?",France,48.53157,2.62829,3003481,Le Mee-sur-Seine,FR,False,False
+"What's the longitude and latitude of Zentsujicho, Japan?",Japan,34.22699,133.77791,1847983,Zentsujicho,JP,False,False
+"What's the longitude and latitude of Kiserian, Kenya?",Kenya,-1.4275,36.6865,191318,Kiserian,KE,False,False
+"What's the longitude and latitude of Zuerich (Kreis 11) / Oerlikon, Switzerland?",Switzerland,47.40823,8.54258,2659310,Zuerich (Kreis 11) / Oerlikon,CH,False,False
+"What's the longitude and latitude of Casa Santa, Italy?",Italy,38.02514,12.5484,8948706,Casa Santa,IT,False,False
+"What's the longitude and latitude of Swabi, Pakistan?",Pakistan,34.12018,72.46982,1164216,Swabi,PK,False,False
+"What's the longitude and latitude of Pirgaaj, Bangladesh?",Bangladesh,25.85587,88.35943,1337239,Pirgaaj,BD,False,False
+"What's the longitude and latitude of Bridgetown, Barbados?",Barbados,13.10732,-59.62021,3374036,Bridgetown,BB,False,True
+"What's the longitude and latitude of Campo De Ourique, Portugal?",Portugal,38.72134,-9.16738,12777908,Campo De Ourique,PT,False,False
+"What's the longitude and latitude of Baharestan, Iran?",Iran,32.48814,51.77312,418943,Baharestan,IR,False,False
+"What's the longitude and latitude of Stuttgart Feuerbach, Germany?",Germany,48.80867,9.15719,2927043,Stuttgart Feuerbach,DE,False,False
+"What's the longitude and latitude of Ma'anshan, China?",China,31.68579,118.51008,1801620,Ma'anshan,CN,False,False
+"What's the longitude and latitude of Aljaraque, Spain?",Spain,37.26989,-7.02313,2521964,Aljaraque,ES,False,False
+"What's the longitude and latitude of Barra Bonita, Brazil?",Brazil,-22.49472,-48.55806,3470776,Barra Bonita,BR,False,False
+"What's the longitude and latitude of Pula, Croatia?",Croatia,44.86833,13.84806,3192224,Pula,HR,False,False
+"What's the longitude and latitude of Changanacheri, India?",India,9.44203,76.53604,1274664,Changanacheri,IN,False,False
+"What's the longitude and latitude of Corsico, Italy?",Italy,45.43099,9.11093,3178004,Corsico,IT,False,False
+"What's the longitude and latitude of Mayiladuthurai, India?",India,11.10354,79.655,1263247,Mayiladuthurai,IN,False,False
+"What's the longitude and latitude of Wakaf Baharu, Malaysia?",Malaysia,6.11667,102.2,1736366,Wakaf Baharu,MY,False,False
+"What's the longitude and latitude of Haldia, India?",India,22.06046,88.10975,1344377,Haldia,IN,False,False
+"What's the longitude and latitude of Doraha, India?",India,30.79953,76.02355,1272375,Doraha,IN,False,False
+"What's the longitude and latitude of Natham, India?",India,10.22776,78.22969,1261705,Natham,IN,False,False
+"What's the longitude and latitude of Epping, Australia?",Australia,-33.77271,151.08184,2167280,Epping,AU,False,False
+"What's the longitude and latitude of Leipzig, Germany?",Germany,51.33962,12.37129,2879139,Leipzig,DE,False,False
+"What's the longitude and latitude of Jamay, Mexico?",Mexico,20.29479,-102.7094,4004126,Jamay,MX,False,False
+"What's the longitude and latitude of Mtubatuba, South Africa?",South Africa,-28.41789,32.18483,972803,Mtubatuba,ZA,False,False
+"What's the longitude and latitude of Comalapa, Mexico?",Mexico,15.65995,-92.14111,3527542,Comalapa,MX,False,False
+"What's the longitude and latitude of Lapy, Poland?",Poland,52.9911,22.88422,766783,Lapy,PL,False,False
+"What's the longitude and latitude of Umeki, Japan?",Japan,31.66667,130.38333,1849306,Umeki,JP,False,False
+"What's the longitude and latitude of Montceau-les-Mines, France?",France,46.66667,4.36667,2992863,Montceau-les-Mines,FR,False,False
+"What's the longitude and latitude of Center City, United States?",United States,39.9512,-75.15923,9958118,Center City,US,False,False
+"What's the longitude and latitude of Loei, Thailand?",Thailand,17.49052,101.72749,1609071,Loei,TH,False,False
+"What's the longitude and latitude of Pozzuoli, Italy?",Italy,40.84394,14.0952,3169984,Pozzuoli,IT,False,False
+"What's the longitude and latitude of Wendelstein, Germany?",Germany,49.3523,11.15069,2811292,Wendelstein,DE,False,False
+"What's the longitude and latitude of Eilat, Israel?",Israel,29.55805,34.94821,295277,Eilat,IL,False,False
+"What's the longitude and latitude of San Justo, Argentina?",Argentina,-30.78991,-60.59276,3837124,San Justo,AR,False,False
+"What's the longitude and latitude of Sankaraperi, India?",India,8.83868,78.10513,13494703,Sankaraperi,IN,False,False
+"What's the longitude and latitude of Ciechanow, Poland?",Poland,52.88141,20.61996,774208,Ciechanow,PL,False,False
+"What's the longitude and latitude of Pad Idan, Pakistan?",Pakistan,26.77455,68.30094,1168652,Pad Idan,PK,False,False
+"What's the longitude and latitude of Pengze, China?",China,29.89885,116.54572,1798900,Pengze,CN,False,False
+"What's the longitude and latitude of Of, Turkey?",Turkey,40.94055,40.25918,741240,Of,TR,False,False
+"What's the longitude and latitude of Maumelle, United States?",United States,34.86676,-92.40432,4120792,Maumelle,US,False,False
+"What's the longitude and latitude of Tiruvankod, India?",India,8.24521,77.301,1254329,Tiruvankod,IN,False,False
+"What's the longitude and latitude of Xianlong, China?",China,29.15107,105.78403,1904187,Xianlong,CN,False,False
+"What's the longitude and latitude of Bathurst Manor, Canada?",Canada,43.76481,-79.45606,12156897,Bathurst Manor,CA,False,False
+"What's the longitude and latitude of Agra, India?",India,27.18333,78.01667,1279259,Agra,IN,False,False
+"What's the longitude and latitude of General Gueemes, Argentina?",Argentina,-24.67445,-65.0466,3855090,General Gueemes,AR,False,False
+"What's the longitude and latitude of Monte Santo de Minas, Brazil?",Brazil,-21.18972,-46.98028,3456816,Monte Santo de Minas,BR,False,False
+"What's the longitude and latitude of Lokoja, Nigeria?",Nigeria,7.79688,6.74048,2331939,Lokoja,NG,False,False
+"What's the longitude and latitude of Tupiza, Bolivia?",Bolivia,-21.44345,-65.71875,3902202,Tupiza,BO,False,False
+"What's the longitude and latitude of Boaco, Nicaragua?",Nicaragua,12.47255,-85.65956,3620674,Boaco,NI,False,False
+"What's the longitude and latitude of Qingfeng, China?",China,29.33938,105.82676,1904138,Qingfeng,CN,False,False
+"What's the longitude and latitude of Bundi, India?",India,25.43855,75.63735,1275103,Bundi,IN,False,False
+"What's the longitude and latitude of Columbia, United States?",United States,39.24038,-76.83942,4352053,Columbia,US,False,False
+"What's the longitude and latitude of Avrankou, Benin?",Benin,6.55591,2.65123,2395477,Avrankou,BJ,False,False
+"What's the longitude and latitude of Thuwal, Saudi Arabia?",Saudi Arabia,22.28272,39.11245,409682,Thuwal,SA,False,False
+"What's the longitude and latitude of Erebuni, Armenia?",Armenia,40.13309,44.53009,866152,Erebuni,AM,False,False
+"What's the longitude and latitude of Los Andes, Chile?",Chile,-32.83369,-70.59827,3882434,Los Andes,CL,False,False
+"What's the longitude and latitude of Kumhari, India?",India,21.26667,81.51667,1265660,Kumhari,IN,False,False
+"What's the longitude and latitude of Omidiyeh, Iran?",Iran,30.76277,49.70226,121861,Omidiyeh,IR,False,False
+"What's the longitude and latitude of Afranio, Brazil?",Brazil,-8.515,-41.005,3408270,Afranio,BR,False,False
+"What's the longitude and latitude of Castleford, United Kingdom?",United Kingdom,53.72587,-1.36256,2653584,Castleford,GB,False,False
+"What's the longitude and latitude of Culleredo, Spain?",Spain,43.28788,-8.38858,3124041,Culleredo,ES,False,False
+"What's the longitude and latitude of Collinwood, United States?",United States,41.55838,-81.56929,5150792,Collinwood,US,False,False
+"What's the longitude and latitude of Syktyvkar, Russia?",Russia,61.66393,50.8163,485239,Syktyvkar,RU,False,False
+"What's the longitude and latitude of Kansk, Russia?",Russia,56.20218,95.71848,1504682,Kansk,RU,False,False
+"What's the longitude and latitude of Dammarie-les-Lys, France?",France,48.51667,2.65,3021852,Dammarie-les-Lys,FR,False,False
+"What's the longitude and latitude of Vijayawada, India?",India,16.50745,80.6466,1253184,Vijayawada,IN,False,False
+"What's the longitude and latitude of San Marcos, Nicaragua?",Nicaragua,11.90949,-86.20351,3616682,San Marcos,NI,False,False
+"What's the longitude and latitude of Kainan, Japan?",Japan,34.15166,135.21398,1860785,Kainan,JP,False,False
+"What's the longitude and latitude of Voula, Greece?",Greece,37.84221,23.77651,251780,Voula,GR,False,False
+"What's the longitude and latitude of Springfield, United States?",United States,37.21533,-93.29824,4409896,Springfield,US,False,False
+"What's the longitude and latitude of Piracicaba, Brazil?",Brazil,-22.72528,-47.64917,3453643,Piracicaba,BR,False,False
+"What's the longitude and latitude of Sayula, Mexico?",Mexico,19.88372,-103.60073,3983216,Sayula,MX,False,False
+"What's the longitude and latitude of Shaping, China?",China,22.77019,112.95776,1795842,Shaping,CN,False,False
+"What's the longitude and latitude of At Tall, Syria?",Syria,33.61033,36.3107,172349,At Tall,SY,False,False
+"What's the longitude and latitude of Miaojie, China?",China,25.31232,100.27983,12358566,Miaojie,CN,False,False
+"What's the longitude and latitude of Kauhava, Finland?",Finland,63.10299,23.07129,653616,Kauhava,FI,False,False
+"What's the longitude and latitude of Jersey City, United States?",United States,40.72816,-74.07764,5099836,Jersey City,US,False,False
+"What's the longitude and latitude of Rogers Park, United States?",United States,42.00864,-87.66672,4908033,Rogers Park,US,False,False
+"What's the longitude and latitude of Nha Trang, Vietnam?",Vietnam,12.24507,109.19432,1572151,Nha Trang,VN,False,False
+"What's the longitude and latitude of La Quinta, United States?",United States,33.66336,-116.31001,5364079,La Quinta,US,False,False
+"What's the longitude and latitude of Guaianases, Brazil?",Brazil,-23.54333,-46.41083,3462011,Guaianases,BR,False,False
+"What's the longitude and latitude of La Ciotat, France?",France,43.17476,5.60449,3010025,La Ciotat,FR,False,False
+"What's the longitude and latitude of Bothell West, United States?",United States,47.80527,-122.24064,7315409,Bothell West,US,False,False
+"What's the longitude and latitude of Valmiera, Latvia?",Latvia,57.54108,25.42751,453754,Valmiera,LV,False,False
+"What's the longitude and latitude of Budta, Philippines?",Philippines,7.20417,124.43972,1723510,Budta,PH,False,False
+"What's the longitude and latitude of Katheru, India?",India,17.03795,81.77597,7302834,Katheru,IN,False,False
+"What's the longitude and latitude of Chaves, Portugal?",Portugal,41.74019,-7.46879,2740761,Chaves,PT,False,False
+"What's the longitude and latitude of Beledweyne, Somalia?",Somalia,4.73583,45.20361,64460,Beledweyne,SO,False,False
+"What's the longitude and latitude of Kenora, Canada?",Canada,49.76741,-94.48985,5991055,Kenora,CA,False,False
+"What's the longitude and latitude of Bridgeport, United States?",United States,41.83809,-87.65116,4885565,Bridgeport,US,False,False
+"What's the longitude and latitude of Rendsburg, Germany?",Germany,54.30182,9.67175,2848245,Rendsburg,DE,False,False
+"What's the longitude and latitude of Bihta, India?",India,25.55885,84.87141,1275712,Bihta,IN,False,False
+"What's the longitude and latitude of Hoi An, Vietnam?",Vietnam,15.87944,108.335,1580541,Hoi An,VN,False,False
+"What's the longitude and latitude of Adanattutekkumuri Kizhakku, India?",India,9.07909,76.51367,11501709,Adanattutekkumuri Kizhakku,IN,False,False
+"What's the longitude and latitude of Basti, India?",India,26.78817,82.71617,1276736,Basti,IN,False,False
+"What's the longitude and latitude of Staaken, Germany?",Germany,52.53661,13.15057,2829962,Staaken,DE,False,False
+"What's the longitude and latitude of Rio de Janeiro, Brazil?",Brazil,-22.90642,-43.18223,3451190,Rio de Janeiro,BR,False,True
+"What's the longitude and latitude of Mahbubabad, India?",India,17.59728,80.00207,1264409,Mahbubabad,IN,False,False
+"What's the longitude and latitude of Dinapur Cantonment, India?",India,25.63616,85.02026,13156929,Dinapur Cantonment,IN,False,False
+"What's the longitude and latitude of Nieuw-Vennep, Netherlands?",Netherlands,52.26417,4.63056,2750121,Nieuw-Vennep,NL,False,False
+"What's the longitude and latitude of Ciudad Juarez, Mexico?",Mexico,31.72024,-106.46084,4013708,Ciudad Juarez,MX,False,False
+"What's the longitude and latitude of Hampton, United Kingdom?",United Kingdom,51.41334,-0.36701,2647550,Hampton,GB,False,False
+"What's the longitude and latitude of Jayamkondacholapuram, India?",India,11.21266,79.36369,1269102,Jayamkondacholapuram,IN,False,False
+"What's the longitude and latitude of Vengara, India?",India,11.05083,75.97806,13353581,Vengara,IN,False,False
+"What's the longitude and latitude of Southwest Waterfront, United States?",United States,38.87934,-77.01758,13526900,Southwest Waterfront,US,False,False
+"What's the longitude and latitude of Kimberley, South Africa?",South Africa,-28.73226,24.76232,990930,Kimberley,ZA,False,False
+"What's the longitude and latitude of New Haven, United States?",United States,41.30815,-72.92816,4839366,New Haven,US,False,False
+"What's the longitude and latitude of Barddhaman, India?",India,23.25572,87.85691,1277029,Barddhaman,IN,False,False
+"What's the longitude and latitude of Fukuroi, Japan?",Japan,34.75,137.91667,1863945,Fukuroi,JP,False,False
+"What's the longitude and latitude of Fort Erie, Canada?",Canada,42.90012,-78.93286,5955815,Fort Erie,CA,False,False
+"What's the longitude and latitude of Vihti, Finland?",Finland,60.41699,24.31965,631707,Vihti,FI,False,False
+"What's the longitude and latitude of Algorta, Spain?",Spain,43.34927,-3.0094,3130380,Algorta,ES,False,False
+"What's the longitude and latitude of Midstream, South Africa?",South Africa,-25.91849,28.19881,8030233,Midstream,ZA,False,False
+"What's the longitude and latitude of Namlea, Indonesia?",Indonesia,-3.26194,127.09292,1634519,Namlea,ID,False,False
+"What's the longitude and latitude of La Courneuve, France?",France,48.92805,2.39627,3009824,La Courneuve,FR,False,False
+"What's the longitude and latitude of Wujia, China?",China,29.63482,105.3911,1791188,Wujia,CN,False,False
+"What's the longitude and latitude of Orcasitas, Spain?",Spain,40.36863,-3.71242,11549997,Orcasitas,ES,False,False
+"What's the longitude and latitude of Alcabideche, Portugal?",Portugal,38.73366,-9.40928,2272215,Alcabideche,PT,False,False
+"What's the longitude and latitude of Fuessen, Germany?",Germany,47.57143,10.70171,2923507,Fuessen,DE,False,False
+"What's the longitude and latitude of Lido, Italy?",Italy,45.4105,12.36649,3174748,Lido,IT,False,False
+"What's the longitude and latitude of Kalliyoor, India?",India,8.43128,77.01285,13353570,Kalliyoor,IN,False,False
+"What's the longitude and latitude of Ngerulmud, Palau?",Palau,7.50077,134.6238,8063361,Ngerulmud,PW,False,False
+"What's the longitude and latitude of Adiwerna, Indonesia?",Indonesia,-6.9375,109.1325,1651887,Adiwerna,ID,False,False
+"What's the longitude and latitude of Vite, India?",India,17.27343,74.53792,1253091,Vite,IN,False,False
+"What's the longitude and latitude of Pucol, Spain?",Spain,39.61667,-0.3,2512127,Pucol,ES,False,False
+"What's the longitude and latitude of Djibo, Burkina Faso?",Burkina Faso,14.09864,-1.62665,2361177,Djibo,BF,False,False
+"What's the longitude and latitude of Rosario, Argentina?",Argentina,-32.94682,-60.63932,3838583,Rosario,AR,False,True
+"What's the longitude and latitude of Dillingen an der Donau, Germany?",Germany,48.58153,10.49527,2936974,Dillingen an der Donau,DE,False,False
+"What's the longitude and latitude of Manmad, India?",India,20.25334,74.43755,1263664,Manmad,IN,False,False
+"What's the longitude and latitude of South Benfleet, United Kingdom?",United Kingdom,51.55295,0.55962,2637476,South Benfleet,GB,False,False
+"What's the longitude and latitude of Alamaiti, China?",China,38.58203,77.47622,12420915,Alamaiti,CN,False,False
+"What's the longitude and latitude of Green Haven, United States?",United States,39.13955,-76.54774,4356783,Green Haven,US,False,False
+"What's the longitude and latitude of Trelleborg, Sweden?",Sweden,55.37514,13.15691,2667402,Trelleborg,SE,False,False
+"What's the longitude and latitude of Proletarsk, Russia?",Russia,46.70241,41.72487,504831,Proletarsk,RU,False,False
+"What's the longitude and latitude of Fair Oaks, United States?",United States,38.64463,-121.27217,5347287,Fair Oaks,US,False,False
+"What's the longitude and latitude of Botad, India?",India,22.16917,71.66671,1275218,Botad,IN,False,False
+"What's the longitude and latitude of Gangshang, China?",China,34.52147,118.11835,1549538,Gangshang,CN,False,False
+"What's the longitude and latitude of Jarabacoa, Dominican Republic?",Dominican Republic,19.11683,-70.63595,3504158,Jarabacoa,DO,False,False
+"What's the longitude and latitude of Seen (Kreis 3), Switzerland?",Switzerland,47.47646,8.76996,6295531,Seen (Kreis 3),CH,False,False
+"What's the longitude and latitude of Mastic, United States?",United States,40.80204,-72.84094,5126208,Mastic,US,False,False
+"What's the longitude and latitude of Buenos Aires, Argentina?",Argentina,-34.61315,-58.37723,3435910,Buenos Aires,AR,False,False
+"What's the longitude and latitude of Xinzhou, China?",China,19.71446,109.31146,1788461,Xinzhou,CN,False,False
+"What's the longitude and latitude of Monclova, Mexico?",Mexico,26.90687,-101.42056,3995523,Monclova,MX,False,False
+"What's the longitude and latitude of Diglipur, India?",India,13.26667,93.0,1272607,Diglipur,IN,False,False
+"What's the longitude and latitude of Montelimar, France?",France,44.55468,4.75469,2992703,Montelimar,FR,False,False
+"What's the longitude and latitude of Genoa, Italy?",Italy,44.40478,8.94439,3176219,Genoa,IT,False,False
+"What's the longitude and latitude of Camborne, United Kingdom?",United Kingdom,50.21306,-5.29731,2653945,Camborne,GB,False,False
+"What's the longitude and latitude of Oqtosh, Uzbekistan?",Uzbekistan,39.92139,65.92528,1217926,Oqtosh,UZ,False,False
+"What's the longitude and latitude of Buni, Pakistan?",Pakistan,36.27333,72.25929,1182122,Buni,PK,False,False
+"What's the longitude and latitude of Hutang, China?",China,31.53429,119.49,1806591,Hutang,CN,False,False
+"What's the longitude and latitude of Stonebridge, Canada?",Canada,52.08454,-106.62266,13589220,Stonebridge,CA,False,False
+"What's the longitude and latitude of Dharmanagar, India?",India,24.36667,92.16667,1272852,Dharmanagar,IN,False,False
+"What's the longitude and latitude of Kottaikuppam, India?",India,11.96126,79.83923,11679803,Kottaikuppam,IN,False,False
+"What's the longitude and latitude of Bad Waldsee, Germany?",Germany,47.92027,9.7549,2953320,Bad Waldsee,DE,False,False
+"What's the longitude and latitude of Francavilla al Mare, Italy?",Italy,42.42158,14.28217,3176605,Francavilla al Mare,IT,False,False
+"What's the longitude and latitude of 'Akra, Iraq?",Iraq,36.73359,43.88038,445694,'Akra,IQ,False,False
+"What's the longitude and latitude of Khanna, India?",India,30.70547,76.22196,1267016,Khanna,IN,False,False
+"What's the longitude and latitude of Maganja, Mozambique?",Mozambique,-17.31197,37.50784,1024703,Maganja,MZ,False,False
+"What's the longitude and latitude of Thanh Xuan, Vietnam?",Vietnam,20.99472,105.79977,8616118,Thanh Xuan,VN,False,False
+"What's the longitude and latitude of Chittoor, India?",India,13.21055,79.0956,1274033,Chittoor,IN,False,False
+"What's the longitude and latitude of Chahar Dangeh, Iran?",Iran,35.6031,51.3098,139706,Chahar Dangeh,IR,False,False
+"What's the longitude and latitude of Ettumanoor, India?",India,9.67,76.57,10376566,Ettumanoor,IN,False,False
+"What's the longitude and latitude of Moeng La, Myanmar?",Myanmar,21.67112,100.01267,1847826,Moeng La,MM,False,False
+"What's the longitude and latitude of Tartu, Estonia?",Estonia,58.38062,26.72509,588335,Tartu,EE,False,False
+"What's the longitude and latitude of Arao, Japan?",Japan,32.97888,130.44572,11274040,Arao,JP,False,False
+"What's the longitude and latitude of Tocopilla, Chile?",Chile,-22.09198,-70.19792,3869716,Tocopilla,CL,False,False
+"What's the longitude and latitude of Longmeadow, United States?",United States,42.0501,-72.58287,4942508,Longmeadow,US,False,False
+"What's the longitude and latitude of Port Alberni, Canada?",Canada,49.24133,-124.8028,6111632,Port Alberni,CA,False,False
+"What's the longitude and latitude of Ekazhevo, Russia?",Russia,43.21222,44.82306,563551,Ekazhevo,RU,False,False
+"What's the longitude and latitude of Ives Estates, United States?",United States,25.96231,-80.17671,4159896,Ives Estates,US,False,False
+"What's the longitude and latitude of Jajarm, Iran?",Iran,36.95012,56.38005,130524,Jajarm,IR,False,False
+"What's the longitude and latitude of Sirsilla, India?",India,18.38865,78.81048,1256039,Sirsilla,IN,False,False
+"What's the longitude and latitude of Nageswari, Bangladesh?",Bangladesh,25.96817,89.69153,1185160,Nageswari,BD,False,False
+"What's the longitude and latitude of La Cite-Limoilou, Canada?",Canada,46.82894,-71.22641,13589045,La Cite-Limoilou,CA,False,False
+"What's the longitude and latitude of Okubo-naka, Japan?",Japan,34.4045,135.34087,1854255,Okubo-naka,JP,False,False
+"What's the longitude and latitude of Martinez, United States?",United States,33.51736,-82.07567,4207981,Martinez,US,False,False
+"What's the longitude and latitude of Bodinayakkanur, India?",India,10.01171,77.34976,1275388,Bodinayakkanur,IN,False,False
+"What's the longitude and latitude of Nainwa, India?",India,25.77145,75.84978,1262115,Nainwa,IN,False,False
+"What's the longitude and latitude of Uromi, Nigeria?",Nigeria,6.7,6.33333,2319668,Uromi,NG,False,False
+"What's the longitude and latitude of Ahlone, Myanmar?",Myanmar,16.78897,96.12649,1329548,Ahlone,MM,False,False
+"What's the longitude and latitude of Khagrachhari, Bangladesh?",Bangladesh,23.10787,91.97007,1185252,Khagrachhari,BD,False,False
+"What's the longitude and latitude of Zitong, China?",China,30.1782,105.82991,1783700,Zitong,CN,False,False
+"What's the longitude and latitude of Hessisch Oldendorf, Germany?",Germany,52.17269,9.24913,2905290,Hessisch Oldendorf,DE,False,False
+"What's the longitude and latitude of Nao-Me-Toque, Brazil?",Brazil,-28.45917,-52.82083,3456397,Nao-Me-Toque,BR,False,False
+"What's the longitude and latitude of Nanya, China?",China,31.08434,108.08664,8400150,Nanya,CN,False,False
+"What's the longitude and latitude of Le Robert, Martinique?",Martinique,14.67751,-60.94228,3570412,Le Robert,MQ,False,False
+"What's the longitude and latitude of Waddinxveen, Netherlands?",Netherlands,52.045,4.65139,2745096,Waddinxveen,NL,False,False
+"What's the longitude and latitude of Bhinga, India?",India,27.70283,81.9343,1275921,Bhinga,IN,False,False
+"What's the longitude and latitude of Kudymkar, Russia?",Russia,59.01516,54.65319,539817,Kudymkar,RU,False,False
+"What's the longitude and latitude of Kotikawatta, Sri Lanka?",Sri Lanka,6.9269,79.9095,1239047,Kotikawatta,LK,False,False
+"What's the longitude and latitude of New York City, United States?",United States,40.71427,-74.00597,5128581,New York City,US,False,True
+"What's the longitude and latitude of Binmaley, Philippines?",Philippines,16.03232,120.26904,1724956,Binmaley,PH,False,False
+"What's the longitude and latitude of Pushchino, Russia?",Russia,54.83373,37.61138,504042,Pushchino,RU,False,False
+"What's the longitude and latitude of Pattukkottai, India?",India,10.42358,79.31949,1260040,Pattukkottai,IN,False,False
+"What's the longitude and latitude of Eglinton East, Canada?",Canada,43.73917,-79.24576,7871311,Eglinton East,CA,False,False
+"What's the longitude and latitude of Moscow, United States?",United States,46.73239,-117.00017,5601538,Moscow,US,False,False
+"What's the longitude and latitude of Shinjo, Japan?",Japan,38.75861,140.30083,2111065,Shinjo,JP,False,False
+"What's the longitude and latitude of Holladay, United States?",United States,40.66884,-111.82466,5776008,Holladay,US,False,False
+"What's the longitude and latitude of Marivan, Iran?",Iran,35.51829,46.18298,124778,Marivan,IR,False,False
+"What's the longitude and latitude of Halver, Germany?",Germany,51.18612,7.49817,2911384,Halver,DE,False,False
+"What's the longitude and latitude of Port Richmond, United States?",United States,40.63316,-74.13653,5132028,Port Richmond,US,False,False
+"What's the longitude and latitude of La Paz, Uruguay?",Uruguay,-34.76031,-56.2259,3442098,La Paz,UY,False,False
+"What's the longitude and latitude of Bais, Philippines?",Philippines,9.59111,123.12278,1728772,Bais,PH,False,False
+"What's the longitude and latitude of Novokhovrino, Russia?",Russia,55.86667,37.5,518740,Novokhovrino,RU,False,False
+"What's the longitude and latitude of Bin Xian, China?",China,45.74274,127.46053,2038283,Bin Xian,CN,False,False
+"What's the longitude and latitude of Hiddenhausen, Germany?",Germany,52.16667,8.61667,2904886,Hiddenhausen,DE,False,False
+"What's the longitude and latitude of Kaseda-shirakame, Japan?",Japan,31.41667,130.31667,1859964,Kaseda-shirakame,JP,False,False
+"What's the longitude and latitude of Kalale, Benin?",Benin,10.29275,3.38367,2393722,Kalale,BJ,False,False
+"What's the longitude and latitude of Kakata, Liberia?",Liberia,6.53104,-10.35368,2276086,Kakata,LR,False,False
+"What's the longitude and latitude of Urziceni, Romania?",Romania,44.71667,26.63333,664074,Urziceni,RO,False,False
+"What's the longitude and latitude of Altuf'yevskiy, Russia?",Russia,55.88333,37.58333,472072,Altuf'yevskiy,RU,False,False
+"What's the longitude and latitude of Coatepec, Mexico?",Mexico,19.45229,-96.96148,3530531,Coatepec,MX,False,False
+"What's the longitude and latitude of Gingoog, Philippines?",Philippines,8.82778,125.09972,1712875,Gingoog,PH,False,False
+"What's the longitude and latitude of Brymbo, United Kingdom?",United Kingdom,53.06667,-3.06667,2654450,Brymbo,GB,False,False
+"What's the longitude and latitude of Yaxing, China?",China,19.44778,109.26273,1783554,Yaxing,CN,False,False
+"What's the longitude and latitude of Lomas de Zamora, Argentina?",Argentina,-34.7574,-58.40279,3431271,Lomas de Zamora,AR,False,False
+"What's the longitude and latitude of Pawtucket, United States?",United States,41.87871,-71.38256,5223869,Pawtucket,US,False,False
+"What's the longitude and latitude of Linda-a-Velha, Portugal?",Portugal,38.71446,-9.2422,2267067,Linda-a-Velha,PT,False,False
+"What's the longitude and latitude of Nagasaki, Japan?",Japan,35.72983,139.68857,8573184,Nagasaki,JP,False,False
+"What's the longitude and latitude of Aileu, Timor-Leste?",Timor-Leste,-8.72806,125.56639,1651816,Aileu,TL,False,False
+"What's the longitude and latitude of Banlung, Cambodia?",Cambodia,13.73939,106.98727,1831732,Banlung,KH,False,False
+"What's the longitude and latitude of Dreieich, Germany?",Germany,50.01997,8.69611,2935220,Dreieich,DE,False,False
+"What's the longitude and latitude of Huizen, Netherlands?",Netherlands,52.29917,5.24167,2753468,Huizen,NL,False,False
+"What's the longitude and latitude of Royston, United Kingdom?",United Kingdom,52.04832,-0.02438,2639018,Royston,GB,False,False
+"What's the longitude and latitude of Burlington, United States?",United States,39.02756,-84.72411,4286281,Burlington,US,False,False
+"What's the longitude and latitude of Albertville, United States?",United States,34.26783,-86.20878,4829791,Albertville,US,False,False
+"What's the longitude and latitude of Grosseto, Italy?",Italy,42.76296,11.10941,3175786,Grosseto,IT,False,False
+"What's the longitude and latitude of Chawinda, Pakistan?",Pakistan,32.34434,74.70507,1181352,Chawinda,PK,False,False
+"What's the longitude and latitude of Mount Vernon, United States?",United States,40.9126,-73.83708,5127835,Mount Vernon,US,False,False
+"What's the longitude and latitude of Bairagnia, India?",India,26.74063,85.27323,1277748,Bairagnia,IN,False,False
+"What's the longitude and latitude of Issy-les-Moulineaux, France?",France,48.82104,2.27718,3012649,Issy-les-Moulineaux,FR,False,False
+"What's the longitude and latitude of Araci, Brazil?",Brazil,-11.33333,-38.96667,3471854,Araci,BR,False,False
+"What's the longitude and latitude of Carmen de Viboral, Colombia?",Colombia,6.08236,-75.33509,3687318,Carmen de Viboral,CO,False,False
+"What's the longitude and latitude of Masterton, New Zealand?",New Zealand,-40.95972,175.6575,2206890,Masterton,NZ,False,False
+"What's the longitude and latitude of Calvillo, Mexico?",Mexico,21.84591,-102.71881,4016086,Calvillo,MX,False,False
+"What's the longitude and latitude of Poplar Bluff, United States?",United States,36.757,-90.39289,4404233,Poplar Bluff,US,False,False
+"What's the longitude and latitude of Villasis, Philippines?",Philippines,15.90167,120.58833,1679845,Villasis,PH,False,False
+"What's the longitude and latitude of Jackson, United States?",United States,42.24587,-84.40135,4997384,Jackson,US,False,False
+"What's the longitude and latitude of Roseburg, United States?",United States,43.2165,-123.34174,5749352,Roseburg,US,False,False
+"What's the longitude and latitude of Bishop Auckland, United Kingdom?",United Kingdom,54.65554,-1.67706,2655583,Bishop Auckland,GB,False,False
+"What's the longitude and latitude of Segezha, Russia?",Russia,63.74549,34.31614,497927,Segezha,RU,False,False
+"What's the longitude and latitude of Namminikara, India?",India,10.43216,76.25418,11463524,Namminikara,IN,False,False
+"What's the longitude and latitude of Sik, Malaysia?",Malaysia,5.83333,100.75,6805124,Sik,MY,False,False
+"What's the longitude and latitude of Elk Grove, United States?",United States,38.4088,-121.37162,5346111,Elk Grove,US,False,False
+"What's the longitude and latitude of Sao Miguel do Iguacu, Brazil?",Brazil,-25.34806,-54.23778,3448453,Sao Miguel do Iguacu,BR,False,False
+"What's the longitude and latitude of Rosedale-Moore Park, Canada?",Canada,43.68282,-79.37967,12156862,Rosedale-Moore Park,CA,False,False
+"What's the longitude and latitude of Lincoln, United States?",United States,38.89156,-121.29301,5366375,Lincoln,US,False,False
+"What's the longitude and latitude of Eersel, Netherlands?",Netherlands,51.3575,5.31806,2756342,Eersel,NL,False,False
+"What's the longitude and latitude of Kizlyar, Russia?",Russia,43.84686,46.70977,547840,Kizlyar,RU,False,False
+"What's the longitude and latitude of Guben, Germany?",Germany,51.94993,14.7055,2913922,Guben,DE,False,False
+"What's the longitude and latitude of Baituo, China?",China,34.85111,106.00167,1817306,Baituo,CN,False,False
+"What's the longitude and latitude of Tayma', Saudi Arabia?",Saudi Arabia,27.62233,38.53882,101516,Tayma',SA,False,False
+"What's the longitude and latitude of Shizunai-furukawacho, Japan?",Japan,42.33389,142.36694,2128025,Shizunai-furukawacho,JP,False,False
+"What's the longitude and latitude of Tanuma, Japan?",Japan,36.36667,139.58333,1850630,Tanuma,JP,False,False
+"What's the longitude and latitude of Saatli, Azerbaijan?",Azerbaijan,39.93214,48.36892,147288,Saatli,AZ,False,False
+"What's the longitude and latitude of Phu Loc, Vietnam?",Vietnam,9.42838,105.74111,1566029,Phu Loc,VN,False,False
+"What's the longitude and latitude of New London, United States?",United States,41.35565,-72.09952,4839416,New London,US,False,False
+"What's the longitude and latitude of Norwood, United States?",United States,39.15561,-84.45966,4519995,Norwood,US,False,False
+"What's the longitude and latitude of Baghpat, India?",India,28.94485,77.21865,1277882,Baghpat,IN,False,False
+"What's the longitude and latitude of Zango, Angola?",Angola,-9.01212,13.38437,11592398,Zango,AO,False,False
+"What's the longitude and latitude of Medininagar, India?",India,24.03971,84.0658,1273626,Medininagar,IN,False,False
+"What's the longitude and latitude of Khlong San, Thailand?",Thailand,13.73008,100.50874,1609879,Khlong San,TH,False,False
+"What's the longitude and latitude of Maia, Portugal?",Portugal,41.23574,-8.6199,2738014,Maia,PT,False,False
+"What's the longitude and latitude of Moradabad, India?",India,28.83893,78.77684,1262801,Moradabad,IN,False,False
+"What's the longitude and latitude of Tepeji del Rio de Ocampo, Mexico?",Mexico,19.90546,-99.34229,3515887,Tepeji del Rio de Ocampo,MX,False,False
+"What's the longitude and latitude of Marshalltown, United States?",United States,42.04943,-92.90798,4866371,Marshalltown,US,False,False
+"What's the longitude and latitude of Magtymguly, Turkmenistan?",Turkmenistan,38.43637,56.28401,161980,Magtymguly,TM,False,False
+"What's the longitude and latitude of Maryborough, Australia?",Australia,-25.54073,152.70493,2158562,Maryborough,AU,False,False
+"What's the longitude and latitude of Arenella, Italy?",Italy,40.85734,14.2228,12070064,Arenella,IT,False,False
+"What's the longitude and latitude of Shitanjing, China?",China,39.23417,106.34389,1794971,Shitanjing,CN,False,False
+"What's the longitude and latitude of Trinity-Bellwoods, Canada?",Canada,43.64791,-79.40849,7870920,Trinity-Bellwoods,CA,False,False
+"What's the longitude and latitude of Irituia, Brazil?",Brazil,-1.77111,-47.43806,3398014,Irituia,BR,False,False
+"What's the longitude and latitude of Santa Rosa de Copan, Honduras?",Honduras,14.77388,-88.7756,3601494,Santa Rosa de Copan,HN,False,False
+"What's the longitude and latitude of Uvinza, Tanzania?",Tanzania,-5.10361,30.39111,149050,Uvinza,TZ,False,False
+"What's the longitude and latitude of Kungsholmen, Sweden?",Sweden,59.33183,18.04118,2698691,Kungsholmen,SE,False,False
+"What's the longitude and latitude of Kwidzyn, Poland?",Poland,53.72495,18.93114,3094086,Kwidzyn,PL,False,False
+"What's the longitude and latitude of Pingshan, China?",China,30.09655,107.42439,8405701,Pingshan,CN,False,False
+"What's the longitude and latitude of Schiedam, Netherlands?",Netherlands,51.91917,4.38889,2747596,Schiedam,NL,False,False
+"What's the longitude and latitude of Puliyankudi, India?",India,9.17489,77.39799,1259263,Puliyankudi,IN,False,False
+"What's the longitude and latitude of Victorville, United States?",United States,34.53611,-117.29116,5406222,Victorville,US,False,False
+"What's the longitude and latitude of Kriva Palanka, North Macedonia?",North Macedonia,42.20197,22.33385,789045,Kriva Palanka,MK,False,False
+"What's the longitude and latitude of Long Island City, United States?",United States,40.74482,-73.94875,5125125,Long Island City,US,False,False
+"What's the longitude and latitude of Armyansk, Ukraine?",Ukraine,46.10919,33.69206,713203,Armyansk,UA,False,False
+"What's the longitude and latitude of Mehkar, India?",India,20.1505,76.56841,1263195,Mehkar,IN,False,False
+"What's the longitude and latitude of Vechelde, Germany?",Germany,52.26038,10.36491,2817813,Vechelde,DE,False,False
+"What's the longitude and latitude of Bagan Serai, Malaysia?",Malaysia,5.0108,100.54101,1734409,Bagan Serai,MY,False,False
+"What's the longitude and latitude of Lisburn, United Kingdom?",United Kingdom,54.52337,-6.03527,2644411,Lisburn,GB,False,False
+"What's the longitude and latitude of Osny, France?",France,49.0701,2.06277,2989130,Osny,FR,False,False
+"What's the longitude and latitude of Tequixquiac, Mexico?",Mexico,19.90944,-99.14472,3515794,Tequixquiac,MX,False,False
+"What's the longitude and latitude of Dhekiajuli, India?",India,26.70367,92.47808,1272790,Dhekiajuli,IN,False,False
+"What's the longitude and latitude of Baynjiwayn, Iraq?",Iraq,35.62054,45.94908,98012,Baynjiwayn,IQ,False,False
+"What's the longitude and latitude of Tiaoshi, China?",China,29.27722,106.6425,1792818,Tiaoshi,CN,False,False
+"What's the longitude and latitude of Caapora, Brazil?",Brazil,-7.51556,-34.90833,3404656,Caapora,BR,False,False
+"What's the longitude and latitude of Tangjiazhuang, China?",China,39.74326,118.45099,1793385,Tangjiazhuang,CN,False,False
+"What's the longitude and latitude of Korsun-Shevchenkivskyi, Ukraine?",Ukraine,49.41822,31.25174,704858,Korsun-Shevchenkivskyi,UA,False,False
+"What's the longitude and latitude of Zaragoza, Mexico?",Mexico,19.77097,-97.55506,3514051,Zaragoza,MX,False,False
+"What's the longitude and latitude of Hura, Israel?",Israel,31.30084,34.93606,8374209,Hura,IL,False,False
+"What's the longitude and latitude of Tan Uyen, Vietnam?",Vietnam,11.08416,106.78834,7910088,Tan Uyen,VN,False,False
+"What's the longitude and latitude of Zhaozhou, China?",China,45.70595,125.26606,2033147,Zhaozhou,CN,False,False
+"What's the longitude and latitude of West Covina, United States?",United States,34.06862,-117.93895,5407933,West Covina,US,False,False
+"What's the longitude and latitude of Conflans-Sainte-Honorine, France?",France,49.00158,2.09694,3023924,Conflans-Sainte-Honorine,FR,False,False
+"What's the longitude and latitude of Micolene, Mozambique?",Mozambique,-16.73333,39.23333,1037792,Micolene,MZ,False,False
+"What's the longitude and latitude of Tuerkmengala, Turkmenistan?",Turkmenistan,37.42469,62.33821,1218195,Tuerkmengala,TM,False,False
+"What's the longitude and latitude of Brusque, Brazil?",Brazil,-27.09795,-48.91281,3468879,Brusque,BR,False,False
+"What's the longitude and latitude of Lazaro Cardenas, Mexico?",Mexico,30.52663,-115.93137,3979174,Lazaro Cardenas,MX,False,False
+"What's the longitude and latitude of Dubendorf, Switzerland?",Switzerland,47.39724,8.61872,2660971,Dubendorf,CH,False,False
+"What's the longitude and latitude of Gatumba, Burundi?",Burundi,-3.33333,29.25,425309,Gatumba,BI,False,False
+"What's the longitude and latitude of Kilburn, United Kingdom?",United Kingdom,51.55295,-0.19157,6690572,Kilburn,GB,False,False
+"What's the longitude and latitude of Eltham, Australia?",Australia,-37.73333,145.15,2167445,Eltham,AU,False,False
+"What's the longitude and latitude of Sanhui, China?",China,30.08167,106.5912,1796797,Sanhui,CN,False,False
+"What's the longitude and latitude of Linh Nam, Vietnam?",Vietnam,20.97966,105.89044,13680020,Linh Nam,VN,False,False
+"What's the longitude and latitude of Mamatid, Philippines?",Philippines,14.2349,121.15902,1702372,Mamatid,PH,False,False
+"What's the longitude and latitude of Chek Chue, Hong Kong?",Hong Kong,22.21849,114.21241,1819980,Chek Chue,HK,False,False
+"What's the longitude and latitude of Sosnovaya Polyana, Russia?",Russia,59.83528,30.14667,490377,Sosnovaya Polyana,RU,False,False
+"What's the longitude and latitude of Kensington-Chinatown, Canada?",Canada,43.65355,-79.39724,12156886,Kensington-Chinatown,CA,False,False
+"What's the longitude and latitude of Steinfurt, Germany?",Germany,52.15045,7.33664,2828105,Steinfurt,DE,False,False
+"What's the longitude and latitude of Morioka, Japan?",Japan,39.7,141.15,2111834,Morioka,JP,False,False
+"What's the longitude and latitude of Oyem, Gabon?",Gabon,1.5995,11.57933,2396646,Oyem,GA,False,False
+"What's the longitude and latitude of Cherkasy, Ukraine?",Ukraine,49.44452,32.05738,710791,Cherkasy,UA,False,False
+"What's the longitude and latitude of Glenview, United States?",United States,42.06975,-87.78784,4893886,Glenview,US,False,False
+"What's the longitude and latitude of Lealman, United States?",United States,27.82114,-82.67927,4161705,Lealman,US,False,False
+"What's the longitude and latitude of Rishon LeTsiyyon, Israel?",Israel,31.97102,34.78939,293703,Rishon LeTsiyyon,IL,False,False
+"What's the longitude and latitude of Suwa, Japan?",Japan,36.03799,138.11308,1851368,Suwa,JP,False,False
+"What's the longitude and latitude of Dayr Hafir, Syria?",Syria,36.15694,37.70778,170785,Dayr Hafir,SY,False,False
+"What's the longitude and latitude of Dhamtari, India?",India,20.70718,81.54874,1272997,Dhamtari,IN,False,False
+"What's the longitude and latitude of Chiquinquira, Colombia?",Colombia,5.61637,-73.81748,3686513,Chiquinquira,CO,False,False
+"What's the longitude and latitude of Zuerich (Kreis 11) / Affoltern, Switzerland?",Switzerland,47.41814,8.5122,6295484,Zuerich (Kreis 11) / Affoltern,CH,False,False
+"What's the longitude and latitude of Notre-Dame-de-Grace, Canada?",Canada,45.47675,-73.61432,6091314,Notre-Dame-de-Grace,CA,False,False
+"What's the longitude and latitude of Sovetsk, Russia?",Russia,55.08392,21.87851,490068,Sovetsk,RU,False,False
+"What's the longitude and latitude of Par Naogaon, Bangladesh?",Bangladesh,24.80418,88.94875,1192366,Par Naogaon,BD,False,False
+"What's the longitude and latitude of Decines-Charpieu, France?",France,45.76873,4.95883,3021662,Decines-Charpieu,FR,False,False
+"What's the longitude and latitude of Dasheng, China?",China,36.32,118.85541,12324247,Dasheng,CN,False,False
+"What's the longitude and latitude of Sao Sebastiao, Brazil?",Brazil,-9.93361,-36.55417,3388112,Sao Sebastiao,BR,False,False
+"What's the longitude and latitude of Mirfield, United Kingdom?",United Kingdom,53.67343,-1.69636,2642423,Mirfield,GB,False,False
+"What's the longitude and latitude of West Bloomfield Township, United States?",United States,42.56891,-83.38356,7259621,West Bloomfield Township,US,False,False
+"What's the longitude and latitude of Brunssum, Netherlands?",Netherlands,50.94667,5.97083,2758174,Brunssum,NL,False,False
+"What's the longitude and latitude of 'Aqrah, Iraq?",Iraq,36.76038,43.89428,98822,'Aqrah,IQ,False,False
+"What's the longitude and latitude of Bomfim, Portugal?",Portugal,41.15417,-8.58688,2742136,Bomfim,PT,False,False
+"What's the longitude and latitude of Kota Tinggi, Malaysia?",Malaysia,1.7381,103.8999,1732738,Kota Tinggi,MY,False,False
+"What's the longitude and latitude of Rodeo del Medio, Argentina?",Argentina,-32.99487,-68.68597,3838684,Rodeo del Medio,AR,False,False
+"What's the longitude and latitude of Curvelo, Brazil?",Brazil,-18.75639,-44.43083,3464891,Curvelo,BR,False,False
+"What's the longitude and latitude of Cermik, Turkey?",Turkey,38.13538,39.445,318766,Cermik,TR,False,False
+"What's the longitude and latitude of Arad, Romania?",Romania,46.18333,21.31667,686254,Arad,RO,False,False
+"What's the longitude and latitude of Khowa, South Africa?",South Africa,-31.33306,27.85,1005781,Khowa,ZA,False,False
+"What's the longitude and latitude of Palmeira, Brazil?",Brazil,-25.42944,-50.00639,3455425,Palmeira,BR,False,False
+"What's the longitude and latitude of Garanhuns, Brazil?",Brazil,-8.88202,-36.50216,3399058,Garanhuns,BR,False,False
+"What's the longitude and latitude of Labrador, Australia?",Australia,-27.94402,153.39815,8012683,Labrador,AU,False,False
+"What's the longitude and latitude of Kucove, Albania?",Albania,40.80028,19.91667,3185060,Kucove,AL,False,False
+"What's the longitude and latitude of Borgo San Paolo, Italy?",Italy,45.06024,7.64455,3167895,Borgo San Paolo,IT,False,False
+"What's the longitude and latitude of Leidsche Rijn, Netherlands?",Netherlands,52.09497,5.04613,13645515,Leidsche Rijn,NL,False,False
+"What's the longitude and latitude of Xindian, China?",China,36.7975,118.29444,1789118,Xindian,CN,False,False
+"What's the longitude and latitude of Warah, Pakistan?",Pakistan,27.44805,67.79654,1162589,Warah,PK,False,False
+"What's the longitude and latitude of Emiliano Zapata, Mexico?",Mexico,19.34361,-98.97472,8858099,Emiliano Zapata,MX,False,False
+"What's the longitude and latitude of Thornton, United States?",United States,39.86804,-104.97192,5441492,Thornton,US,False,False
+"What's the longitude and latitude of Moskovskiy, Russia?",Russia,55.5991,37.3552,857690,Moskovskiy,RU,False,False
+"What's the longitude and latitude of Porto Grande, Brazil?",Brazil,0.71333,-51.41333,3391368,Porto Grande,BR,False,False
+"What's the longitude and latitude of Rameswaram, India?",India,14.74006,78.54259,13156768,Rameswaram,IN,False,False
+"What's the longitude and latitude of Montecarlo, Argentina?",Argentina,-26.56849,-54.7579,3430601,Montecarlo,AR,False,False
+"What's the longitude and latitude of Saltash, United Kingdom?",United Kingdom,50.40959,-4.22514,2638651,Saltash,GB,False,False
+"What's the longitude and latitude of UErguep, Turkey?",Turkey,38.6296,34.91199,298326,UErguep,TR,False,False
+"What's the longitude and latitude of Albany, United States?",United States,31.57851,-84.15574,4179320,Albany,US,False,False
+"What's the longitude and latitude of Qiryat Mal'akhi, Israel?",Israel,31.72888,34.74632,293835,Qiryat Mal'akhi,IL,False,False
+"What's the longitude and latitude of Zarate, Argentina?",Argentina,-34.09584,-59.02423,3427213,Zarate,AR,False,False
+"What's the longitude and latitude of Samal, Philippines?",Philippines,14.76778,120.54306,1690664,Samal,PH,False,False
+"What's the longitude and latitude of Rejon placu Grunwaldzkiego, Poland?",Poland,51.11669,17.06126,12047623,Rejon placu Grunwaldzkiego,PL,False,False
+"What's the longitude and latitude of Opelousas, United States?",United States,30.53353,-92.08151,4336153,Opelousas,US,False,False
+"What's the longitude and latitude of Wealdstone, United Kingdom?",United Kingdom,51.59983,-0.33711,12048038,Wealdstone,GB,False,False
+"What's the longitude and latitude of Boon Lay, Singapore?",Singapore,1.311,103.694,1880761,Boon Lay,SG,False,False
+"What's the longitude and latitude of Danderyd, Sweden?",Sweden,59.40398,18.02376,2718000,Danderyd,SE,False,False
+"What's the longitude and latitude of Jerez de Garcia Salinas, Mexico?",Mexico,22.6497,-102.98979,4004024,Jerez de Garcia Salinas,MX,False,False
+"What's the longitude and latitude of Musanze, Rwanda?",Rwanda,-1.49984,29.63497,201521,Musanze,RW,False,False
+"What's the longitude and latitude of Bhaun, Pakistan?",Pakistan,32.86048,72.75677,1182688,Bhaun,PK,False,False
+"What's the longitude and latitude of Paracatu, Brazil?",Brazil,-17.22222,-46.87472,3455168,Paracatu,BR,False,False
+"What's the longitude and latitude of South Riding, United States?",United States,38.92094,-77.50388,4786667,South Riding,US,False,False
+"What's the longitude and latitude of Sitges, Spain?",Spain,41.23506,1.81193,3108877,Sitges,ES,False,False
+"What's the longitude and latitude of Same, Tanzania?",Tanzania,-4.06667,37.73333,150276,Same,TZ,False,False
+"What's the longitude and latitude of Fergus, Canada?",Canada,43.70604,-80.37761,7871320,Fergus,CA,False,False
+"What's the longitude and latitude of Warwick, United States?",United States,41.7001,-71.41617,5225507,Warwick,US,False,False
+"What's the longitude and latitude of Mariahu, India?",India,25.60404,82.60379,1263523,Mariahu,IN,False,False
+"What's the longitude and latitude of Nou Barris, Spain?",Spain,41.44163,2.17727,6252065,Nou Barris,ES,False,False
+"What's the longitude and latitude of Jhumri Telaiya, India?",India,24.4349,85.52951,1268775,Jhumri Telaiya,IN,False,False
+"What's the longitude and latitude of Mirabel, Canada?",Canada,45.65008,-74.08251,6075061,Mirabel,CA,False,False
+"What's the longitude and latitude of Scordia, Italy?",Italy,37.29548,14.84058,2523180,Scordia,IT,False,False
+"What's the longitude and latitude of Cacuso, Angola?",Angola,-9.42102,15.74668,2243127,Cacuso,AO,False,False
+"What's the longitude and latitude of Wuxi, China?",China,26.5844,111.859,1797417,Wuxi,CN,False,False
+"What's the longitude and latitude of Tissemsilt, Algeria?",Algeria,35.60722,1.81081,2475860,Tissemsilt,DZ,False,False
+"What's the longitude and latitude of Coslada, Spain?",Spain,40.42378,-3.56129,3124408,Coslada,ES,False,False
+"What's the longitude and latitude of Iiyama, Japan?",Japan,36.85,138.36667,1861838,Iiyama,JP,False,False
+"What's the longitude and latitude of Erbil, Iraq?",Iraq,36.19117,44.00943,95446,Erbil,IQ,False,False
+"What's the longitude and latitude of Manage, Belgium?",Belgium,50.50312,4.23589,2791814,Manage,BE,False,False
+"What's the longitude and latitude of Shcherbinka, Russia?",Russia,55.498,37.5579,495260,Shcherbinka,RU,False,False
+"What's the longitude and latitude of Nazarabad, Iran?",Iran,35.95411,50.60607,122438,Nazarabad,IR,False,False
+"What's the longitude and latitude of Puerto Boyaca, Colombia?",Colombia,5.976,-74.58516,3671531,Puerto Boyaca,CO,False,False
+"What's the longitude and latitude of Saveh, Iran?",Iran,35.0213,50.3566,116667,Saveh,IR,False,False
+"What's the longitude and latitude of West and East Lealman, United States?",United States,27.81993,-82.68944,4177960,West and East Lealman,US,False,False
+"What's the longitude and latitude of Carlisle, United Kingdom?",United Kingdom,54.8951,-2.9382,2653775,Carlisle,GB,False,False
+"What's the longitude and latitude of Tauranga, New Zealand?",New Zealand,-37.68611,176.16667,2208032,Tauranga,NZ,False,False
+"What's the longitude and latitude of Irakleion, Greece?",Greece,35.32787,25.14341,261745,Irakleion,GR,False,False
+"What's the longitude and latitude of Randolph, United States?",United States,40.84829,-74.58148,8469295,Randolph,US,False,False
+"What's the longitude and latitude of Gevelsberg, Germany?",Germany,51.31971,7.3392,2920757,Gevelsberg,DE,False,False
+"What's the longitude and latitude of Al Abyar, Libya?",Libya,32.19,20.59653,89087,Al Abyar,LY,False,False
+"What's the longitude and latitude of Fernley, United States?",United States,39.60797,-119.25183,5504003,Fernley,US,False,False
+"What's the longitude and latitude of Naberezhnyye Chelny, Russia?",Russia,55.73718,52.41961,523750,Naberezhnyye Chelny,RU,False,False
+"What's the longitude and latitude of Cheraga, Algeria?",Algeria,36.76775,2.95924,2501465,Cheraga,DZ,False,False
+"What's the longitude and latitude of Horley, United Kingdom?",United Kingdom,51.17423,-0.15919,2646606,Horley,GB,False,False
+"What's the longitude and latitude of Rio do Antonio, Brazil?",Brazil,-14.41139,-42.07556,3451185,Rio do Antonio,BR,False,False
+"What's the longitude and latitude of Orsk, Russia?",Russia,51.23206,58.48802,514734,Orsk,RU,False,False
+"What's the longitude and latitude of New Springville, United States?",United States,40.59344,-74.1632,5128566,New Springville,US,False,False
+"What's the longitude and latitude of Izamal, Mexico?",Mexico,20.93315,-89.01887,3526662,Izamal,MX,False,False
+"What's the longitude and latitude of Mandya, India?",India,12.5223,76.89746,1263814,Mandya,IN,False,False
+"What's the longitude and latitude of Mercer Island, United States?",United States,47.57065,-122.22207,5803139,Mercer Island,US,False,False
+"What's the longitude and latitude of Atronie, Ghana?",Ghana,7.15341,-2.40496,2303789,Atronie,GH,False,False
+"What's the longitude and latitude of Cedar Hill, United States?",United States,32.58847,-96.95612,4679803,Cedar Hill,US,False,False
+"What's the longitude and latitude of Afipskiy, Russia?",Russia,44.90005,38.84265,584126,Afipskiy,RU,False,False
+"What's the longitude and latitude of Tonbridge, United Kingdom?",United Kingdom,51.19532,0.27363,2635703,Tonbridge,GB,False,False
+"What's the longitude and latitude of Ust'-Ilimsk, Russia?",Russia,58.00056,102.66194,2013952,Ust'-Ilimsk,RU,False,False
+"What's the longitude and latitude of Mutukula, Tanzania?",Tanzania,-1.00111,31.415,9256290,Mutukula,TZ,False,False
+"What's the longitude and latitude of Patzcuaro, Mexico?",Mexico,19.5132,-101.60995,3993179,Patzcuaro,MX,False,False
+"What's the longitude and latitude of Xiyu, China?",China,34.05163,105.3036,7373724,Xiyu,CN,False,False
+"What's the longitude and latitude of Maran, Malaysia?",Malaysia,3.586,102.773,1732637,Maran,MY,False,False
+"What's the longitude and latitude of Rossosh', Russia?",Russia,50.19645,39.56631,501231,Rossosh',RU,False,False
+"What's the longitude and latitude of Chautapal, India?",India,17.25799,78.89776,11039180,Chautapal,IN,False,False
+"What's the longitude and latitude of Flemingdon Park, Canada?",Canada,43.71806,-79.33222,5954579,Flemingdon Park,CA,False,False
+"What's the longitude and latitude of Fujiidera, Japan?",Japan,34.5676,135.5974,6825495,Fujiidera,JP,False,False
+"What's the longitude and latitude of Chake Chake, Tanzania?",Tanzania,-5.24586,39.76659,160677,Chake Chake,TZ,False,False
+"What's the longitude and latitude of Malabon, Philippines?",Philippines,14.67333,120.93972,1703320,Malabon,PH,False,False
+"What's the longitude and latitude of Piedade, Portugal?",Portugal,38.67005,-9.15852,2264736,Piedade,PT,False,False
+"What's the longitude and latitude of Yan Nawa, Thailand?",Thailand,13.69634,100.54212,1604792,Yan Nawa,TH,False,False
+"What's the longitude and latitude of Fangchenggang, China?",China,21.76945,108.35661,12269572,Fangchenggang,CN,False,False
+"What's the longitude and latitude of Wang Noi, Thailand?",Thailand,14.22689,100.7155,1605118,Wang Noi,TH,False,False
+"What's the longitude and latitude of Sanmiao, China?",China,30.23763,106.12704,1942265,Sanmiao,CN,False,False
+"What's the longitude and latitude of Fleetwood, Canada?",Canada,49.16667,-122.8,5954556,Fleetwood,CA,False,False
+"What's the longitude and latitude of Ulhasnagar, India?",India,19.21667,73.15,1253894,Ulhasnagar,IN,False,False
+"What's the longitude and latitude of Kashima-shi, Japan?",Japan,35.96536,140.64474,1860748,Kashima-shi,JP,False,False
+"What's the longitude and latitude of Koovappady, India?",India,10.15525,76.48544,11185666,Koovappady,IN,False,False
+"What's the longitude and latitude of Pallikaranai, India?",India,12.9377,80.2153,9972729,Pallikaranai,IN,False,False
+"What's the longitude and latitude of Ad-Dindar, Sudan?",Sudan,13.334,34.09268,13132448,Ad-Dindar,SD,False,False
+"What's the longitude and latitude of Isla Vista, United States?",United States,34.41333,-119.86097,5359864,Isla Vista,US,False,False
+"What's the longitude and latitude of Hashtgerd, Iran?",Iran,35.962,50.6799,131691,Hashtgerd,IR,False,False
+"What's the longitude and latitude of Asnieres-sur-Seine, France?",France,48.91667,2.28333,3036572,Asnieres-sur-Seine,FR,False,False
+"What's the longitude and latitude of Kallamchavadi, India?",India,12.95306,80.13083,1465881,Kallamchavadi,IN,False,False
+"What's the longitude and latitude of Gulshan, Bangladesh?",Bangladesh,23.78971,90.41043,11876505,Gulshan,BD,False,False
+"What's the longitude and latitude of Chajari, Argentina?",Argentina,-30.75482,-57.98196,3435486,Chajari,AR,False,False
+"What's the longitude and latitude of Lalian, Pakistan?",Pakistan,31.82462,72.80116,1172295,Lalian,PK,False,False
+"What's the longitude and latitude of Saint-Raphael, France?",France,43.42332,6.7735,2977246,Saint-Raphael,FR,False,False
+"What's the longitude and latitude of Macarani, Brazil?",Brazil,-15.56833,-40.42306,3458249,Macarani,BR,False,False
+"What's the longitude and latitude of Tewkesbury, United Kingdom?",United Kingdom,51.99244,-2.1601,2636071,Tewkesbury,GB,False,False
+"What's the longitude and latitude of Rawmarsh, United Kingdom?",United Kingdom,53.46062,-1.34437,2639588,Rawmarsh,GB,False,False
+"What's the longitude and latitude of Vaihingen an der Enz, Germany?",Germany,48.93563,8.96045,2817927,Vaihingen an der Enz,DE,False,False
+"What's the longitude and latitude of Guacari, Colombia?",Colombia,3.76388,-76.33201,3681797,Guacari,CO,False,False
+"What's the longitude and latitude of Stanley, Falkland Islands?",Falkland Islands,-51.69382,-57.85701,3426691,Stanley,FK,False,False
+"What's the longitude and latitude of Nova Hartz, Brazil?",Brazil,-29.58425,-50.90278,3453956,Nova Hartz,BR,False,False
+"What's the longitude and latitude of Bayanhongor, Mongolia?",Mongolia,46.19444,100.71806,2032533,Bayanhongor,MN,False,False
+"What's the longitude and latitude of Victoria, Hong Kong?",Hong Kong,22.2875,114.14417,1931681,Victoria,HK,False,False
+"What's the longitude and latitude of Santa Clara del Mar, Argentina?",Argentina,-37.83438,-57.50749,3428373,Santa Clara del Mar,AR,False,False
+"What's the longitude and latitude of Go Vap, Vietnam?",Vietnam,10.81667,106.68333,1581461,Go Vap,VN,False,False
+"What's the longitude and latitude of Lalpettai, India?",India,11.30088,79.55612,11679084,Lalpettai,IN,False,False
+"What's the longitude and latitude of Shek Kip Mei, Hong Kong?",Hong Kong,22.33146,114.16799,1818905,Shek Kip Mei,HK,False,False
+"What's the longitude and latitude of Paraiba do Sul, Brazil?",Brazil,-22.15847,-43.29321,3455141,Paraiba do Sul,BR,False,False
+"What's the longitude and latitude of Kimitsu, Japan?",Japan,35.35043,139.87029,1907307,Kimitsu,JP,False,False
+"What's the longitude and latitude of Vilshofen, Germany?",Germany,48.62695,13.19222,2817202,Vilshofen,DE,False,False
+"What's the longitude and latitude of Ecatepec de Morelos, Mexico?",Mexico,19.60492,-99.06064,3529612,Ecatepec de Morelos,MX,False,False
+"What's the longitude and latitude of Ayancheri, India?",India,11.62609,75.67427,10924994,Ayancheri,IN,False,False
+"What's the longitude and latitude of Alcazar de San Juan, Spain?",Spain,39.39011,-3.20827,2522131,Alcazar de San Juan,ES,False,False
+"What's the longitude and latitude of Mundgod, India?",India,14.97144,75.03658,1262510,Mundgod,IN,False,False
+"What's the longitude and latitude of Ostrow Wielkopolski, Poland?",Poland,51.65501,17.80686,3089684,Ostrow Wielkopolski,PL,False,False
+"What's the longitude and latitude of Musan-up, North Korea?",North Korea,42.22609,129.20776,2042738,Musan-up,KP,False,False
+"What's the longitude and latitude of Jalalpur Jattan, Pakistan?",Pakistan,32.64118,74.20561,1176368,Jalalpur Jattan,PK,False,False
+"What's the longitude and latitude of Palakkodu, India?",India,12.30696,78.07022,1260793,Palakkodu,IN,False,False
+"What's the longitude and latitude of San Chaung, Myanmar?",Myanmar,17.0953,96.0992,1480266,San Chaung,MM,False,False
+"What's the longitude and latitude of Casal Bertone, Italy?",Italy,41.89821,12.53413,12188859,Casal Bertone,IT,False,False
+"What's the longitude and latitude of Xapuri, Brazil?",Brazil,-10.65167,-68.50444,3924674,Xapuri,BR,False,False
+"What's the longitude and latitude of Jaisalmer, India?",India,26.91763,70.90387,1269507,Jaisalmer,IN,False,False
+"What's the longitude and latitude of Kira, Uganda?",Uganda,0.4,32.63333,231165,Kira,UG,False,False
+"What's the longitude and latitude of Charikar, Afghanistan?",Afghanistan,35.01361,69.17139,1145352,Charikar,AF,False,False
+"What's the longitude and latitude of Westminster, United States?",United States,39.57538,-76.99581,4373238,Westminster,US,False,False
+"What's the longitude and latitude of Deception Bay, Australia?",Australia,-27.19354,153.02631,2169220,Deception Bay,AU,False,False
+"What's the longitude and latitude of Zarzal, Colombia?",Colombia,4.3958,-76.07113,3665559,Zarzal,CO,False,False
+"What's the longitude and latitude of Chikuma, Japan?",Japan,36.52715,138.08943,6822112,Chikuma,JP,False,False
+"What's the longitude and latitude of Villingen-Schwenningen, Germany?",Germany,48.06226,8.49358,2817220,Villingen-Schwenningen,DE,False,False
+"What's the longitude and latitude of Boca Chica, Dominican Republic?",Dominican Republic,18.45,-69.6,3511336,Boca Chica,DO,False,False
+"What's the longitude and latitude of Amarpatan, India?",India,24.31371,80.97703,1278899,Amarpatan,IN,False,False
+"What's the longitude and latitude of Nyangao, Tanzania?",Tanzania,-10.33333,39.28333,877471,Nyangao,TZ,False,False
+"What's the longitude and latitude of Kisii, Kenya?",Kenya,-0.68174,34.76666,191299,Kisii,KE,False,False
+"What's the longitude and latitude of Ibia, Brazil?",Brazil,-19.47833,-46.53889,3461620,Ibia,BR,False,False
+"What's the longitude and latitude of Leiderdorp, Netherlands?",Netherlands,52.15833,4.52917,2751771,Leiderdorp,NL,False,False
+"What's the longitude and latitude of Shrirampur, India?",India,19.62201,74.65699,11184435,Shrirampur,IN,False,False
+"What's the longitude and latitude of Bangkok, Thailand?",Thailand,13.75398,100.50144,1609350,Bangkok,TH,False,False
+"What's the longitude and latitude of Governador Valadares, Brazil?",Brazil,-18.85111,-41.94944,3462315,Governador Valadares,BR,False,False
+"What's the longitude and latitude of Nilakottai, India?",India,10.165,77.85024,1261401,Nilakottai,IN,False,False
+"What's the longitude and latitude of Cortazar, Mexico?",Mexico,20.48301,-100.96352,4012721,Cortazar,MX,False,False
+"What's the longitude and latitude of Saint John's, Antigua and Barbuda?",Antigua and Barbuda,17.12096,-61.84329,3576022,Saint John's,AG,False,False
+"What's the longitude and latitude of Circoiscrizione VI, Italy?",Italy,45.1022,7.70029,13607970,Circoiscrizione VI,IT,False,False
+"What's the longitude and latitude of Pehonko, Benin?",Benin,10.22746,2.00192,2392164,Pehonko,BJ,False,False
+"What's the longitude and latitude of Pimlico, United Kingdom?",United Kingdom,51.48897,-0.13699,6545249,Pimlico,GB,False,False
+"What's the longitude and latitude of Pinto, Spain?",Spain,40.24147,-3.69999,3113415,Pinto,ES,False,False
+"What's the longitude and latitude of East Patchogue, United States?",United States,40.76704,-72.99622,5116004,East Patchogue,US,False,False
+"What's the longitude and latitude of Nishinoomote, Japan?",Japan,30.73333,131.0,1855203,Nishinoomote,JP,False,False
+"What's the longitude and latitude of Umirim, Brazil?",Brazil,-3.67722,-39.35028,3385758,Umirim,BR,False,False
+"What's the longitude and latitude of Gaur, Nepal?",Nepal,26.76371,85.27659,1283401,Gaur,NP,False,False
+"What's the longitude and latitude of Kikuyu, Kenya?",Kenya,-1.24627,36.66291,192126,Kikuyu,KE,False,False
+"What's the longitude and latitude of North Tonawanda, United States?",United States,43.03867,-78.8642,5129245,North Tonawanda,US,False,False
+"What's the longitude and latitude of Washington, United States?",United States,40.70365,-89.40731,4915545,Washington,US,False,True
+"What's the longitude and latitude of Snellville, United States?",United States,33.85733,-84.01991,4223413,Snellville,US,False,False
+"What's the longitude and latitude of Lawar Khas, India?",India,29.11091,77.77767,1264989,Lawar Khas,IN,False,False
+"What's the longitude and latitude of Ash Shafa, Saudi Arabia?",Saudi Arabia,21.07268,40.31842,410096,Ash Shafa,SA,False,False
+"What's the longitude and latitude of Kitwe, Zambia?",Zambia,-12.80243,28.21323,911148,Kitwe,ZM,False,False
+"What's the longitude and latitude of Kuala Kangsar, Malaysia?",Malaysia,4.76667,100.93333,1734599,Kuala Kangsar,MY,False,False
+"What's the longitude and latitude of Limbang, Malaysia?",Malaysia,4.75477,115.01011,1737714,Limbang,MY,False,False
+"What's the longitude and latitude of Yuncheng, China?",China,35.02306,110.99278,1785738,Yuncheng,CN,False,False
+"What's the longitude and latitude of Kaminoma, Japan?",Japan,34.80802,136.86441,11777085,Kaminoma,JP,False,False
+"What's the longitude and latitude of Pauini, Brazil?",Brazil,-7.71361,-66.97639,3662927,Pauini,BR,False,False
+"What's the longitude and latitude of Minnetonka Mills, United States?",United States,44.94107,-93.4419,5037790,Minnetonka Mills,US,False,False
+"What's the longitude and latitude of University City, United States?",United States,39.95071,-75.19476,4561871,University City,US,False,False
+"What's the longitude and latitude of Jiutai, China?",China,44.15127,125.82975,2036401,Jiutai,CN,False,False
+"What's the longitude and latitude of Bad Oeynhausen, Germany?",Germany,52.20699,8.80365,2953386,Bad Oeynhausen,DE,False,False
+"What's the longitude and latitude of Samjiyon-up, North Korea?",North Korea,41.80356,128.31886,2041442,Samjiyon-up,KP,False,False
+"What's the longitude and latitude of Nidda, Germany?",Germany,50.4133,9.00638,2863716,Nidda,DE,False,False
+"What's the longitude and latitude of Loma de Gato, Philippines?",Philippines,14.78869,120.99889,1705771,Loma de Gato,PH,False,False
+"What's the longitude and latitude of Baocheng, China?",China,18.64028,109.69944,1816904,Baocheng,CN,False,False
+"What's the longitude and latitude of Maisons-Laffitte, France?",France,48.95264,2.14521,2996564,Maisons-Laffitte,FR,False,False
+"What's the longitude and latitude of Wantagh, United States?",United States,40.68371,-73.51013,5143198,Wantagh,US,False,False
+"What's the longitude and latitude of West Lynchburg, United States?",United States,37.4032,-79.17808,4792867,West Lynchburg,US,False,False
+"What's the longitude and latitude of Apam, Ghana?",Ghana,5.285,-0.746,2304389,Apam,GH,False,False
+"What's the longitude and latitude of Dadu, Pakistan?",Pakistan,26.73033,67.7769,1180809,Dadu,PK,False,False
+"What's the longitude and latitude of Torre del Mar, Spain?",Spain,36.742,-4.09291,2510309,Torre del Mar,ES,False,False
+"What's the longitude and latitude of Piro, India?",India,25.33218,84.40454,1259530,Piro,IN,False,False
+"What's the longitude and latitude of Lakhyabad, India?",India,23.66667,86.66667,1265220,Lakhyabad,IN,False,False
+"What's the longitude and latitude of Kampung Batu Empat, Malaysia?",Malaysia,1.776,103.8736,1780841,Kampung Batu Empat,MY,False,False
+"What's the longitude and latitude of Sevan, Armenia?",Armenia,40.548,44.95314,616250,Sevan,AM,False,False
+"What's the longitude and latitude of Rafiganj, India?",India,24.81757,84.63445,1259060,Rafiganj,IN,False,False
+"What's the longitude and latitude of Karambi, Rwanda?",Rwanda,-2.31695,29.24413,7021332,Karambi,RW,False,False
+"What's the longitude and latitude of Yamatokoriyama, Japan?",Japan,34.60658,135.77033,11611477,Yamatokoriyama,JP,False,False
+"What's the longitude and latitude of Hammond, United States?",United States,30.50463,-90.46293,4326868,Hammond,US,False,False
+"What's the longitude and latitude of Fukagawa, Japan?",Japan,43.70806,142.03917,2130332,Fukagawa,JP,False,False
+"What's the longitude and latitude of Guimba, Philippines?",Philippines,15.6605,120.7683,1712488,Guimba,PH,False,False
+"What's the longitude and latitude of Wadi, India?",India,17.05183,76.99048,1253041,Wadi,IN,False,False
+"What's the longitude and latitude of Emet, Turkey?",Turkey,39.343,29.25847,315639,Emet,TR,False,False
+"What's the longitude and latitude of Kanaishima, Japan?",Japan,35.34412,139.11749,10409864,Kanaishima,JP,False,False
+"What's the longitude and latitude of Yubileyny, Russia?",Russia,55.93333,37.83333,536206,Yubileyny,RU,False,False
+"What's the longitude and latitude of Brits, South Africa?",South Africa,-25.63473,27.78022,1015621,Brits,ZA,False,False
+"What's the longitude and latitude of Axochiapan, Mexico?",Mexico,18.50207,-98.75299,3532545,Axochiapan,MX,False,False
+"What's the longitude and latitude of Haan, Germany?",Germany,51.19382,7.0133,2913195,Haan,DE,False,False
+"What's the longitude and latitude of Loma Bonita, Mexico?",Mexico,18.10766,-95.88053,3824996,Loma Bonita,MX,False,False
+"What's the longitude and latitude of Vienne, France?",France,45.52569,4.87484,2969284,Vienne,FR,False,False
+"What's the longitude and latitude of Ghatampur, India?",India,26.15272,80.16803,1271345,Ghatampur,IN,False,False
+"What's the longitude and latitude of Mansa, India?",India,23.42564,72.65739,1263623,Mansa,IN,False,False
+"What's the longitude and latitude of Kosigi, India?",India,15.8551,77.24463,1266070,Kosigi,IN,False,False
+"What's the longitude and latitude of Bloomingdale, United States?",United States,41.95753,-88.0809,4885156,Bloomingdale,US,False,False
+"What's the longitude and latitude of Shunhe, China?",China,34.84184,116.55722,1794348,Shunhe,CN,False,False
+"What's the longitude and latitude of Devgarh, India?",India,25.52533,73.90812,1273098,Devgarh,IN,False,False
+"What's the longitude and latitude of Elbasan, Albania?",Albania,41.11138,20.08224,783263,Elbasan,AL,False,False
+"What's the longitude and latitude of Gongmen, China?",China,34.94139,106.29639,1810107,Gongmen,CN,False,False
+"What's the longitude and latitude of Sao Francisco do Sul, Brazil?",Brazil,-26.24333,-48.63806,3449112,Sao Francisco do Sul,BR,False,False
+"What's the longitude and latitude of Yunjinghong, China?",China,22.01479,100.79843,1785710,Yunjinghong,CN,False,False
+"What's the longitude and latitude of Ferdowsiyeh, Iran?",Iran,35.6011,51.0645,33069,Ferdowsiyeh,IR,False,False
+"What's the longitude and latitude of Dania Beach, United States?",United States,26.05231,-80.14393,4152772,Dania Beach,US,False,False
+"What's the longitude and latitude of Phuket, Thailand?",Thailand,7.89059,98.3981,1151254,Phuket,TH,False,True
+"What's the longitude and latitude of Manaveli, India?",India,11.89091,79.81037,11679731,Manaveli,IN,False,False
+"What's the longitude and latitude of Vaesteras, Sweden?",Sweden,59.61617,16.55276,2664454,Vaesteras,SE,False,False
+"What's the longitude and latitude of Smila, Ukraine?",Ukraine,49.23295,31.88427,693457,Smila,UA,False,False
+"What's the longitude and latitude of Den Chai, Thailand?",Thailand,17.98372,100.05217,1610943,Den Chai,TH,False,False
+"What's the longitude and latitude of Amambai, Brazil?",Brazil,-23.10417,-55.22583,3472391,Amambai,BR,False,False
+"What's the longitude and latitude of Tittagudi, India?",India,11.40717,79.12216,1254300,Tittagudi,IN,False,False
+"What's the longitude and latitude of Changshu, China?",China,31.64615,120.74221,7283386,Changshu,CN,False,False
+"What's the longitude and latitude of Minacu, Brazil?",Brazil,-13.53306,-48.22,6317592,Minacu,BR,False,False
+"What's the longitude and latitude of Tatsuno, Japan?",Japan,34.83184,134.54338,11612326,Tatsuno,JP,False,False
+"What's the longitude and latitude of Ceyhan, Turkey?",Turkey,37.02472,35.8175,318675,Ceyhan,TR,False,False
+"What's the longitude and latitude of Verdun, Canada?",Canada,45.46005,-73.57058,6173767,Verdun,CA,False,False
+"What's the longitude and latitude of Sacramento, Brazil?",Brazil,-19.86528,-47.44,3450759,Sacramento,BR,False,False
+"What's the longitude and latitude of Seaford, United Kingdom?",United Kingdom,50.77141,0.10268,2638311,Seaford,GB,False,False
+"What's the longitude and latitude of Koster, South Africa?",South Africa,-25.86301,26.89756,987648,Koster,ZA,False,False
+"What's the longitude and latitude of Chettinayakkanpatti, India?",India,10.39399,77.9754,11677688,Chettinayakkanpatti,IN,False,False
+"What's the longitude and latitude of Barjala, India?",India,23.6182,91.35596,1276938,Barjala,IN,False,False
+"What's the longitude and latitude of Oba, Turkey?",Turkey,36.55013,32.0596,8068982,Oba,TR,False,False
+"What's the longitude and latitude of Raj-Nandgaon, India?",India,21.09687,81.0289,1258831,Raj-Nandgaon,IN,False,False
+"What's the longitude and latitude of Mandalgarh, India?",India,25.19407,75.07215,1263911,Mandalgarh,IN,False,False
+"What's the longitude and latitude of Jiudian, China?",China,36.9918,120.20412,1805220,Jiudian,CN,False,False
+"What's the longitude and latitude of City One, Hong Kong?",Hong Kong,22.38679,114.20275,12640679,City One,HK,False,False
+"What's the longitude and latitude of Puerto Triunfo, Colombia?",Colombia,5.87259,-74.6405,3671308,Puerto Triunfo,CO,False,False
+"What's the longitude and latitude of Kampung Ayer Molek, Malaysia?",Malaysia,2.2139,102.3278,1771485,Kampung Ayer Molek,MY,False,False
+"What's the longitude and latitude of Acocks Green, United Kingdom?",United Kingdom,52.45,-1.81667,2657703,Acocks Green,GB,False,False
+"What's the longitude and latitude of Galveston, United States?",United States,29.30135,-94.7977,4692883,Galveston,US,False,False
+"What's the longitude and latitude of La Calera, Argentina?",Argentina,-31.34582,-64.33849,3852374,La Calera,AR,False,False
+"What's the longitude and latitude of Acaponeta, Mexico?",Mexico,22.49046,-105.36074,4019819,Acaponeta,MX,False,False
+"What's the longitude and latitude of Anlan, China?",China,29.24722,106.59417,1914248,Anlan,CN,False,False
+"What's the longitude and latitude of Koch Bihar, India?",India,26.32539,89.44508,1266436,Koch Bihar,IN,False,False
+"What's the longitude and latitude of Stuhr, Germany?",Germany,53.03333,8.75,2825422,Stuhr,DE,False,False
+"What's the longitude and latitude of Hervanta, Finland?",Finland,61.44792,23.85301,658120,Hervanta,FI,False,False
+"What's the longitude and latitude of Oranjestad, Aruba?",Aruba,12.52398,-70.02703,3577154,Oranjestad,AW,False,False
+"What's the longitude and latitude of Ashton in Makerfield, United Kingdom?",United Kingdom,53.48333,-2.65,2656918,Ashton in Makerfield,GB,False,False
+"What's the longitude and latitude of Wuxi, China?",China,31.56887,120.28857,1790923,Wuxi,CN,False,False
+"What's the longitude and latitude of Chunga, Zambia?",Zambia,-15.31737,28.26868,13132725,Chunga,ZM,False,False
+"What's the longitude and latitude of Munakata, Japan?",Japan,33.7957,130.55895,11611614,Munakata,JP,False,False
+"What's the longitude and latitude of Sekimachi, Japan?",Japan,35.48333,136.91667,1852775,Sekimachi,JP,False,False
+"What's the longitude and latitude of Helsingborg, Sweden?",Sweden,56.04673,12.69437,2706767,Helsingborg,SE,False,False
+"What's the longitude and latitude of Umarkot, India?",India,19.66529,82.20629,1253860,Umarkot,IN,False,False
+"What's the longitude and latitude of Egra, India?",India,21.89947,87.53794,1272101,Egra,IN,False,False
+"What's the longitude and latitude of Cherpulassery, India?",India,10.87655,76.30932,8504418,Cherpulassery,IN,False,False
+"What's the longitude and latitude of Cote-Saint-Luc, Canada?",Canada,45.46536,-73.66585,5928488,Cote-Saint-Luc,CA,False,False
+"What's the longitude and latitude of Selby, United Kingdom?",United Kingdom,53.78333,-1.06667,2638235,Selby,GB,False,False
+"What's the longitude and latitude of Poble Sec, Spain?",Spain,41.37452,2.16326,6545103,Poble Sec,ES,False,False
+"What's the longitude and latitude of Baishan, China?",China,41.93853,126.41965,2038584,Baishan,CN,False,False
+"What's the longitude and latitude of Raigarh, India?",India,21.89764,83.3966,1259005,Raigarh,IN,False,False
+"What's the longitude and latitude of E'zhou, China?",China,30.39607,114.88655,6642286,E'zhou,CN,False,False
+"What's the longitude and latitude of Atherton, United Kingdom?",United Kingdom,53.52371,-2.49354,2656847,Atherton,GB,False,False
+"What's the longitude and latitude of Shuijiang, China?",China,29.2476,107.28443,1794478,Shuijiang,CN,False,False
+"What's the longitude and latitude of San Francisco de Yojoa, Honduras?",Honduras,15.01442,-87.9716,3602272,San Francisco de Yojoa,HN,False,False
+"What's the longitude and latitude of Bac Ninh, Vietnam?",Vietnam,21.18608,106.07631,1591449,Bac Ninh,VN,False,False
+"What's the longitude and latitude of Kampung Baharu Nilai, Malaysia?",Malaysia,2.8033,101.7972,1771287,Kampung Baharu Nilai,MY,False,False
+"What's the longitude and latitude of Pindai, Brazil?",Brazil,-14.4925,-42.68722,3453858,Pindai,BR,False,False
+"What's the longitude and latitude of Vijayapuri North, India?",India,16.58534,79.32046,10490140,Vijayapuri North,IN,False,False
+"What's the longitude and latitude of Insein, Myanmar?",Myanmar,16.88874,96.10257,1321937,Insein,MM,False,False
+"What's the longitude and latitude of Lille, Belgium?",Belgium,51.24197,4.82313,2792360,Lille,BE,False,False
+"What's the longitude and latitude of Bolobo, Democratic Republic of the Congo?",Democratic Republic of the Congo,-2.158,16.23249,2316748,Bolobo,CD,False,False
+"What's the longitude and latitude of Jieyang, China?",China,23.5418,116.36581,1797121,Jieyang,CN,False,False
+"What's the longitude and latitude of Villa Consuelo, Dominican Republic?",Dominican Republic,18.48333,-69.9,3491946,Villa Consuelo,DO,False,False
+"What's the longitude and latitude of Castelo Branco, Portugal?",Portugal,39.82364,-7.49101,2269514,Castelo Branco,PT,False,False
+"What's the longitude and latitude of Hudiksvall, Sweden?",Sweden,61.72744,17.10558,2704613,Hudiksvall,SE,False,False
+"What's the longitude and latitude of Guider, Cameroon?",Cameroon,9.9333,13.94671,2230876,Guider,CM,False,False
+"What's the longitude and latitude of Hamilton, New Zealand?",New Zealand,-37.78333,175.28333,2190324,Hamilton,NZ,False,False
+"What's the longitude and latitude of Makueni Boma, Kenya?",Kenya,-1.80388,37.62405,188080,Makueni Boma,KE,False,False
+"What's the longitude and latitude of Carangola, Brazil?",Brazil,-20.73306,-42.02944,3467012,Carangola,BR,False,False
+"What's the longitude and latitude of Sinfin, United Kingdom?",United Kingdom,52.88157,-1.48681,11863036,Sinfin,GB,False,False
+"What's the longitude and latitude of Kamoke, Pakistan?",Pakistan,31.97526,74.22304,1175088,Kamoke,PK,False,False
+"What's the longitude and latitude of Arica, Chile?",Chile,-18.47552,-70.30058,3899361,Arica,CL,False,False
+"What's the longitude and latitude of Coquitlam Town Centre, Canada?",Canada,49.27697,-122.79669,13512932,Coquitlam Town Centre,CA,False,False
+"What's the longitude and latitude of Cantagalo, Brazil?",Brazil,-21.98111,-42.36806,3467445,Cantagalo,BR,False,False
+"What's the longitude and latitude of Vijalpor, India?",India,20.92212,72.90945,13157141,Vijalpor,IN,False,False
+"What's the longitude and latitude of Capulhuac de Mirafuentes, Mexico?",Mexico,19.19354,-99.46585,3531598,Capulhuac de Mirafuentes,MX,False,False
+"What's the longitude and latitude of Jhansi, India?",India,25.45887,78.57994,1269006,Jhansi,IN,False,False
+"What's the longitude and latitude of Hlohovec, Slovakia?",Slovakia,48.43174,17.8031,3060095,Hlohovec,SK,False,False
+"What's the longitude and latitude of Shiraz, Iran?",Iran,29.61031,52.53113,115019,Shiraz,IR,False,True
+"What's the longitude and latitude of Sarh, Chad?",Chad,9.14555,18.38331,2425791,Sarh,TD,False,False
+"What's the longitude and latitude of Kadi, India?",India,23.29908,72.33362,1268680,Kadi,IN,False,False
+"What's the longitude and latitude of Upper Norwood, United Kingdom?",United Kingdom,51.41505,-0.0927,2635113,Upper Norwood,GB,False,False
+"What's the longitude and latitude of Suutarila, Finland?",Finland,60.27996,25.01759,847506,Suutarila,FI,False,False
+"What's the longitude and latitude of Royal Palm Beach, United States?",United States,26.7084,-80.2306,4170617,Royal Palm Beach,US,False,False
+"What's the longitude and latitude of Wexford/Maryvale, Canada?",Canada,43.74857,-79.29864,12156875,Wexford/Maryvale,CA,False,False
+"What's the longitude and latitude of Bad Hersfeld, Germany?",Germany,50.87197,9.70891,2953439,Bad Hersfeld,DE,False,False
+"What's the longitude and latitude of Ventimiglia, Italy?",Italy,43.78956,7.60872,3164582,Ventimiglia,IT,False,False
+"What's the longitude and latitude of Mogaung, Myanmar?",Myanmar,25.30543,96.93537,1308946,Mogaung,MM,False,False
+"What's the longitude and latitude of Aluminio, Brazil?",Brazil,-23.535,-47.26194,6316372,Aluminio,BR,False,False
+"What's the longitude and latitude of Grantham, United Kingdom?",United Kingdom,52.91149,-0.64184,2648208,Grantham,GB,False,False
+"What's the longitude and latitude of Radevormwald, Germany?",Germany,51.20219,7.36027,2850995,Radevormwald,DE,False,False
+"What's the longitude and latitude of Jaworzno, Poland?",Poland,50.20528,19.27498,3097333,Jaworzno,PL,False,False
+"What's the longitude and latitude of Eldorado dos Carajas, Brazil?",Brazil,-6.10417,-49.35528,6317056,Eldorado dos Carajas,BR,False,False
+"What's the longitude and latitude of Kotivakkam, India?",India,12.97016,80.25769,1465829,Kotivakkam,IN,False,False
+"What's the longitude and latitude of Pushkino, Russia?",Russia,55.99456,37.82897,503977,Pushkino,RU,False,False
+"What's the longitude and latitude of Wari, India?",India,21.15313,79.0076,10469921,Wari,IN,False,False
+"What's the longitude and latitude of Constanza, Dominican Republic?",Dominican Republic,18.90919,-70.74499,3509363,Constanza,DO,False,False
+"What's the longitude and latitude of Harsewinkel, Germany?",Germany,51.96224,8.22766,2910278,Harsewinkel,DE,False,False
+"What's the longitude and latitude of Maramba, Tanzania?",Tanzania,-5.05,38.61667,154780,Maramba,TZ,False,False
+"What's the longitude and latitude of Talaja, India?",India,21.3527,72.03524,1255175,Talaja,IN,False,False
+"What's the longitude and latitude of Calverton, United States?",United States,39.05761,-76.93581,4350160,Calverton,US,False,False
+"What's the longitude and latitude of Aleysk, Russia?",Russia,52.49631,82.77466,1511783,Aleysk,RU,False,False
+"What's the longitude and latitude of Ahram, Iran?",Iran,28.8826,51.2746,144484,Ahram,IR,False,False
+"What's the longitude and latitude of Huangnihe, China?",China,43.55833,128.02389,2036734,Huangnihe,CN,False,False
+"What's the longitude and latitude of Guarapari, Brazil?",Brazil,-20.67182,-40.50196,3461888,Guarapari,BR,False,False
+"What's the longitude and latitude of Kayalpattinam, India?",India,8.57143,78.11992,1267361,Kayalpattinam,IN,False,False
+"What's the longitude and latitude of Wardenburg, Germany?",Germany,53.05938,8.19669,2814146,Wardenburg,DE,False,False
+"What's the longitude and latitude of Palacio, Spain?",Spain,40.41542,-3.71407,11549949,Palacio,ES,False,False
+"What's the longitude and latitude of Termas de Rio Hondo, Argentina?",Argentina,-27.49362,-64.85972,3834502,Termas de Rio Hondo,AR,False,False
+"What's the longitude and latitude of Umm Al Quwain City, United Arab Emirates?",United Arab Emirates,25.56473,55.55517,290594,Umm Al Quwain City,AE,False,False
+"What's the longitude and latitude of Soron, India?",India,27.89055,78.74621,1255704,Soron,IN,False,False
+"What's the longitude and latitude of Torremaggiore, Italy?",Italy,41.68894,15.29408,3165435,Torremaggiore,IT,False,False
+"What's the longitude and latitude of Barriera di Milano, Italy?",Italy,45.09228,7.69399,11288655,Barriera di Milano,IT,False,False
+"What's the longitude and latitude of Macomia, Mozambique?",Mozambique,-12.24667,40.12083,1042456,Macomia,MZ,False,False
+"What's the longitude and latitude of Thaikkattussery, India?",India,9.77147,76.34385,12625364,Thaikkattussery,IN,False,False
+"What's the longitude and latitude of Oxon Hill-Glassmanor, United States?",United States,38.79615,-76.97499,7258432,Oxon Hill-Glassmanor,US,False,False
+"What's the longitude and latitude of Tbilisskaya, Russia?",Russia,45.36452,40.19679,483883,Tbilisskaya,RU,False,False
+"What's the longitude and latitude of Setun', Russia?",Russia,55.71667,37.41667,496456,Setun',RU,False,False
+"What's the longitude and latitude of Bang Pakong, Thailand?",Thailand,13.54297,100.99333,1619363,Bang Pakong,TH,False,False
+"What's the longitude and latitude of Miyakonojo, Japan?",Japan,31.73333,131.06667,1856775,Miyakonojo,JP,False,False
+"What's the longitude and latitude of Fairfield Heights, United States?",United States,39.82861,-86.38224,8347326,Fairfield Heights,US,False,False
+"What's the longitude and latitude of Jalalabad, India?",India,30.60622,74.25727,1269445,Jalalabad,IN,False,False
+"What's the longitude and latitude of Frolovo, Russia?",Russia,49.7688,43.65417,562389,Frolovo,RU,False,False
+"What's the longitude and latitude of Santiago de los Caballeros, Dominican Republic?",Dominican Republic,19.45036,-70.69085,3492914,Santiago de los Caballeros,DO,False,False
+"What's the longitude and latitude of Soka, Japan?",Japan,35.83643,139.79957,1851604,Soka,JP,False,False
+"What's the longitude and latitude of Biu, Nigeria?",Nigeria,10.61285,12.19458,2346995,Biu,NG,False,False
+"What's the longitude and latitude of Guye, China?",China,39.74083,118.45069,1809159,Guye,CN,False,False
+"What's the longitude and latitude of Kafr Manda, Israel?",Israel,32.81095,35.26071,294608,Kafr Manda,IL,False,False
+"What's the longitude and latitude of Garfield, United States?",United States,40.88149,-74.1132,5098343,Garfield,US,False,False
+"What's the longitude and latitude of San Giovanni in Persiceto, Italy?",Italy,44.63838,11.18419,3168239,San Giovanni in Persiceto,IT,False,False
+"What's the longitude and latitude of Levallois-Perret, France?",France,48.89389,2.28864,2998975,Levallois-Perret,FR,False,False
+"What's the longitude and latitude of Jamadoba, India?",India,23.71667,86.4,1269379,Jamadoba,IN,False,False
+"What's the longitude and latitude of Golungo Alto, Angola?",Angola,-9.13333,14.76667,2240975,Golungo Alto,AO,False,False
+"What's the longitude and latitude of Hawthorne, United States?",United States,40.94926,-74.15375,5098909,Hawthorne,US,False,False
+"What's the longitude and latitude of Bad Bentheim, Germany?",Germany,52.30066,7.15763,2953552,Bad Bentheim,DE,False,False
+"What's the longitude and latitude of Kekem, Cameroon?",Cameroon,5.15689,10.01996,2230378,Kekem,CM,False,False
+"What's the longitude and latitude of Maroantsetra, Madagascar?",Madagascar,-15.43527,49.73794,1060283,Maroantsetra,MG,False,False
+"What's the longitude and latitude of Horsham, Australia?",Australia,-36.71131,142.19981,2163055,Horsham,AU,False,False
+"What's the longitude and latitude of Merkezefendi, Turkey?",Turkey,37.80544,29.04236,11238838,Merkezefendi,TR,False,False
+"What's the longitude and latitude of Arhribs, Algeria?",Algeria,36.79361,4.31158,2506519,Arhribs,DZ,False,False
+"What's the longitude and latitude of Danjiangkou, China?",China,32.54278,111.50861,1813828,Danjiangkou,CN,False,False
+"What's the longitude and latitude of Bals, Romania?",Romania,44.35,24.1,685586,Bals,RO,False,False
+"What's the longitude and latitude of Mongagua, Brazil?",Brazil,-24.09306,-46.62083,3456944,Mongagua,BR,False,False
+"What's the longitude and latitude of Huangpu, China?",China,31.2378,121.4781,8307452,Huangpu,CN,False,False
+"What's the longitude and latitude of Kuala Kubu Baharu, Malaysia?",Malaysia,3.5638,101.6581,1732676,Kuala Kubu Baharu,MY,False,False
+"What's the longitude and latitude of Saint-Laurent-du-Maroni, French Guiana?",French Guiana,5.50153,-54.02916,3380387,Saint-Laurent-du-Maroni,GF,False,False
+"What's the longitude and latitude of Savelugu, Ghana?",Ghana,9.62376,-0.82705,2295517,Savelugu,GH,False,False
+"What's the longitude and latitude of Starobilsk, Ukraine?",Ukraine,49.27881,38.9075,692832,Starobilsk,UA,False,False
+"What's the longitude and latitude of Krychaw, Belarus?",Belarus,53.71924,31.71356,626450,Krychaw,BY,False,False
+"What's the longitude and latitude of Overijse, Belgium?",Belgium,50.77436,4.53461,2789413,Overijse,BE,False,False
+"What's the longitude and latitude of Maniyur, India?",India,11.55221,75.65026,10924880,Maniyur,IN,False,False
+"What's the longitude and latitude of Tay Ho, Vietnam?",Vietnam,21.06895,105.81053,1566566,Tay Ho,VN,False,False
+"What's the longitude and latitude of Bante, Benin?",Benin,8.41221,1.88969,2395301,Bante,BJ,False,False
+"What's the longitude and latitude of Ghulja, China?",China,43.91515,81.32151,1529435,Ghulja,CN,False,False
+"What's the longitude and latitude of Lawndale, United States?",United States,33.88724,-118.35257,5365603,Lawndale,US,False,False
+"What's the longitude and latitude of Santo Tome, Argentina?",Argentina,-31.66274,-60.7653,3835793,Santo Tome,AR,False,False
+"What's the longitude and latitude of Eisenach, Germany?",Germany,50.9807,10.31522,2931574,Eisenach,DE,False,False
+"What's the longitude and latitude of Talitay, Philippines?",Philippines,7.03333,124.7,1683818,Talitay,PH,False,False
+"What's the longitude and latitude of Beibei, China?",China,29.82739,106.43645,1816790,Beibei,CN,False,False
+"What's the longitude and latitude of Adwick le Street, United Kingdom?",United Kingdom,53.57077,-1.18454,2657658,Adwick le Street,GB,False,False
+"What's the longitude and latitude of Adachi, Japan?",Japan,35.76318,139.80761,10987897,Adachi,JP,False,False
+"What's the longitude and latitude of Polysayevo, Russia?",Russia,54.60343,86.27577,1494456,Polysayevo,RU,False,False
+"What's the longitude and latitude of Alor Gajah, Malaysia?",Malaysia,2.3804,102.2089,1734745,Alor Gajah,MY,False,False
+"What's the longitude and latitude of Chichen-Itza, Mexico?",Mexico,20.66667,-88.56667,3530978,Chichen-Itza,MX,False,True
+"What's the longitude and latitude of Adrar, Algeria?",Algeria,27.87429,-0.29388,2508813,Adrar,DZ,False,False
+"What's the longitude and latitude of Chrzanow, Poland?",Poland,50.13546,19.40203,3101547,Chrzanow,PL,False,False
+"What's the longitude and latitude of Graaff Reinet, South Africa?",South Africa,-32.25215,24.53075,1000543,Graaff Reinet,ZA,False,False
+"What's the longitude and latitude of Stowbtsy, Belarus?",Belarus,53.47994,26.7351,621266,Stowbtsy,BY,False,False
+"What's the longitude and latitude of Comilla, Bangladesh?",Bangladesh,23.46186,91.18503,1185186,Comilla,BD,False,False
+"What's the longitude and latitude of Shiwan, China?",China,23.00107,113.077,1794947,Shiwan,CN,False,False
+"What's the longitude and latitude of Labuhan Deli, Indonesia?",Indonesia,3.879,98.633,1214800,Labuhan Deli,ID,False,False
+"What's the longitude and latitude of Weingarten, Germany?",Germany,47.81009,9.63863,2812204,Weingarten,DE,False,False
+"What's the longitude and latitude of Anjar, India?",India,23.11316,70.02671,1278573,Anjar,IN,False,False
+"What's the longitude and latitude of Kingston, Norfolk Island?",Norfolk Island,-29.05459,167.96628,2161314,Kingston,NF,False,False
+"What's the longitude and latitude of Molo, Kenya?",Kenya,-0.24849,35.73194,186315,Molo,KE,False,False
+"What's the longitude and latitude of Northampton, United States?",United States,42.32509,-72.6412,4945819,Northampton,US,False,False
+"What's the longitude and latitude of Pariyaram, India?",India,12.05876,75.32476,10892271,Pariyaram,IN,False,False
+"What's the longitude and latitude of Haltern am See, Germany?",Germany,51.74297,7.18163,2911395,Haltern am See,DE,False,False
+"What's the longitude and latitude of South Holland, United States?",United States,41.60087,-87.60699,4911934,South Holland,US,False,False
+"What's the longitude and latitude of Yeovil, United Kingdom?",United Kingdom,50.94159,-2.63211,2633373,Yeovil,GB,False,False
+"What's the longitude and latitude of Namangan, Uzbekistan?",Uzbekistan,40.9983,71.67257,1513157,Namangan,UZ,False,False
+"What's the longitude and latitude of Bang Bon, Thailand?",Thailand,13.66185,100.39567,8355932,Bang Bon,TH,False,False
+"What's the longitude and latitude of Frontera, Mexico?",Mexico,18.54326,-92.6453,3527545,Frontera,MX,False,False
+"What's the longitude and latitude of Singrauli, India?",India,24.19973,82.67535,7279754,Singrauli,IN,False,False
+"What's the longitude and latitude of Sunam, India?",India,30.12883,75.79943,1255449,Sunam,IN,False,False
+"What's the longitude and latitude of Muscat, Oman?",Oman,23.58413,58.40778,287286,Muscat,OM,False,True
+"What's the longitude and latitude of Royton, United Kingdom?",United Kingdom,53.56507,-2.12267,2639015,Royton,GB,False,False
+"What's the longitude and latitude of Halabja, Iraq?",Iraq,35.17778,45.98611,96205,Halabja,IQ,False,False
+"What's the longitude and latitude of Iwon-up, North Korea?",North Korea,40.32306,128.65528,2043677,Iwon-up,KP,False,False
+"What's the longitude and latitude of Lyublino, Russia?",Russia,55.67738,37.76005,532535,Lyublino,RU,False,False
+"What's the longitude and latitude of Orta Nova, Italy?",Italy,41.32879,15.70994,3171900,Orta Nova,IT,False,False
+"What's the longitude and latitude of Bajitpur, Bangladesh?",Bangladesh,24.21623,90.95002,1185276,Bajitpur,BD,False,False
+"What's the longitude and latitude of Villa Altagracia, Dominican Republic?",Dominican Republic,18.67297,-70.17095,3491952,Villa Altagracia,DO,False,False
+"What's the longitude and latitude of Gola Gokarannath, India?",India,28.07837,80.47054,1271049,Gola Gokarannath,IN,False,False
+"What's the longitude and latitude of Poti, Georgia?",Georgia,42.14272,41.67384,612366,Poti,GE,False,False
+"What's the longitude and latitude of Makhachkala, Russia?",Russia,42.97782,47.50027,532096,Makhachkala,RU,False,False
+"What's the longitude and latitude of Hatonuevo, Colombia?",Colombia,11.06944,-72.76694,3680944,Hatonuevo,CO,False,False
+"What's the longitude and latitude of Roissy-en-Brie, France?",France,48.79159,2.64747,2983074,Roissy-en-Brie,FR,False,False
+"What's the longitude and latitude of Mahmudabad, Iran?",Iran,36.63191,52.26286,125328,Mahmudabad,IR,False,False
+"What's the longitude and latitude of Balaungi, India?",India,30.73058,76.69368,10733995,Balaungi,IN,False,False
+"What's the longitude and latitude of Akademgorodok, Russia?",Russia,54.8523,83.106,1512086,Akademgorodok,RU,False,False
+"What's the longitude and latitude of Khwaeng Bang Plat, Thailand?",Thailand,13.78775,100.49469,13494068,Khwaeng Bang Plat,TH,False,False
+"What's the longitude and latitude of Hyuga, Japan?",Japan,32.42272,131.64093,11611625,Hyuga,JP,False,False
+"What's the longitude and latitude of Dongcun, China?",China,36.77667,121.15972,1812621,Dongcun,CN,False,False
+"What's the longitude and latitude of Yverdon-les-Bains, Switzerland?",Switzerland,46.77852,6.64115,2657941,Yverdon-les-Bains,CH,False,False
+"What's the longitude and latitude of Purificacion, Colombia?",Colombia,3.85871,-74.93129,3671208,Purificacion,CO,False,False
+"What's the longitude and latitude of Luohe, China?",China,33.57424,114.03261,1801934,Luohe,CN,False,False
+"What's the longitude and latitude of Bagaha, India?",India,24.52898,85.06019,1277940,Bagaha,IN,False,False
+"What's the longitude and latitude of Barauni, India?",India,25.4709,85.976,11184261,Barauni,IN,False,False
+"What's the longitude and latitude of Aston, United Kingdom?",United Kingdom,52.5,-1.88333,2656867,Aston,GB,False,False
+"What's the longitude and latitude of Miano, Italy?",Italy,40.88816,14.25339,3173473,Miano,IT,False,False
+"What's the longitude and latitude of Radolfzell, Germany?",Germany,47.74194,8.97098,2850954,Radolfzell,DE,False,False
+"What's the longitude and latitude of Floral Park, United States?",United States,40.72371,-73.70485,5117438,Floral Park,US,False,False
+"What's the longitude and latitude of Barra da Estiva, Brazil?",Brazil,-13.62611,-41.32694,3470744,Barra da Estiva,BR,False,False
+"What's the longitude and latitude of Vyshneve, Ukraine?",Ukraine,50.38834,30.36809,689487,Vyshneve,UA,False,False
+"What's the longitude and latitude of Acre, Israel?",Israel,32.92814,35.07647,295721,Acre,IL,False,False
+"What's the longitude and latitude of Dover, United States?",United States,39.15817,-75.52437,4142290,Dover,US,False,False
+"What's the longitude and latitude of Dalap-Uliga-Dorrit, Marshall Islands?",Marshall Islands,7.087,171.377,8347657,Dalap-Uliga-Dorrit,MH,False,False
+"What's the longitude and latitude of Cheruthazham, India?",India,12.08097,75.26272,11523476,Cheruthazham,IN,False,False
+"What's the longitude and latitude of Nijar, Spain?",Spain,36.96655,-2.20595,2513222,Nijar,ES,False,False
+"What's the longitude and latitude of Lazarevac, Serbia?",Serbia,44.38534,20.2557,788771,Lazarevac,RS,False,False
+"What's the longitude and latitude of Hlaingthaya, Myanmar?",Myanmar,16.85,96.06667,8740157,Hlaingthaya,MM,False,False
+"What's the longitude and latitude of Bokajan, India?",India,26.02131,93.77945,1275364,Bokajan,IN,False,False
+"What's the longitude and latitude of Celaya, Mexico?",Mexico,20.52181,-100.81399,4014875,Celaya,MX,False,False
+"What's the longitude and latitude of Seri Kembangan, Malaysia?",Malaysia,3.03333,101.71667,1744246,Seri Kembangan,MY,False,False
+"What's the longitude and latitude of Konskie, Poland?",Poland,51.19166,20.40607,768218,Konskie,PL,False,False
+"What's the longitude and latitude of Sakete, Benin?",Benin,6.73618,2.65866,2392009,Sakete,BJ,False,False
+"What's the longitude and latitude of Hoddesdon, United Kingdom?",United Kingdom,51.76148,-0.01144,2646807,Hoddesdon,GB,False,False
+"What's the longitude and latitude of Xiaoweizhai, China?",China,26.19028,107.5125,1789945,Xiaoweizhai,CN,False,False
+"What's the longitude and latitude of Khongapani, India?",India,23.1912,82.16265,13156958,Khongapani,IN,False,False
+"What's the longitude and latitude of Bayan Nur, China?",China,40.74143,107.38599,11838258,Bayan Nur,CN,False,False
+"What's the longitude and latitude of Waris Aliganj, India?",India,25.0172,85.64047,1252930,Waris Aliganj,IN,False,False
+"What's the longitude and latitude of Badlapur, India?",India,19.15516,73.26553,1277976,Badlapur,IN,False,False
+"What's the longitude and latitude of Covington, United States?",United States,39.08367,-84.50855,4288809,Covington,US,False,False
+"What's the longitude and latitude of Valenza, Italy?",Italy,45.01242,8.64379,3164920,Valenza,IT,False,False
+"What's the longitude and latitude of Davtashen, Armenia?",Armenia,40.21642,44.48088,616758,Davtashen,AM,False,False
+"What's the longitude and latitude of Yanqi, China?",China,42.06321,86.57185,1529031,Yanqi,CN,False,False
+"What's the longitude and latitude of Nileshwar, India?",India,12.25953,75.1352,1261394,Nileshwar,IN,False,False
+"What's the longitude and latitude of Le Vieux-Longueuil, Canada?",Canada,45.53721,-73.50773,13546325,Le Vieux-Longueuil,CA,False,False
+"What's the longitude and latitude of Sviblovo, Russia?",Russia,55.85,37.63333,485630,Sviblovo,RU,False,False
+"What's the longitude and latitude of Kingsland, United States?",United States,30.79996,-81.68983,4204007,Kingsland,US,False,False
+"What's the longitude and latitude of Mile End, Canada?",Canada,45.5237,-73.59631,12626156,Mile End,CA,False,False
+"What's the longitude and latitude of Sofo-Birnin-Gwari, Nigeria?",Nigeria,11.01537,6.78036,2347061,Sofo-Birnin-Gwari,NG,False,False
+"What's the longitude and latitude of Liangping, China?",China,31.12136,109.96909,8398673,Liangping,CN,False,False
+"What's the longitude and latitude of Phalaborwa, South Africa?",South Africa,-23.94299,31.14107,965528,Phalaborwa,ZA,False,False
+"What's the longitude and latitude of Bereket, Turkmenistan?",Turkmenistan,39.24463,55.51536,161974,Bereket,TM,False,False
+"What's the longitude and latitude of Panjin, China?",China,41.121,122.0739,10794003,Panjin,CN,False,False
+"What's the longitude and latitude of Helsinki, Finland?",Finland,60.16952,24.93545,658225,Helsinki,FI,True,False
+"What's the longitude and latitude of Semboku, Japan?",Japan,39.7093,140.74654,11612707,Semboku,JP,False,False
+"What's the longitude and latitude of Westminster, United States?",United States,39.83665,-105.0372,5443910,Westminster,US,False,False
+"What's the longitude and latitude of Muyuka, Cameroon?",Cameroon,4.2898,9.4103,2225726,Muyuka,CM,False,False
+"What's the longitude and latitude of Arakawa, Japan?",Japan,35.73825,139.78047,10968247,Arakawa,JP,False,False
+"What's the longitude and latitude of Faxinal, Brazil?",Brazil,-24.00028,-51.31944,3463573,Faxinal,BR,False,False
+"What's the longitude and latitude of Ruiru, Kenya?",Kenya,-1.14665,36.96087,181032,Ruiru,KE,False,False
+"What's the longitude and latitude of Caojie, China?",China,29.99755,106.39018,12489669,Caojie,CN,False,False
+"What's the longitude and latitude of Garhi Khairo, Pakistan?",Pakistan,28.05717,67.97898,1174376,Garhi Khairo,PK,False,False
+"What's the longitude and latitude of Birine, Algeria?",Algeria,35.635,3.225,2503852,Birine,DZ,False,False
+"What's the longitude and latitude of Telemaco Borba, Brazil?",Brazil,-24.32389,-50.61556,3446652,Telemaco Borba,BR,False,False
+"What's the longitude and latitude of Pingxiang, China?",China,27.61672,113.85353,1798654,Pingxiang,CN,False,False
+"What's the longitude and latitude of Apodi, Brazil?",Brazil,-5.66417,-37.79889,3407440,Apodi,BR,False,False
+"What's the longitude and latitude of Libreville, Gabon?",Gabon,0.39241,9.45356,2399697,Libreville,GA,False,False
+"What's the longitude and latitude of Teshi Old Town, Ghana?",Ghana,5.58365,-0.10722,2294665,Teshi Old Town,GH,False,False
+"What's the longitude and latitude of Estahban, Iran?",Iran,29.1266,54.0421,135094,Estahban,IR,False,False
+"What's the longitude and latitude of Sha Tin Wai, Hong Kong?",Hong Kong,22.37756,114.19753,1818916,Sha Tin Wai,HK,False,False
+"What's the longitude and latitude of Taketoyo, Japan?",Japan,34.85,136.91667,1850818,Taketoyo,JP,False,False
+"What's the longitude and latitude of Al Manaqil, Sudan?",Sudan,14.2459,32.9891,379149,Al Manaqil,SD,False,False
+"What's the longitude and latitude of Canillejas, Spain?",Spain,40.44838,-3.60849,3126558,Canillejas,ES,False,False
+"What's the longitude and latitude of Kampong Cham, Cambodia?",Cambodia,11.99339,105.4635,1831173,Kampong Cham,KH,False,False
+"What's the longitude and latitude of Wakefield, United States?",United States,40.89788,-73.85236,5143056,Wakefield,US,False,False
+"What's the longitude and latitude of McAlester, United States?",United States,34.93343,-95.76971,4542367,McAlester,US,False,False
+"What's the longitude and latitude of Canudos, Brazil?",Brazil,-9.89667,-39.02639,3403214,Canudos,BR,False,False
+"What's the longitude and latitude of Binan, Philippines?",Philippines,14.34267,121.08071,1725115,Binan,PH,False,False
+"What's the longitude and latitude of Alcantara, Portugal?",Portugal,38.70102,-9.17145,2272187,Alcantara,PT,False,False
+"What's the longitude and latitude of Sanjiao, China?",China,29.05028,106.73639,1796755,Sanjiao,CN,False,False
+"What's the longitude and latitude of Heiloo, Netherlands?",Netherlands,52.60252,4.68815,2754516,Heiloo,NL,False,False
+"What's the longitude and latitude of Jatibarang, Indonesia?",Indonesia,-6.47472,108.31528,1642726,Jatibarang,ID,False,False
+"What's the longitude and latitude of Barstow, United States?",United States,34.89859,-117.02282,5326297,Barstow,US,False,False
+"What's the longitude and latitude of Fleetwood, United Kingdom?",United Kingdom,53.92527,-3.01085,2649312,Fleetwood,GB,False,False
+"What's the longitude and latitude of Se, Macao?",Macao,22.19089,113.54733,13527317,Se,MO,False,False
+"What's the longitude and latitude of Cuscatancingo, El Salvador?",El Salvador,13.72702,-89.18161,3586833,Cuscatancingo,SV,False,False
+"What's the longitude and latitude of Rozdilna, Ukraine?",Ukraine,46.85479,30.07091,695344,Rozdilna,UA,False,False
+"What's the longitude and latitude of Zaragoza, Philippines?",Philippines,15.44903,120.79627,1679397,Zaragoza,PH,False,False
+"What's the longitude and latitude of Zuerich (Kreis 6) / Unterstrass, Switzerland?",Switzerland,47.3953,8.53721,6295504,Zuerich (Kreis 6) / Unterstrass,CH,False,False
+"What's the longitude and latitude of Lisbon, Portugal?",Portugal,38.72509,-9.1498,2267057,Lisbon,PT,False,True
+"What's the longitude and latitude of Halmstad, Sweden?",Sweden,56.67446,12.85676,2708365,Halmstad,SE,False,False
+"What's the longitude and latitude of Rawson, Argentina?",Argentina,-43.30031,-65.10564,3839307,Rawson,AR,False,False
+"What's the longitude and latitude of Thottada, India?",India,11.83851,75.4208,7660032,Thottada,IN,False,False
+"What's the longitude and latitude of Ratia, India?",India,29.69029,75.57688,1258347,Ratia,IN,False,False
+"What's the longitude and latitude of San Rafael Tlanalapan, Mexico?",Mexico,19.29167,-98.46806,8858120,San Rafael Tlanalapan,MX,False,False
+"What's the longitude and latitude of Yangcun, China?",China,39.36389,117.06028,1787646,Yangcun,CN,False,False
+"What's the longitude and latitude of Cubatao, Brazil?",Brazil,-23.895,-46.42528,3465059,Cubatao,BR,False,False
+"What's the longitude and latitude of Semi, Benin?",Benin,6.36667,2.61667,2391833,Semi,BJ,False,False
+"What's the longitude and latitude of Tekkalakote, India?",India,15.53444,76.87703,1254795,Tekkalakote,IN,False,False
+"What's the longitude and latitude of Enugu, Nigeria?",Nigeria,6.44132,7.49883,2343279,Enugu,NG,False,False
+"What's the longitude and latitude of Slovyansk, Ukraine?",Ukraine,48.84974,37.59739,693468,Slovyansk,UA,False,False
+"What's the longitude and latitude of Leichlingen, Germany?",Germany,51.10628,7.01873,2879315,Leichlingen,DE,False,False
+"What's the longitude and latitude of Bhindar, India?",India,24.50235,74.18551,1275925,Bhindar,IN,False,False
+"What's the longitude and latitude of Idaho Falls, United States?",United States,43.46658,-112.03414,5596475,Idaho Falls,US,False,False
+"What's the longitude and latitude of Kajiado, Kenya?",Kenya,-1.85238,36.77683,195298,Kajiado,KE,False,False
+"What's the longitude and latitude of Agege, Nigeria?",Nigeria,6.61563,3.33337,2351943,Agege,NG,False,False
+"What's the longitude and latitude of Cangzhou, China?",China,38.31124,116.85334,1816080,Cangzhou,CN,False,False
+"What's the longitude and latitude of Nasugbu, Philippines?",Philippines,14.06694,120.63181,1698030,Nasugbu,PH,False,False
+"What's the longitude and latitude of Lurup, Germany?",Germany,53.59266,9.87697,2875023,Lurup,DE,False,False
+"What's the longitude and latitude of Pokrov, Ukraine?",Ukraine,47.65361,34.11488,698436,Pokrov,UA,False,False
+"What's the longitude and latitude of Portsmouth, United States?",United States,38.73174,-82.99767,4521816,Portsmouth,US,False,False
+"What's the longitude and latitude of Sabana de Torres, Colombia?",Colombia,7.3915,-73.49574,3670520,Sabana de Torres,CO,False,False
+"What's the longitude and latitude of Damascus, United States?",United States,39.28844,-77.20387,4352728,Damascus,US,False,False
+"What's the longitude and latitude of Umburanas, Brazil?",Brazil,-10.73278,-41.32639,3445802,Umburanas,BR,False,False
+"What's the longitude and latitude of Lugulu, Kenya?",Kenya,0.39337,34.30399,188657,Lugulu,KE,False,False
+"What's the longitude and latitude of Imperial Beach, United States?",United States,32.58394,-117.11308,5359054,Imperial Beach,US,False,False
+"What's the longitude and latitude of Helena, United States?",United States,46.59271,-112.03611,5656882,Helena,US,False,False
+"What's the longitude and latitude of Chak Five Hundred Seventy-five, Pakistan?",Pakistan,31.54514,73.82891,1162572,Chak Five Hundred Seventy-five,PK,False,False
+"What's the longitude and latitude of Puthur, India?",India,10.4874,76.27929,11463506,Puthur,IN,False,False
+"What's the longitude and latitude of Pikesville, United States?",United States,39.37427,-76.72247,4365387,Pikesville,US,False,False
+"What's the longitude and latitude of Salem, United States?",United States,42.51977,-70.89552,4950065,Salem,US,False,False
+"What's the longitude and latitude of East Naples, United States?",United States,26.13842,-81.76648,4154031,East Naples,US,False,False
+"What's the longitude and latitude of Deolali, India?",India,19.47393,74.62063,1273234,Deolali,IN,False,False
+"What's the longitude and latitude of Bressanone, Italy?",Italy,46.71503,11.65598,3181550,Bressanone,IT,False,False
+"What's the longitude and latitude of Clementi Housing Estate, Singapore?",Singapore,1.31583,103.76472,1884384,Clementi Housing Estate,SG,False,False
+"What's the longitude and latitude of Mantilla, Cuba?",Cuba,23.06794,-82.34143,3547932,Mantilla,CU,False,False
+"What's the longitude and latitude of Misrikh, India?",India,27.43137,80.53157,1262988,Misrikh,IN,False,False
+"What's the longitude and latitude of Sastamala, Finland?",Finland,61.34942,22.90928,8198723,Sastamala,FI,False,False
+"What's the longitude and latitude of Chaiyaphum, Thailand?",Thailand,15.81047,102.02881,1611407,Chaiyaphum,TH,False,False
+"What's the longitude and latitude of Novyye Cheremushki, Russia?",Russia,55.7,37.58333,517161,Novyye Cheremushki,RU,False,False
+"What's the longitude and latitude of Arsikere, India?",India,13.31446,76.25704,1278354,Arsikere,IN,False,False
+"What's the longitude and latitude of East Lake, United States?",United States,28.11085,-82.69482,4154008,East Lake,US,False,False
+"What's the longitude and latitude of Hildesheim, Germany?",Germany,52.15077,9.95112,2904789,Hildesheim,DE,False,False
+"What's the longitude and latitude of Lyon 04, France?",France,45.77507,4.82712,6543970,Lyon 04,FR,False,False
+"What's the longitude and latitude of Al Bada'i' al Wusta, Saudi Arabia?",Saudi Arabia,25.98546,43.73659,397833,Al Bada'i' al Wusta,SA,False,False
+"What's the longitude and latitude of Novi Ligure, Italy?",Italy,44.76246,8.787,3172170,Novi Ligure,IT,False,False
+"What's the longitude and latitude of Pamuru, India?",India,15.09633,79.41174,1260615,Pamuru,IN,False,False
+"What's the longitude and latitude of Sidi Merouane, Algeria?",Algeria,36.52056,6.26111,2480198,Sidi Merouane,DZ,False,False
+"What's the longitude and latitude of Palmarito Tochapan, Mexico?",Mexico,18.90135,-97.63833,3522118,Palmarito Tochapan,MX,False,False
+"What's the longitude and latitude of Nima, China?",China,34.00065,102.07127,1783666,Nima,CN,False,False
+"What's the longitude and latitude of Dewas, India?",India,22.96585,76.05526,1273066,Dewas,IN,False,False
+"What's the longitude and latitude of Wantirna South, Australia?",Australia,-37.88333,145.21667,2144728,Wantirna South,AU,False,False
+"What's the longitude and latitude of Kozani, Greece?",Greece,40.29931,21.78984,735563,Kozani,GR,False,False
+"What's the longitude and latitude of Thi Tran GJam Ha, Vietnam?",Vietnam,21.35314,107.59722,1584023,Thi Tran GJam Ha,VN,False,False
+"What's the longitude and latitude of Kapadvanj, India?",India,23.02302,73.07113,1267939,Kapadvanj,IN,False,False
+"What's the longitude and latitude of Pudunagaram, India?",India,10.68018,76.68363,1259296,Pudunagaram,IN,False,False
+"What's the longitude and latitude of Granite City, United States?",United States,38.70144,-90.14872,4239714,Granite City,US,False,False
+"What's the longitude and latitude of Atlantis, South Africa?",South Africa,-33.56668,18.48335,3370352,Atlantis,ZA,False,False
+"What's the longitude and latitude of Feijo, Brazil?",Brazil,-8.1654,-70.35486,3664243,Feijo,BR,False,False
+"What's the longitude and latitude of Be'er Ya'aqov, Israel?",Israel,31.93864,34.83749,295525,Be'er Ya'aqov,IL,False,False
+"What's the longitude and latitude of Qunghirot, Uzbekistan?",Uzbekistan,43.04333,58.83944,601323,Qunghirot,UZ,False,False
+"What's the longitude and latitude of Trikarpur South, India?",India,12.11649,75.18517,10878443,Trikarpur South,IN,False,False
+"What's the longitude and latitude of Frenda, Algeria?",Algeria,35.06544,1.04945,2496232,Frenda,DZ,False,False
+"What's the longitude and latitude of Luton, United Kingdom?",United Kingdom,51.87967,-0.41748,2643339,Luton,GB,False,False
+"What's the longitude and latitude of Bocaiuva, Brazil?",Brazil,-17.10778,-43.815,3469601,Bocaiuva,BR,False,False
+"What's the longitude and latitude of Lake Havasu City, United States?",United States,34.4839,-114.32245,5301388,Lake Havasu City,US,False,False
+"What's the longitude and latitude of Laem Ngop, Thailand?",Thailand,12.17129,102.39472,1609283,Laem Ngop,TH,False,False
+"What's the longitude and latitude of Bradley, United States?",United States,41.14198,-87.86115,4885418,Bradley,US,False,False
+"What's the longitude and latitude of Aguas Santas, Portugal?",Portugal,41.21017,-8.57599,2743304,Aguas Santas,PT,False,False
+"What's the longitude and latitude of Hungnam, North Korea?",North Korea,39.84198,127.63206,1877030,Hungnam,KP,False,False
+"What's the longitude and latitude of Pathalgaon, India?",India,22.55656,83.46355,1260141,Pathalgaon,IN,False,False
+"What's the longitude and latitude of Alpinopolis, Brazil?",Brazil,-20.86361,-46.38806,3472507,Alpinopolis,BR,False,False
+"What's the longitude and latitude of Ruzomberok, Slovakia?",Slovakia,49.0748,19.30751,3057789,Ruzomberok,SK,False,False
+"What's the longitude and latitude of Tamluk, India?",India,22.30083,87.92593,1255046,Tamluk,IN,False,False
+"What's the longitude and latitude of Amvrosiyivka, Ukraine?",Ukraine,47.79062,38.47851,713504,Amvrosiyivka,UA,False,False
+"What's the longitude and latitude of Mohale's Hoek, Lesotho?",Lesotho,-30.15137,27.47691,932438,Mohale's Hoek,LS,False,False
+"What's the longitude and latitude of Lehrte, Germany?",Germany,52.37193,9.97919,2879367,Lehrte,DE,False,False
+"What's the longitude and latitude of Arsk, Russia?",Russia,56.09254,49.87819,580850,Arsk,RU,False,False
+"What's the longitude and latitude of Oceanside, United States?",United States,33.19587,-117.37948,5378771,Oceanside,US,False,False
+"What's the longitude and latitude of Namponkore, Burkina Faso?",Burkina Faso,11.73748,1.77718,12217144,Namponkore,BF,False,False
+"What's the longitude and latitude of Mandi Bahauddin, Pakistan?",Pakistan,32.58704,73.49123,1171123,Mandi Bahauddin,PK,False,False
+"What's the longitude and latitude of Nansana, Uganda?",Uganda,0.36389,32.52861,10943053,Nansana,UG,False,False

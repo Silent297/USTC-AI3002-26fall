@@ -1,0 +1,109 @@
+{
+  "seed": 20261004,
+  "source": {
+    "cities15000.txt": {
+      "md5": "93552399ffea69d2eefa0670c44f34ed",
+      "rows": 34166
+    },
+    "countryInfo.txt": {
+      "md5": "8b8c150699ba73e51f0ee42a51e00d4c",
+      "countries": 252
+    }
+  },
+  "protocol": {
+    "total": 12000,
+    "train": 8382,
+    "valid": 1050,
+    "test": 1050,
+    "test_unseen": 1518,
+    "unseen_countries": 30,
+    "unseen_country_city_range": [
+      8,
+      500
+    ],
+    "country_prompt": "What's the longitude and latitude of {place}, {country}?",
+    "city_state_prompt": "What's the longitude and latitude of {place}?"
+  },
+  "counts": {
+    "sampled_rows": 12000,
+    "distinct_countries": 235,
+    "train_countries": 193,
+    "valid_countries": 117,
+    "test_countries": 110,
+    "unseen_countries": 30
+  },
+  "unseen_iso": [
+    "BA",
+    "BG",
+    "BW",
+    "CI",
+    "CR",
+    "CZ",
+    "DK",
+    "EG",
+    "ET",
+    "GM",
+    "GN",
+    "GT",
+    "HT",
+    "HU",
+    "KG",
+    "KR",
+    "KZ",
+    "LB",
+    "MA",
+    "ML",
+    "NE",
+    "PA",
+    "PE",
+    "PS",
+    "SN",
+    "TN",
+    "TT",
+    "TW",
+    "VE",
+    "YE"
+  ],
+  "unseen_country_names": [
+    "Bosnia and Herzegovina",
+    "Bulgaria",
+    "Botswana",
+    "Côte d’Ivoire",
+    "Costa Rica",
+    "Czechia",
+    "Denmark",
+    "Egypt",
+    "Ethiopia",
+    "The Gambia",
+    "Guinea",
+    "Guatemala",
+    "Haiti",
+    "Hungary",
+    "Kyrgyzstan",
+    "South Korea",
+    "Kazakhstan",
+    "Lebanon",
+    "Morocco",
+    "Mali",
+    "Niger",
+    "Panama",
+    "Peru",
+    "Palestine",
+    "Senegal",
+    "Tunisia",
+    "Trinidad and Tobago",
+    "Taiwan",
+    "Venezuela",
+    "Yemen"
+  ],
+  "overlap": {
+    "train_match_orig_valid": 14,
+    "train_match_orig_train": 68,
+    "valid_match_orig_valid": 2,
+    "test_match_orig_valid": 1,
+    "unseen_match_orig_valid": 8,
+    "orig_valid_rows_with_iso": 130,
+    "orig_train_rows_with_iso": 496
+  },
+  "note": "cities15000 当前版本有 244 个国家码；采样框取城市数最多的 235 个（剔除 9 个单城市代码），与指南2 的 235 个代码对齐。每个采样国家至少 1 条，因此 counts.distinct_countries 应为 235。"
+}

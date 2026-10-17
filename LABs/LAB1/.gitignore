@@ -9,3 +9,7 @@ report/*.xdv
 report/*.out
 report/*.log
 report/*.synctex.gz
+
+# C3：GeoNames 原始 dump 与提取特征（大文件，可由 c3_build_dataset.py / c3_extract.py 重建）
+experiments/C3/data/raw/
+experiments/C3/features/
