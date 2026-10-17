@@ -1,0 +1,213 @@
+65 tasks, 4 workers, out=/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_c3/c3_v1
+Training converged at epoch 1331, loss=45.87758355
+Training converged at epoch 1369, loss=33.90923733
+Training converged at epoch 1328, loss=46.93453995
+Training converged at epoch 1352, loss=38.91797980
+Training converged at epoch 1017, loss=386.92145468
+orig_layer2: orig_valid=157.57 new_test=163.25 unseen=61.21 lr=0.002 attempts=1 (13.7s)
+Training converged at epoch 1022, loss=364.89880392
+orig_layer11: orig_valid=167.04 new_test=147.01 unseen=56.46 lr=0.002 attempts=1 (13.8s)
+Training converged at epoch 1015, loss=390.48039045
+orig_layer5: orig_valid=163.02 new_test=172.08 unseen=70.36 lr=0.002 attempts=1 (14.1s)
+Training converged at epoch 1022, loss=368.20419576
+orig_layer8: orig_valid=159.14 new_test=183.58 unseen=95.82 lr=0.002 attempts=1 (14.2s)
+Training converged at epoch 1356, loss=37.39044769
+Training converged at epoch 1345, loss=40.86638158
+Training converged at epoch 1335, loss=44.40354593
+Training converged at epoch 1336, loss=44.14632577
+Training converged at epoch 1018, loss=373.34979915
+orig_layer14: orig_valid=213.67 new_test=198.23 unseen=137.96 lr=0.002 attempts=1 (11.7s)
+Training converged at epoch 1006, loss=409.96017763
+orig_layer17: orig_valid=227.13 new_test=195.61 unseen=133.16 lr=0.002 attempts=1 (13.0s)
+Training converged at epoch 998, loss=438.63277880
+orig_layer20: orig_valid=241.83 new_test=227.41 unseen=161.40 lr=0.002 attempts=1 (13.0s)
+Training converged at epoch 1009, loss=405.63692515
+orig_layer23: orig_valid=241.14 new_test=251.42 unseen=197.20 lr=0.002 attempts=1 (12.9s)
+Training converged at epoch 1345, loss=41.07517288
+Training converged at epoch 1345, loss=41.08867234
+Training converged at epoch 1369, loss=33.89102488
+Training converged at epoch 1374, loss=32.40939908
+Training converged at epoch 1001, loss=434.35488783
+orig_layer26: orig_valid=226.25 new_test=242.31 unseen=128.81 lr=0.002 attempts=1 (11.6s)
+Training converged at epoch 1001, loss=436.88895993
+orig_layer29: orig_valid=209.99 new_test=267.67 unseen=125.05 lr=0.002 attempts=1 (11.2s)
+Training converged at epoch 1372, loss=33.00751741
+Training converged at epoch 1014, loss=389.02944219
+orig_layer32: orig_valid=180.31 new_test=190.21 unseen=53.89 lr=0.002 attempts=1 (14.4s)
+Training converged at epoch 1023, loss=358.33744092
+orig_layer34: orig_valid=196.46 new_test=195.53 unseen=95.93 lr=0.002 attempts=1 (14.5s)
+Training converged at epoch 1022, loss=360.88183093
+orig_layer35: orig_valid=204.91 new_test=192.66 unseen=93.31 lr=0.002 attempts=1 (5.6s)
+Training converged at epoch 1469, loss=38.97660149
+Training converged at epoch 1470, loss=38.71693327
+Training converged at epoch 1490, loss=33.06393580
+Training converged at epoch 1500, loss=30.34315339
+Training converged at epoch 1231, loss=219.21464820
+new_layer2: orig_valid=186.65 new_test=84.34 unseen=263.29 lr=0.002 attempts=1 (1129.3s)
+Training converged at epoch 1229, loss=221.53892310
+new_layer5: orig_valid=243.37 new_test=83.16 unseen=319.26 lr=0.002 attempts=1 (1131.4s)
+Training converged at epoch 1236, loss=209.36001888
+new_layer8: orig_valid=253.52 new_test=70.96 unseen=221.65 lr=0.002 attempts=1 (1143.6s)
+Training converged at epoch 1238, loss=207.41481179
+new_layer11: orig_valid=225.29 new_test=64.02 unseen=148.49 lr=0.002 attempts=1 (1153.2s)
+Training converged at epoch 1487, loss=33.70811582
+Training converged at epoch 1481, loss=35.39039716
+Training converged at epoch 1475, loss=37.07144238
+Training converged at epoch 1472, loss=38.08175139
+Training converged at epoch 1225, loss=229.11029823
+new_layer14: orig_valid=295.26 new_test=74.47 unseen=166.23 lr=0.002 attempts=1 (1585.2s)
+Training converged at epoch 1216, loss=246.73535989
+new_layer17: orig_valid=352.07 new_test=85.60 unseen=176.14 lr=0.002 attempts=1 (1581.4s)
+Training converged at epoch 1209, loss=262.29045737
+new_layer20: orig_valid=381.24 new_test=86.72 unseen=190.42 lr=0.002 attempts=1 (1575.9s)
+Training converged at epoch 1221, loss=237.98156316
+new_layer23: orig_valid=357.90 new_test=82.72 unseen=148.31 lr=0.002 attempts=1 (1577.5s)
+Training converged at epoch 1483, loss=34.82634689
+Training converged at epoch 1484, loss=34.63351450
+Training converged at epoch 1501, loss=30.20550418
+Training converged at epoch 1497, loss=31.29627908
+Training converged at epoch 1219, loss=241.25856296
+new_layer26: orig_valid=345.82 new_test=83.79 unseen=167.84 lr=0.002 attempts=1 (876.2s)
+Training converged at epoch 1224, loss=231.15991955
+new_layer29: orig_valid=354.41 new_test=86.72 unseen=136.95 lr=0.002 attempts=1 (878.6s)
+Training converged at epoch 1239, loss=204.71896913
+new_layer32: orig_valid=268.03 new_test=73.96 unseen=86.23 lr=0.002 attempts=1 (883.2s)
+Training converged at epoch 1236, loss=210.80738118
+new_layer34: orig_valid=300.60 new_test=77.17 unseen=107.53 lr=0.002 attempts=1 (871.4s)
+Training converged at epoch 1495, loss=31.74247634
+Training converged at epoch 1469, loss=38.96266787
+Training converged at epoch 1470, loss=38.68932534
+Training converged at epoch 1490, loss=33.00729825
+Training converged at epoch 1231, loss=219.33794074
+Training converged at epoch 1235, loss=212.72457993
+new_noleak_layer2: orig_valid=186.85 new_test=84.31 unseen=263.88 lr=0.002 attempts=1 (487.0s)
+new_layer35: orig_valid=320.33 new_test=78.48 unseen=116.25 lr=0.002 attempts=1 (490.5s)
+Training converged at epoch 1229, loss=221.62420570
+new_noleak_layer5: orig_valid=243.81 new_test=83.15 unseen=319.78 lr=0.002 attempts=1 (482.1s)
+Training converged at epoch 1236, loss=209.36378585
+new_noleak_layer8: orig_valid=254.20 new_test=70.96 unseen=221.84 lr=0.002 attempts=1 (483.6s)
+Training converged at epoch 1488, loss=33.67749496
+Training converged at epoch 1501, loss=30.31423008
+Training converged at epoch 1482, loss=35.34271972
+Training converged at epoch 1476, loss=37.02132682
+Training converged at epoch 1225, loss=229.08444150
+new_noleak_layer14: orig_valid=296.78 new_test=74.50 unseen=166.98 lr=0.002 attempts=1 (396.0s)
+Training converged at epoch 1238, loss=207.37684244
+new_noleak_layer11: orig_valid=226.00 new_test=64.05 unseen=149.29 lr=0.002 attempts=1 (400.0s)
+Training converged at epoch 1216, loss=246.60201764
+new_noleak_layer17: orig_valid=354.81 new_test=85.70 unseen=176.49 lr=0.002 attempts=1 (393.9s)
+Training converged at epoch 1209, loss=261.99424209
+new_noleak_layer20: orig_valid=385.14 new_test=86.97 unseen=190.51 lr=0.002 attempts=1 (392.2s)
+Training converged at epoch 1473, loss=38.01827770
+Training converged at epoch 1484, loss=34.75648081
+Training converged at epoch 1484, loss=34.54893571
+Training converged at epoch 1501, loss=30.16154690
+Training converged at epoch 1221, loss=237.88830099
+new_noleak_layer23: orig_valid=359.82 new_test=82.83 unseen=148.21 lr=0.002 attempts=1 (350.9s)
+Training converged at epoch 1219, loss=241.15719724
+new_noleak_layer26: orig_valid=347.53 new_test=83.91 unseen=167.64 lr=0.002 attempts=1 (349.6s)
+Training converged at epoch 1224, loss=231.04774093
+new_noleak_layer29: orig_valid=356.46 new_test=86.81 unseen=136.87 lr=0.002 attempts=1 (350.5s)
+Training converged at epoch 1239, loss=204.74023123
+new_noleak_layer32: orig_valid=269.06 new_test=74.02 unseen=86.10 lr=0.002 attempts=1 (356.7s)
+Training converged at epoch 1497, loss=31.25666561
+Training converged at epoch 1495, loss=31.70304056
+Training converged at epoch 1457, loss=41.27527315
+Training converged at epoch 1455, loss=41.69027878
+Training converged at epoch 1236, loss=210.81867359
+new_noleak_layer34: orig_valid=301.87 new_test=77.22 unseen=107.35 lr=0.002 attempts=1 (351.4s)
+Training converged at epoch 1235, loss=212.73475594
+new_noleak_layer35: orig_valid=321.59 new_test=78.53 unseen=115.92 lr=0.002 attempts=1 (350.4s)
+Training converged at epoch 1212, loss=241.66531994
+union_layer2: orig_valid=139.21 new_test=84.49 unseen=138.47 lr=0.002 attempts=1 (356.5s)
+Training converged at epoch 1210, loss=246.59584322
+union_layer5: orig_valid=154.90 new_test=82.18 unseen=139.80 lr=0.002 attempts=1 (356.1s)
+Training converged at epoch 1475, loss=35.67869902
+Training converged at epoch 1487, loss=32.25748916
+Training converged at epoch 1472, loss=36.47207296
+Training converged at epoch 1464, loss=38.94614621
+Training converged at epoch 1217, loss=233.35099148
+union_layer8: orig_valid=182.73 new_test=70.34 unseen=135.11 lr=0.002 attempts=1 (360.9s)
+Training converged at epoch 1217, loss=232.07335799
+union_layer11: orig_valid=172.92 new_test=62.34 unseen=81.90 lr=0.002 attempts=1 (366.4s)
+Training converged at epoch 1204, loss=258.45629657
+union_layer14: orig_valid=229.22 new_test=72.29 unseen=119.37 lr=0.002 attempts=1 (362.5s)
+Training converged at epoch 1194, loss=279.15016958
+union_layer17: orig_valid=269.43 new_test=82.29 unseen=142.20 lr=0.002 attempts=1 (356.3s)
+Training converged at epoch 1458, loss=40.82976155
+Training converged at epoch 1454, loss=42.02041076
+Training converged at epoch 1467, loss=38.01276650
+Training converged at epoch 1467, loss=37.99877762
+Training converged at epoch 1187, loss=296.49640575
+union_layer20: orig_valid=294.14 new_test=83.14 unseen=164.02 lr=0.002 attempts=1 (360.1s)
+Training converged at epoch 1199, loss=269.41653136
+union_layer23: orig_valid=287.07 new_test=80.53 unseen=114.72 lr=0.002 attempts=1 (356.6s)
+Training converged at epoch 1202, loss=263.77435654
+union_layer29: orig_valid=282.14 new_test=83.58 unseen=99.64 lr=0.002 attempts=1 (357.9s)
+Training converged at epoch 1197, loss=273.64322481
+union_layer26: orig_valid=272.18 new_test=80.78 unseen=112.84 lr=0.002 attempts=1 (363.3s)
+Training converged at epoch 1485, loss=32.96792713
+Training converged at epoch 1481, loss=33.90688180
+Training converged at epoch 1479, loss=34.41769018
+Training converged at epoch 1457, loss=41.26102257
+Training converged at epoch 1214, loss=237.80891626
+union_layer34: orig_valid=234.95 new_test=74.28 unseen=83.02 lr=0.002 attempts=1 (386.2s)
+Training converged at epoch 1217, loss=232.66694579
+union_layer32: orig_valid=212.04 new_test=71.55 unseen=65.60 lr=0.002 attempts=1 (390.5s)
+Training converged at epoch 1214, loss=239.18643353
+union_layer35: orig_valid=252.39 new_test=75.61 unseen=95.32 lr=0.002 attempts=1 (385.4s)
+Training converged at epoch 1212, loss=241.81835792
+union_noleak_layer2: orig_valid=139.36 new_test=84.47 unseen=138.50 lr=0.002 attempts=1 (386.2s)
+Training converged at epoch 1456, loss=41.66640947
+Training converged at epoch 1475, loss=35.62717140
+Training converged at epoch 1488, loss=32.23490066
+Training converged at epoch 1472, loss=36.45076572
+Training converged at epoch 1210, loss=246.71313508
+union_noleak_layer5: orig_valid=155.16 new_test=82.18 unseen=139.84 lr=0.002 attempts=1 (382.1s)
+Training converged at epoch 1217, loss=233.38551488
+union_noleak_layer8: orig_valid=183.34 new_test=70.34 unseen=135.19 lr=0.002 attempts=1 (388.5s)
+Training converged at epoch 1217, loss=232.07636245
+union_noleak_layer11: orig_valid=173.47 new_test=62.37 unseen=82.17 lr=0.002 attempts=1 (387.4s)
+Training converged at epoch 1204, loss=258.50024003
+union_noleak_layer14: orig_valid=229.90 new_test=72.31 unseen=119.63 lr=0.002 attempts=1 (386.4s)
+Training converged at epoch 1464, loss=38.90953737
+Training converged at epoch 1458, loss=40.79484110
+Training converged at epoch 1455, loss=41.97150766
+Training converged at epoch 1467, loss=37.94553397
+Training converged at epoch 1195, loss=279.12213829
+union_noleak_layer17: orig_valid=270.69 new_test=82.34 unseen=142.40 lr=0.002 attempts=1 (376.8s)
+Training converged at epoch 1187, loss=296.33555762
+union_noleak_layer20: orig_valid=295.94 new_test=83.28 unseen=164.02 lr=0.002 attempts=1 (377.1s)
+Training converged at epoch 1199, loss=269.38237409
+union_noleak_layer23: orig_valid=288.24 new_test=80.62 unseen=114.63 lr=0.002 attempts=1 (374.9s)
+Training converged at epoch 1197, loss=273.60462042
+union_noleak_layer26: orig_valid=273.20 new_test=80.87 unseen=112.67 lr=0.002 attempts=1 (379.4s)
+Training converged at epoch 1467, loss=37.95227862
+Training converged at epoch 1482, loss=33.88293633
+Training converged at epoch 1485, loss=32.93907926
+Training converged at epoch 1480, loss=34.39295800
+Training converged at epoch 1202, loss=263.72611319
+union_noleak_layer29: orig_valid=283.31 new_test=83.65 unseen=99.63 lr=0.002 attempts=1 (362.5s)
+Training converged at epoch 1214, loss=237.87150563
+union_noleak_layer34: orig_valid=235.77 new_test=74.31 unseen=82.95 lr=0.002 attempts=1 (359.4s)
+Training converged at epoch 1217, loss=232.73750631
+union_noleak_layer32: orig_valid=212.65 new_test=71.59 unseen=65.52 lr=0.002 attempts=1 (360.2s)
+Training converged at epoch 1214, loss=239.24256155
+union_noleak_layer35: orig_valid=253.28 new_test=75.64 unseen=95.18 lr=0.002 attempts=1 (357.4s)
+
+anchor checks: 13/13 ok
+  orig L2: 157.5709 vs 157.5709 (diff -0.0000)
+  orig L5: 163.0192 vs 163.0192 (diff +0.0000)
+  orig L8: 159.1384 vs 159.1384 (diff +0.0000)
+  orig L11: 167.0413 vs 167.0413 (diff -0.0000)
+  orig L14: 213.6689 vs 213.6689 (diff +0.0000)
+  orig L17: 227.1312 vs 227.1312 (diff +0.0000)
+  orig L20: 241.8260 vs 241.8260 (diff +0.0000)
+  orig L23: 241.1448 vs 241.1448 (diff -0.0000)
+  orig L26: 226.2459 vs 226.2459 (diff +0.0000)
+  orig L29: 209.9880 vs 209.9880 (diff +0.0000)
+  orig L32: 180.3090 vs 180.3090 (diff +0.0000)
+  orig L34: 196.4604 vs 196.4604 (diff +0.0000)
+  orig L35: 204.9075 vs 204.9075 (diff -0.0000)
+
+Wrote /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB1/results/slurm_c3/c3_v1/c3_metrics.json
