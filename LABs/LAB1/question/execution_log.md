@@ -46,7 +46,7 @@
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
 
-附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**C2**（prompt 变体特征 + 探针，`experiments/C2/`，见 §3「附录 C2」）；**C3**（GeoNames 数据扩增，`experiments/C3/`，见 §3「附录 C3」）；**A1–A3**（线性读出上限包）与 **A7**（5 折 CV 协议补做）见 `experiments/` 各自目录与 §3 对应附录。
+附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**C2**（prompt 变体特征 + 探针，`experiments/C2/`，见 §3「附录 C2」）；**C3**（GeoNames 数据扩增，`experiments/C3/`，见 §3「附录 C3」）；**A1–A3**（线性读出上限包）、**A7**（5 折 CV 协议补做）与 **A10**（球面损失 vs MSE 控制组）见 `experiments/` 各自目录与 §3 对应附录。
 
 ## 3. 逐题执行记录
 
@@ -224,6 +224,20 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **train 指标不能选层**：world train↔valid ρ=−0.247（ns），且 in-sample MSE 83.1–125.5 比 CV 低 2.8–5.4×；truth train acc 饱和（见上）。
   - **结论**：truth 的"L20 最优"经 CV 完全复现（同选、零 regret、11/15 折冠军），报告可放心把 valid 选层作为主结论；world 的 valid 选层在 CV 下**排序不稳但代价极小**（+1.29 MSE），应按"L2/L8 平台 + 折间 CI"报告，并把"均值 MSE 的划分敏感性（离群点尾部）"写进 limitation；选层一律不用 train 指标。
 
+### 附录 A10 球面损失 θ² vs MSE 控制组（world L11，附加实验）
+
+- **来源**：《可做实验清单》A10（指南3 §5，参考报告**非官方**）；2026-10-17 指派执行。属**附加探究**（不进课程必交内容）。问题：把 world L11 探针的坐标 MSE 换成球面中心角平方 $\theta^2$，地理距离能否改善？**周期等价解与坐标越界会把课程口径 MSE 扭曲到什么程度？** 指南要求在 valid 上选超参；我们的改动是**超参与早停只在 train 内部 5 折 × 3 seed CV 上选，valid 只做最终报告**。
+- **设计**：模型 $p=90(Az+a)$（$A\in\mathbb{R}^{2\times2560}$），特征按训练折 z-score。三组损失：① MSE 控制 $\frac1{2N}\sum\|p-y\|^2+\lambda\|A\|_F^2$；② 球面 $\frac1N\sum\theta_\varepsilon^2+\lambda\|A\|_F^2$，$\theta_\varepsilon=\mathrm{atan2}(\sqrt{\|u\times\hat u\|^2+\varepsilon},u\cdot\hat u)$、$\varepsilon=10^{-12}$；③ hybrid $\theta^2+\beta\cdot\mathrm{MSE}_{\rm rad}$。网格 lr $\{10^{-3},3\times10^{-3}\}$ × $\lambda\{0,10^{-3},10^{-2}\}$；hybrid 固定球面选中 lr/λ 扫 $\beta\in\{0.01,0.1,0.2,0.3,0.5,1.0\}$。选择/早停：train-only 5 折 × 3 seed OOF（MSE 组按 OOF 原始 MSE；球面/hybrid 按 OOF 平均大圆距离），patience 150、≤1200 轮；最终全 train 重训，轮数 = 15 次 best epoch 中位数，3 seeds 报均值±std。数值自检：球面梯度对拍指南解析式 max abs err **3.85e-19**；ridge 锚点 valid MSE **167.1707** / 中位 **923.1206 km**（脚本内断言）。
+- **代码/资产**：`experiments/A10/a10_spherical_loss.py`（`--hybrid` 全量、`--smoke`、`--replot`；本地 CPU **108.9 s**，torch 2.14.1+cpu / 4 threads）；结果 `a10_results.json`（protocol/anchors/cv/selected/ridge + 逐折记录）、`a10_predictions.npz`、`a10_weights.npz`、`a10_run.log`；图 `experiments/A10/figures/a10_{training_curves,metric_bars,hybrid_sweep,distance_ecdf,valid_map}.{png,pdf}`；逐图说明 `experiments/A10/a10_figure_notes.md`（含 10 条反射样本表与 7 条 caveats）。
+- **记录**（2026-10-17 完成）：
+  - **球面组距离大幅改善**：valid 平均 **1395.7±13.9 km vs MSE 控制 1977.3±119.2（−29.4%）**、中位 **1157.0±29.5 vs 1718.4±117.1（−32.7%）**；OOF 同向（1542.7 vs 1987.4，−22.4%），是分布级改善（ECDF 大部分分位优于 MSE 控制），不是少数样本的均值效应。
+  - **周期等价解确实出现，raw MSE 必须与分支诊断同报**：valid **10/130（7.7%）**、OOF **34/500（6.8%）** 输出落在反向纬度分支（原始 lat 低至 −184°）；课程口径 raw MSE **1801.45±11.74 vs 357.40±23.82（5.0×）**，但分支规范化 **370.46 vs 357.40（+3.7%）**、周期 MSE **289.93（−18.8%）**——"球面 MSE 更差"主要是坐标表示问题，不是 3D 位置。10 条中 9 条是澳洲—大洋洲点（真实经度 130–178°E），规范化后 SE 仅 7–295 deg²；第 10 条南极半岛（idx 101）规范化后仍 SE=22,982（真 3D 错误）。排除 10 条反射，球面规范化 MSE **205.9**（seed 0）< MSE 控制 383.0。
+  - **hybrid β=0.5 消掉反射**：β 由 0.3→0.5 是相变（反射 2.6%→0、raw MSE 770→485、平均距离 1775→1844 km）；β=0.5 最终 valid **239.71±2.63 MSE / 1187.5±28.3 中位 / 1460.9±10.6 平均 / 0 反射**，为三训练组综合最优；但 **OOF MSE 484.66 vs MSE 控制 472.46（+2.6%）**，valid 的 −33% 未复现，距离优势 OOF 成立（−7.2%）⇒ MSE 改进只能表述为"valid 上的观察"。
+  - **球面目标非凸/分支不稳**：同 lr=3e-3 下 MSE 控制正常（OOF 1987 km、0.2% 反射），球面组塌到 **43.5% 反射、OOF 3728.6 km、250 条纬度越界**（有限值坏分支解，非数值 inf/nan）⇒ 球面需更小 lr（1e-3）并监控反射率。λ 不可分辨：球面 lr=1e-3 下 λ=0/1e-3/1e-2 的 OOF 平均距离 1545.1/1544.9/1542.7 km（差 ≈0.7× seed std 3.4）；MSE 控制 lr=3e-3 下 OOF MSE 476.5/476.2/472.5（std 13–18）。
+  - **ridge 仍是整体最优**：valid 167.17 MSE / 923.1 中位 / 1203.1 平均，优于所有梯度训练组。A10 只回答"梯度训练探针内部换损失"，不能写成"球面损失优于 ridge"。**ensemble 仅作诊断**（球面 unit-vector 平均天然消分支，规范化 MSE 834.5 反比单 seed 均值 370.5 差）；正文用 seed 均值±std、地图/ECDF 用 seed 0。
+  - **口径说明**：指南参考数（valid 选参口径）不可逐位比较；我们所有选择在 train-only OOF，valid 只用一次，且最终用全部 500 条重训（CV 折仅 400 条），故 valid 指标系统性优于 OOF。
+- **结论**：球面 $\theta^2$ 在距离指标上是真实的分布级改善，但会产生 ~7% 周期等价解并把课程 raw MSE 放大 5×，必须同时报告分支规范化/周期 MSE 与越界计数；hybrid β=0.5 是零反射的工程折中（valid 240 MSE / 1187 km），但其 MSE 优势未被 OOF 复现；闭式 ridge（167 / 923）仍是整体上限参照。
+
 ### 附录 C3 GeoNames 数据扩增（附加实验）
 
 - **来源**：《可做实验清单》C3 / 指南2 §1（参考报告**非官方**）；2026-10-17 指派执行。属**附加探究**（不进课程必交内容）。问题：在 world 500 条之外重采样上万 GeoNames 地点、重提 Qwen 特征并训练探针，能否提升原 world 任务与"未见国家"泛化？
@@ -260,4 +274,5 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-16：**A1–A3 完成**（线性读出上限包，附加实验）：A1 多层拼接 world **L5+L32 128.82**（−18% vs 最好单层，低于历史提交 150.43）/ truth L17+L20 0.8833；A2 sklearn 家族仅 world-L11 KNN（140.70）超闭式 ridge，truth 全家族 0.85–0.877（SVC-RBF 0.8767 ≈ 参考报告 0.87）；A3 自训 MLP 均值均未超闭式锚（单 seed 可及但方差大，linear-AdamW 对照欠拟合）。⇒ 表征 + 正则对齐 > 模型族，线性读出已近上限。产物 `experiments/A{1,2,3}/`（3 脚本 + 3 结果 JSON + 6 图 + 3 逐图说明）。
 - 2026-10-17：**A7 完成**（5 折 CV 协议补做，附加实验）：train-only 5 折 × 3 重复、估计器同 A1。truth CV↔valid 秩相关 **0.968**、CV 与 valid 同选 **L20**（regret 0，15 折中 L20 赢 11）⇒ valid 选层可复现；world ρ=0.703、CV 最优 L8 vs valid 最优 L2 但头部不可分辨（valid regret 仅 **+1.29 MSE**）⇒ 应按 L2/L8 平台报告；world CV 均值 MSE 高于 valid 系离群点尾部（典型误差一致：L2 中位 SE 47.1/45.1、中位距离 988/978 km；top-5 占 SSE 40.6%）⇒ 均值 MSE 对划分敏感；train 指标不能选层（world ρ=−0.25 ns、truth train acc 饱和）。产物 `experiments/A7/`（脚本 + 结果 JSON + CSV + 4 图 + 留档日志 + 逐图说明）。
 - 2026-10-17：**C2 完成**（prompt 变体特征 + 探针，附加实验）：5 变体 × 13 层 std13（raw11 辅助，nameonly raw11 发散）。std13-L11：删国家名 MSE 539→1069、中位 2280→3115 km（+1005 km CI [624, 1391]）、去指令仅 +233 km、换问法 −199 km（CI 上界 +0.3）、读点国家 token→句末 "?" +1511 km；国家名效应集中在 seen 国家（+1127 vs unseen +335，CI 跨 0）⇒ 与 Q7 反向闭环。锚点 13/14 逐位一致（L35 +0.77 为 float16 数值差，raw11 −0.10）。产物 `experiments/C2/`（脚本 + 5 变体 CSV + 3 图 + `c2_figure_notes.md`）与 `results/slurm_c2/c2_v1/`。
+- 2026-10-17：**A10 完成**（球面损失 θ² vs MSE 控制组，附加实验）：world L11 探针，train-only 5 折 × 3 seed 选参/早停（valid 只用一次）。球面组 valid 平均距离 **1396 vs MSE 控制 1977 km（−29.4%）**、中位 1157 vs 1718（−32.7%）；但 **10/130（7.7%）** 输出落反向纬度分支（OOF 34/500），raw MSE **1801 vs 357**（5.0×），分支规范化后 **370 vs 357**、周期 MSE 290 ⇒ 恶化主要来自坐标表示而非 3D 位置；9/10 反射集中在澳洲—大洋洲。hybrid β=0.5 零反射（valid 240 MSE / 1187 km 中位），但 OOF MSE 485 vs 472（+2.6%）未复现 valid 的 −33%；球面 lr=3e-3 塌到 43.5% 反射（非凸证据）；λ 不可分辨；ridge 167/923 仍全场最优。产物 `experiments/A10/`（脚本 + 结果 JSON + 预测/权重 NPZ + 5 图 + `a10_figure_notes.md`）。
 - 2026-10-17：**C3 完成**（GeoNames 数据扩增，附加实验）：12,000 城 / 30 国整国留出；13 层重提 + 5 训练集 × 4 评估集。原 world valid 总体不显著（union−orig L2 −18.4 / L11 +5.9，CI 跨 0）；收益集中于 unseen（L11 −143.1，CI 不跨 0）；strict8 上 union 比 new 低 21.7 MSE（cluster CI [−41.9,−7.8]）但逐国异质；new 单独训练伤原任务（L11 +58.2）⇒ 混合优于替换；full unseen 的 22/30 国重叠是陷阱。产物 `experiments/C3/`（4 图 + `c3_figure_notes.md` + `c3_analysis.json` + 评估脚本）与 `results/slurm_c3/c3_v1/`（65 runs）。
