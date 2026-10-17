@@ -7,7 +7,7 @@
 # Students 分区混部 RTX5090 / A100；5090 节点上 ai26 的 torch cu130 会触发 CUDA error 804，钉死 A100。
 #SBATCH --gres=gpu:A100:1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=32G
+#SBATCH --mem=16G
 #SBATCH --time=4:00:00
 
 # 提交（仓库根目录）：
