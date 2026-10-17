@@ -1,0 +1,501 @@
+sentence,country,latitude,longitude
+"Lake Baikal, Russia",Russia,53.50000,108.00000
+"Los Angeles, United States",United States,34.05220,-118.24370
+"Three Gorges Dam, China",China,30.82310,111.00300
+"Cape of Good Hope, South Africa",South Africa,-34.35680,18.47300
+"Mumbai, India",India,19.07611,72.87750
+"Harvard University, United States",United States,42.37700,-71.11670
+"The Pentagon, United States",United States,38.87190,-77.05630
+Vatican City,Vatican City,41.90290,12.45340
+Singapore,Singapore,1.28333,103.83333
+"Suzhou, Jiangsu, China",China,31.30000,120.61944
+"Brisbane, Australia",Australia,-27.46980,153.02510
+"Sao Paulo, Brazil",Brazil,-23.55050,-46.63330
+"Zanzibar City, Tanzania",Tanzania,-6.16590,39.20260
+"Prague, Czechia",Czechia,50.07550,14.43780
+"Valparaiso, Chile",Chile,-33.04720,-71.61270
+"Cairo, Egypt",Egypt,30.04440,31.23570
+San Marino,San Marino,43.94240,12.45780
+"Auckland, New Zealand",New Zealand,-36.85090,174.76450
+"Kampala, Uganda",Uganda,0.34760,32.58250
+"Basilica of Our Lady of Guadalupe, Mexico",Mexico,19.48490,-99.11760
+"Concepcion, Chile",Chile,-36.82010,-73.04440
+"Busan, South Korea",South Korea,35.17960,129.07560
+"Warsaw, Poland",Poland,52.22970,21.01220
+"Lusaka, Zambia",Zambia,-15.38750,28.32280
+"Times Square, United States",United States,40.75800,-73.98550
+"Isfahan, Iran",Iran,32.65460,51.66800
+"Luxor, Egypt",Egypt,25.68720,32.63960
+"Las Vegas, United States",United States,36.16990,-115.13980
+"Cali, Colombia",Colombia,3.45160,-76.53200
+"Vaduz, Liechtenstein",Liechtenstein,47.14100,9.52090
+"Itsukushima Shrine, Japan",Japan,34.29600,132.31970
+"Queenstown, New Zealand",New Zealand,-45.03120,168.66260
+"Arusha, Tanzania",Tanzania,-3.38690,36.68300
+"Miami, United States",United States,25.76170,-80.19180
+"Wuhan, China",China,30.59280,114.30550
+"Oslo, Norway",Norway,59.91390,10.75220
+"Curitiba, Brazil",Brazil,-25.42840,-49.27330
+"Gqeberha, South Africa",South Africa,-33.96080,25.60220
+"Panama Canal Miraflores Locks, Panama",Panama,8.99450,-79.59070
+"Gyeongbokgung Palace, South Korea",South Korea,37.57960,126.97700
+"Shanghai, China",China,31.23250,121.46917
+"Moscow, Russia",Russia,55.75580,37.61730
+"Blantyre, Malawi",Malawi,-15.78610,35.00580
+"Tijuana, Mexico",Mexico,32.51490,-117.03820
+"Florianopolis, Brazil",Brazil,-27.59540,-48.54800
+"Canberra, Australia",Australia,-35.28090,149.13000
+"Lahore, Pakistan",Pakistan,31.54972,74.34361
+"Harare, Zimbabwe",Zimbabwe,-17.82520,31.03350
+"Teotihuacan Pyramid of the Sun, Mexico",Mexico,19.69250,-98.84380
+"Colosseum, Italy",Italy,41.89020,12.49220
+"Golden Temple, India",India,31.62000,74.87639
+"Victoria, Seychelles",Seychelles,-4.61910,55.45130
+"Hoover Dam, United States",United States,36.01610,-114.73770
+"Ushuaia, Argentina",Argentina,-54.80190,-68.30300
+"Seoul, South Korea",South Korea,37.56000,126.99000
+"Acropolis of Athens, Greece",Greece,37.97150,23.72570
+"Dakar, Senegal",Senegal,14.71670,-17.46770
+"Honolulu, United States",United States,21.30990,-157.85810
+"Chengdu, China",China,30.57280,104.06680
+"Rotorua, New Zealand",New Zealand,-38.13680,176.24970
+"Salvador, Brazil",Brazil,-12.97770,-38.50160
+"Hanoi, Vietnam",Vietnam,21.00000,105.85000
+"Belgrade, Serbia",Serbia,44.78660,20.44890
+"Bujumbura, Burundi",Burundi,-3.36140,29.35990
+"San Salvador, El Salvador",El Salvador,13.69290,-89.21820
+"Ankara, Turkey",Turkey,39.93340,32.85970
+"Maputo, Mozambique",Mozambique,-25.96920,32.57320
+"Havana, Cuba",Cuba,23.11360,-82.36660
+"Sarajevo, Bosnia and Herzegovina",Bosnia and Herzegovina,43.85630,18.41310
+"Rosario, Argentina",Argentina,-32.94420,-60.65050
+"Sigiriya, Sri Lanka",Sri Lanka,7.95694,80.75972
+"Aswan, Egypt",Egypt,24.08890,32.89980
+"Charleston, United States",United States,32.77650,-79.93110
+"Perth, Australia",Australia,-31.95050,115.86050
+"Muscat, Oman",Oman,23.58800,58.38290
+"Kremlin, Russia",Russia,55.75200,37.61750
+"Dodoma, Tanzania",Tanzania,-6.16300,35.75160
+"Belize City, Belize",Belize,17.50460,-88.19620
+"Belo Horizonte, Brazil",Brazil,-19.91670,-43.93450
+"Forbidden City, China",China,39.91583,116.39083
+"Jerusalem, Israel/Palestine",Israel/Palestine,31.77800,35.23540
+"Dubrovnik Old Town, Croatia",Croatia,42.64000,18.11000
+"Omdurman, Sudan",Sudan,15.64450,32.47770
+"San Jose, California, United States",United States,37.33820,-121.88630
+"Fortaleza, Brazil",Brazil,-3.73190,-38.52670
+"Qutub Minar, India",India,28.52450,77.18550
+"Kisumu, Kenya",Kenya,-0.09170,34.76800
+"Statue of Liberty, United States",United States,40.68920,-74.04450
+"Fremantle Prison, Australia",Australia,-32.05690,115.75300
+"Podgorica, Montenegro",Montenegro,42.43040,19.25940
+"Colombo, Sri Lanka",Sri Lanka,6.93444,79.84278
+"Addis Ababa, Ethiopia",Ethiopia,8.98060,38.75780
+"Monterrey, Mexico",Mexico,25.68660,-100.31610
+"Foz do Iguacu, Brazil",Brazil,-25.51630,-54.58540
+"Charminar, India",India,17.36160,78.47470
+"Windsor Castle, United Kingdom",United Kingdom,51.48390,-0.60440
+"Dire Dawa, Ethiopia",Ethiopia,9.60090,41.85010
+"Anchorage, United States",United States,61.21810,-149.90030
+"Hagia Sophia, Turkey",Turkey,41.00860,28.98020
+"Tbilisi, Georgia",Georgia,41.71510,44.82710
+"Lisbon, Portugal",Portugal,38.72230,-9.13930
+"Giza pyramid complex, Egypt",Egypt,29.97920,31.13420
+"Calgary, Canada",Canada,51.04470,-114.07190
+"Bogota, Colombia",Colombia,4.71100,-74.07210
+"Meenakshi Temple, India",India,9.91950,78.11930
+"Toamasina, Madagascar",Madagascar,-18.14920,49.40230
+"Dallas, United States",United States,32.77670,-96.79700
+Monaco,Monaco,43.73840,7.42460
+"Samarkand, Uzbekistan",Uzbekistan,39.65420,66.95970
+"Santa Cruz de la Sierra, Bolivia",Bolivia,-17.78330,-63.18210
+"Mbabane, Eswatini",Eswatini,-26.30540,31.13670
+"Seattle, United States",United States,47.60620,-122.33210
+"Luang Prabang, Laos",Laos,19.89000,102.13472
+"Brussels, Belgium",Belgium,50.85030,4.35170
+"Pretoria, South Africa",South Africa,-25.74790,28.22930
+"Salt Lake City, United States",United States,40.76080,-111.89100
+"Dhaka, Bangladesh",Bangladesh,23.76444,90.38889
+"Caracas, Venezuela",Venezuela,10.48060,-66.90360
+"Chongqing, China",China,29.43160,106.91230
+"Tirana, Albania",Albania,41.32750,19.81870
+"Saint-Louis, Senegal",Senegal,16.03260,-16.48180
+"Managua, Nicaragua",Nicaragua,12.11500,-86.23620
+"Islamabad, Pakistan",Pakistan,33.69306,73.06389
+"Francistown, Botswana",Botswana,-21.17020,27.51440
+"Chateau Frontenac, Canada",Canada,46.81190,-71.20550
+"Cartagena, Colombia",Colombia,10.39100,-75.47940
+"Red Square, Russia",Russia,55.75390,37.62080
+"Jakarta, Indonesia",Indonesia,-6.18000,106.83000
+"Entebbe, Uganda",Uganda,0.05120,32.46370
+"Cleveland, United States",United States,41.49930,-81.69440
+"Medina, Saudi Arabia",Saudi Arabia,24.47000,39.61000
+"Bern, Switzerland",Switzerland,46.94800,7.44740
+"Montevideo, Uruguay",Uruguay,-34.90110,-56.16450
+"Dar es Salaam, Tanzania",Tanzania,-6.79240,39.20830
+"Kingston, Jamaica",Jamaica,17.97120,-76.79360
+"Abu Dhabi, United Arab Emirates",United Arab Emirates,24.46667,54.36667
+"Dalian, China",China,38.91400,121.61470
+"Reykjavík, Iceland",Iceland,64.14660,-21.94260
+"Alexandria, Egypt",Egypt,31.20010,29.91870
+"New York City, United States",United States,40.71280,-74.00600
+"Medellin, Colombia",Colombia,6.24760,-75.56580
+"Yerevan, Armenia",Armenia,40.17920,44.49910
+"Lilongwe, Malawi",Malawi,-13.96260,33.77410
+"San Francisco, United States",United States,37.77490,-122.41940
+"Ljubljana, Slovenia",Slovenia,46.05690,14.50580
+"Pyongyang, North Korea",North Korea,39.01667,125.74750
+"Windhoek, Namibia",Namibia,-22.56090,17.06580
+"Mexico City, Mexico",Mexico,19.43260,-99.13320
+"Santiago, Santiago Metropolitan Region, Chile",Chile,-33.44890,-70.66930
+"Beijing, China",China,39.90667,116.39750
+"Stockholm, Sweden",Sweden,59.32930,18.06860
+"Ndola, Zambia",Zambia,-12.95870,28.63660
+"Colon, Panama",Panama,9.35470,-79.90010
+"Tel Aviv, Israel",Israel,32.08530,34.78180
+"Rio de Janeiro, Brazil",Brazil,-22.90680,-43.17290
+"Kota Kinabalu, Malaysia",Malaysia,5.98040,116.07350
+"Sofia, Bulgaria",Bulgaria,42.69770,23.32190
+"Giza, Egypt",Egypt,29.98700,31.21180
+"Lincoln Memorial, United States",United States,38.88930,-77.05020
+"Hiroshima Peace Memorial, Japan",Japan,34.39556,132.45361
+"Hollywood Sign, United States",United States,34.13410,-118.32150
+"Mont Saint-Michel, France",France,48.63600,-1.51150
+"Lima, Peru",Peru,-12.04640,-77.04280
+"Ulaanbaatar, Mongolia",Mongolia,47.92194,106.91528
+"Nassau, The Bahamas",The Bahamas,25.04430,-77.35040
+"Dubai, United Arab Emirates",United Arab Emirates,25.20472,55.27083
+"Chișinău, Moldova",Moldova,47.01050,28.86380
+"Port of Spain, Trinidad and Tobago",Trinidad and Tobago,10.65490,-61.50190
+"Sugarloaf Mountain Cable Station, Brazil",Brazil,-22.94860,-43.15660
+"Amritsar, India",India,31.63400,74.87230
+"Harbin, China",China,45.75760,126.64090
+"Hermitage Museum, Russia",Russia,59.93980,30.31460
+"Washington, United States",United States,38.90720,-77.03690
+"Arequipa, Peru",Peru,-16.40900,-71.53750
+"Paro Taktsang, Bhutan",Bhutan,27.49191,89.36349
+"Kennedy Space Center, United States",United States,28.57290,-80.64890
+"Stonehenge, United Kingdom",United Kingdom,51.17890,-1.82620
+"Damascus, Syria",Syria,33.51380,36.27650
+"Queretaro, Mexico",Mexico,20.58880,-100.38990
+"Paramaribo, Suriname",Suriname,5.85200,-55.20380
+"Phuket, Thailand",Thailand,7.89000,98.39833
+"Rome, Italy",Italy,41.90280,12.49640
+"Tegucigalpa, Honduras",Honduras,14.07230,-87.19210
+"Chennai, India",India,13.08250,80.27500
+"Delhi, India",India,28.61000,77.23000
+"Kyiv, Ukraine",Ukraine,50.45010,30.52340
+"Port-au-Prince, Haiti",Haiti,18.59440,-72.30740
+"Easter Island Moai at Ahu Tongariki, Chile",Chile,-27.12580,-109.27670
+"Varanasi, India",India,25.31889,83.01278
+"Minneapolis, United States",United States,44.97780,-93.26500
+"Berlin, Germany",Germany,52.52000,13.40500
+"Kathmandu, Nepal",Nepal,27.71000,85.32000
+"Asuncion, Paraguay",Paraguay,-25.26370,-57.57590
+"Montreal, Canada",Canada,45.50170,-73.56730
+"Nikko Toshogu Shrine, Japan",Japan,36.75810,139.59890
+"Vienna, Austria",Austria,48.20820,16.37380
+"Mount Rushmore, United States",United States,43.87910,-103.45910
+"Jaipur, India",India,26.91500,75.82000
+"La Paz, Bolivia",Bolivia,-16.48970,-68.11930
+"Da Nang, Vietnam",Vietnam,16.06944,108.20972
+"Athens, Greece",Greece,37.98380,23.72750
+"Vancouver, Canada",Canada,49.28270,-123.12070
+"Nagasaki Peace Park, Japan",Japan,32.77310,129.86440
+"Palace of Fine Arts, Mexico",Mexico,19.43520,-99.14120
+"Belem, Brazil",Brazil,-1.45580,-48.49020
+"Skopje, North Macedonia",North Macedonia,41.99810,21.42540
+"Srinagar, India",India,34.08370,74.79730
+"Gateway Arch, United States",United States,38.62470,-90.18480
+"Mandalay, Myanmar",Myanmar,21.98306,96.08444
+"Madrid, Spain",Spain,40.41680,-3.70380
+"Christ the Redeemer, Brazil",Brazil,-22.95190,-43.21050
+"Jacksonville, United States",United States,30.33220,-81.65570
+"Burj Khalifa, United Arab Emirates",United Arab Emirates,25.19720,55.27420
+"Tashkent, Uzbekistan",Uzbekistan,41.29950,69.24010
+"Palace of Versailles, France",France,48.80490,2.12040
+"Empire State Building, United States",United States,40.74840,-73.98570
+"Manaus, Brazil",Brazil,-3.11900,-60.02170
+"Phnom Penh, Cambodia",Cambodia,11.56944,104.92111
+"Ottawa, Canada",Canada,45.42150,-75.69720
+"Zagreb, Croatia",Croatia,45.81500,15.98190
+"George Town, Malaysia",Malaysia,5.41410,100.32880
+"Cancun, Mexico",Mexico,21.16190,-86.85150
+"Brasilia, Brazil",Brazil,-15.79390,-47.88280
+"Persepolis, Iran",Iran,29.93520,52.89160
+"Bucharest, Romania",Romania,44.42680,26.10250
+"White House, United States",United States,38.89770,-77.03650
+"Macau Historic Centre, China",China,22.19870,113.54390
+"Quito, Ecuador",Ecuador,-0.18070,-78.46780
+"Terracotta Army, China",China,34.38500,109.27306
+"Minsk, Belarus",Belarus,53.90060,27.55900
+"Space Needle, United States",United States,47.62050,-122.34930
+"Manila, Philippines",Philippines,14.59580,120.97720
+"Boston, United States",United States,42.36010,-71.05890
+"Xi'an, China",China,34.34160,108.93980
+"Tikal Temple I, Guatemala",Guatemala,17.22210,-89.62370
+"Nanjing, China",China,32.06030,118.79690
+"Parliament Hill, Canada",Canada,45.42360,-75.70090
+"Yogyakarta, Indonesia",Indonesia,-7.80139,110.36444
+"Osaka, Japan",Japan,34.69389,135.50222
+"Austin, United States",United States,30.26720,-97.74310
+"Lijiang Old Town, China",China,26.86667,100.23333
+"Guatemala City, Guatemala",Guatemala,14.63490,-90.50690
+"Thimphu, Bhutan",Bhutan,27.47222,89.63611
+"Edmonton, Canada",Canada,53.54610,-113.49380
+"Marina Bay Sands, Singapore",Singapore,1.28250,103.86000
+"Atlanta, United States",United States,33.74900,-84.38800
+"Hampi, India",India,15.33444,76.46222
+"Mecca, Saudi Arabia",Saudi Arabia,21.42250,39.82333
+"Bridgetown, Barbados",Barbados,13.09750,-59.61670
+"Baghdad, Iraq",Iraq,33.31520,44.36610
+"Pittsburgh, United States",United States,40.44060,-79.99590
+"Taipei, China",China,25.03750,121.56250
+"Grand Central Terminal, United States",United States,40.75270,-73.97720
+"Ho Chi Minh City, Vietnam",Vietnam,10.77556,106.70194
+"Portland, Oregon, United States",United States,45.51520,-122.67840
+"Tehran, Iran",Iran,35.68920,51.38900
+"Hue Imperial City, Vietnam",Vietnam,16.46370,107.59090
+"Halifax, Canada",Canada,44.64880,-63.57520
+"Kolkata, India",India,22.56750,88.37000
+"Santo Domingo, Dominican Republic",Dominican Republic,18.48610,-69.93120
+"Petra, Jordan",Jordan,30.32850,35.44440
+"Panama City, Panama",Panama,8.98240,-79.51990
+"Kyoto, Japan",Japan,35.01161,135.76811
+"Havana Capitol, Cuba",Cuba,23.13500,-82.35920
+"Sapporo, Japan",Japan,43.06180,141.35450
+"Kuwait City, Kuwait",Kuwait,29.37590,47.97740
+"United States Capitol, United States",United States,38.88990,-77.00910
+"Potala Palace, China",China,29.65778,91.11694
+"Tulum Archaeological Zone, Mexico",Mexico,20.21490,-87.42910
+"Kandy, Sri Lanka",Sri Lanka,7.29060,80.63370
+"San Diego, United States",United States,32.71570,-117.16110
+"Borobudur, Indonesia",Indonesia,-7.60800,110.20400
+"Chichen Itza, Mexico",Mexico,20.68430,-88.56780
+"Prambanan, Indonesia",Indonesia,-7.75222,110.49167
+"Bali, Indonesia",Indonesia,-8.33500,115.08806
+"Victoria, British Columbia, Canada",Canada,48.42840,-123.36560
+"Leshan Giant Buddha, China",China,29.54472,103.77333
+"Parliament House, Australia",Australia,-35.30810,149.12440
+"Sky Tower, New Zealand",New Zealand,-36.84850,174.76220
+"Cairns, Australia",Australia,-16.91860,145.77810
+"Aksum Obelisks, Ethiopia",Ethiopia,14.13100,38.71800
+"Great Mosque of Djenné, Mali",Mali,13.90610,-4.55500
+"Gorée, Senegal",Senegal,14.66700,-17.39800
+"Bissau, Guinea-Bissau",Guinea-Bissau,11.88170,-15.61700
+"Basilica of Our Lady of Peace, Yamoussoukro, Côte d’Ivoire","Yamoussoukro, Côte d’Ivoire",6.81610,-5.27500
+"Cape Coast Castle, Ghana",Ghana,5.10530,-1.24660
+"Abu Simbel Temples, Egypt",Egypt,22.33720,31.62580
+"El Jem Amphitheatre, Tunisia",Tunisia,35.29600,10.70600
+"Abuja, Nigeria",Nigeria,9.07650,7.39860
+"Douala, Cameroon",Cameroon,4.05110,9.76790
+"Cotonou, Benin",Benin,6.37030,2.39120
+"Accra, Ghana",Ghana,5.60370,-0.18700
+"Aït Benhaddou, Morocco",Morocco,31.04700,-7.12900
+"Freetown, Sierra Leone",Sierra Leone,8.46570,-13.23170
+"Yamoussoukro, Côte d’Ivoire",Côte d’Ivoire,6.82760,-5.28930
+"Karnak, Egypt",Egypt,25.71880,32.65730
+"Lagos, Nigeria",Nigeria,6.52440,3.37920
+Great Zimbabwe,Zimbabwe,-20.26700,30.93300
+"Great Sphinx of Giza, Egypt",Egypt,29.97530,31.13760
+"Kasubi Tombs, Uganda",Uganda,0.33670,32.55310
+"Conakry, Guinea",Guinea,9.64120,-13.57840
+"Topkapı Palace, Turkey",Turkey,41.01150,28.98330
+"Brasilia Cathedral, Brazil",Brazil,-15.79810,-47.87560
+"Banjul, The Gambia",The Gambia,13.45490,-16.57900
+"Brandenburg Gate, Germany",Germany,52.51630,13.37770
+"Kano, Nigeria",Nigeria,12.00220,8.59200
+"La Moneda Palace, Chile",Chile,-33.44290,-70.65360
+"Saint Petersburg, Russia",Russia,59.93110,30.36090
+"Stone Town, Tanzania",Tanzania,-6.16220,39.18830
+"Bangui, Central African Republic",Central African Republic,4.39470,18.55820
+"Neuschwanstein Castle, Germany",Germany,47.55760,10.74980
+"Abidjan, Côte d’Ivoire",Côte d’Ivoire,5.36000,-4.00830
+"Seville, Spain",Spain,37.38910,-5.98450
+"Lalibela Rock-Hewn Churches, Ethiopia",Ethiopia,12.03190,39.04750
+"Naples, Italy",Italy,40.85180,14.26810
+"Kumasi, Ghana",Ghana,6.68850,-1.62440
+"Carthage Archaeological Site, Tunisia",Tunisia,36.85300,10.32300
+"Bran Castle, Romania",Romania,45.51500,25.36720
+"Elmina Castle, Ghana",Ghana,5.08330,-1.35000
+"Glasgow, United Kingdom",United Kingdom,55.86420,-4.25180
+"Charles Bridge, Czechia",Czechia,50.08650,14.41140
+"Valencia, Spain",Spain,39.46990,-0.37630
+"Porto, Portugal",Portugal,41.15790,-8.62910
+"Venice, Italy",Italy,45.44080,12.31550
+"Lyon, France",France,45.76400,4.83570
+"Leaning Tower of Pisa, Italy",Italy,43.72300,10.39660
+"Milan, Italy",Italy,45.46420,9.19000
+"University of Texas at Austin, United States",United States,30.28490,-97.73410
+"Rila Monastery, Bulgaria",Bulgaria,42.13330,23.34000
+"Sultan Qaboos Grand Mosque, Oman",Oman,23.58330,58.38940
+"Monument to the Revolution, Mexico",Mexico,19.43610,-99.15460
+"Blue Mosque, Turkey",Turkey,41.00540,28.97680
+"Oxford, United Kingdom",United Kingdom,51.75200,-1.25770
+"Fort George, Trinidad and Tobago",Trinidad and Tobago,10.66860,-61.53290
+"Registan, Uzbekistan",Uzbekistan,39.65480,66.97580
+"Almaty, Kazakhstan",Kazakhstan,43.23830,76.94550
+"Bordeaux, France",France,44.83780,-0.57920
+"Notre-Dame Basilica of Montreal, Canada",Canada,45.50450,-73.55610
+"Bukhara, Uzbekistan",Uzbekistan,39.77470,64.42860
+National Palace of El Salvador,El Salvador,13.69750,-89.19140
+"Alhambra, Spain",Spain,37.17610,-3.58810
+"Masada, Israel",Israel,31.31560,35.35360
+"Library of Congress, United States",United States,38.88870,-77.00470
+"Bagan Archaeological Zone, Myanmar",Myanmar,21.17170,94.85850
+"Nice, France",France,43.71020,7.26200
+"Shiraz, Iran",Iran,29.59180,52.58370
+"Kazan Kremlin, Russia",Russia,55.79800,49.10640
+"Mount Tavurvur, Papua New Guinea",Papua New Guinea,-4.23600,152.20300
+"Buka Island, Papua New Guinea",Papua New Guinea,-5.25000,154.65000
+"Sigatoka Sand Dunes, Fiji",Fiji,-18.16670,177.98330
+"Mount Otemanu, France",France,-16.50000,-151.74170
+"Lord Howe Island, Australia",Australia,-31.55530,159.08200
+"Lake Poopo, Bolivia",Bolivia,-18.80000,-67.10000
+"Villarrica Volcano summit, Chile",Chile,-39.42000,-71.93000
+"Colca Canyon Cruz del Condor viewpoint, Peru",Peru,-15.60800,-71.89900
+"Dunes of Lencois Maranhenses, Brazil",Brazil,-2.48300,-43.12500
+"Morne Seychellois, Seychelles",Seychelles,-4.65000,55.45000
+"Salar de Atacama, Chile",Chile,-23.50000,-68.25000
+"Mount Bintumani, Sierra Leone",Sierra Leone,9.16000,-11.11000
+"Lake Chilwa, Malawi",Malawi,-15.30000,35.70000
+"Lake Argentino, Argentina",Argentina,-50.25000,-72.75000
+"Simien Mountains National Park, Ethiopia",Ethiopia,13.18330,38.06670
+"Cerro Torre summit, Argentina",Argentina,-49.29300,-73.09800
+"Mount Toubkal foothill peak Jbel Ouanoukrim, Morocco",Morocco,31.02000,-7.91000
+"Mount Elgon, Uganda / Kenya",Uganda / Kenya,1.12000,34.55000
+"Lake Guatavita, Colombia",Colombia,4.97800,-73.77300
+"Rwenzori Mountains, Uganda / Democratic Republic of the Congo",Uganda / Democratic Republic of the Congo,0.40000,29.90000
+"Samburu National Reserve, Kenya",Kenya,0.56670,37.53330
+"Cerro Catedral summit, Uruguay",Uruguay,-34.84000,-54.98000
+"Gouina Falls, Mali",Mali,13.30000,-11.05000
+"Ibera Wetlands Laguna Iberá, Argentina",Argentina,-28.50000,-57.00000
+"Etosha National Park, Namibia",Namibia,-18.94530,15.89780
+"Mount Karisimbi, Rwanda / Democratic Republic of the Congo",Rwanda / Democratic Republic of the Congo,-1.50600,29.45000
+"Lake Ypacarai, Paraguay",Paraguay,-25.30000,-57.30000
+"Lake Tanganyika, Tanzania / DRC / Burundi / Zambia",Tanzania / DRC / Burundi / Zambia,-6.00000,29.50000
+"Chalbi Desert, Kenya",Kenya,3.50000,37.00000
+"Quilotoa crater lake, Ecuador",Ecuador,-0.87200,-78.90200
+"Lake Abbe, Djibouti / Ethiopia",Djibouti / Ethiopia,11.10000,41.78000
+"Lake Junin, Peru",Peru,-11.00000,-76.10000
+"Serengeti National Park, Tanzania",Tanzania,-2.40000,34.60000
+"Ponta do Ouro, Mozambique",Mozambique,-26.85000,32.88330
+"Atacama Valley of the Moon, Chile",Chile,-22.91600,-68.25000
+"Lake Malawi, Malawi / Mozambique / Tanzania",Malawi / Mozambique / Tanzania,-12.00000,34.50000
+"Cenote Ik Kil, Mexico",Mexico,20.66670,-88.56810
+"Mount Aragats, Armenia",Armenia,40.52300,44.19600
+"Lake Victoria, Africa, Tanzania / Uganda / Kenya",Tanzania / Uganda / Kenya,-1.00000,33.00000
+"Lake Titicaca, Peru",Peru,-15.80000,-69.40000
+"Ometepe Concepcion Volcano, Nicaragua",Nicaragua,11.53800,-85.62300
+"Krasnoyarsk Stolby Nature Reserve, Russia",Russia,55.95000,92.76670
+"Mount Nimba, Guinea / Côte d’Ivoire / Liberia",Guinea / Côte d’Ivoire / Liberia,7.60000,-8.40000
+"Masaya Volcano crater, Nicaragua",Nicaragua,11.98400,-86.16100
+"Cliffs of Moher, Ireland",Ireland,52.97150,-9.43090
+"Pico Paraná summit, Brazil",Brazil,-25.24300,-48.84900
+"Lake Kainji, Nigeria",Nigeria,10.40000,4.60000
+"Giant’s Causeway, United Kingdom",United Kingdom,55.24080,-6.51160
+"Mount Nyiragongo, Democratic Republic of the Congo",Democratic Republic of the Congo,-1.52300,29.25000
+"Tayrona Cabo San Juan, Colombia",Colombia,11.31900,-74.03600
+"Vinson Massif, Antarctica",Antarctica,-78.52560,-85.61720
+"Mount Erebus, Antarctica",Antarctica,-77.52972,167.15333
+"Mount Ruapehu, New Zealand",New Zealand,-39.28000,175.57000
+"Waitomo Glowworm Caves, New Zealand",New Zealand,-38.26000,175.11000
+"Wave Rock, Australia",Australia,-32.44400,118.89500
+"Mount Kosciuszko, Australia",Australia,-36.45590,148.26360
+"Mount Taranaki, New Zealand",New Zealand,-39.29690,174.06360
+"Kangaroo Island, Australia",Australia,-35.77500,137.21400
+"Kata Tjuta, Australia",Australia,-25.30000,130.73330
+"Pinnacles Desert, Australia",Australia,-30.60000,115.16000
+"Huka Falls, New Zealand",New Zealand,-38.64800,176.08800
+"Kakadu National Park, Australia",Australia,-13.09230,132.39380
+"Fraser Island (K'gari), Australia",Australia,-25.25000,153.15000
+"Blue Mountains Three Sisters, Australia",Australia,-33.73200,150.31200
+"Rarotonga, Cook Islands",Cook Islands,-21.23000,-159.77770
+"Tasmania, Australia",Australia,-42.00000,147.00000
+"Kandy Lake, Sri Lanka",Sri Lanka,7.29330,80.64050
+"Iztaccihuatl summit, Mexico",Mexico,19.17900,-98.64300
+"Kangchenjunga, Nepal/India",Nepal/India,27.70250,88.14750
+"Copper Canyon Urique viewpoint, Mexico",Mexico,27.19400,-107.91800
+"Issyk-Kul, Kyrgyzstan",Kyrgyzstan,42.44000,77.30000
+"Big Almaty Lake, Kazakhstan",Kazakhstan,43.05000,76.98500
+"Ouzoud Falls, Morocco",Morocco,32.01500,-6.72000
+"Preikestolen, Norway",Norway,58.98600,6.18800
+"Mount Whitney summit, United States",United States,36.57850,-118.29230
+"Mount Paektu, North Korea/China",North Korea/China,41.99300,128.07900
+"Tofo Beach, Mozambique",Mozambique,-23.85000,35.55000
+"Fitz Roy summit, Argentina",Argentina,-49.27200,-73.04300
+"Nahanni Virginia Falls, Canada",Canada,61.60000,-125.75000
+"Lake Skadar, Montenegro / Albania",Montenegro / Albania,42.16670,19.25000
+"Seoraksan, South Korea",South Korea,38.11900,128.46500
+"Tana Lake, Ethiopia",Ethiopia,12.00000,37.25000
+"Mount Pelée summit, France",France,14.80900,-61.16600
+"Darvaza Gas Crater, Turkmenistan",Turkmenistan,40.25200,58.43900
+"Triglav, Slovenia",Slovenia,46.37860,13.83670
+"Nahuel Huapi Lake, Argentina",Argentina,-40.85000,-71.60000
+"Lake Bosumtwi, Ghana",Ghana,6.50000,-1.40000
+"Lake Atitlan, Guatemala",Guatemala,14.69000,-91.20200
+"Phong Nha-Ke Bang National Park, Vietnam",Vietnam,17.53722,106.15139
+"Chobe National Park, Botswana",Botswana,-18.66670,24.50000
+"Komodo Island, Indonesia",Indonesia,-8.55000,119.45000
+"Lake Maggiore, Italy / Switzerland",Italy / Switzerland,46.05000,8.65000
+"Moraine Lake, Canada",Canada,51.32170,-116.18600
+"Perito Moreno Glacier, Argentina",Argentina,-50.49600,-73.13700
+"Kaziranga National Park, India",India,26.57750,93.17110
+"Mount Meru, Tanzania",Tanzania,-3.24400,36.74600
+"Lake Enriquillo, Dominican Republic",Dominican Republic,18.49000,-71.63000
+"Ben Nevis, United Kingdom",United Kingdom,56.79690,-5.00360
+"Kinabalu Park, Malaysia",Malaysia,6.08330,116.55000
+"Augrabies Falls, South Africa",South Africa,-28.58330,20.33330
+"Cradle Mountain, Australia",Australia,-41.68400,145.96400
+"Bondi Beach, Australia",Australia,-33.89150,151.27670
+"Uluru, Australia",Australia,-25.34500,131.03611
+"Yosemite Half Dome, United States",United States,37.74590,-119.53320
+"Kaieteur Falls, Guyana",Guyana,5.17670,-59.48080
+"Zhangjiajie National Forest Park, China",China,29.34992,110.43515
+"Mount Elbrus, Russia",Russia,43.34990,42.44530
+"Sahara Desert, North Africa",North Africa,23.00000,13.00000
+"Mount Rainier summit, United States",United States,46.85230,-121.76030
+"Mount Apo, Philippines",Philippines,6.98750,125.27083
+"Twelve Apostles, Australia",Australia,-38.66500,143.10500
+"Aconcagua summit, Argentina",Argentina,-32.65300,-70.01100
+"Chocolate Hills, Philippines",Philippines,9.91667,124.16667
+"Lake Chad, Chad / Nigeria / Niger / Cameroon",Chad / Nigeria / Niger / Cameroon,13.00000,14.00000
+"Lake District, United Kingdom",United Kingdom,54.46000,-3.08860
+"Niagara Falls, United States",United States,43.09620,-79.03770
+"Mount Kinabalu, Malaysia",Malaysia,6.07500,116.55861
+Mount Cameroon,Cameroon,4.20300,9.17000
+"Horseshoe Bend, United States",United States,36.87910,-111.51050
+"Mount Aso, Japan",Japan,32.88444,131.10389
+"Franz Josef Glacier, New Zealand",New Zealand,-43.46400,170.18100
+"Mount Ararat, Turkey",Turkey,39.70190,44.29830
+"Qinghai Lake, China",China,36.90000,100.15000
+"Halley Research Station, Antarctica",Antarctica,-75.56806,-25.50833
+"Rothera Research Station, Antarctica",Antarctica,-67.56878,-68.12503
+"Concordia Station, Antarctica",Antarctica,-75.09978,123.33220
+"Strasbourg, France",France,48.57340,7.75210
+"Ouro Preto, Brazil",Brazil,-20.38560,-43.50350
+"Algiers, Algeria",Algeria,36.75380,3.05880
+"Copan Ruins, Honduras",Honduras,14.83810,-89.14220
+"Tallinn, Estonia",Estonia,59.43700,24.75360
+"Kakum National Park Canopy Walkway, Ghana",Ghana,5.35000,-1.40000
+"Acapulco, Mexico",Mexico,16.85310,-99.82370
+"Punta Arenas, Chile",Chile,-53.16380,-70.91710
+"Vladivostok, Russia",Russia,43.11550,131.88550
+"Hargeisa, Somaliland",Somaliland,9.56240,44.07700
+"Vilnius, Lithuania",Lithuania,54.68720,25.27970
+Santiago de Cuba,Cuba,20.01690,-75.83020
+"Salta, Argentina",Argentina,-24.78210,-65.42320
+"Kedarnath Temple, India",India,30.73460,79.06690
+"Tripoli, Libya",Libya,32.88720,13.19130
+"San Pedro Sula, Honduras",Honduras,15.51490,-88.02500
+"Port Vila, Vanuatu",Vanuatu,-17.73330,168.32730
+"Riga, Latvia",Latvia,56.94960,24.10520
+"Vigan Historic City, Philippines",Philippines,17.57470,120.38690
+"Fez, Morocco",Morocco,34.01810,-5.00780
+"Quebec City, Canada",Canada,46.81390,-71.20800
+"Merv Archaeological Site, Turkmenistan",Turkmenistan,37.66700,62.17900
+"Gothenburg, Sweden",Sweden,57.70890,11.97460
+"Volubilis, Morocco",Morocco,34.07300,-5.55400
+"Savannah, Georgia, United States",United States,32.08090,-81.09120
+"Preah Vihear Temple, Cambodia",Cambodia,14.39200,104.68000
+"Kokoda Track memorial, Papua New Guinea",Papua New Guinea,-8.87800,147.73700

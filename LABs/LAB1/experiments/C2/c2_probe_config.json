@@ -1,0 +1,48 @@
+{
+  "_readme": [
+    "C2 Prompt 变体探针配置：5 个变体 × 2 套探针（std13 / raw11）。",
+    "std13 与 train_layers.json 的 world 主网格完全一致（standardize=True, lr=0.002, epochs=2000, lambda1=0.001, lambda2=1.0），",
+    "用于变体之间的逐层曲线对比；raw11 与 world 历史最优 extra run 一致（standardize=False, lr=5e-4, epochs=2000, lambda1=0.001, lambda2=0.1），",
+    "作为与 Q6/Q7 锚点（valid MSE 150.4277）可直接对拍的头条口径。",
+    "anchors：origcountry 在 world 原始句上的逐层 MSE 必须复现 results/slurm_layers/world/summary.csv（tolerance=0.5），",
+    "用来证明特征提取（origcountry 与 datasets/world 现有特征一致性）与训练管线没有错配。"
+  ],
+  "variants": ["origcountry", "origlast", "nocountry", "nameonly", "rephrase"],
+  "probe_sets": {
+    "std13": {
+      "layers": [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 34, 35],
+      "standardize": true,
+      "lr": 0.002,
+      "epochs": 2000,
+      "lambda1": 0.001,
+      "lambda2": 1.0
+    },
+    "raw11": {
+      "layers": [11],
+      "standardize": false,
+      "lr": 0.0005,
+      "epochs": 2000,
+      "lambda1": 0.001,
+      "lambda2": 0.1
+    }
+  },
+  "anchors": {
+    "tolerance": 0.5,
+    "world_std13_mse": {
+      "2": 157.57087905356968,
+      "5": 163.0192463015746,
+      "8": 159.13839151040816,
+      "11": 167.04130708058523,
+      "14": 213.6689006099402,
+      "17": 227.13115219125567,
+      "20": 241.8260490880495,
+      "23": 241.1447845333811,
+      "26": 226.24586039999085,
+      "29": 209.98803726142842,
+      "32": 180.3089516778867,
+      "34": 196.4603525638868,
+      "35": 204.9074646462061
+    },
+    "world_raw11_mse": 150.42772354798632
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "n_train": 500,
+  "n_valid": 130,
+  "explicit_country_suffix": {
+    "train": 492,
+    "valid": 128
+  },
+  "implicit_country_rows": 10,
+  "valid_place_unseen_in_train": 130,
+  "train_place_names_multi_country": 0,
+  "valid_place_ambiguous_in_train": 0,
+  "valid_sentence_exact_overlap_train": 0,
+  "examples_train_row0": {
+    "origcountry": "What's the longitude and latitude of Lake Baikal, Russia?",
+    "origlast": "What's the longitude and latitude of Lake Baikal, Russia?",
+    "nocountry": "What's the longitude and latitude of Lake Baikal?",
+    "nameonly": "Lake Baikal, Russia",
+    "rephrase": "Could you tell me the latitude and longitude of Lake Baikal, Russia?"
+  },
+  "examples_vatican": {
+    "origcountry": "What's the longitude and latitude of Vatican City?",
+    "nocountry": "What's the longitude and latitude of Vatican City?",
+    "nameonly": "Vatican City",
+    "rephrase": "Could you tell me the latitude and longitude of Vatican City?"
+  }
+}
