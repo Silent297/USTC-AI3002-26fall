@@ -1,0 +1,28 @@
+[world L11] 8 models, 10 selection fits per config; metric=valid MSE
+[world L11] OLS                params={} cv=515.6950 train=0.0000 valid=311.5647 (2.1s)
+[world L11] Ridge              params={'alpha': 500.0} cv=395.6537 train=91.2115 valid=167.1707 (0.0s)
+[world L11] KNN                params={'n_neighbors': 3.0} cv=391.0218 train=0.0000 valid=140.7015 (0.0s)
+[world L11] SVR-RBF            params={'estimator__regressor__C': 100.0, 'estimator__regressor__gamma': 0.000390625} cv=445.8103 train=25.2033 valid=296.1725 (0.2s)
+[world L11] KernelRidge-RBF    params={'alpha': 0.1, 'gamma': 0.000390625} cv=418.7830 train=21.8178 valid=253.6729 (0.0s)
+[world L11] RandomForest       params={} cv=574.4539 train=69.3565 valid=388.8405 (18.3s)
+[world L11] ExtraTrees         params={} cv=472.5367 train=0.0000 valid=286.4356 (14.7s)
+[world L11] HistGradientBoosting params={} cv=500.3109 train=8.9865 valid=332.1860 (39.3s)
+[world L2] 8 models, 10 selection fits per config; metric=valid MSE
+[world L2] OLS                params={} cv=656.9213 train=0.0000 valid=718.2580 (1.3s)
+[world L2] Ridge              params={'alpha': 500.0} cv=420.4689 train=125.5375 valid=157.6186 (0.0s)
+[world L2] KNN                params={'n_neighbors': 5.0} cv=515.8932 train=0.0000 valid=211.7928 (0.0s)
+[world L2] SVR-RBF            params={'estimator__regressor__C': 100.0, 'estimator__regressor__gamma': 0.000390625} cv=400.1910 train=24.6590 valid=206.9214 (0.6s)
+[world L2] KernelRidge-RBF    params={'alpha': 0.1, 'gamma': 0.000390625} cv=407.2597 train=56.3385 valid=168.2339 (0.2s)
+[world L2] RandomForest       params={} cv=540.9573 train=66.1170 valid=273.1397 (23.1s)
+[world L2] ExtraTrees         params={} cv=420.4527 train=0.0000 valid=194.9682 (17.2s)
+[world L2] HistGradientBoosting params={} cv=496.3723 train=7.6004 valid=232.3552 (31.1s)
+[truth L20] 7 models, 5 selection fits per config; metric=valid acc
+[truth L20] LogisticRegression params={'C': 1.0} cv=0.8404 train=1.0000 valid=0.8600 (0.7s)
+[truth L20] LinearSVC          params={'C': 0.1} cv=0.8302 train=1.0000 valid=0.8633 (14.7s)
+[truth L20] SVC-RBF            params={'C': 10.0, 'gamma': 0.0011718750000000002} cv=0.8455 train=1.0000 valid=0.8767 (25.4s)
+[truth L20] KNN                params={'n_neighbors': 3.0} cv=0.7655 train=1.0000 valid=0.7767 (0.0s)
+[truth L20] RandomForest       params={} cv=0.8465 train=1.0000 valid=0.8500 (5.1s)
+[truth L20] ExtraTrees         params={} cv=0.8410 train=1.0000 valid=0.8500 (3.2s)
+[truth L20] HistGradientBoosting params={} cv=0.8530 train=1.0000 valid=0.8600 (18.9s)
+[figs] wrote a2_model_bars
+[done] 5174.7s; wrote C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiments\A2\a2_results.json

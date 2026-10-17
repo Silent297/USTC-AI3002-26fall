@@ -1,0 +1,2 @@
+[world tails] L2: CV MSE 368.5 (med SE 47.1) vs valid MSE 157.6 (med SE 45.1); median km 988 vs 978; top5 SSE share 40.6% (n=500) vs 53.0% (n=130); valid MSE excl top5 77.0; max SE 22235 vs 3930
+[world tails] L8: CV MSE 361.1 (med SE 60.5) vs valid MSE 158.9 (med SE 45.6); median km 1074 vs 944; top5 SSE share 42.0% (n=500) vs 47.6% (n=130); valid MSE excl top5 86.6; max SE 33493 vs 4332

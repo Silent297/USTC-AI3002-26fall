@@ -1,0 +1,31 @@
+[world L11] 8 models, 10 selection fits per config; metric=valid MSE
+[world L11] OLS                params={} cv=515.6950 train=0.0000 valid=311.5647 (2.3s)
+[world L11] Ridge              params={'alpha': 500.0} cv=395.6537 train=91.2115 valid=167.1707 (0.2s)
+[world L11] KNN                params={'n_neighbors': 3.0} cv=391.0218 train=0.0000 valid=140.7015 (0.0s)
+[world L11] SVR-RBF            params={'estimator__regressor__C': 100.0, 'estimator__regressor__gamma': 0.000390625} cv=445.8103 train=25.2033 valid=296.1725 (0.6s)
+[world L11] KernelRidge-RBF    params={'alpha': 0.1, 'gamma': 0.000390625} cv=418.7830 train=21.8178 valid=253.6729 (0.4s)
+[world L11] RandomForest       params={} cv=574.4539 train=69.3565 valid=388.8405 (25.0s)
+[world L11] ExtraTrees         params={} cv=472.5367 train=0.0000 valid=286.4356 (11.0s)
+Traceback (most recent call last):
+  File "C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiment\02\a2_sklearn_family.py", line 264, in <module>
+    main()
+  File "C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiment\02\a2_sklearn_family.py", line 245, in main
+    world_l11, info = run_task("world", 11, "world_l11", True)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiment\02\a2_sklearn_family.py", line 181, in run_task
+    res = evaluate(task, name, make_est, grid, Xtr, ytr, Xva, yva, folds, scorer)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiment\02\a2_sklearn_family.py", line 143, in evaluate
+    est.fit(Xtr[tr_idx], ytr[tr_idx])
+  File "C:\Users\35150\miniconda3\envs\ai26\Lib\site-packages\sklearn\base.py", line 1403, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\35150\miniconda3\envs\ai26\Lib\site-packages\sklearn\ensemble\_hist_gradient_boosting\gradient_boosting.py", line 448, in fit
+    y = _check_y(y, estimator=self)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\35150\miniconda3\envs\ai26\Lib\site-packages\sklearn\utils\validation.py", line 1368, in _check_y
+    y = column_or_1d(y, warn=True)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\35150\miniconda3\envs\ai26\Lib\site-packages\sklearn\utils\validation.py", line 1450, in column_or_1d
+    raise ValueError(
+ValueError: y should be a 1d array, got an array of shape (400, 2) instead.

@@ -1,0 +1,289 @@
+{
+ "seed": 0,
+ "anchors": {
+  "world": {
+   "linear_in_protocol_l11": 167.17,
+   "linear_in_protocol_l2": 157.62,
+   "submission_raw_l11": 150.43,
+   "guide_knn": 125.27,
+   "guide_mlp128_64": 152.7
+  },
+  "truth": {
+   "linear_in_protocol_l20": 0.8667,
+   "gd_raw_l20": 0.8967,
+   "guide_rbf_svc": 0.87
+  }
+ },
+ "guide_note": "student reference report (non-official)",
+ "env": {
+  "python": "3.12.14",
+  "numpy": "2.5.3"
+ },
+ "world_l11": {
+  "results": [
+   {
+    "model": "OLS",
+    "params": {},
+    "cv_score": 515.6949965909245,
+    "fit_s": 2.1,
+    "train_score": 2.3646051362497702e-26,
+    "valid_score": 311.5647364011554,
+    "layer": 11
+   },
+   {
+    "model": "Ridge",
+    "params": {
+     "alpha": 500.0
+    },
+    "cv_score": 395.6536858644526,
+    "fit_s": 0.0,
+    "train_score": 91.21147923227123,
+    "valid_score": 167.17072274253434,
+    "layer": 11
+   },
+   {
+    "model": "KNN",
+    "params": {
+     "n_neighbors": 3.0
+    },
+    "cv_score": 391.0218053211755,
+    "fit_s": 0.0,
+    "train_score": 8.015862469630456e-13,
+    "valid_score": 140.70146481905968,
+    "layer": 11
+   },
+   {
+    "model": "SVR-RBF",
+    "params": {
+     "estimator__regressor__C": 100.0,
+     "estimator__regressor__gamma": 0.000390625
+    },
+    "cv_score": 445.8103384599971,
+    "fit_s": 0.2,
+    "train_score": 25.203252394410967,
+    "valid_score": 296.1725256868325,
+    "layer": 11
+   },
+   {
+    "model": "KernelRidge-RBF",
+    "params": {
+     "alpha": 0.1,
+     "gamma": 0.000390625
+    },
+    "cv_score": 418.78297973783174,
+    "fit_s": 0.0,
+    "train_score": 21.817752177986627,
+    "valid_score": 253.67292902484925,
+    "layer": 11
+   },
+   {
+    "model": "RandomForest",
+    "params": {},
+    "cv_score": 574.4538567798915,
+    "fit_s": 18.3,
+    "train_score": 69.35652414023377,
+    "valid_score": 388.84047957308314,
+    "layer": 11
+   },
+   {
+    "model": "ExtraTrees",
+    "params": {},
+    "cv_score": 472.5366613117419,
+    "fit_s": 14.7,
+    "train_score": 1.7511968126930835e-25,
+    "valid_score": 286.43556063381794,
+    "layer": 11
+   },
+   {
+    "model": "HistGradientBoosting",
+    "params": {},
+    "cv_score": 500.3109250518398,
+    "fit_s": 39.3,
+    "train_score": 8.986508721491388,
+    "valid_score": 332.18598185860515,
+    "layer": 11
+   }
+  ],
+  "info": {
+   "n_train": 500,
+   "n_valid": 130,
+   "dim": 2560,
+   "n_cv_fits": 10
+  }
+ },
+ "world_l2": {
+  "results": [
+   {
+    "model": "OLS",
+    "params": {},
+    "cv_score": 656.9212860207227,
+    "fit_s": 1.3,
+    "train_score": 4.7608064579728984e-26,
+    "valid_score": 718.2580207619991,
+    "layer": 2
+   },
+   {
+    "model": "Ridge",
+    "params": {
+     "alpha": 500.0
+    },
+    "cv_score": 420.46891676842995,
+    "fit_s": 0.0,
+    "train_score": 125.53747905254585,
+    "valid_score": 157.6185773259132,
+    "layer": 2
+   },
+   {
+    "model": "KNN",
+    "params": {
+     "n_neighbors": 5.0
+    },
+    "cv_score": 515.8931668479972,
+    "fit_s": 0.0,
+    "train_score": 5.763004911194766e-12,
+    "valid_score": 211.79275751874604,
+    "layer": 2
+   },
+   {
+    "model": "SVR-RBF",
+    "params": {
+     "estimator__regressor__C": 100.0,
+     "estimator__regressor__gamma": 0.000390625
+    },
+    "cv_score": 400.1909793172386,
+    "fit_s": 0.6,
+    "train_score": 24.65904251294239,
+    "valid_score": 206.9214052693206,
+    "layer": 2
+   },
+   {
+    "model": "KernelRidge-RBF",
+    "params": {
+     "alpha": 0.1,
+     "gamma": 0.000390625
+    },
+    "cv_score": 407.25970265635243,
+    "fit_s": 0.2,
+    "train_score": 56.33852283753514,
+    "valid_score": 168.2338538342352,
+    "layer": 2
+   },
+   {
+    "model": "RandomForest",
+    "params": {},
+    "cv_score": 540.9572840305581,
+    "fit_s": 23.1,
+    "train_score": 66.11699908439245,
+    "valid_score": 273.13966147030357,
+    "layer": 2
+   },
+   {
+    "model": "ExtraTrees",
+    "params": {},
+    "cv_score": 420.4526847298459,
+    "fit_s": 17.2,
+    "train_score": 1.7511968126930835e-25,
+    "valid_score": 194.96824666302192,
+    "layer": 2
+   },
+   {
+    "model": "HistGradientBoosting",
+    "params": {},
+    "cv_score": 496.37225424384627,
+    "fit_s": 31.1,
+    "train_score": 7.600352079809033,
+    "valid_score": 232.3552274526418,
+    "layer": 2
+   }
+  ],
+  "info": {
+   "n_train": 500,
+   "n_valid": 130,
+   "dim": 2560,
+   "n_cv_fits": 10
+  }
+ },
+ "truth_l20": {
+  "results": [
+   {
+    "model": "LogisticRegression",
+    "params": {
+     "C": 1.0
+    },
+    "cv_score": 0.8404088050314465,
+    "fit_s": 0.7,
+    "train_score": 1.0,
+    "valid_score": 0.86,
+    "layer": 20
+   },
+   {
+    "model": "LinearSVC",
+    "params": {
+     "C": 0.1
+    },
+    "cv_score": 0.8301886792452831,
+    "fit_s": 14.7,
+    "train_score": 1.0,
+    "valid_score": 0.8633333333333333,
+    "layer": 20
+   },
+   {
+    "model": "SVC-RBF",
+    "params": {
+     "C": 10.0,
+     "gamma": 0.0011718750000000002
+    },
+    "cv_score": 0.8455188679245284,
+    "fit_s": 25.4,
+    "train_score": 1.0,
+    "valid_score": 0.8766666666666667,
+    "layer": 20
+   },
+   {
+    "model": "KNN",
+    "params": {
+     "n_neighbors": 3.0
+    },
+    "cv_score": 0.7655267295597484,
+    "fit_s": 0.0,
+    "train_score": 1.0,
+    "valid_score": 0.7766666666666666,
+    "layer": 20
+   },
+   {
+    "model": "RandomForest",
+    "params": {},
+    "cv_score": 0.846501572327044,
+    "fit_s": 5.1,
+    "train_score": 1.0,
+    "valid_score": 0.85,
+    "layer": 20
+   },
+   {
+    "model": "ExtraTrees",
+    "params": {},
+    "cv_score": 0.840998427672956,
+    "fit_s": 3.2,
+    "train_score": 1.0,
+    "valid_score": 0.85,
+    "layer": 20
+   },
+   {
+    "model": "HistGradientBoosting",
+    "params": {},
+    "cv_score": 0.8529874213836478,
+    "fit_s": 18.9,
+    "train_score": 1.0,
+    "valid_score": 0.86,
+    "layer": 20
+   }
+  ],
+  "info": {
+   "n_train": 5088,
+   "n_valid": 300,
+   "dim": 2560,
+   "n_cv_fits": 5
+  }
+ },
+ "elapsed_s": 5174.7
+}

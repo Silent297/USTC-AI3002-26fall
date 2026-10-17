@@ -1,0 +1,32 @@
+[world L11] 3 archs x 3 seeds; metric=valid MSE
+[world L11] linear     seed=0 best_ep=137 ran=167 train=485.9429 valid=454.8636 (68.4s)
+[world L11] linear     seed=1 best_ep=127 ran=157 train=491.0726 valid=496.5904 (54.7s)
+[world L11] linear     seed=2 best_ep=122 ran=152 train=500.3437 valid=476.4558 (47.3s)
+[world L11] mlp64      seed=0 best_ep= 38 ran= 68 train=170.8596 valid=182.2055 (49.0s)
+[world L11] mlp64      seed=1 best_ep=154 ran=184 train=36.2126 valid=207.0361 (134.3s)
+[world L11] mlp64      seed=2 best_ep=267 ran=297 train=57.4838 valid=180.3387 (20.3s)
+[world L11] mlp128_64  seed=0 best_ep= 44 ran= 74 train=89.0019 valid=159.4325 (2.6s)
+[world L11] mlp128_64  seed=1 best_ep= 51 ran= 81 train=54.1786 valid=199.4809 (3.5s)
+[world L11] mlp128_64  seed=2 best_ep=122 ran=152 train=56.3759 valid=168.9085 (12.1s)
+[world L2] 3 archs x 3 seeds; metric=valid MSE
+[world L2] linear     seed=0 best_ep=108 ran=138 train=525.2536 valid=485.0038 (3.8s)
+[world L2] linear     seed=1 best_ep=106 ran=136 train=529.2779 valid=533.6169 (3.2s)
+[world L2] linear     seed=2 best_ep= 94 ran=124 train=558.5831 valid=493.7927 (3.5s)
+[world L2] mlp64      seed=0 best_ep= 98 ran=128 train=136.2640 valid=175.8267 (5.3s)
+[world L2] mlp64      seed=1 best_ep= 51 ran= 81 train=192.5151 valid=236.8414 (3.3s)
+[world L2] mlp64      seed=2 best_ep= 26 ran= 56 train=289.0608 valid=204.9712 (2.7s)
+[world L2] mlp128_64  seed=0 best_ep=140 ran=170 train=66.9154 valid=188.3873 (11.1s)
+[world L2] mlp128_64  seed=1 best_ep= 22 ran= 52 train=201.8184 valid=248.1240 (3.3s)
+[world L2] mlp128_64  seed=2 best_ep= 28 ran= 58 train=180.0651 valid=144.2472 (3.9s)
+[truth L20] 3 archs x 3 seeds; metric=valid acc
+[truth L20] linear     seed=0 best_ep=  5 ran= 35 train=0.9118 valid=0.9000 (3.1s)
+[truth L20] linear     seed=1 best_ep=  5 ran= 35 train=0.9100 valid=0.8933 (3.0s)
+[truth L20] linear     seed=2 best_ep=  4 ran= 34 train=0.9021 valid=0.8600 (2.6s)
+[truth L20] mlp64      seed=0 best_ep=  3 ran= 33 train=0.9448 valid=0.9033 (7.5s)
+[truth L20] mlp64      seed=1 best_ep=  2 ran= 32 train=0.9253 valid=0.8767 (7.1s)
+[truth L20] mlp64      seed=2 best_ep=  2 ran= 32 train=0.9194 valid=0.8900 (7.3s)
+[truth L20] mlp128_64  seed=0 best_ep=  2 ran= 32 train=0.9292 valid=0.8667 (11.3s)
+[truth L20] mlp128_64  seed=1 best_ep=  2 ran= 32 train=0.9239 valid=0.8900 (8.8s)
+[truth L20] mlp128_64  seed=2 best_ep=  2 ran= 32 train=0.9247 valid=0.8900 (12.2s)
+[figs] wrote a3_model_bars + a3_curves
+[done] 500.1s; wrote C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiment\03\a3_results.json

@@ -46,7 +46,7 @@
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
 
-附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，代码/评估就绪待集群运行）、**A1–A3** 见 `experiments/` 各自目录。
+附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**A1–A3**（线性读出上限包）与 **A7**（5 折 CV 协议补做）见 `experiments/` 各自目录与 §3 对应附录。
 
 ## 3. 逐题执行记录
 
@@ -188,6 +188,30 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **与参考报告（非官方）一致性**：valid hit100 完全相同（0.6385）、均值 159.1 vs 159.0、Tomanivi 预测逐位相同 ⇒ 同 revision + 贪心解码可复现；中位 43.8 vs 35.8 等小差异源于解析接受度（我们宽松收满 130/499 vs 参考 128/495）。
   - **结论**："线性读出误差 ≠ 模型没有地理知识"（与 Q6/Q7 闭环）；附加实验口径，仅并列报告、不宣称"探针 < 生成式"；指标须捆周期 MSE + 距离分布一起报。
 
+### 附录 A1–A3 线性读出上限包（多层拼接 / sklearn 家族 / 自训 MLP，附加实验）
+
+- **来源**：《可做实验清单》A1/A2/A3（参考报告为`指南3.pdf` §2，**非官方**）；2026-10-16 指派执行。属**附加探究**（不进课程必交内容），回答"线性读出是否已接近任务上限"。
+- **设计**：统一闭式协议（world 主口径 = 双形式 ridge 固定 λ2=1.0；truth = lbfgs 固定 C）对照三族：① **A1 多层拼接**——13 层特征各自 train z-score 后拼接，97 种组合（13 单层 + 78 对 + 6 三元，world 与 truth 双任务）；② **A2 sklearn 家族**——world：KNN/Ridge/KernelRidge/ET/SVR/OLS/HistGB/RF，truth：LR/LinearSVC/SVC-RBF/HistGB/RF/ET/KNN；③ **A3 自训 MLP**——PyTorch AdamW（lr=1e-3、wd=1e-4、patience 30、3 seeds），linear/mlp64/mlp128_64 三架构，train 内部 10% 早停（不触 valid）。
+- **代码**：`experiments/A1/a1_multilayer_concat.py`、`experiments/A2/a2_sklearn_family.py`、`experiments/A3/a3_mlp_torch.py`（本地跑，合计 ~2.4 h）；**图**：`experiments/A{1,2,3}/figures/`（a1_concat_heatmaps / a1_best_combos / a1_corr_matrices / a2_model_bars / a3_model_bars / a3_curves，各 png+pdf）；**逐图说明**：`experiments/A{1,2,3}/a{1,2,3}_figure_notes.md`。
+- **记录**（2026-10-16 完成）：
+  - **A1 多层拼接**：world 最优 **L5+L32 → 128.82**（中位 800.4 km；CV 选参口径 139.56、λ2=3），比最好单层 L2（157.62）低 18%，也低于历史提交 150.43；78 对中 21 对超最好单层、头部对全部含 L32；truth 最优对 L17+L20 = 0.8833（vs 单层 L20 0.8667，6/78 超越）。锚点复算逐位一致（L11 167.1707 / L2 157.6186）。
+  - **A2 sklearn 家族**：world 仅 **L11 KNN k=3 → 140.70** 超过闭式 Ridge（L2 上 Ridge 157.62 即最优）；核/树方法全面偏弱（SVR 296.2/206.9、RF 388.8/273.1、HistGB 332.2/232.4；HistGB 需 MultiOutputRegressor 包装，首跑崩溃留档 `experiments/A2/a2_firstrun_crashed.log`）；truth 全家族挤在 0.85–0.877（**SVC-RBF 0.8767** ≈ 参考报告 0.87，LinearSVC 0.8633）。
+  - **A3 自训 MLP**：均值均未超闭式锚——world L11 mlp128_64 **175.94±17.09**、L2 193.59±42.57；单 seed 可及/超过（L2 144.25、L11 159.43）但折间 std 12–43 很大；同配方 linear-AdamW 对照 476–504（欠拟合，呼应 Q3：结论对训练/正则口径敏感）；truth mlp64 **0.8900±0.0109** 为 z 协议最高（略超 A3 linear 0.8844 的 AdamW 口径）。
+  - **跨实验统一排行榜**（world valid MSE）：**128.82 拼接 L5+L32 < 140.17 三元组 < 140.70 KNN < 150.43 历史提交 < 157.62 单层 Ridge(L2) < 175.94 MLP 均值**；truth：0.8900 MLP-64 ／ 0.8833 拼接 L17+L20 ／ 0.8767 SVC-RBF ／ 0.8667 单层锚（GD raw 0.8967 为历史协议）。
+  - **结论**：**"换表征（选层/多层拼接）+ 对齐正则口径"的收益 ≥ "换更复杂的模型族"**——线性读出（尤其多层拼接）已接近该特征下的可达上限；一切对比以统一闭式口径为准，A2 的 valid 网格选择与 A3 的随机种子波动均如实标注口径与方差。
+
+### 附录 A7 5 折 CV 协议补做（world/truth 全 13 层，附加实验）
+
+- **来源**：《可做实验清单》A7（指南1 §4.2，参考报告为`指南3.pdf`，**非官方**）；2026-10-17 指派执行。属**附加探究**（不进课程必交内容），用途是**方法论严谨性**：在 train 内部做交叉验证，检验"用 valid 选层"的稳健性，并补上指南综述标注缺失的 CV↔valid 一致性图。
+- **设计**：只在 train 上做 **5 折 × 3 重复**（seeds 0/1/2）：truth 按标签 `StratifiedKFold`；world 按纬度五分位分层（158 国、最小样本 1，无法按国家分层）；每折用训练折自身统计量 z-score（无泄漏）。估计器与 A1 单层完全一致：world 闭式 dual ridge 固定 λ2=1.0、truth lbfgs 固定 C=1/(2n_tr·λ2)、λ2=1e-3。指标：world 元素均值 MSE + 中位 haversine；truth acc + logloss；OOF 取 3 次重复的均值、误差条 = 15 折 std。对照列取 `experiments/A1/a1_results.json` 的同协议 train/valid（锚点 world L2 valid 157.6186、truth L20 0.8667 在脚本内断言）。13 层 × 15 折 × 2 任务 = 390 次拟合，本地 344.3 s。
+- **代码**：`experiments/A7/a7_cv_protocol.py`（含锚点断言）；**记录**：`a7_results.json`（逐层记录 + 各折指标 + 13×15 秩矩阵 + 折冠军 + 相关性 + selection 块）、`a7_summary.csv`、`a7_run.log`、`a7_tails_audit.log`；**图**：`experiments/A7/figures/a7_{cv_curves,cv_vs_valid,fold_stability,world_error_tails}.{png,pdf}`；**逐图说明**：`experiments/A7/a7_figure_notes.md`（含逐层表与 6 条 caveats）。
+- **记录**（2026-10-17 完成）：
+  - **truth：选层可复现**。CV↔valid 秩相关 **ρ=0.968**（13 层）；CV 最优 = valid 最优 = **L20**——CV 0.8508±0.0124 vs valid 0.8667，**selection regret = 0**；15 折冠军 L20 **11/15**、L23 4/15。CV logloss↔valid acc ρ=−0.916（仅方向相反，按 logloss 选层仍落 L20）。train↔valid ρ=0.935，但 train acc 自 L17 起饱和在 0.998–1.000，**不能用于选层**。CV 略低于 valid（每折只用 80% 数据；Q8 已证 typo/新主体不伤 L20），深层差 0.4–2.0 pp。
+  - **world：头部是平台，不是单峰**。CV↔valid ρ=**0.703**（p=0.007）显著但远低于 truth；CV 最优 **L8** 351.0±150.6（该层 valid 158.9），valid 最优 **L2** 157.6（该层 CV 378.9）。但 CV 选 L8 的 valid regret 仅 **+1.29 MSE**（≈0.8%，与折间噪声同级）；15 折冠军 L8 7/15、L2 3/15、其余 5 层各 1——**头部层统计上不可分辨**，报告应写"L2/L8 平台"而非"L2 冠军"。CV↔valid 的中位距离 ρ=0.852（p=2.2e-4）、CV 内均值 MSE↔中位 km ρ=0.731——mean/median 两种误差排序同向，结论不依赖单一指标。
+  - **world CV 均值 MSE 高于 valid 是尾部效应，不是"CV 更差"**。L2：CV OOF MSE 368.5（重复 0）vs valid 157.6，但典型误差一致（中位 SE **47.1 vs 45.1**、中位距离 **988 vs 978 km**）；差异全在尾部——CV top-5/500 平方误差占 SSE **40.6%**（valid top-5/130 占 53.0%），最大 SE 22,235 vs 3,930，valid 去掉 top-5 后 MSE 仅 **77.0**；L8 同构（361.1 vs 158.9；中位 60.5/1074 vs 45.6/944；max SE 33,493 vs 4,332）。成因：Q7 已证 valid 是"新地名、近位置"的近邻划分（中位 2.03° 到同国 train 点），随机折会抽到太平洋孤岛/南极等孤立点。**world 的均值 MSE 对划分方式高度敏感，跨划分比较须并列中位数/尾部。**
+  - **train 指标不能选层**：world train↔valid ρ=−0.247（ns），且 in-sample MSE 83.1–125.5 比 CV 低 2.8–5.4×；truth train acc 饱和（见上）。
+  - **结论**：truth 的"L20 最优"经 CV 完全复现（同选、零 regret、11/15 折冠军），报告可放心把 valid 选层作为主结论；world 的 valid 选层在 CV 下**排序不稳但代价极小**（+1.29 MSE），应按"L2/L8 平台 + 折间 CI"报告，并把"均值 MSE 的划分敏感性（离群点尾部）"写进 limitation；选层一律不用 train 指标。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -205,3 +229,5 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-16：Q8 完成：分布差异四维统计（typo 3.5×、主体新颖 77.4% vs 零假设 20.8%、模板/长度、world 对照）+ L20 分层稳健性（差异不显著、浅层怕错拼）+ CV 对照（随机 vs 分组 −0.8pp，负结果如实报告）；3 图 + 逐图说明 `figures/q8_figure_notes.md`。
 - 2026-10-16：**B1 完成**（CREAK 逐句对拍，可选实验）：truth 100% 可追溯（direct 86.08%/63.33% 与 guide3 一致，near 层补全到 100%）、valid 来源 = dev/contrast/test 与 train.json 零重叠、标签 0 冲突、扰动仅两族（错拼 415 + 主谓翻转 431 处，无第三类）；Q8 错拼检出来源还原（注入 307/354 与 65/74、自带专名假阳性 40/6）。产物 `experiments/B1/`（脚本 22 锚点 + 4 图 + `b1_figure_notes.md` + `b1_metrics.json`）；Q8 小节"范围说明"同步更新。
 - 2026-10-16：**C1 完成**（附加实验：Qwen3-4B-Base 直接输出坐标 vs L11 探针）：集群 A100 跑 630 题（严格解析 99.8%/99.2%、宽松 100%）、valid 距离中位 43.8 km（探针 953.8 的 22×）、逐条 119/130 直接更近（+982.5 km CI [835, 1139]）；原始 MSE 被单条日界线样本主导（Tomanivi 96.5%，周期口径 17.6）；与参考报告（非官方）逐项一致（hit100 相同）。产物 `experiments/C1/`（评估脚本 + 3 图 + `c1_figure_notes.md`）与 `results/slurm_qwen_direct/qwen_direct_v1/`。
+- 2026-10-16：**A1–A3 完成**（线性读出上限包，附加实验）：A1 多层拼接 world **L5+L32 128.82**（−18% vs 最好单层，低于历史提交 150.43）/ truth L17+L20 0.8833；A2 sklearn 家族仅 world-L11 KNN（140.70）超闭式 ridge，truth 全家族 0.85–0.877（SVC-RBF 0.8767 ≈ 参考报告 0.87）；A3 自训 MLP 均值均未超闭式锚（单 seed 可及但方差大，linear-AdamW 对照欠拟合）。⇒ 表征 + 正则对齐 > 模型族，线性读出已近上限。产物 `experiments/A{1,2,3}/`（3 脚本 + 3 结果 JSON + 6 图 + 3 逐图说明）。
+- 2026-10-17：**A7 完成**（5 折 CV 协议补做，附加实验）：train-only 5 折 × 3 重复、估计器同 A1。truth CV↔valid 秩相关 **0.968**、CV 与 valid 同选 **L20**（regret 0，15 折中 L20 赢 11）⇒ valid 选层可复现；world ρ=0.703、CV 最优 L8 vs valid 最优 L2 但头部不可分辨（valid regret 仅 **+1.29 MSE**）⇒ 应按 L2/L8 平台报告；world CV 均值 MSE 高于 valid 系离群点尾部（典型误差一致：L2 中位 SE 47.1/45.1、中位距离 988/978 km；top-5 占 SSE 40.6%）⇒ 均值 MSE 对划分敏感；train 指标不能选层（world ρ=−0.25 ns、truth train acc 饱和）。产物 `experiments/A7/`（脚本 + 结果 JSON + CSV + 4 图 + 留档日志 + 逐图说明）。
