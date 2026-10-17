@@ -46,7 +46,7 @@
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
 
-附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**A1–A3**（线性读出上限包）与 **A7**（5 折 CV 协议补做）见 `experiments/` 各自目录与 §3 对应附录。
+附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**C2**（prompt 变体特征 + 探针，`experiments/C2/`，见 §3「附录 C2」）；**C3**（GeoNames 数据扩增，`experiments/C3/`，见 §3「附录 C3」）；**A1–A3**（线性读出上限包）与 **A7**（5 折 CV 协议补做）见 `experiments/` 各自目录与 §3 对应附录。
 
 ## 3. 逐题执行记录
 
@@ -224,6 +224,22 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **train 指标不能选层**：world train↔valid ρ=−0.247（ns），且 in-sample MSE 83.1–125.5 比 CV 低 2.8–5.4×；truth train acc 饱和（见上）。
   - **结论**：truth 的"L20 最优"经 CV 完全复现（同选、零 regret、11/15 折冠军），报告可放心把 valid 选层作为主结论；world 的 valid 选层在 CV 下**排序不稳但代价极小**（+1.29 MSE），应按"L2/L8 平台 + 折间 CI"报告，并把"均值 MSE 的划分敏感性（离群点尾部）"写进 limitation；选层一律不用 train 指标。
 
+### 附录 C3 GeoNames 数据扩增（附加实验）
+
+- **来源**：《可做实验清单》C3 / 指南2 §1（参考报告**非官方**）；2026-10-17 指派执行。属**附加探究**（不进课程必交内容）。问题：在 world 500 条之外重采样上万 GeoNames 地点、重提 Qwen 特征并训练探针，能否提升原 world 任务与"未见国家"泛化？
+- **数据/资产**：GeoNames `cities15000`（34,166 城 / 244 国，md5 `93552399…`）+ `countryInfo`（252 国，md5 `8b8c1506…`）；12,000 条 → train 8,382 / valid 1,050 / test 1,050 / test_unseen 1,518（30 国整国留出，每国 8–500 城），seed 20261004；prompt 与 world 完全一致（城邦省略国家后缀），国家名最后 subtoken 读点，13 层 float16。泄漏审计：train 与 world valid 同名同国 14 条（与 world train 68 条），`new_noleak`/`union_noleak` 剔除；5 训练集 orig/new/new_noleak/union/union_noleak × 4 评估集。**严格未见子集**：`test_unseen` 30 国中 22 国出现在 world train，故另设 `strict8`（8 国 260 条）/`hard6`（去 Niger/Palestine，6 国 212 条）；这两个子集对 orig/new/union 都干净。
+- **代码/资产**：`experiments/C3/`（`c3_build_dataset.py`、`c3_extract.py`、`c3_train_probes.py`、`c3_eval.py`、`run_c3.sbatch`；划分 `data/splits/`；原始 dump 与特征 gitignored）；训练产物 `results/slurm_c3/c3_v1/`（65/65 run 有限）；评估 `experiments/C3/c3_analysis.json`；图 4 张 ×2 格式；逐图说明 `experiments/C3/c3_figure_notes.md`。
+- **记录**（2026-10-17 完成）：
+  - **提取/训练自检**：重提 world 26 个 (split, layer) 组合 mean cosine ≥0.99993；`orig` 13 层 MSE 与历史 std13 summary **13/13 逐位一致**（L2 157.571 / L11 167.041 / L35 204.907），无管线错配。
+  - **原任务总体是平的**：world valid（130）union−orig L2 **−18.4 MSE**（item CI [−56.5,+15.5]）、L11 **+5.9**（item CI [−49.0,+61.7]），均跨 0。L2 是事后选层（同一 130 条），union 139.2 仍高于国家均值 oracle 113.8；L11 课程口径 union 172.9 vs orig 167.0。
+  - **分层解释"平"**：seen 110 条 L11 union 比 orig 差 **+27.4**（CI 跨 0）；unseen→C3 12 条 **−143.1**（item CI [−303.4,−25.1]，cluster [−303.2,−25.8]）；unseen both 8 条 L2 −76.1（CI 不跨 0）。⇒ 增广收益=覆盖新国家，代价=稀释已见国家，总量抵消。
+  - **新任务**：Geo test L11 new 64.0 / union 62.3 / orig 147.0；union−new **−1.7**（CI 跨 0）⇒ 500 条原数据不伤害新分布，new 单独已足够。Geo valid union 81.4 vs new 87.8（−6.4，CI 上界 −0.0）。
+  - **strict unseen 是最稳健收益**：L11 orig 93.8 / new 97.4 / union 75.7；union−new **−21.7**（item [−25.1,−18.5]，country-cluster [−41.9,−7.8]），hard6 −22.7（cluster [−47.6,−4.5]）；但 union−orig 的 cluster CI 跨 0（8 国太少），不能写成"显著优于原模型"。L32 union 57.4 vs new 64.0，cluster CI 跨 0。
+  - **full unseen 是陷阱**：orig L11 56.5 看似最好，实则 22/30 国已在 world train；该面板不能回答未见国家泛化。
+  - **逐国高度异质**：strict8 上 union 在 Costa Rica/Palestine 等变好，Denmark/Hungary/Lebanon/Niger/Yemen 上 orig/new 更好 ⇒ 报告须给逐国表，不能只报均值。
+  - **泄漏控制可忽略**：noleak−full |ΔMSE| <1（L11 +0.55，0.3%），不是背答案。
+- **结论**：GeoNames 增广不是免费午餐——在原 world 分布上总体无显著收益（L11 +5.9），收益集中于 world 未覆盖国家（unseen→C3 −143.1；strict8 上 union 比 GeoNames-only 低 21.7 MSE，且 cluster CI 不跨 0），代价是 seen 国家略变差；混合训练（union）优于用新数据替换旧数据（new 在原任务 L11 +58.2）。报告应同时给 L2（事后）与 L11（预注册）、item 与 country-cluster CI，并把 full unseen 的 22/30 重叠写进 limitation。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -244,3 +260,4 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-16：**A1–A3 完成**（线性读出上限包，附加实验）：A1 多层拼接 world **L5+L32 128.82**（−18% vs 最好单层，低于历史提交 150.43）/ truth L17+L20 0.8833；A2 sklearn 家族仅 world-L11 KNN（140.70）超闭式 ridge，truth 全家族 0.85–0.877（SVC-RBF 0.8767 ≈ 参考报告 0.87）；A3 自训 MLP 均值均未超闭式锚（单 seed 可及但方差大，linear-AdamW 对照欠拟合）。⇒ 表征 + 正则对齐 > 模型族，线性读出已近上限。产物 `experiments/A{1,2,3}/`（3 脚本 + 3 结果 JSON + 6 图 + 3 逐图说明）。
 - 2026-10-17：**A7 完成**（5 折 CV 协议补做，附加实验）：train-only 5 折 × 3 重复、估计器同 A1。truth CV↔valid 秩相关 **0.968**、CV 与 valid 同选 **L20**（regret 0，15 折中 L20 赢 11）⇒ valid 选层可复现；world ρ=0.703、CV 最优 L8 vs valid 最优 L2 但头部不可分辨（valid regret 仅 **+1.29 MSE**）⇒ 应按 L2/L8 平台报告；world CV 均值 MSE 高于 valid 系离群点尾部（典型误差一致：L2 中位 SE 47.1/45.1、中位距离 988/978 km；top-5 占 SSE 40.6%）⇒ 均值 MSE 对划分敏感；train 指标不能选层（world ρ=−0.25 ns、truth train acc 饱和）。产物 `experiments/A7/`（脚本 + 结果 JSON + CSV + 4 图 + 留档日志 + 逐图说明）。
 - 2026-10-17：**C2 完成**（prompt 变体特征 + 探针，附加实验）：5 变体 × 13 层 std13（raw11 辅助，nameonly raw11 发散）。std13-L11：删国家名 MSE 539→1069、中位 2280→3115 km（+1005 km CI [624, 1391]）、去指令仅 +233 km、换问法 −199 km（CI 上界 +0.3）、读点国家 token→句末 "?" +1511 km；国家名效应集中在 seen 国家（+1127 vs unseen +335，CI 跨 0）⇒ 与 Q7 反向闭环。锚点 13/14 逐位一致（L35 +0.77 为 float16 数值差，raw11 −0.10）。产物 `experiments/C2/`（脚本 + 5 变体 CSV + 3 图 + `c2_figure_notes.md`）与 `results/slurm_c2/c2_v1/`。
+- 2026-10-17：**C3 完成**（GeoNames 数据扩增，附加实验）：12,000 城 / 30 国整国留出；13 层重提 + 5 训练集 × 4 评估集。原 world valid 总体不显著（union−orig L2 −18.4 / L11 +5.9，CI 跨 0）；收益集中于 unseen（L11 −143.1，CI 不跨 0）；strict8 上 union 比 new 低 21.7 MSE（cluster CI [−41.9,−7.8]）但逐国异质；new 单独训练伤原任务（L11 +58.2）⇒ 混合优于替换；full unseen 的 22/30 国重叠是陷阱。产物 `experiments/C3/`（4 图 + `c3_figure_notes.md` + `c3_analysis.json` + 评估脚本）与 `results/slurm_c3/c3_v1/`（65 runs）。
