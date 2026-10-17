@@ -1,0 +1,801 @@
+{
+  "generated_utc": "2026-10-17T02:55:10Z",
+  "metrics_path": "results\\slurm_c2\\c2_v1\\c2_metrics.json",
+  "n_valid": 130,
+  "anchors": {
+    "origcountry_raw11_mse": 150.3258802134989,
+    "origcountry_std13_L11_mse": 167.41934065090322
+  },
+  "anchors_expected": {
+    "origcountry_raw11_mse": 150.42772354798632,
+    "origcountry_std13_L11_mse": 167.04130708058523
+  },
+  "missing_raw11": [
+    "nameonly"
+  ],
+  "headline": {
+    "std13": {
+      "origcountry": {
+        "layer": 11,
+        "mse": 167.41934065090322,
+        "periodic_mse": 167.41934065090328,
+        "dist_median_km": 909.3400635371912,
+        "dist_mean_km": 1203.14864766492,
+        "dist_p90_km": 2471.3248223422897,
+        "hit100_rate": 0.007692307692307693
+      },
+      "origlast": {
+        "layer": 11,
+        "mse": 539.141762086332,
+        "periodic_mse": 539.1417620863322,
+        "dist_median_km": 2280.126584785507,
+        "dist_mean_km": 2714.5627941673656,
+        "dist_p90_km": 5530.230516119885,
+        "hit100_rate": 0.0
+      },
+      "nocountry": {
+        "layer": 11,
+        "mse": 1069.3773261328752,
+        "periodic_mse": 1069.3773261328754,
+        "dist_median_km": 3115.2290037817866,
+        "dist_mean_km": 3719.4609511949757,
+        "dist_p90_km": 7544.244532249287,
+        "hit100_rate": 0.0
+      },
+      "nameonly": {
+        "layer": 11,
+        "mse": 224.5873291523334,
+        "periodic_mse": 224.58732915233335,
+        "dist_median_km": 1099.900739063317,
+        "dist_mean_km": 1435.7385007751604,
+        "dist_p90_km": 3008.538231582502,
+        "hit100_rate": 0.015384615384615385
+      },
+      "rephrase": {
+        "layer": 11,
+        "mse": 492.6481669650367,
+        "periodic_mse": 492.6481669650367,
+        "dist_median_km": 2163.263164660121,
+        "dist_mean_km": 2515.3466191256744,
+        "dist_p90_km": 4539.942184740867,
+        "hit100_rate": 0.0
+      }
+    },
+    "raw11": {
+      "origcountry": {
+        "layer": 11,
+        "mse": 150.3258802134989,
+        "periodic_mse": 150.32588021349886,
+        "dist_median_km": 944.7708251384555,
+        "dist_mean_km": 1141.432780657898,
+        "dist_p90_km": 2359.8307342376934,
+        "hit100_rate": 0.0
+      },
+      "origlast": {
+        "layer": 11,
+        "mse": 1901.9165942581483,
+        "periodic_mse": 1901.916594258148,
+        "dist_median_km": 4114.374090730565,
+        "dist_mean_km": 5235.730659755823,
+        "dist_p90_km": 9837.202690472393,
+        "hit100_rate": 0.0
+      },
+      "nocountry": {
+        "layer": 11,
+        "mse": 1883.6531408666085,
+        "periodic_mse": 1883.6531408666085,
+        "dist_median_km": 4014.0009307184846,
+        "dist_mean_km": 5086.769985571603,
+        "dist_p90_km": 10401.440777979731,
+        "hit100_rate": 0.0
+      },
+      "rephrase": {
+        "layer": 11,
+        "mse": 2003.2286144959842,
+        "periodic_mse": 2003.228614495984,
+        "dist_median_km": 4428.2029860319535,
+        "dist_mean_km": 5377.423740880128,
+        "dist_p90_km": 9953.672995874394,
+        "hit100_rate": 0.0
+      }
+    }
+  },
+  "layer_curves": {
+    "origcountry": [
+      {
+        "layer": 2,
+        "mse": 157.57087905356968,
+        "periodic_mse": 157.5708790535697,
+        "dist_median_km": 973.7868773978555
+      },
+      {
+        "layer": 5,
+        "mse": 163.01924630157458,
+        "periodic_mse": 163.01924630157458,
+        "dist_median_km": 946.7991417339392
+      },
+      {
+        "layer": 8,
+        "mse": 159.13839151040827,
+        "periodic_mse": 159.13839151040827,
+        "dist_median_km": 952.6135752336368
+      },
+      {
+        "layer": 11,
+        "mse": 167.41934065090322,
+        "periodic_mse": 167.41934065090328,
+        "dist_median_km": 909.3401092845037
+      },
+      {
+        "layer": 14,
+        "mse": 213.6689006099402,
+        "periodic_mse": 213.66890060994012,
+        "dist_median_km": 1089.8301847826426
+      },
+      {
+        "layer": 17,
+        "mse": 227.1311521912557,
+        "periodic_mse": 227.1311521912556,
+        "dist_median_km": 1198.912355186217
+      },
+      {
+        "layer": 20,
+        "mse": 241.8260490880496,
+        "periodic_mse": 241.82604908804961,
+        "dist_median_km": 1167.2001937997056
+      },
+      {
+        "layer": 23,
+        "mse": 241.22874312510012,
+        "periodic_mse": 241.22874312510015,
+        "dist_median_km": 1420.0503364613928
+      },
+      {
+        "layer": 26,
+        "mse": 226.24586039999085,
+        "periodic_mse": 226.2458603999908,
+        "dist_median_km": 1323.9813927637408
+      },
+      {
+        "layer": 29,
+        "mse": 209.98803726142853,
+        "periodic_mse": 209.98803726142853,
+        "dist_median_km": 1207.137459220233
+      },
+      {
+        "layer": 32,
+        "mse": 180.30895167788677,
+        "periodic_mse": 180.3089516778868,
+        "dist_median_km": 1131.7904355318822
+      },
+      {
+        "layer": 34,
+        "mse": 196.4603525638869,
+        "periodic_mse": 196.46035256388691,
+        "dist_median_km": 1085.9633798414347
+      },
+      {
+        "layer": 35,
+        "mse": 204.14076321406506,
+        "periodic_mse": 204.1407632140651,
+        "dist_median_km": 1129.6976742321215
+      }
+    ],
+    "origlast": [
+      {
+        "layer": 2,
+        "mse": 421.1539572876829,
+        "periodic_mse": 421.15395728768294,
+        "dist_median_km": 1707.3846606259544
+      },
+      {
+        "layer": 5,
+        "mse": 417.85947435961526,
+        "periodic_mse": 417.85947435961526,
+        "dist_median_km": 1845.8944975183017
+      },
+      {
+        "layer": 8,
+        "mse": 498.3320941898248,
+        "periodic_mse": 498.3320941898248,
+        "dist_median_km": 2019.3183557387388
+      },
+      {
+        "layer": 11,
+        "mse": 539.141762086332,
+        "periodic_mse": 539.1417620863322,
+        "dist_median_km": 2280.126598134966
+      },
+      {
+        "layer": 14,
+        "mse": 568.731460128314,
+        "periodic_mse": 568.731460128314,
+        "dist_median_km": 2244.019956083409
+      },
+      {
+        "layer": 17,
+        "mse": 660.8814268487116,
+        "periodic_mse": 660.8814268487116,
+        "dist_median_km": 2603.143612568332
+      },
+      {
+        "layer": 20,
+        "mse": 724.9487580798829,
+        "periodic_mse": 724.9487580798829,
+        "dist_median_km": 2601.9276669656247
+      },
+      {
+        "layer": 23,
+        "mse": 747.3676180323902,
+        "periodic_mse": 747.36761803239,
+        "dist_median_km": 2575.6937185466895
+      },
+      {
+        "layer": 26,
+        "mse": 691.6712398476757,
+        "periodic_mse": 691.6712398476757,
+        "dist_median_km": 2495.1073264210827
+      },
+      {
+        "layer": 29,
+        "mse": 736.5280764845721,
+        "periodic_mse": 736.5280764845721,
+        "dist_median_km": 2405.1604490905274
+      },
+      {
+        "layer": 32,
+        "mse": 533.9401702109952,
+        "periodic_mse": 533.9401702109952,
+        "dist_median_km": 1870.6188136227631
+      },
+      {
+        "layer": 34,
+        "mse": 573.6064962631077,
+        "periodic_mse": 573.6064962631077,
+        "dist_median_km": 2058.6616598097403
+      },
+      {
+        "layer": 35,
+        "mse": 566.7484286513477,
+        "periodic_mse": 566.7484286513477,
+        "dist_median_km": 1952.5462682046314
+      }
+    ],
+    "nocountry": [
+      {
+        "layer": 2,
+        "mse": 2598.1689868693243,
+        "periodic_mse": 2598.168986869324,
+        "dist_median_km": 5138.108452821172
+      },
+      {
+        "layer": 5,
+        "mse": 1824.3424532698464,
+        "periodic_mse": 1824.3424532698464,
+        "dist_median_km": 3749.228151961434
+      },
+      {
+        "layer": 8,
+        "mse": 2026.5689762660638,
+        "periodic_mse": 2026.5689762660638,
+        "dist_median_km": 4420.670992708869
+      },
+      {
+        "layer": 11,
+        "mse": 1069.3773261328752,
+        "periodic_mse": 1069.3773261328754,
+        "dist_median_km": 3115.2290087632773
+      },
+      {
+        "layer": 14,
+        "mse": 1296.4289032671127,
+        "periodic_mse": 1296.4289032671127,
+        "dist_median_km": 2977.080210745201
+      },
+      {
+        "layer": 17,
+        "mse": 1345.6089672826124,
+        "periodic_mse": 1345.6089672826124,
+        "dist_median_km": 3152.868669776521
+      },
+      {
+        "layer": 20,
+        "mse": 1266.5568423569498,
+        "periodic_mse": 1266.5568423569498,
+        "dist_median_km": 2758.870562394865
+      },
+      {
+        "layer": 23,
+        "mse": 1194.0039848178294,
+        "periodic_mse": 1194.0039848178294,
+        "dist_median_km": 2947.790747372905
+      },
+      {
+        "layer": 26,
+        "mse": 850.8133285954713,
+        "periodic_mse": 850.8133285954713,
+        "dist_median_km": 2503.1833816783865
+      },
+      {
+        "layer": 29,
+        "mse": 891.5562841781576,
+        "periodic_mse": 891.5562841781576,
+        "dist_median_km": 2233.1309232713857
+      },
+      {
+        "layer": 32,
+        "mse": 689.1665978262572,
+        "periodic_mse": 689.1665978262572,
+        "dist_median_km": 1954.0888293424887
+      },
+      {
+        "layer": 34,
+        "mse": 833.3335109429718,
+        "periodic_mse": 833.3335109429719,
+        "dist_median_km": 2426.8499514282103
+      },
+      {
+        "layer": 35,
+        "mse": 822.9854362288362,
+        "periodic_mse": 822.9854362288362,
+        "dist_median_km": 2243.7865686507225
+      }
+    ],
+    "nameonly": [
+      {
+        "layer": 2,
+        "mse": 159.81365915704654,
+        "periodic_mse": 159.81365915704657,
+        "dist_median_km": 1061.2413247570912
+      },
+      {
+        "layer": 5,
+        "mse": 184.61918738736532,
+        "periodic_mse": 184.61918738736534,
+        "dist_median_km": 1129.0946373595505
+      },
+      {
+        "layer": 8,
+        "mse": 193.68472181588356,
+        "periodic_mse": 193.6847218158835,
+        "dist_median_km": 1140.9471607385271
+      },
+      {
+        "layer": 11,
+        "mse": 224.5873291523334,
+        "periodic_mse": 224.58732915233335,
+        "dist_median_km": 1099.9007111691171
+      },
+      {
+        "layer": 14,
+        "mse": 282.9867818917224,
+        "periodic_mse": 282.9867818917224,
+        "dist_median_km": 1325.49175042168
+      },
+      {
+        "layer": 17,
+        "mse": 322.74147464027703,
+        "periodic_mse": 322.74147464027703,
+        "dist_median_km": 1563.21462972993
+      },
+      {
+        "layer": 20,
+        "mse": 349.8908846092729,
+        "periodic_mse": 349.8908846092729,
+        "dist_median_km": 1658.6356009659685
+      },
+      {
+        "layer": 23,
+        "mse": 272.17146333780937,
+        "periodic_mse": 272.17146333780937,
+        "dist_median_km": 1336.7849635614575
+      },
+      {
+        "layer": 26,
+        "mse": 280.11587115435236,
+        "periodic_mse": 280.11587115435236,
+        "dist_median_km": 1498.7458965448377
+      },
+      {
+        "layer": 29,
+        "mse": 264.567682128951,
+        "periodic_mse": 264.567682128951,
+        "dist_median_km": 1300.5143772924866
+      },
+      {
+        "layer": 32,
+        "mse": 243.463686055767,
+        "periodic_mse": 243.463686055767,
+        "dist_median_km": 1294.1160424449677
+      },
+      {
+        "layer": 34,
+        "mse": 299.44728344918843,
+        "periodic_mse": 299.4472834491884,
+        "dist_median_km": 1366.0188293006388
+      },
+      {
+        "layer": 35,
+        "mse": 313.50689206730846,
+        "periodic_mse": 313.5068920673085,
+        "dist_median_km": 1291.4329955963262
+      }
+    ],
+    "rephrase": [
+      {
+        "layer": 2,
+        "mse": 419.88099236808984,
+        "periodic_mse": 419.88099236808984,
+        "dist_median_km": 1722.4292751063413
+      },
+      {
+        "layer": 5,
+        "mse": 448.9791046445308,
+        "periodic_mse": 448.97910464453093,
+        "dist_median_km": 1799.212315713509
+      },
+      {
+        "layer": 8,
+        "mse": 470.6778499357039,
+        "periodic_mse": 470.6778499357038,
+        "dist_median_km": 2132.1965533627945
+      },
+      {
+        "layer": 11,
+        "mse": 492.6481669650367,
+        "periodic_mse": 492.6481669650367,
+        "dist_median_km": 2163.263151528604
+      },
+      {
+        "layer": 14,
+        "mse": 694.0811763615341,
+        "periodic_mse": 694.0811763615341,
+        "dist_median_km": 2320.45328492475
+      },
+      {
+        "layer": 17,
+        "mse": 798.898605008991,
+        "periodic_mse": 798.8986050089909,
+        "dist_median_km": 2797.593187491617
+      },
+      {
+        "layer": 20,
+        "mse": 781.777951968513,
+        "periodic_mse": 781.7779519685131,
+        "dist_median_km": 2679.0792989414194
+      },
+      {
+        "layer": 23,
+        "mse": 807.9491393746566,
+        "periodic_mse": 807.9491393746566,
+        "dist_median_km": 2646.513621207226
+      },
+      {
+        "layer": 26,
+        "mse": 922.0043230179317,
+        "periodic_mse": 922.0043230179315,
+        "dist_median_km": 2765.970602932889
+      },
+      {
+        "layer": 29,
+        "mse": 985.7659517809491,
+        "periodic_mse": 985.7659517809491,
+        "dist_median_km": 2656.1165675013285
+      },
+      {
+        "layer": 32,
+        "mse": 680.2292524026528,
+        "periodic_mse": 680.2292524026528,
+        "dist_median_km": 2323.49287087206
+      },
+      {
+        "layer": 34,
+        "mse": 795.0430502480123,
+        "periodic_mse": 795.0430502480123,
+        "dist_median_km": 2463.5401750608835
+      },
+      {
+        "layer": 35,
+        "mse": 791.3052080247458,
+        "periodic_mse": 791.3052080247458,
+        "dist_median_km": 2225.1644845443225
+      }
+    ]
+  },
+  "pair_effects": [
+    {
+      "pair": "instruction removed",
+      "reference": "origcountry",
+      "test": "nameonly",
+      "probe_set": "std13",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": 232.5898531102403,
+      "median_delta_km": 202.31865668046711,
+      "ci95_delta_km": [
+        76.82454601825069,
+        385.3608824999126
+      ],
+      "test_closer": 48,
+      "reference_closer": 82,
+      "mean_shift_km": 905.1769649530311,
+      "median_shift_km": 689.8891746047564,
+      "ci95_shift_km": [
+        773.8571934115286,
+        1055.8522171838679
+      ],
+      "mean_ref_km": 1203.14864766492,
+      "mean_test_km": 1435.7385007751604,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": 297.0811251996798,
+          "ci95_delta_km": [
+            150.8851915037539,
+            447.7314940426919
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": -122.11214338167619,
+          "ci95_delta_km": [
+            -716.0514877155786,
+            383.42577601674896
+          ]
+        }
+      }
+    },
+    {
+      "pair": "country name removed",
+      "reference": "origlast",
+      "test": "nocountry",
+      "probe_set": "std13",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": 1004.8981570276096,
+      "median_delta_km": 743.6297224473608,
+      "ci95_delta_km": [
+        623.4618895771746,
+        1391.2782662183656
+      ],
+      "test_closer": 42,
+      "reference_closer": 88,
+      "mean_shift_km": 2915.6215061620874,
+      "median_shift_km": 2269.2755614398284,
+      "ci95_shift_km": [
+        2591.7987062255265,
+        3249.7856242074567
+      ],
+      "mean_ref_km": 2714.5627941673656,
+      "mean_test_km": 3719.4609511949757,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": 1126.6722992929738,
+          "ci95_delta_km": [
+            724.6712664837361,
+            1554.703814820685
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": 335.1403745681061,
+          "ci95_delta_km": [
+            -639.6822213721869,
+            1242.795028463325
+          ]
+        }
+      }
+    },
+    {
+      "pair": "question rephrased",
+      "reference": "origlast",
+      "test": "rephrase",
+      "probe_set": "std13",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": -199.21617504169134,
+      "median_delta_km": -154.67876450745712,
+      "ci95_delta_km": [
+        -398.0398437064531,
+        0.31111255008263894
+      ],
+      "test_closer": 76,
+      "reference_closer": 54,
+      "mean_shift_km": 1319.8082672709913,
+      "median_shift_km": 1172.668889057009,
+      "ci95_shift_km": [
+        1173.5191704253286,
+        1472.7173634607318
+      ],
+      "mean_ref_km": 2714.5627941673656,
+      "mean_test_km": 2515.3466191256744,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": -233.18568911174034,
+          "ci95_delta_km": [
+            -450.07819310508506,
+            -0.8724547099998073
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": -12.383847656421551,
+          "ci95_delta_km": [
+            -381.10803399185676,
+            376.15020306643095
+          ]
+        }
+      }
+    },
+    {
+      "pair": "token position (last vs country)",
+      "reference": "origcountry",
+      "test": "origlast",
+      "probe_set": "std13",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": 1511.4141465024456,
+      "median_delta_km": 1318.0111815403952,
+      "ci95_delta_km": [
+        1238.8779033853516,
+        1783.6267195737782
+      ],
+      "test_closer": 20,
+      "reference_closer": 110,
+      "mean_shift_km": 2531.314727021296,
+      "median_shift_km": 2128.877959574067,
+      "ci95_shift_km": [
+        2235.223092329631,
+        2840.6084221150363
+      ],
+      "mean_ref_km": 1203.14864766492,
+      "mean_test_km": 2714.5627941673656,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": 1576.7818201986265,
+          "ci95_delta_km": [
+            1274.7769476286446,
+            1881.1647995143692
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": 1151.8919411734505,
+          "ci95_delta_km": [
+            607.8418872026499,
+            1788.1267928005163
+          ]
+        }
+      }
+    },
+    {
+      "pair": "country name removed",
+      "reference": "origlast",
+      "test": "nocountry",
+      "probe_set": "raw11",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": -148.96067418421973,
+      "median_delta_km": -117.98703372650976,
+      "ci95_delta_km": [
+        -420.65830735353956,
+        125.41548357565067
+      ],
+      "test_closer": 69,
+      "reference_closer": 61,
+      "mean_shift_km": 2056.289938454573,
+      "median_shift_km": 1817.1957289489033,
+      "ci95_shift_km": [
+        1829.0440349389028,
+        2301.176967233022
+      ],
+      "mean_ref_km": 5235.730659755823,
+      "mean_test_km": 5086.769985571603,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": -98.39323952471864,
+          "ci95_delta_km": [
+            -399.7166246509154,
+            199.5243422561262
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": -427.08156481147597,
+          "ci95_delta_km": [
+            -1023.4928644799618,
+            91.86615634023921
+          ]
+        }
+      }
+    },
+    {
+      "pair": "question rephrased",
+      "reference": "origlast",
+      "test": "rephrase",
+      "probe_set": "raw11",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": 141.6930811243051,
+      "median_delta_km": 94.41031488565625,
+      "ci95_delta_km": [
+        -13.42116552279543,
+        295.5278181712887
+      ],
+      "test_closer": 58,
+      "reference_closer": 72,
+      "mean_shift_km": 944.3611360733399,
+      "median_shift_km": 749.4715351948126,
+      "ci95_shift_km": [
+        829.0580903915625,
+        1062.2912754446504
+      ],
+      "mean_ref_km": 5235.730659755823,
+      "mean_test_km": 5377.423740880128,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": 120.04269716316553,
+          "ci95_delta_km": [
+            -48.441023439174046,
+            290.610565497079
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": 260.770192910573,
+          "ci95_delta_km": [
+            -31.59012690586797,
+            636.6393471652121
+          ]
+        }
+      }
+    },
+    {
+      "pair": "token position (last vs country)",
+      "reference": "origcountry",
+      "test": "origlast",
+      "probe_set": "raw11",
+      "layer": 11,
+      "n": 130,
+      "mean_delta_km": 4094.297879097924,
+      "median_delta_km": 3140.9410035879364,
+      "ci95_delta_km": [
+        3515.4337537901342,
+        4699.752353975514
+      ],
+      "test_closer": 5,
+      "reference_closer": 125,
+      "mean_shift_km": 5053.9802517260105,
+      "median_shift_km": 4016.283401493739,
+      "ci95_shift_km": [
+        4461.896883591293,
+        5666.063715052157
+      ],
+      "mean_ref_km": 1141.432780657898,
+      "mean_test_km": 5235.730659755823,
+      "strata": {
+        "country_seen": {
+          "n": 110,
+          "mean_delta_km": 4484.000152745181,
+          "ci95_delta_km": [
+            3831.3624402655805,
+            5136.8908864365085
+          ]
+        },
+        "country_unseen": {
+          "n": 20,
+          "mean_delta_km": 1950.9353740380143,
+          "ci95_delta_km": [
+            1246.4487778542534,
+            2702.8204192309304
+          ]
+        }
+      }
+    }
+  ]
+}
