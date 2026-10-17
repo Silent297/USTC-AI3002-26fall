@@ -1,0 +1,240 @@
+Training converged at epoch 1331, loss=45.87758355
+Training converged at epoch 1017, loss=386.92145468
+origcountry_std13_layer2     mse=157.5709 med=973.8km lr=0.002 attempts=1 (3.5s)
+Training converged at epoch 1328, loss=46.93453995
+Training converged at epoch 1015, loss=390.48039045
+origcountry_std13_layer5     mse=163.0192 med=946.8km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1352, loss=38.91797980
+Training converged at epoch 1022, loss=368.20419576
+origcountry_std13_layer8     mse=159.1384 med=952.6km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1369, loss=33.91220870
+Training converged at epoch 1022, loss=364.91603156
+origcountry_std13_layer11    mse=167.4193 med=909.3km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1356, loss=37.39044769
+Training converged at epoch 1018, loss=373.34979915
+origcountry_std13_layer14    mse=213.6689 med=1089.8km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1345, loss=40.86638158
+Training converged at epoch 1006, loss=409.96017763
+origcountry_std13_layer17    mse=227.1312 med=1198.9km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1335, loss=44.40354593
+Training converged at epoch 998, loss=438.63277880
+origcountry_std13_layer20    mse=241.8260 med=1167.2km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1336, loss=44.21252602
+Training converged at epoch 1009, loss=404.65991023
+origcountry_std13_layer23    mse=241.2287 med=1420.1km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1345, loss=41.07517288
+Training converged at epoch 1001, loss=434.35488783
+origcountry_std13_layer26    mse=226.2459 med=1324.0km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1345, loss=41.08867234
+Training converged at epoch 1001, loss=436.88895993
+origcountry_std13_layer29    mse=209.9880 med=1207.1km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1369, loss=33.89102488
+Training converged at epoch 1014, loss=389.02944219
+origcountry_std13_layer32    mse=180.3090 med=1131.8km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1374, loss=32.40939908
+Training converged at epoch 1023, loss=358.33744092
+origcountry_std13_layer34    mse=196.4604 med=1086.0km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1372, loss=32.97405879
+Training converged at epoch 1023, loss=360.02861611
+origcountry_std13_layer35    mse=204.1408 med=1129.7km lr=0.002 attempts=1 (3.0s)
+origcountry_raw11_layer11    mse=150.3259 med=944.8km lr=0.0005 attempts=1 (5.1s)
+Training converged at epoch 1243, loss=92.79821098
+Training converged at epoch 955, loss=641.68221044
+origlast_std13_layer2        mse=421.1540 med=1707.4km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1231, loss=102.42758939
+Training converged at epoch 945, loss=696.20075416
+origlast_std13_layer5        mse=417.8595 med=1845.9km lr=0.002 attempts=1 (2.7s)
+Training converged at epoch 1210, loss=121.60131749
+Training converged at epoch 923, loss=839.93371530
+origlast_std13_layer8        mse=498.3321 med=2019.3km lr=0.002 attempts=1 (2.7s)
+loss exploded at epoch 28 (loss=1.083e+09 vs initial 9.745e+02), training has stopped
+loss exploded at epoch 31 (loss=8.240e+09 vs initial 5.024e+03), training has stopped
+Training converged at epoch 1647, loss=982.05868870
+origlast_std13_layer11       mse=539.1418 med=2280.1km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 20 (loss=1.109e+09 vs initial 1.041e+03), training has stopped
+loss exploded at epoch 23 (loss=5.224e+09 vs initial 5.223e+03), training has stopped
+Training converged at epoch 1627, loss=1073.36510055
+origlast_std13_layer14       mse=568.7315 med=2244.0km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 19 (loss=1.371e+09 vs initial 1.046e+03), training has stopped
+loss exploded at epoch 25 (loss=9.967e+09 vs initial 5.074e+03), training has stopped
+Training converged at epoch 1610, loss=1161.86295967
+origlast_std13_layer17       mse=660.8814 med=2603.1km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 9 (loss=1.849e+09 vs initial 1.188e+03), training has stopped
+loss exploded at epoch 13 (loss=6.927e+09 vs initial 4.930e+03), training has stopped
+Training converged at epoch 1628, loss=1095.54453584
+origlast_std13_layer20       mse=724.9488 med=2601.9km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 8 (loss=8.779e+09 vs initial 1.325e+03), training has stopped
+loss exploded at epoch 9 (loss=6.350e+09 vs initial 5.189e+03), training has stopped
+Training converged at epoch 1599, loss=1247.84037040
+origlast_std13_layer23       mse=747.3676 med=2575.7km lr=0.001 attempts=2 (4.5s)
+loss exploded at epoch 8 (loss=6.337e+09 vs initial 1.391e+03), training has stopped
+loss exploded at epoch 9 (loss=1.337e+10 vs initial 5.294e+03), training has stopped
+Training converged at epoch 1607, loss=1207.29865667
+origlast_std13_layer26       mse=691.6712 med=2495.1km lr=0.001 attempts=2 (4.5s)
+loss exploded at epoch 11 (loss=2.912e+09 vs initial 1.155e+03), training has stopped
+loss exploded at epoch 13 (loss=2.194e+10 vs initial 5.207e+03), training has stopped
+Training converged at epoch 1635, loss=1033.97901236
+origlast_std13_layer29       mse=736.5281 med=2405.2km lr=0.001 attempts=2 (4.6s)
+Training converged at epoch 1285, loss=66.24181279
+Training converged at epoch 957, loss=632.43642360
+origlast_std13_layer32       mse=533.9402 med=1870.6km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1281, loss=68.65891628
+Training converged at epoch 955, loss=630.98578127
+origlast_std13_layer34       mse=573.6065 med=2058.7km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1287, loss=64.99709279
+Training converged at epoch 960, loss=604.60985464
+origlast_std13_layer35       mse=566.7484 med=1952.5km lr=0.002 attempts=1 (2.8s)
+origlast_raw11_layer11       mse=1901.9166 med=4114.4km lr=0.0005 attempts=1 (5.1s)
+Training converged at epoch 1104, loss=287.71096875
+Training converged at epoch 839, loss=1981.40839018
+nocountry_std13_layer2       mse=2598.1690 med=5138.1km lr=0.002 attempts=1 (2.5s)
+Training converged at epoch 1117, loss=258.71813777
+Training converged at epoch 865, loss=1572.72784847
+nocountry_std13_layer5       mse=1824.3425 med=3749.2km lr=0.002 attempts=1 (2.5s)
+Training converged at epoch 1107, loss=280.96503555
+Training converged at epoch 851, loss=1897.64689803
+nocountry_std13_layer8       mse=2026.5690 med=4420.7km lr=0.002 attempts=1 (2.5s)
+nocountry_std13_layer11      mse=1069.3773 med=3115.2km lr=0.002 attempts=1 (5.0s)
+Training converged at epoch 1158, loss=185.54891212
+Training converged at epoch 874, loss=1387.81534669
+nocountry_std13_layer14      mse=1296.4289 med=2977.1km lr=0.002 attempts=1 (2.6s)
+Training converged at epoch 1153, loss=193.12677746
+Training converged at epoch 869, loss=1420.16554171
+nocountry_std13_layer17      mse=1345.6090 med=3152.9km lr=0.002 attempts=1 (2.5s)
+loss exploded at epoch 1979 (loss=9.378e+08 vs initial 9.321e+02), training has stopped
+Training converged at epoch 1606, loss=1243.20520053
+nocountry_std13_layer20      mse=1266.5568 med=2758.9km lr=0.001 attempts=2 (9.5s)
+loss exploded at epoch 18 (loss=2.051e+09 vs initial 9.894e+02), training has stopped
+loss exploded at epoch 19 (loss=7.478e+09 vs initial 4.858e+03), training has stopped
+Training converged at epoch 1603, loss=1269.68177008
+nocountry_std13_layer23      mse=1194.0040 med=2947.8km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 18 (loss=1.981e+09 vs initial 9.946e+02), training has stopped
+loss exploded at epoch 19 (loss=6.757e+09 vs initial 4.729e+03), training has stopped
+Training converged at epoch 1626, loss=1130.64165354
+nocountry_std13_layer26      mse=850.8133 med=2503.2km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 154 (loss=9.442e+08 vs initial 9.050e+02), training has stopped
+loss exploded at epoch 165 (loss=4.929e+09 vs initial 4.589e+03), training has stopped
+Training converged at epoch 1660, loss=945.57460791
+nocountry_std13_layer29      mse=891.5563 med=2233.1km lr=0.001 attempts=2 (5.0s)
+Training converged at epoch 1261, loss=80.36456299
+Training converged at epoch 950, loss=680.01948787
+nocountry_std13_layer32      mse=689.1666 med=1954.1km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1255, loss=84.74851619
+Training converged at epoch 947, loss=687.53270515
+nocountry_std13_layer34      mse=833.3335 med=2426.8km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1256, loss=83.99320060
+Training converged at epoch 947, loss=688.73103262
+nocountry_std13_layer35      mse=822.9854 med=2243.8km lr=0.002 attempts=1 (2.8s)
+nocountry_raw11_layer11      mse=1883.6531 med=4014.0km lr=0.0005 attempts=1 (5.1s)
+Training converged at epoch 1333, loss=45.15348921
+Training converged at epoch 1019, loss=380.75078362
+nameonly_std13_layer2        mse=159.8137 med=1061.2km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1327, loss=47.34811671
+Training converged at epoch 1012, loss=400.00908028
+nameonly_std13_layer5        mse=184.6192 med=1129.1km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1350, loss=39.42764533
+Training converged at epoch 1017, loss=381.68084179
+nameonly_std13_layer8        mse=193.6847 med=1140.9km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1356, loss=37.52293312
+Training converged at epoch 1010, loss=397.64531174
+nameonly_std13_layer11       mse=224.5873 med=1099.9km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1332, loss=45.61331843
+Training converged at epoch 1000, loss=430.58690608
+nameonly_std13_layer14       mse=282.9868 med=1325.5km lr=0.002 attempts=1 (3.0s)
+Training converged at epoch 1319, loss=50.51786990
+Training converged at epoch 988, loss=473.57752833
+nameonly_std13_layer17       mse=322.7415 med=1563.2km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1316, loss=51.86992610
+Training converged at epoch 982, loss=496.15874228
+nameonly_std13_layer20       mse=349.8909 med=1658.6km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1318, loss=50.96366624
+Training converged at epoch 998, loss=445.04448554
+nameonly_std13_layer23       mse=272.1715 med=1336.8km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1312, loss=53.58272851
+Training converged at epoch 979, loss=519.61759254
+nameonly_std13_layer26       mse=280.1159 med=1498.7km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1302, loss=57.65592626
+Training converged at epoch 982, loss=505.01573642
+nameonly_std13_layer29       mse=264.5677 med=1300.5km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1323, loss=48.80205586
+Training converged at epoch 999, loss=435.15413609
+nameonly_std13_layer32       mse=243.4637 med=1294.1km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1321, loss=49.67541518
+Training converged at epoch 1002, loss=422.69853538
+nameonly_std13_layer34       mse=299.4473 med=1366.0km lr=0.002 attempts=1 (2.9s)
+Training converged at epoch 1317, loss=51.43929367
+Training converged at epoch 999, loss=433.60061635
+nameonly_std13_layer35       mse=313.5069 med=1291.4km lr=0.002 attempts=1 (2.9s)
+loss exploded at epoch 2 (loss=7.361e+11 vs initial 3.395e+03), training has stopped
+loss exploded at epoch 2 (loss=1.274e+14 vs initial 4.378e+05), training has stopped
+loss exploded at epoch 2 (loss=1.098e+10 vs initial 1.448e+03), training has stopped
+loss exploded at epoch 2 (loss=1.901e+12 vs initial 1.124e+05), training has stopped
+loss exploded at epoch 3 (loss=1.603e+11 vs initial 1.067e+03), training has stopped
+loss exploded at epoch 3 (loss=2.774e+13 vs initial 3.206e+04), training has stopped
+loss exploded at epoch 4 (loss=1.168e+11 vs initial 1.025e+03), training has stopped
+loss exploded at epoch 3 (loss=8.407e+10 vs initial 1.244e+04), training has stopped
+nameonly_raw11_layer11       FAIL lr=6.25e-05 attempts=4 (0.1s)
+Training converged at epoch 1245, loss=91.86645465
+Training converged at epoch 954, loss=641.69873636
+rephrase_std13_layer2        mse=419.8810 med=1722.4km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1236, loss=98.41012922
+Training converged at epoch 949, loss=670.30741091
+rephrase_std13_layer5        mse=448.9791 med=1799.2km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1210, loss=121.37516284
+Training converged at epoch 923, loss=848.92510621
+rephrase_std13_layer8        mse=470.6778 med=2132.2km lr=0.002 attempts=1 (2.7s)
+loss exploded at epoch 26 (loss=1.774e+09 vs initial 9.634e+02), training has stopped
+loss exploded at epoch 27 (loss=9.742e+09 vs initial 5.299e+03), training has stopped
+Training converged at epoch 1631, loss=1058.34078491
+rephrase_std13_layer11       mse=492.6482 med=2163.3km lr=0.001 attempts=2 (4.7s)
+loss exploded at epoch 14 (loss=1.294e+09 vs initial 1.041e+03), training has stopped
+loss exploded at epoch 15 (loss=6.808e+09 vs initial 5.485e+03), training has stopped
+Training converged at epoch 1605, loss=1198.28040081
+rephrase_std13_layer14       mse=694.0812 med=2320.5km lr=0.001 attempts=2 (4.7s)
+loss exploded at epoch 15 (loss=1.086e+09 vs initial 1.028e+03), training has stopped
+loss exploded at epoch 17 (loss=1.465e+10 vs initial 5.346e+03), training has stopped
+Training converged at epoch 1587, loss=1311.70947118
+rephrase_std13_layer17       mse=798.8986 med=2797.6km lr=0.001 attempts=2 (4.5s)
+loss exploded at epoch 11 (loss=1.642e+09 vs initial 1.054e+03), training has stopped
+loss exploded at epoch 12 (loss=8.415e+09 vs initial 5.183e+03), training has stopped
+Training converged at epoch 1617, loss=1157.76977508
+rephrase_std13_layer20       mse=781.7780 med=2679.1km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 9 (loss=1.585e+09 vs initial 1.074e+03), training has stopped
+loss exploded at epoch 10 (loss=2.047e+10 vs initial 5.486e+03), training has stopped
+Training converged at epoch 1595, loss=1285.22463591
+rephrase_std13_layer23       mse=807.9491 med=2646.5km lr=0.001 attempts=2 (4.6s)
+loss exploded at epoch 11 (loss=3.981e+09 vs initial 1.040e+03), training has stopped
+loss exploded at epoch 11 (loss=5.741e+09 vs initial 5.478e+03), training has stopped
+Training converged at epoch 1590, loss=1326.65986794
+rephrase_std13_layer26       mse=922.0043 med=2766.0km lr=0.001 attempts=2 (4.5s)
+loss exploded at epoch 17 (loss=1.607e+09 vs initial 1.003e+03), training has stopped
+loss exploded at epoch 19 (loss=8.344e+09 vs initial 5.439e+03), training has stopped
+Training converged at epoch 1588, loss=1305.95335935
+rephrase_std13_layer29       mse=985.7660 med=2656.1km lr=0.001 attempts=2 (4.5s)
+Training converged at epoch 1247, loss=90.07301059
+Training converged at epoch 934, loss=770.21435987
+rephrase_std13_layer32       mse=680.2293 med=2323.5km lr=0.002 attempts=1 (2.8s)
+Training converged at epoch 1230, loss=103.55674720
+Training converged at epoch 924, loss=832.51393758
+rephrase_std13_layer34       mse=795.0431 med=2463.5km lr=0.002 attempts=1 (2.7s)
+Training converged at epoch 1237, loss=97.52548407
+Training converged at epoch 928, loss=805.11371489
+rephrase_std13_layer35       mse=791.3052 med=2225.2km lr=0.002 attempts=1 (2.7s)
+rephrase_raw11_layer11       mse=2003.2286 med=4428.2km lr=0.0005 attempts=1 (5.1s)
+
+anchor checks: 13/14 ok
+  origcountry std13 L2: 157.5709 vs 157.5709 (diff +0.0000)
+  origcountry std13 L5: 163.0192 vs 163.0192 (diff -0.0000)
+  origcountry std13 L8: 159.1384 vs 159.1384 (diff +0.0000)
+  origcountry std13 L11: 167.4193 vs 167.0413 (diff +0.3780)
+  origcountry std13 L14: 213.6689 vs 213.6689 (diff +0.0000)
+  origcountry std13 L17: 227.1312 vs 227.1312 (diff +0.0000)
+  origcountry std13 L20: 241.8260 vs 241.8260 (diff +0.0000)
+  origcountry std13 L23: 241.2287 vs 241.1448 (diff +0.0840)
+  origcountry std13 L26: 226.2459 vs 226.2459 (diff +0.0000)
+  origcountry std13 L29: 209.9880 vs 209.9880 (diff +0.0000)
+  origcountry std13 L32: 180.3090 vs 180.3090 (diff +0.0000)
+  origcountry std13 L34: 196.4604 vs 196.4604 (diff +0.0000)
+  origcountry std13 L35: 204.1408 vs 204.9075 (diff -0.7667)  <-- FAIL
+  origcountry raw11 L11: 150.3259 vs 150.4277 (diff -0.1018)
+anchor check failed for 1 runs
