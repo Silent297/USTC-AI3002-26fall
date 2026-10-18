@@ -1,0 +1,1080 @@
+{
+  "protocol": {
+    "n_train": 500,
+    "n_valid": 130,
+    "grid": "10 deg x 10 deg; area weight = cos(mid latitude); coverage is approximate",
+    "distance": "haversine, R=6371 km"
+  },
+  "countries": {
+    "n_train_countries": 158,
+    "n_valid_countries": 78,
+    "n_both": 59,
+    "n_valid_only": 19,
+    "n_train_only": 99,
+    "valid_only": [
+      "Andorra",
+      "Azerbaijan",
+      "Bahrain",
+      "Chad",
+      "Costa Rica",
+      "Denmark",
+      "Estonia / Russia",
+      "Finland",
+      "Germany / Switzerland / Austria",
+      "Hungary",
+      "Liberia",
+      "Luxembourg",
+      "Mauritania",
+      "Mauritius",
+      "Netherlands",
+      "Puerto Rico",
+      "Rwanda",
+      "Slovakia",
+      "Yemen"
+    ],
+    "valid_only_samples": 20,
+    "train_only_samples": 187,
+    "gini_train": 0.5201012658227848,
+    "gini_valid": 0.3248520710059172,
+    "hhi_train": 0.020775999999999996,
+    "hhi_valid": 0.021420118343195273,
+    "top10_share_train": 0.348,
+    "top10_share_valid": 0.36153846153846153,
+    "top1_share_train": 0.09,
+    "top1_share_valid": 0.06153846153846154,
+    "countries_with_1_sample_train": 73,
+    "countries_with_1_sample_valid": 55,
+    "countries_with_ge5_train": 26,
+    "countries_with_ge5_valid": 4
+  },
+  "country_table": [
+    {
+      "country": "Albania",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Algeria",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Andorra",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Antarctica",
+      "train": 5,
+      "valid": 2
+    },
+    {
+      "country": "Argentina",
+      "train": 10,
+      "valid": 2
+    },
+    {
+      "country": "Armenia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Australia",
+      "train": 20,
+      "valid": 5
+    },
+    {
+      "country": "Austria",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Azerbaijan",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Bahrain",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Bangladesh",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Barbados",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Belarus",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Belgium",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Belize",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Benin",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Bhutan",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Bolivia",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Bosnia and Herzegovina",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Botswana",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Brazil",
+      "train": 17,
+      "valid": 3
+    },
+    {
+      "country": "Bulgaria",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Burundi",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Cambodia",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Cameroon",
+      "train": 2,
+      "valid": 2
+    },
+    {
+      "country": "Canada",
+      "train": 13,
+      "valid": 4
+    },
+    {
+      "country": "Central African Republic",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Chad",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Chad / Nigeria / Niger / Cameroon",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Chile",
+      "train": 9,
+      "valid": 1
+    },
+    {
+      "country": "China",
+      "train": 20,
+      "valid": 5
+    },
+    {
+      "country": "Colombia",
+      "train": 6,
+      "valid": 1
+    },
+    {
+      "country": "Cook Islands",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Costa Rica",
+      "train": 0,
+      "valid": 2
+    },
+    {
+      "country": "Croatia",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Cuba",
+      "train": 3,
+      "valid": 1
+    },
+    {
+      "country": "Czechia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Côte d’Ivoire",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Democratic Republic of the Congo",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Denmark",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Djibouti / Ethiopia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Dominican Republic",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Ecuador",
+      "train": 2,
+      "valid": 4
+    },
+    {
+      "country": "Egypt",
+      "train": 9,
+      "valid": 1
+    },
+    {
+      "country": "El Salvador",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Estonia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Estonia / Russia",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Eswatini",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Ethiopia",
+      "train": 6,
+      "valid": 1
+    },
+    {
+      "country": "Fiji",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Finland",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "France",
+      "train": 8,
+      "valid": 1
+    },
+    {
+      "country": "Georgia",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Germany",
+      "train": 3,
+      "valid": 1
+    },
+    {
+      "country": "Germany / Switzerland / Austria",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Ghana",
+      "train": 6,
+      "valid": 0
+    },
+    {
+      "country": "Greece",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Guatemala",
+      "train": 3,
+      "valid": 2
+    },
+    {
+      "country": "Guinea",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Guinea / Côte d’Ivoire / Liberia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Guinea-Bissau",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Guyana",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Haiti",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Honduras",
+      "train": 3,
+      "valid": 1
+    },
+    {
+      "country": "Hungary",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Iceland",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "India",
+      "train": 15,
+      "valid": 7
+    },
+    {
+      "country": "Indonesia",
+      "train": 6,
+      "valid": 0
+    },
+    {
+      "country": "Iran",
+      "train": 4,
+      "valid": 1
+    },
+    {
+      "country": "Iraq",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Ireland",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Israel",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Israel/Palestine",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Italy",
+      "train": 6,
+      "valid": 2
+    },
+    {
+      "country": "Italy / Switzerland",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Jamaica",
+      "train": 1,
+      "valid": 2
+    },
+    {
+      "country": "Japan",
+      "train": 8,
+      "valid": 0
+    },
+    {
+      "country": "Jordan",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Kazakhstan",
+      "train": 2,
+      "valid": 2
+    },
+    {
+      "country": "Kenya",
+      "train": 3,
+      "valid": 3
+    },
+    {
+      "country": "Kuwait",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Kyrgyzstan",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Laos",
+      "train": 1,
+      "valid": 2
+    },
+    {
+      "country": "Latvia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Liberia",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Libya",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Liechtenstein",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Lithuania",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Luxembourg",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Madagascar",
+      "train": 1,
+      "valid": 2
+    },
+    {
+      "country": "Malawi",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Malawi / Mozambique / Tanzania",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Malaysia",
+      "train": 4,
+      "valid": 1
+    },
+    {
+      "country": "Mali",
+      "train": 2,
+      "valid": 2
+    },
+    {
+      "country": "Mauritania",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Mauritius",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Mexico",
+      "train": 15,
+      "valid": 4
+    },
+    {
+      "country": "Moldova",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Monaco",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Mongolia",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Montenegro",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Montenegro / Albania",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Morocco",
+      "train": 5,
+      "valid": 1
+    },
+    {
+      "country": "Mozambique",
+      "train": 3,
+      "valid": 1
+    },
+    {
+      "country": "Myanmar",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Namibia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Nepal",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Nepal/India",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Netherlands",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "New Zealand",
+      "train": 9,
+      "valid": 3
+    },
+    {
+      "country": "Nicaragua",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Nigeria",
+      "train": 4,
+      "valid": 0
+    },
+    {
+      "country": "North Africa",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "North Korea",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "North Korea/China",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "North Macedonia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Norway",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Oman",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Pakistan",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Panama",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Papua New Guinea",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Paraguay",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Peru",
+      "train": 5,
+      "valid": 3
+    },
+    {
+      "country": "Philippines",
+      "train": 4,
+      "valid": 0
+    },
+    {
+      "country": "Poland",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Portugal",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Puerto Rico",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Romania",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Russia",
+      "train": 10,
+      "valid": 0
+    },
+    {
+      "country": "Rwanda",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Rwanda / Democratic Republic of the Congo",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "San Marino",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Saudi Arabia",
+      "train": 2,
+      "valid": 1
+    },
+    {
+      "country": "Senegal",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Serbia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Seychelles",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Sierra Leone",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Singapore",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Slovakia",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Slovenia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Somaliland",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "South Africa",
+      "train": 4,
+      "valid": 4
+    },
+    {
+      "country": "South Korea",
+      "train": 4,
+      "valid": 0
+    },
+    {
+      "country": "Spain",
+      "train": 4,
+      "valid": 0
+    },
+    {
+      "country": "Sri Lanka",
+      "train": 4,
+      "valid": 1
+    },
+    {
+      "country": "Sudan",
+      "train": 1,
+      "valid": 1
+    },
+    {
+      "country": "Suriname",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Sweden",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Switzerland",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Syria",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Tanzania",
+      "train": 7,
+      "valid": 1
+    },
+    {
+      "country": "Tanzania / DRC / Burundi / Zambia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Tanzania / Uganda / Kenya",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Thailand",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "The Bahamas",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "The Gambia",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Trinidad and Tobago",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Tunisia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Turkey",
+      "train": 5,
+      "valid": 0
+    },
+    {
+      "country": "Turkmenistan",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Uganda",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "Uganda / Democratic Republic of the Congo",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Uganda / Kenya",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Ukraine",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "United Arab Emirates",
+      "train": 3,
+      "valid": 0
+    },
+    {
+      "country": "United Kingdom",
+      "train": 7,
+      "valid": 1
+    },
+    {
+      "country": "United States",
+      "train": 45,
+      "valid": 8
+    },
+    {
+      "country": "Uruguay",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Uzbekistan",
+      "train": 4,
+      "valid": 0
+    },
+    {
+      "country": "Vanuatu",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Vatican City",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Venezuela",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Vietnam",
+      "train": 5,
+      "valid": 0
+    },
+    {
+      "country": "Yamoussoukro, Côte d’Ivoire",
+      "train": 1,
+      "valid": 0
+    },
+    {
+      "country": "Yemen",
+      "train": 0,
+      "valid": 1
+    },
+    {
+      "country": "Zambia",
+      "train": 2,
+      "valid": 0
+    },
+    {
+      "country": "Zimbabwe",
+      "train": 2,
+      "valid": 1
+    }
+  ],
+  "nearest_neighbour": {
+    "train_to_train": {
+      "median_km": 135.97300789886773,
+      "mean_km": 225.50519495158844,
+      "p90_km": 485.2354868485107,
+      "max_km": 3853.7120458407644
+    },
+    "valid_to_train": {
+      "median_km": 187.6789937214873,
+      "mean_km": 235.5180544725518,
+      "p90_km": 536.527957416069,
+      "max_km": 974.0866564584497,
+      "frac_within_100km": 0.3076923076923077,
+      "frac_within_500km": 0.8692307692307693,
+      "frac_within_1000km": 1.0
+    }
+  },
+  "latitude_bands": {
+    "lat_centers": [
+      -85.0,
+      -75.0,
+      -65.0,
+      -55.0,
+      -45.0,
+      -35.0,
+      -25.0,
+      -15.0,
+      -5.0,
+      5.0,
+      15.0,
+      25.0,
+      35.0,
+      45.0,
+      55.0,
+      65.0,
+      75.0,
+      85.0
+    ],
+    "train_counts": [
+      0,
+      4,
+      1,
+      4,
+      7,
+      30,
+      30,
+      27,
+      30,
+      52,
+      59,
+      53,
+      86,
+      80,
+      34,
+      3,
+      0,
+      0
+    ],
+    "valid_counts": [
+      0,
+      1,
+      1,
+      0,
+      3,
+      9,
+      7,
+      9,
+      9,
+      8,
+      28,
+      14,
+      10,
+      21,
+      8,
+      2,
+      0,
+      0
+    ],
+    "train_per_area": [
+      0.0,
+      15.454813220625095,
+      2.3662015831524985,
+      6.973787182484393,
+      9.899494936611665,
+      36.62323766284368,
+      33.101337568874754,
+      27.95245687107224,
+      30.114595126300422,
+      52.198631552254064,
+      61.0812946441949,
+      58.47902970501207,
+      104.98661463348522,
+      113.1370849898476,
+      59.277191051117335,
+      7.098604749457495,
+      0.0,
+      0.0
+    ],
+    "valid_per_area": [
+      0.0,
+      3.8637033051562737,
+      2.3662015831524985,
+      0.0,
+      4.242640687119285,
+      10.986971298853105,
+      7.723645432737443,
+      9.317485623690747,
+      9.034378537890126,
+      8.030558700346779,
+      28.987733051482326,
+      15.447290865474885,
+      12.20774588761456,
+      29.698484809834994,
+      13.947574364968785,
+      4.732403166304997,
+      0.0,
+      0.0
+    ],
+    "north_frac_train": 0.734,
+    "north_frac_valid": 0.7
+  },
+  "grid": {
+    "train": {
+      "occupied_cells": 148,
+      "total_cells": 648,
+      "area_fraction": 0.2976203391995716,
+      "gini_occupied": 0.4384054054054054,
+      "hhi_occupied": 0.011880000000000002,
+      "effective_cells": 84.17508417508417,
+      "top1_share": 0.034,
+      "top5_share": 0.124
+    },
+    "valid": {
+      "occupied_cells": 82,
+      "total_cells": 648,
+      "area_fraction": 0.16660056467933002,
+      "gini_occupied": 0.27392120075046905,
+      "hhi_occupied": 0.017159763313609473,
+      "effective_cells": 58.275862068965495,
+      "top1_share": 0.038461538461538464,
+      "top5_share": 0.18461538461538463
+    }
+  }
+}

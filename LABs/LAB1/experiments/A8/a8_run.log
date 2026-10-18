@@ -1,0 +1,86 @@
+[world_L11] lmax_aug=139310 L=559.24 lr_crit=0.00357628 f*=398.017 (dual ridge (closed form), 0.2s)
+[world_L11] sweep gd       f= 0.1 gap=2.756e-02
+[world_L11] sweep gd       f= 0.3 gap=4.490e-03
+[world_L11] sweep gd       f= 0.5 gap=7.840e-04
+[world_L11] sweep gd       f= 0.7 gap=1.383e-04
+[world_L11] sweep gd       f= 0.9 gap=2.446e-05
+[world_L11] sweep gd       f= 1.0 gap=1.437e-02
+[world_L11] sweep gd       f= 1.1 DIVERGED@51
+[world_L11] sweep gd       f= 1.3 DIVERGED@21
+[world_L11] sweep gd       f= 1.5 DIVERGED@15
+[world_L11] sweep gd       f= 1.9 DIVERGED@10
+[world_L11] sweep gd       f= 2.2 DIVERGED@9
+[world_L11] sweep gd       f= 3.0 DIVERGED@7
+[world_L11] sweep momentum f= 0.1 gap=6.276e-06
+[world_L11] sweep momentum f= 0.3 gap=3.935e-17
+[world_L11] sweep momentum f= 0.5 gap=0.000e+00
+[world_L11] sweep momentum f= 0.7 gap=0.000e+00
+[world_L11] sweep momentum f= 0.9 gap=7.870e-18
+[world_L11] sweep momentum f= 1.0 gap=0.000e+00
+[world_L11] sweep momentum f= 1.1 gap=0.000e+00
+[world_L11] sweep momentum f= 1.3 gap=0.000e+00
+[world_L11] sweep momentum f= 1.5 gap=0.000e+00
+[world_L11] sweep momentum f= 1.9 gap=5.185e+00
+[world_L11] sweep momentum f= 2.2 DIVERGED@13
+[world_L11] sweep momentum f= 3.0 DIVERGED@8
+[world_L11] sweep adam     f= 0.1 gap=1.706e-01
+[world_L11] sweep adam     f= 0.3 gap=7.083e-02
+[world_L11] sweep adam     f= 0.5 gap=5.772e-02
+[world_L11] sweep adam     f= 0.7 gap=5.076e-02
+[world_L11] sweep adam     f= 0.9 gap=4.584e-02
+[world_L11] sweep adam     f= 1.0 gap=4.379e-02
+[world_L11] sweep adam     f= 1.1 gap=4.192e-02
+[world_L11] sweep adam     f= 1.3 gap=3.861e-02
+[world_L11] sweep adam     f= 1.5 gap=3.570e-02
+[world_L11] sweep adam     f= 1.9 gap=3.068e-02
+[world_L11] sweep adam     f= 2.2 gap=2.743e-02
+[world_L11] sweep adam     f= 3.0 gap=2.024e-02
+[world_L11] probe gd f=1.5 init=0 DIVERGED@15
+[world_L11] probe gd f=1.5 init=0.001 DIVERGED@15
+[world_L11] head gd       f=0.9 steps=2335 gap=4.470e-15 elapsed=3.6s
+[world_L11] head momentum f=0.9 steps=501 gap=0.000e+00 elapsed=0.8s
+[world_L11] head adam     f=0.9 steps=8000 gap=8.786e-07 elapsed=14.4s
+[truth_L20] lmax_aug=726381 L=35.6929 lr_crit=0.0560336 f*=0.0660047 (L-BFGS-B, 4.7s)
+[truth_L20] lbfgs success=True nit=319 grad_inf=3.22e-09
+[truth_L20] sweep gd       f= 0.1 gap=2.519e-01
+[truth_L20] sweep gd       f= 0.3 gap=1.736e-01
+[truth_L20] sweep gd       f= 0.5 gap=1.365e-01
+[truth_L20] sweep gd       f= 0.7 gap=1.124e-01
+[truth_L20] sweep gd       f= 0.9 gap=9.506e-02
+[truth_L20] sweep gd       f= 1.0 gap=8.799e-02
+[truth_L20] sweep gd       f= 1.1 gap=8.173e-02
+[truth_L20] sweep gd       f= 1.3 gap=7.110e-02
+[truth_L20] sweep gd       f= 1.5 gap=6.240e-02
+[truth_L20] sweep gd       f= 1.9 gap=4.899e-02
+[truth_L20] sweep gd       f= 2.2 gap=4.136e-02
+[truth_L20] sweep gd       f= 3.0 gap=2.725e-02
+[truth_L20] sweep momentum f= 0.1 gap=8.803e-02
+[truth_L20] sweep momentum f= 0.3 gap=2.702e-02
+[truth_L20] sweep momentum f= 0.5 gap=1.071e-02
+[truth_L20] sweep momentum f= 0.7 gap=4.744e-03
+[truth_L20] sweep momentum f= 0.9 gap=2.266e-03
+[truth_L20] sweep momentum f= 1.0 gap=1.603e-03
+[truth_L20] sweep momentum f= 1.1 gap=1.152e-03
+[truth_L20] sweep momentum f= 1.3 gap=6.196e-04
+[truth_L20] sweep momentum f= 1.5 gap=3.518e-04
+[truth_L20] sweep momentum f= 1.9 gap=1.309e-04
+[truth_L20] sweep momentum f= 2.2 gap=6.902e-05
+[truth_L20] sweep momentum f= 3.0 gap=1.617e-05
+[truth_L20] sweep adam     f= 0.1 gap=4.519e-04
+[truth_L20] sweep adam     f= 0.3 gap=4.759e-06
+[truth_L20] sweep adam     f= 0.5 gap=8.085e-06
+[truth_L20] sweep adam     f= 0.7 gap=3.571e-08
+[truth_L20] sweep adam     f= 0.9 gap=2.908e-01
+[truth_L20] sweep adam     f= 1.0 gap=6.135e-04
+[truth_L20] sweep adam     f= 1.1 gap=6.258e-05
+[truth_L20] sweep adam     f= 1.3 gap=2.279e+00
+[truth_L20] sweep adam     f= 1.5 gap=3.667e-04
+[truth_L20] sweep adam     f= 1.9 gap=6.365e-04
+[truth_L20] sweep adam     f= 2.2 gap=2.153e-01
+[truth_L20] sweep adam     f= 3.0 gap=1.172e+00
+[truth_L20] probe gd f=1.5 init=0 gap=6.242e-02
+[truth_L20] probe gd f=1.5 init=0.001 gap=6.240e-02
+[truth_L20] head gd       f=0.9 steps=8000 gap=9.303e-04 elapsed=76.8s
+[truth_L20] head momentum f=0.9 steps=8000 gap=2.201e-10 elapsed=77.7s
+[truth_L20] head adam     f=0.9 steps=8000 gap=1.083e-08 elapsed=81.3s
+[done] 529.6s; wrote C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiments\A8\a8_results.json

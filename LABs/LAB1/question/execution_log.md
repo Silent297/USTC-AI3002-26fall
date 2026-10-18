@@ -46,7 +46,7 @@
 
 Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报告.md`、`results/slurm_grid/20261009_115559_88653/LAB1 超参数扫描实验报告.md`、`experiments/稳定界说明.md`。
 
-附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**C2**（prompt 变体特征 + 探针，`experiments/C2/`，见 §3「附录 C2」）；**C3**（GeoNames 数据扩增，`experiments/C3/`，见 §3「附录 C3」）；**A1–A3**（线性读出上限包）、**A7**（5 折 CV 协议补做）与 **A10**（球面损失 vs MSE 控制组）见 `experiments/` 各自目录与 §3 对应附录。
+附加实验（不进必交）：**B1** CREAK 逐句对拍已完成（见 §3「附录 B1」，`experiments/B1/`）；**C1**（Qwen 直接输出坐标，`experiments/C1/`，已完成，见 §3「附录 C1」）；**C2**（prompt 变体特征 + 探针，`experiments/C2/`，见 §3「附录 C2」）；**C3**（GeoNames 数据扩增，`experiments/C3/`，见 §3「附录 C3」）；**A1–A3**（线性读出上限包）、**A6**（L1 稠密性）、**A7**（5 折 CV 协议补做）、**A8**（优化器对照）、**A9**（world 地理分布）与 **A10**（球面损失 vs MSE 控制组）见 `experiments/` 各自目录与 §3 对应附录。
 
 ## 3. 逐题执行记录
 
@@ -254,6 +254,48 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
   - **泄漏控制可忽略**：noleak−full |ΔMSE| <1（L11 +0.55，0.3%），不是背答案。
 - **结论**：GeoNames 增广不是免费午餐——在原 world 分布上总体无显著收益（L11 +5.9），收益集中于 world 未覆盖国家（unseen→C3 −143.1；strict8 上 union 比 GeoNames-only 低 21.7 MSE，且 cluster CI 不跨 0），代价是 seen 国家略变差；混合训练（union）优于用新数据替换旧数据（new 在原任务 L11 +58.2）。报告应同时给 L2（事后）与 L11（预注册）、item 与 country-cluster CI，并把 full unseen 的 22/30 重叠写进 limitation。
 
+### 附录 A6 L1 稠密性定量（world L11 + truth L20/L23，附加实验）
+
+- **来源**：《可做实验清单》A6（指南1 §4.3.2；指南称"λ1=0.01 时仍有 1860 个非零系数、表征稠密、L1 全程有害"）；2026-10-17 指派执行。属**附加探究**。问题：线性读出是否稠密？L1 能在多少性能损失下稀疏化？"L1 全程有害"在本课程协议下是否成立？
+- **设计**：三个探针（world L11 线性 λ2=1；truth L20/L23 logistic λ2=1e-3），特征 train z-score，λ1 取 14 点几何网格（1e-5 → ≥λ1_max）。用 **FISTA + 软阈值**（proximal，沿 λ1 递减 warm start）求解，而非 `model.py` 的 sign 次梯度——后者在零点附近不会产生精确零。λ1_max 解析求（w=0 最优的最小 λ1）。**valid 只报告、不参与选择**。非零按行（world 一行 = 一对经纬权重，任一非零即计）与元素两种口径；另报有效维度 $(\sum|w|)^2/\sum w^2$。目标函数与 `model.py` 一致（线性按单目标 1/N 的 Frobenius 和，logistic 为 1/N 交叉熵），λ2 固定以隔离 L1 效应。
+- **代码/资产**：`experiments/A6/a6_l1_density.py`（`--recompute-metrics` / `--replot`）；`a6_results.json`（3 任务 × 14 点 + 权重）、`a6_l1_density.csv`、`a6_weights.npz`、`a6_run.log`（本地 CPU **366.4 s**，42/42 `converged=True`）；图 `figures/a6_{density_curves,metric_vs_l1,coef_structure}.{png,pdf}`；逐图说明 `a6_figure_notes.md`。
+- **记录**（2026-10-17 完成）：
+  - **λ1_max / Gram λmax**：world **91.4091** / 139,309.9；L20 **0.225972** / 726,381；L23 **0.187965** / 945,495。
+  - **"稠密"成立**：world λ1=0.01（0.011% λ1_max）仍有 **2559/2560 行（99.96%）**、5119/5120 元素非零，只压掉 1 行。50% 行归零需 world λ1≈**1.179**（1.29% λ1_max）、L20 **7.71e-4**（0.341%）、L23 **7.31e-4**（0.389%）；10% 行需 world **9.787**（10.7%）、L20 **8.87e-3**（3.93%）、L23 **9.45e-3**（5.03%）。⇒ 表征稠密但可稀疏化，truth 比 world 更易稀疏。
+  - **world 性能**：valid MSE 锚点 167.1707；λ1=0.03 **166.715**、0.1 **165.896（最低；2466 行 / 4008 元素，中位 904.2 km，平均 1205.0 km）**、0.3 166.819、1 **183.486**、3 242.641、10 496.872、30 1356.617、50 2082.783、λ1_max **3311.269**（截距-only，中位 7299.7 km）。改善幅度仅 −0.76%，是描述性浅收益，未做配对检验。
+  - **truth L20**：锚点 acc 0.8667 / logloss 0.4835；λ1=0.001（1147 维）0.8700/0.3247；0.003（609 维）0.8667/**0.2747**；**0.01（217 维）0.8900/0.2948**；0.03（72 维）0.8667；0.05（45 维）0.8533；0.1（15 维）0.8300；0.15（6 维）0.7667；λ1_max 处 1 维 → acc 0.5/log2。**L23**：锚点 0.85/0.4865；0.001（1111 维）0.8633/0.3275；**0.003（562 维）0.8567/0.3150**；0.01（241 维）0.8400；0.03（87 维）0.8433；0.05（55 维）0.8033；0.1（20 维）0.7867；0.15（11 维）0.7767。⇒ 用 **8–24% 的维度**即可保持或略超锚点 acc，logloss 改善远大于 acc（0.4835→0.2747，−43%）。
+  - **有效维度**：world 1635.8（λ1→0）→1254.1（0.1）→472.0（1）→59（30）；L20 1626.9→107.5（0.01）→22.7（0.05）；L23 1595.3→126.2→35.2。名义 2560 维的有效参与度仅 ~1600，L1 可把它压到几百而不伤泛化。
+  - **求解器对拍**：world λ1=0.01 时 sign 次梯度 **5120/5120 元素非零**（5109 个 >1e-6，train MSE 92.929），proximal **2559 行 / 5119 元素**（train MSE 92.086）⇒ 密度统计必须用近端/坐标下降。
+  - **边界伪影**：λ1=λ1_max 时 truth 权重 ~1e-16、p≈0.5，浮点噪声会让 `p>=0.5` 产生虚假 acc；已用 `np.round(p,12)` 修正为 0.5 / log2（不影响非边界点）。
+- **结论**：world/truth 的线性读出都是**稠密但可稀疏化**：world 在 λ1≈0.1（0.1% λ1_max）保留 96% 的行、valid MSE 浅降 0.76%；truth 在 λ1≈0.003–0.01 保留 217–609 维（8–24%），acc 持平或 +2.33pp、logloss −43%。指南"L1 全程有害 / 1860 非零"依赖其归一化与求解器，不能原样引用；可写进报告的结论是"温和 L1 有窄的正则化窗口，强 L1 迅速崩溃，可用区间 world λ1≲0.3 / truth λ1≲0.03"。
+
+### 附录 A9 world 训练/验证集地理分布（附加实验）
+
+- **来源**：《可做实验清单》A9（指南2 §2）；2026-10-17 指派执行。属**附加探究**。问题：world train/valid 覆盖全球多少、集中在哪里？valid 是否只是 train 的近邻子集？
+- **设计**：读取 `datasets/world/{train,valid}.csv`（500/130 条），统计国家标签计数、Gini/HHI/top-k 份额；haversine（R=6371 km）最近邻（train→train 去掉自身、valid→train）；10°×10° 网格（18×36=648 格）占用率，面积权重 cos(中纬)；纬带密度按 cos(lat) 归一；Lorenz 曲线。国家标签含 13 个多国组合（如 "Germany / Switzerland / Austria"），按原标签统计，不是严格国别。纯描述性，无训练/选择。
+- **代码/资产**：`experiments/A9/a9_geo_distribution.py`；`a9_results.json`；图 `figures/a9_{maps,country_counts,coverage}.{png,pdf}`（cartopy 110m 海岸线，**无国界线**）；逐图说明 `a9_figure_notes.md`。
+- **记录**（2026-10-17 完成）：
+  - **国家覆盖**：train **158** 个标签 / valid **78** 个；两者共有 **59**；valid-only **19 个标签 / 20 条**，train-only **99 个 / 187 条**。单样本标签 train **73** / valid **55**；≥5 条 train **26** / valid **4**。
+  - **集中度**：国家计数 Gini train **0.520** / valid **0.325**；HHI **0.0208 / 0.0214**（有效国家数 ~48 / ~47）；top10 份额 **34.8% / 36.2%**；top1 **9.0%（US 45）/6.15%（US 8）**。Top train：US 45、Australia 20、China 20、Brazil 17、India 15、Mexico 15、Canada 13；Russia（10）、Japan（8）在 valid 为 0。
+  - **valid 是近邻子集**：valid→train 最近邻中位 **187.7 km**、平均 235.5、P90 536.5、max **974.1 km**；**100% < 1000 km**、86.9% < 500 km、30.8% < 100 km。train→train 中位 136.0 km，仅略小于 valid→train ⇒ valid 不是"更难的远距离外推"，而是与 train 同分布的内插集（呼应 Q7：同国最近邻中位 ~226 km）。
+  - **空间覆盖**：10° 网格 train 占 **148/648（29.76% 陆地面积权重）**、valid **82/648（16.66%）**；占用格 Gini **0.438/0.274**、有效格数 **84.2/58.3**、top5 份额 12.4%/**18.5%**。北半球占比 **73.4% / 70.0%**；train 密度峰值 45–55°N（113.1 样本/cos 单位，80 条）与 35–45°N（105.0，86 条），valid 峰值 45–55°N（29.7，21 条）与 15–25°N（29.0，28 条）。
+  - **地图读法**：valid 点几乎全部落在 train 覆盖区内，欧洲/东亚/北美/澳洲最密；撒哈拉以南非洲、南美内陆、西伯利亚、北极圈基本空白。valid-only 的 19 个标签多为小国/组合标签，样本量 1–2 条。
+- **结论**：world 划分是**稀疏、北半球、国家高度集中**的采样：~30% 的陆地面积权重承载 train，valid 更窄（16.7%）；valid 与 train 的近邻中位仅 188 km、全部 <1000 km。因此 world valid MSE 主要度量**同分布内插**，不能解释为地理外推能力；Q7/Q8 中"unseen 国家"的结论必须另设划分（如 C3 的 strict8）才成立。
+
+### 附录 A8 优化器对照：GD vs Momentum vs Adam（附加实验）
+
+- **来源**：《可做实验清单》A8（指南3 §4）；2026-10-17 指派执行。属**附加探究**。问题：在同一目标、同一初始化、同一学习率、同一步数下，全批量 GD、heavy-ball momentum（β=0.9）与 Adam 的收敛速度、稳定边界、最终指标差多少？课程 `model.py` 用纯 GD，本实验回答"换优化器会不会改变选层/正则的结论"。
+- **设计**：world L11（线性，λ2=1.0）与 truth L20（logistic，λ2=1e-3）；特征 train z-score，λ1=0（见 A6）。目标与 `model.py` 一致：world 按单目标 1/N 的 Frobenius 和（两坐标分别对应一次单目标拟合），truth 为 1/N 交叉熵；表中 MSE 仍为**元素平均**口径，可直接对拍 A1 锚点 167.1707。全批量 torch float64、4 threads。学习率写成 $f=\mathrm{lr}/\mathrm{lr}_{crit}$，$\mathrm{lr}_{crit}=2/L$：线性 $L=2\lambda_{\max}([X,1])/N+2\lambda_2$，logistic $L=0.25\lambda_{\max}([X,1])/N+2\lambda_2$。稳定性扫描用 $w,b\sim\mathcal N(0,10^{-3})$（seed 1234）激发所有方向、600 步不早停；头对头用 `model.py` 的 $w=b=0$、$f=0.9$、≤8000 步、允许早停。参考最优：world dual ridge、truth L-BFGS-B（319 次迭代，$\|\nabla\|_\infty=3.2\times10^{-9}$）。**valid 只报告，不参与选择**。
+- **代码/资产**：`experiments/A8/a8_optimizers.py`（`--replot` 只重画、`--smoke` 4 点冒烟）；`a8_results.json`（protocol/reference/sweep/init_probe/head + 逐步 history）、`a8_run.log`（本地 CPU **529.6 s**）；图 `figures/a8_{convergence,stability,final_metrics}.{png,pdf}`；逐图说明 `a8_figure_notes.md`。
+- **记录**（2026-10-17 完成）：
+  - **临界学习率**：world $\lambda_{\max}=139{,}309.94$、$L=559.2397$、$\mathrm{lr}_{crit}=3.5763\times10^{-3}$；truth $\lambda_{\max}=726{,}381.04$、$L=35.6929$、$\mathrm{lr}_{crit}=5.60336\times10^{-2}$。world 参考 valid **MSE 167.17072 / 中位 923.12059 km / 平均 1203.0653 km**（与 A1 逐位一致）；truth 参考 valid **acc 0.863333 / logloss 0.484373**。
+  - **头对头（$f=0.9$）**：world 到 $10^{-2}/10^{-3}/10^{-4}$ 的步数——momentum **40/70/90**（501 步早停）、GD 150/320/500（2335 步早停）、Adam 3030/5270/6550（跑满 8000，gap 8.8e-7）；三者 valid MSE 均 167.17（Adam 167.14），中位 923.12 / 923.12 / **926.89** km。truth——Adam **80/120/260**、momentum 350/770/1370、GD 3500/7850/未到 $10^{-4}$；momentum/Adam 收敛到 acc 0.8633 / logloss 0.4844，GD 8000 步仍有 gap 9.3e-4，valid acc 0.8667 / logloss 0.4638 是**早停效应**，不是更优解。
+  - **稳定边界**：world 精确复现理论——GD 在 $f=0.9$ 稳定（gap 2.45e-5）、$f=1.0$ 边缘（1.44e-2）、$f=1.1$ 起发散（DIV@51）；momentum 到 $f=1.5$ 全 0、$f=1.9$ 边缘（5.19）、$f=2.2$ 起发散（DIV@13）；Adam 到 $f=3$ 未发散（gap 0.171→0.020，单调下降）。⇒ GD 边界 $f\approx1$、momentum $f\approx1+\beta=1.9$，是 $L$ 与 heavy-ball 理论的干净对拍。
+  - **logistic 的 $0.25$ 界偏保守**：GD/momentum 到 $f=3$ 都不发散且 gap 随 $f$ 单调下降（GD 0.252→0.027；momentum 0.088→1.62e-5）；**Adam 非单调**——$f=0.7$ 的 gap 3.57e-8，但 $f=0.9/1.3/2.2/3.0$ 分别 0.291/2.28/0.215/1.17（有界震荡，不是 inf 爆炸）。⇒ 不能把 $2/L$ 当 logistic 的硬发散阈值，也不能把"未发散"当"收敛"。
+  - **初始化探针**：world 在 $f=1.5$ 时零初始化与 $\sigma=10^{-3}$ 随机初始化都在**第 15 步发散**（零点梯度 $X^\top y$ 沿顶部特征向量有分量）；truth 在 $f=1.5$ 两种初始化都稳定（gap 0.0624）。⇒ world 的边界不是零初始化造成的假象。
+  - **口径修复**：首次冒烟发现 world 两输出时 `torch.mean` 对 $N\times2$ 元素平均 = $1/(2N)$，而 `model.py` 是单目标 $1/N$（向量化为 Frobenius 和），导致数据项减半、有效 $\lambda_2$ 翻倍、$\mathrm{lr}_{crit}$ 失配（GD 在 $f=1.5$ 竟不发散）。已改为 `mean(sum(..., dim=1))`，上面所有数字均来自修正版；报告 MSE 仍用元素平均以对齐 A1。
+- **结论**：凸问题上优化器**只影响速度、不影响最终解**——world 三组收敛后 valid MSE 都是 167.17，truth 两组与参考差 <1e-6。速度强烈依赖任务几何：world（病态二次型）momentum 最快（到 $10^{-4}$ 90 步 vs GD 500、Adam 6550），truth（logistic）Adam 最快（260 步 vs momentum 1370、GD >8000）。稳定边界在 world 上可被 $2/L$ 与 $2(1+\beta)/L$ 精确预测；logistic 的 $0.25$ 界偏保守，Adam 存在非单调有界震荡。报告应写"按任务几何选优化器"，不能写"某个优化器全面更优"；truth GD 的 86.67% 必须标注为早停效应。
+
 ### Q4 – Q9
 
 见 §2 总览；做到某题时在此追加小节（目标 / 数据 / 代码 / 结果 / 结论）。
@@ -276,3 +318,6 @@ Q4/Q5/Q9 素材位置：`results/slurm_layers/LAB1 分层训练结果分析报�
 - 2026-10-17：**C2 完成**（prompt 变体特征 + 探针，附加实验）：5 变体 × 13 层 std13（raw11 辅助，nameonly raw11 发散）。std13-L11：删国家名 MSE 539→1069、中位 2280→3115 km（+1005 km CI [624, 1391]）、去指令仅 +233 km、换问法 −199 km（CI 上界 +0.3）、读点国家 token→句末 "?" +1511 km；国家名效应集中在 seen 国家（+1127 vs unseen +335，CI 跨 0）⇒ 与 Q7 反向闭环。锚点 13/14 逐位一致（L35 +0.77 为 float16 数值差，raw11 −0.10）。产物 `experiments/C2/`（脚本 + 5 变体 CSV + 3 图 + `c2_figure_notes.md`）与 `results/slurm_c2/c2_v1/`。
 - 2026-10-17：**A10 完成**（球面损失 θ² vs MSE 控制组，附加实验）：world L11 探针，train-only 5 折 × 3 seed 选参/早停（valid 只用一次）。球面组 valid 平均距离 **1396 vs MSE 控制 1977 km（−29.4%）**、中位 1157 vs 1718（−32.7%）；但 **10/130（7.7%）** 输出落反向纬度分支（OOF 34/500），raw MSE **1801 vs 357**（5.0×），分支规范化后 **370 vs 357**、周期 MSE 290 ⇒ 恶化主要来自坐标表示而非 3D 位置；9/10 反射集中在澳洲—大洋洲。hybrid β=0.5 零反射（valid 240 MSE / 1187 km 中位），但 OOF MSE 485 vs 472（+2.6%）未复现 valid 的 −33%；球面 lr=3e-3 塌到 43.5% 反射（非凸证据）；λ 不可分辨；ridge 167/923 仍全场最优。产物 `experiments/A10/`（脚本 + 结果 JSON + 预测/权重 NPZ + 5 图 + `a10_figure_notes.md`）。
 - 2026-10-17：**C3 完成**（GeoNames 数据扩增，附加实验）：12,000 城 / 30 国整国留出；13 层重提 + 5 训练集 × 4 评估集。原 world valid 总体不显著（union−orig L2 −18.4 / L11 +5.9，CI 跨 0）；收益集中于 unseen（L11 −143.1，CI 不跨 0）；strict8 上 union 比 new 低 21.7 MSE（cluster CI [−41.9,−7.8]）但逐国异质；new 单独训练伤原任务（L11 +58.2）⇒ 混合优于替换；full unseen 的 22/30 国重叠是陷阱。产物 `experiments/C3/`（4 图 + `c3_figure_notes.md` + `c3_analysis.json` + 评估脚本）与 `results/slurm_c3/c3_v1/`（65 runs）。
+- 2026-10-17：**A9 完成**（world 地理分布，附加实验）：train/valid = 500/130；国家标签 **158/78**（共有 59、valid-only 19 个/20 条、train-only 99 个/187 条）；Gini **0.520/0.325**、top10 34.8%/36.2%；valid→train 最近邻中位 **187.7 km**、P90 536.5、**max 974.1 km（100% <1000 km）**，train→train 中位 136.0 km ⇒ valid 是同分布内插集而非地理外推；10° 网格 train 占 **29.76%** 面积权重、valid **16.66%**；北半球 73.4%/70.0%。产物 `experiments/A9/`（脚本 + 结果 JSON + 3 图 + `a9_figure_notes.md`）。
+- 2026-10-17：**A6 完成**（L1 稠密性定量，附加实验）：FISTA+软阈值（λ1 递减 warm start，λ1_max 解析）；world L11 / truth L20 / L23。world λ1=0.01（0.011% λ1_max）仍 **2559/2560 行非零**；50% 行归零需 λ1≈**1.179**（1.29% λ1_max），10% 需 **9.787**（10.7%）；truth 更易稀疏（50% 只需 0.34–0.39% λ1_max）。world valid MSE 锚 167.1707，λ1=0.1 时 **165.896（−0.76%，2466 行）**，λ1≥1 迅速崩溃；truth L20 在 λ1=0.01（217 维）valid acc **0.89** / logloss **0.2948**（锚 0.8667/0.4835），L23 在 λ1=0.003（562 维）logloss 0.3150。⇒ "稠密但可稀疏化；温和 L1 有窄窗口，强 L1 有害"，指南"L1 全程有害/1860 非零"依赖归一化与求解器，不能原样引用；sign 次梯度在 λ1=0.01 仍 5120/5120 元素非零（密度统计必须用近端法）。产物 `experiments/A6/`（脚本 + 结果 JSON/CSV/权重 NPZ + 3 图 + `a6_figure_notes.md`）。
+- 2026-10-17：**A8 完成**（优化器对照，附加实验）：world L11 线性 + truth L20 logistic，同目标/同 lr（$f=0.9$）/同初始化/≤8000 步。world 到 $10^{-4}$：momentum **90** 步、GD 500、Adam 6550；truth：Adam **260**、momentum 1370、GD 8000 未到 ⇒ 速度强烈任务依赖。稳定边界：world GD $f\approx1$、momentum $f\approx1+\beta=1.9$（精确复现 $2/L$ 理论）；truth 的 $0.25$ 界偏保守（GD/momentum 到 $f=3$ 不发散），Adam 在 $f=0.9/1.3/2.2/3.0$ 有界震荡（gap 0.29/2.28/0.22/1.17 vs 0.7 处 3.6e-8）。三组收敛后 valid 指标相同（world MSE 167.17、truth 0.8633/0.4844）⇒ 优化器只影响速度、不影响凸问题的解；truth GD 的 86.67% 是 8000 步未收敛（gap 9.3e-4）的早停效应。修正 world 两输出的损失归一化（`torch.mean` 的 $1/(2N)$ → `model.py` 的 $1/N$ Frobenius 和）。产物 `experiments/A8/`（脚本 + 结果 JSON + 日志 + 3 图 + `a8_figure_notes.md`）。

@@ -1,0 +1,43 @@
+[world_L11] lam1=105 frac=1.15 nz=   0 (  0.0%) it=   0 conv=True train=3608.3411 valid=3311.2690
+[world_L11] lam1=91.41 frac=1 nz=   0 (  0.0%) it=   0 conv=True train=3608.3411 valid=3311.2690
+[world_L11] lam1=70 frac=0.766 nz=   8 (  0.3%) it=1091 conv=True train=3094.1568 valid=2799.7508
+[world_L11] lam1=50 frac=0.547 nz=  19 (  0.7%) it= 741 conv=True train=2352.1031 valid=2082.7831
+[world_L11] lam1=30 frac=0.328 nz=  59 (  2.3%) it= 921 conv=True train=1517.2066 valid=1356.6171
+[world_L11] lam1=10 frac=0.109 nz= 248 (  9.7%) it= 821 conv=True train=537.2143 valid=496.8716
+[world_L11] lam1=3 frac=0.0328 nz= 695 ( 27.1%) it=1991 conv=True train=254.9172 valid=242.6412
+[world_L11] lam1=1 frac=0.0109 nz=1383 ( 54.0%) it=2101 conv=True train=159.3316 valid=183.4859
+[world_L11] lam1=0.3 frac=0.00328 nz=2150 ( 84.0%) it=1841 conv=True train=115.6663 valid=166.8190
+[world_L11] lam1=0.1 frac=0.00109 nz=2466 ( 96.3%) it=1001 conv=True train=99.7828 valid=165.8963
+[world_L11] lam1=0.03 frac=0.000328 nz=2543 ( 99.3%) it= 791 conv=True train=93.8251 valid=166.7149
+[world_L11] lam1=0.01 frac=0.000109 nz=2559 (100.0%) it= 581 conv=True train=92.0858 valid=167.0306
+[world_L11] lam1=0.001 frac=1.09e-05 nz=2560 (100.0%) it= 211 conv=True train=91.3023 valid=167.1584
+[world_L11] lam1=0.0001 frac=1.09e-06 nz=2560 (100.0%) it=  91 conv=True train=91.2186 valid=167.1705
+[truth_L20] lam1=0.26 frac=1.15 nz=   0 (  0.0%) it=   0 conv=True train=0.5000 valid=0.5000
+[truth_L20] lam1=0.226 frac=1 nz=   1 (  0.0%) it=  41 conv=True train=0.6930 valid=0.7400
+[truth_L20] lam1=0.2 frac=0.885 nz=   2 (  0.1%) it= 911 conv=True train=0.7327 valid=0.7433
+[truth_L20] lam1=0.15 frac=0.664 nz=   6 (  0.2%) it= 331 conv=True train=0.7685 valid=0.7667
+[truth_L20] lam1=0.1 frac=0.443 nz=  15 (  0.6%) it= 991 conv=True train=0.8184 valid=0.8300
+[truth_L20] lam1=0.05 frac=0.221 nz=  45 (  1.8%) it= 431 conv=True train=0.8514 valid=0.8533
+[truth_L20] lam1=0.03 frac=0.133 nz=  72 (  2.8%) it= 641 conv=True train=0.8656 valid=0.8667
+[truth_L20] lam1=0.01 frac=0.0443 nz= 217 (  8.5%) it= 621 conv=True train=0.8929 valid=0.8900
+[truth_L20] lam1=0.003 frac=0.0133 nz= 609 ( 23.8%) it=1171 conv=True train=0.9296 valid=0.8667
+[truth_L20] lam1=0.001 frac=0.00443 nz=1147 ( 44.8%) it=1901 conv=True train=0.9721 valid=0.8700
+[truth_L20] lam1=0.0003 frac=0.00133 nz=1762 ( 68.8%) it=1191 conv=True train=0.9949 valid=0.8633
+[truth_L20] lam1=0.0001 frac=0.000443 nz=2220 ( 86.7%) it=1081 conv=True train=0.9986 valid=0.8600
+[truth_L20] lam1=3e-05 frac=0.000133 nz=2441 ( 95.4%) it= 851 conv=True train=1.0000 valid=0.8633
+[truth_L20] lam1=1e-05 frac=4.43e-05 nz=2522 ( 98.5%) it= 711 conv=True train=1.0000 valid=0.8633
+[truth_L23] lam1=0.26 frac=1.38 nz=   0 (  0.0%) it=   0 conv=True train=0.5000 valid=0.5000
+[truth_L23] lam1=0.22 frac=1.17 nz=   0 (  0.0%) it=   0 conv=True train=0.5000 valid=0.5000
+[truth_L23] lam1=0.188 frac=1 nz=   1 (  0.0%) it=  41 conv=True train=0.6590 valid=0.6067
+[truth_L23] lam1=0.15 frac=0.798 nz=  11 (  0.4%) it= 501 conv=True train=0.7620 valid=0.7767
+[truth_L23] lam1=0.1 frac=0.532 nz=  20 (  0.8%) it= 841 conv=True train=0.7936 valid=0.7867
+[truth_L23] lam1=0.05 frac=0.266 nz=  55 (  2.1%) it=1091 conv=True train=0.8335 valid=0.8033
+[truth_L23] lam1=0.03 frac=0.16 nz=  87 (  3.4%) it=1111 conv=True train=0.8561 valid=0.8433
+[truth_L23] lam1=0.01 frac=0.0532 nz= 241 (  9.4%) it= 671 conv=True train=0.8882 valid=0.8400
+[truth_L23] lam1=0.003 frac=0.016 nz= 562 ( 22.0%) it=1721 conv=True train=0.9237 valid=0.8567
+[truth_L23] lam1=0.001 frac=0.00532 nz=1111 ( 43.4%) it= 731 conv=True train=0.9631 valid=0.8633
+[truth_L23] lam1=0.0003 frac=0.0016 nz=1759 ( 68.7%) it=2151 conv=True train=0.9894 valid=0.8600
+[truth_L23] lam1=0.0001 frac=0.000532 nz=2206 ( 86.2%) it=2121 conv=True train=0.9971 valid=0.8567
+[truth_L23] lam1=3e-05 frac=0.00016 nz=2436 ( 95.2%) it=1321 conv=True train=0.9982 valid=0.8567
+[truth_L23] lam1=1e-05 frac=5.32e-05 nz=2522 ( 98.5%) it= 581 conv=True train=0.9982 valid=0.8567
+[done] 366.4s; wrote C:\Users\35150\Desktop\USTC-AI3002-26fall\LABs\LAB1\experiments\A6\a6_results.json
