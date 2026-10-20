@@ -23,8 +23,8 @@
 \emergencystretch=2.5em
 
 \title{FAIML Lab1 实验报告}
-\author{【姓名】 \\ 【学号】}   % TODO：填写姓名与学号
-\date{2026 年 10 月}            % TODO：按提交日期修改
+\author{常志强 \\ PB25030753}   % TODO：填写姓名与学号
+\date{2026 年 10 月 21 日}            % TODO：按提交日期修改
 
 \begin{document}
 \maketitle
@@ -36,17 +36,11 @@
 
 \textbf{题面：}重现课件（第 42、48 页）中 $\ell_1$、$\ell_2$ 正则化的“系数路径”，并解释数据来源。
 
-先回答数据来源。课件系数路径图使用了 8 个特征列（bedrooms、bathrooms、sqft\_living、sqft\_lot、floors、yr\_built、yr\_renovated、waterfront），与 King County 房屋销售数据集（Kaggle \texttt{harlfoxem/housesalesprediction}，CC0 许可）的列名完全一致，响应变量为 price——由此判定课件图的数据来源即该数据集。本仓库副本已按 \texttt{id} 与 OpenML 版本做全表对拍：除 \texttt{bedrooms}、\texttt{bathrooms} 两列的 23 个单元格（镜像副本为空值、OpenML 填成 0）外，其余各列逐位一致；我们保留空值口径，剔除 16 个含缺失的行（21613 $\to$ 21597 行，缺失占 0.07\%）。
+\textbf{（1）数据来源。}课件 p42/p49 的 8 个特征列（bedrooms、bathrooms、sqft\_living、sqft\_lot、floors、yr\_built、yr\_renovated、waterfront）与 Kaggle 数据集 House Sales in King County, USA（\url{https://www.kaggle.com/datasets/harlfoxem/housesalesprediction}，CC0 许可）的列名完全一致，由此判定课件图的数据来源即该数据集。本实验下载自该数据集的 GitHub 镜像（\url{https://raw.githubusercontent.com/Willie-Conway/House-Sales-Price-Prediction-King-County-USA-Project/main/House-Sales-Price-Prediction/housing.csv}）
 
-复现的预处理与课件保持一致：课件批注 “all features normalized so coeff. on same scale” 要求标准化，我们对 8 个特征做 z-score、对 price 中心化，使各特征系数处于同一尺度、$\lambda=0$ 处即最小二乘解；$\lambda$ 网格取 $0$ 至 $2\times10^5$ 共 201 个等距点。实现上，Ridge 用 SVD 闭式解并与 sklearn 对拍（$\max|\Delta|\approx10^{-9}$），Lasso 用坐标下降加 warm start（推导见 §附录~\ref{app:math}）。
+\textbf{（2）数据处理（根据讲义）。}课件 p20 批注 “all features normalized so coeff. on same scale” ，于是笔者对 8 个特征做了标准化，使各特征系数处于同一尺度。同时剔除数据集中含缺失的 16 行（21613 $\to$ 21597，占 0.07\%）。$\lambda$ 取 $0$ 至 $2\times10^5$ 共 201 个等距点，与课件一致。
 
-$\lambda=0$ 处的最小二乘解（单位：美元/$\sigma$）为 sqft\_living $268\,160$、waterfront $63\,307$、bathrooms $49\,137$、floors $28\,399$、yr\_renovated $3\,397$、sqft\_lot $-12\,378$、bedrooms $-56\,868$、yr\_built $-92\,382$，与课件量级一致。
-
-$\ell_2$（Ridge）路径上所有系数只缩不归零，与课件第 48 页批注 “所有 $\hat w_j\neq 0$ 但大 $\lambda$ 下都很小” 吻合；其中 bedrooms 与 bathrooms 在 $\lambda\lesssim2\times10^4$ 处先升后降，体现出相关特征之间的补偿效应，与课件曲线形态一致。
-
-$\ell_1$（Lasso）路径随 $\lambda$ 增大精确归零，归零顺序（$\lambda^*$）为 sqft\_lot 9k $\to$ yr\_renovated 13k $\to$ bedrooms 21k $\to$ floors 23k $\to$ bathrooms 26k $\to$ yr\_built 45k $\to$ waterfront 79k；至 $\lambda=2\times10^5$ 只剩 sqft\_living 仍非零（57.7k）——“只剩一个特征”，正对应课件第 49 页 “only features in our model”。
-
-综上，复现的趋势与量级均与课件一致（个别系数有少量出入，源于数据版本与预处理细节）；系数路径图的数据来源判定为 King County 房屋销售数据集（8 特征、特征 z-score、$\mathrm{RSS}+\lambda$ 口径，对拍记录见 §附录~\ref{app:repro}）。
+\textbf{（3）复现结果与简单分析。}$\lambda=0$ 处的最小二乘解（单位：美元/$\sigma$）为 sqft\_living $268\,160$、waterfront $63\,307$、bathrooms $49\,137$、floors $28\,399$、yr\_renovated $3\,397$、sqft\_lot $-12\,378$、bedrooms $-56\,868$、yr\_built $-92\,382$，与课件量级一致。$\ell_2$（Ridge）路径\textbf{只缩不归零}，其中 bedrooms 与 bathrooms 在 $\lambda\lesssim2\times10^4$ 先升后降。$\ell_1$（Lasso）路径随 $\lambda$ 增大\textbf{精确归零}，归零顺序为 sqft\_lot (9k) $\to$ yr\_renovated (13k) $\to$ bedrooms (21k) $\to$ floors (23k) $\to$ bathrooms (26k) $\to$ yr\_built (45k) $\to$ waterfront (79k)，至 $\lambda=2\times10^5$ 只剩 sqft\_living（57.7k）。综上，两条路径的趋势与量级均与课件一致。
 
 \begin{figure}[htbp]
   \centering
