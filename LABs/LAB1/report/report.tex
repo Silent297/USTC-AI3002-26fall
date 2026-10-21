@@ -385,15 +385,15 @@ Q1/Q2 的实现用到两条精确算法。其一，Ridge 的 SVD 闭式解：$X=
 
 追溯与归档：KC 房价数据（Q1/Q2）与 OpenML 全表的逐格对拍记录在 \texttt{question/\allowbreak execution\_\allowbreak log.md} §1.2；truth 数据集的来源指纹见第 8 题；每轮集群运行的全部日志按时间戳归档在 \texttt{results/\allowbreak slurm\_*} 对应目录下。
 
-拓展实验的入口与产物：A7 在 \texttt{experiments/A7}（\texttt{a7\_cv\_protocol.py}，结果与图同目录），A10 在 \texttt{experiments/A10}（\texttt{a10\_spherical\_loss.py}），C1 的评估在 \texttt{experiments/C1}、集群生成在 \texttt{results/slurm\_qwen\_direct/qwen\_direct\_v1}，C2/C3 的提取与训练脚本在 \texttt{experiments/C2}、\texttt{experiments/C3}，训练产物分别在 \texttt{results/slurm\_c2/c2\_v1} 与 \texttt{results/slurm\_c3/c3\_v1}；C1--C3 的特征提取与训练在 A100 上完成，复现细节见各目录脚本的 docstring 与 \texttt{*\_figure\_notes.md}。
+拓展实验的入口与产物：A7 在 \texttt{experiments/A7}（\texttt{a7\_cv\_protocol.py}，结果与图同目录），C1 的评估在 \texttt{experiments/C1}、集群生成在 \texttt{results/slurm\_qwen\_direct/qwen\_direct\_v1}，C2/C3 的提取与训练脚本在 \texttt{experiments/C2}、\texttt{experiments/C3}，训练产物分别在 \texttt{results/slurm\_c2/c2\_v1} 与 \texttt{results/slurm\_c3/c3\_v1}；C1--C3 的特征提取与训练在 A100 上完成，复现细节见各目录脚本的 docstring 与 \texttt{*\_figure\_notes.md}。
 
 % ======================================================================
 \clearpage
 \section{拓展实验列表和动机}\label{app:overview}
 
-下面两个附录（C、D）汇总正文 Q1--Q9 之外的补充工作。附录~C 直接服务于思考题：两轮扫描、稳定界与分块训练展开 Q5/Q9 中的优化现象与工程约束，A7 用仅含 train 的交叉验证复核选层结论。附录~D 从表征、损失、读出与数据四个角度做以研究问题为导向的探索。表~\ref{tab:overview} 给出各实验的动机与主要结论，细节见对应小节。
+下面两个附录（C、D）汇总正文 Q1--Q9 之外的补充工作。附录~C 直接服务于思考题：两轮扫描与稳定界展开 Q5/Q9 中的优化现象，A7 用仅含 train 的交叉验证复核选层结论，C2 通过 prompt 与读点消融检验 Q7 的坐标可读性来源。附录~D 从读出方式与数据边界两个方向做以研究问题为导向的探索。表~\ref{tab:overview} 给出各实验的动机与主要结论，细节见对应小节。
 
-这些实验不属于课程提交要求，正文 Q1--Q9 的结论不依赖它们。所有实验都遵守“选择不看 valid”的纪律：A7/A10 在 train 内做交叉验证，C1--C3 的 valid 只用于最终报告；文中也明确标出事后选层与口径差异。
+这些实验不属于课程提交要求，正文 Q1--Q9 的结论不依赖它们。所有实验都遵守“选择不看 valid”的纪律：A7 在 train 内做交叉验证，C1--C3 的 valid 只用于最终报告；文中也明确标出事后选层与口径差异。
 
 \begin{center}
   \small
@@ -405,15 +405,12 @@ Q1/Q2 的实现用到两条精确算法。其一，Ridge 的 SVD 闭式解：$X=
     \addlinespace[2pt]
     两轮超参数扫描 & Q5/Q9：正则化与优化预算 & truth 的 lr 呈倒 U、$\lambda_1$ 有害；world 的 lr 被稳定界锁死 \\
     发散诊断与稳定界 & Q5：深层为何在固定 lr 下发散 & raw 稳定界随深度缩 1800$\times$；z-score 拉平到 1.5$\times$ 后深层可训 \\
-    分块训练与断点续跑 & 4h 平台时限与慢节点抖动 & 4 个分块作业零发散，吸收 15$\times$ 慢节点、零进度损失 \\
     A7：train 内 5 折交叉验证 & Q9：选层结论是否依赖一次划分 & truth 同峰 L20（$\rho=0.968$）；world 早层平台，valid regret 仅 $+1.3$ MSE \\
+    C2：prompt 与读点消融 & Q7：坐标可读性依赖什么 & 删国家名 $+1005$ km；读点换到句末 $+1511$ km，影响最大 \\
     \midrule
     \multicolumn{3}{l}{\textbf{附录 D：有趣的研究实验}} \\
     \addlinespace[2pt]
-    跨任务表征对照 & Q6--Q8：信息写在哪一层、如何读出 & 两任务最优层带不同；raw/z-score 是交互而非普适增益；world 深层回升 \\
-    A10：球面 $\theta^2$ 损失 & 坐标 MSE 是否惩罚了正确的球面位置 & 平均距离 $-29\%$，但 10/130 落入反向纬度分支；闭式 ridge 仍最优 \\
     C1：Qwen 直接生成坐标 & 误差来自表征还是线性读出 & valid 中位 43.8 对 953.8 km，119/130 条直接输出更近 \\
-    C2：prompt 与读点消融 & Q7：坐标可读性依赖什么 & 删国家名 $+1005$ km；读点换到句末 $+1511$ km，影响最大 \\
     C3：GeoNames 数据扩增 & 外部数据能否提升原任务与未见国家 & 原任务无稳定收益；strict8 上稳健，但未突破国家均值 oracle（113.8） \\
     \bottomrule
   \end{tabular}
@@ -423,37 +420,13 @@ Q1/Q2 的实现用到两条精确算法。其一，Ridge 的 SVD 闭式解：$X=
 % ======================================================================
 \section{思考题的补充实验}\label{app:exp}
 
-本节把正文 Q5/Q9 背后的扫描、数值诊断与工程过程展开，并用仅含 train 的交叉验证复核选层结论；所有数字与正文的提交结果同源，这些实验不改变提交选点。
+本节把正文 Q5/Q9 背后的扫描与数值诊断展开，用仅含 train 的交叉验证复核选层结论，并通过 prompt 与读点消融检验 Q7 的坐标可读性来源；所有数字与正文的提交结果同源，这些实验不改变提交选点。
 
-\subsection{超参数扫描、发散诊断与稳定界}
+\subsection{用 train 的 5 折交叉验证能否复现选层结论}
 
-在正式的分层训练之前，我们做了两轮系统性的超参数扫描（全部为全批量 GD、确定性代码，本地与集群数值一致）。首轮（job 88653）以单变量对照的形式跑了 9 组 35 次训练：两任务在 L11 上分别扫 lr、epochs、$\lambda_1$、$\lambda_2$，并以 L11/23/35 扫描层。扫描给出的主要结论与正文 Q5/Q9 一致，此不重复；这里值得记录的是扫描本身暴露出的形态：truth 的 lr 呈倒 U（0.005 最佳）、$\lambda_1$ 有害、层间差异巨大（L23 84.3\% 对 L11/L35 的 63\% 上下）；world 则是 lr 越大越好但上限被锁死在 $5\times10^{-4}$（150.94），layer 23/35 在 lr$=2\times10^{-4}$ 下直接发散为 inf——同一份扫描在两个任务上呈现完全不同的数值面貌（logistic 有界梯度对 MSE 无界残差），由此引出了一整条“数值修复”支线。
+\textbf{（1）问题。}正文的选层都建立在一次 train/valid 划分上，如果换一批训练样本，结论还成立吗？实验设置上没有让我们进行数据集的划分，这个拓展实验可以看作是对 Q5 和 Q9 的补充。
 
-world 的发散最初表现为一串极具误导性的日志与状态。日志写“Training converged at epoch 263, loss=inf”——收敛判据 \texttt{np.isclose(inf, inf)} 为真，把损失溢出误报成了收敛；实测权重并未变成 nan，而是有限的天文数字（max$|w|$ 达 $1.8\times10^{151}$、$7.9\times10^{152}$），旧代码“权重是否有限”的检查因此误报通过；更隐蔽的是发散时预测出的 MSE 是有限大数（$3.9\times10^{305}$）而非 inf——“只查权重”或“只查指标”都会漏检，必须引入独立的发散标志位。
-
-修复分三处：\texttt{model.py} 新增 diverged 状态（梯度/权重/loss 非有限、或 loss 超过初始值 $10^6$ 倍即中止训练并置位，与正常收敛严格区分）；\texttt{run\_grid.py} 支持逐组 standardize（z-score 统计量只取 train split、验证集复用同一 $\mu/\sigma$），并支持把标准化空间的权重精确折回原始特征空间（$w'=w/\sigma$、$b'=b-\mu\cdot w'$，在原始特征上复算一致、误差 $\sim10^{-14}$）。根因也随之明确：发散不是“深层没有信息”，而是 lr 越过了\textbf{按层稳定界}——未标准化时该界随深度暴跌 1800 倍（数学见附录~\ref{app:math}）。
-
-第二轮（job 89085，16 次训练）在 z-score 特征上重扫。标准化把各层稳定界拉平后，lr$=3\times10^{-3}$ 对三层均安全、$5\times10^{-3}$ 的越界被 \texttt{finite=False} 正确标记为发散；$\lambda_2$ 呈现出真实的 U 形（$0.1\to209.13$——训练已收敛但验证严重过拟合；$1.0\to167.06$ 最优；$3.0\to184.57$）；epochs $\ge500$ 即到平台。layer 扫描（lr$=3\times10^{-3}$）：L11 167.06 / L23 241.12 / L35 204.98。$\lambda_1$ 另外补扫 4 点（同一 std L11 配置，$0,10^{-3},10^{-2},0.1$）：MSE 分别为 $167.07,167.06,166.93,165.82$，$0.1$ 相对 $10^{-3}$ 的配对差为 $-1.24$（95\% CI $[-5.80,3.33]$），不显著。至此三条独立路径——raw 冠军（L11 150.4）、raw 长训练（L23 在 lr$=5\times10^{-5}$、20000 轮下 233.1）、标准化收敛（上列数字）——交叉印证了“L11 是 world 最优层、L23/35 在真正收敛后确实更差”，排除了“深层只是训不动”的假象。
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{results/slurm_grid/20261009_115559_88653/plots/world_grid.pdf}
-  \caption{首轮 world 超参数扫描（88653，未标准化特征）：lr 越大越好但上限被困在 $5\times10^{-4}$（更大即发散）；layer 23/35 的“inf”由数值问题造成，而非“深层无信息”。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{results/slurm_grid/20261009_115559_88653/plots/truth_grid.pdf}
-  \caption{首轮 truth 超参数扫描（88653）：lr、epochs、layer 的效应；$\lambda_1$ 增大有害、$\lambda_2$ 无差异。}
-\end{figure}
-
-\subsection{分块训练、断点续跑与统计口径}
-
-工程方面，truth 的“13 层 $\times$ 5000 轮”在 4h 平台上限内跑不完（首跑 89700 超时），我们把它拆成 4 个分块作业（90243–90246）并实现断点续跑：\texttt{-{}-skip-existing} 复用已完成层、\texttt{python -u} 实时日志、BLAS 线程钉定避免共享节点抢占。四个作业全部成功、零发散；L5 撞上慢节点跑了 3390.5s（约 15 倍于正常耗时）仍被分块设计吸收、零进度损失。统计方法上，层间比较统一使用同批验证样本的\textbf{配对 bootstrap 95\% CI}：world 的 MSE 重尾，单层 SE 达 40+，配对后 CI 显著收窄（25–77）；truth 单样本值 0.33pp。
-
-\subsection{A7：仅用 train 的 5 折交叉验证能否复现选层结论}
-
-A7 的问题很直接：正文的选层都建立在一次 train/valid 划分上，如果换一批训练样本，结论还成立吗？协议只在 train 内做 5 折 $\times$ 3 次重复（seed 0/1/2）：truth 按标签分层，world 无类别标签、按纬度五分位分层以保证每折的地理覆盖；标准化统计量只取训练折，验证折不参与任何选择。估计器沿用 A1 单层协议的代理实现——world 用闭式对偶 ridge（$\lambda_2=1.0$），truth 用 lbfgs（$\lambda_2=10^{-3}$），每任务 13 层 $\times$ 15 折 $=195$ 次拟合，两任务合计 390 次。这里比较的是\textbf{层排序}，不是复现手写全批量 GD 的绝对数值；valid 从头到尾没有参与选择。
+\textbf{（2）实验设置。}在 train 内做 5 折 $\times$ 3 次重复：truth 按标签分层，world 按纬度五分位分层以保证每折的地理覆盖；对于不同层，需要标准化，只对训练折进行了标准化，验证折不参与。使用了两个估计器快速获得参数结果：world 用闭式对偶 ridge（$\lambda_2=1.0$），truth 用 lbfgs（$\lambda_2=10^{-3}$），每任务 13 层 $\times$ 15 折 $=195$ 次拟合，两任务合计 390 次。
 
 \begin{table}[htbp]
   \centering
@@ -475,14 +448,14 @@ A7 的问题很直接：正文的选层都建立在一次 train/valid 划分上�
     35 & $404.1\pm189.6$ & 205.3 & $0.7864\pm0.0134$ & 0.8067 \\
     \bottomrule
   \end{tabular}
-  \caption{A7：train 内 5 折 $\times$ 3 次重复的 OOF 指标（均值 $\pm$ 15 折标准差）与单次 valid 的逐层对照。world 的 CV 绝对 MSE 高于 valid，原因是随机折会抽到更多地理离群点，而不是管线错配；truth 的 CV 与 valid 同峰 L20。}
+  \caption{A7：train 内 5 折 $\times$ 3 次重复的 OOF 指标（均值 $\pm$ 15 折标准差）与单次 valid 的逐层对照。world 的 CV 绝对 MSE 高于 valid，原因是随机折会抽到更多地理离群点，而不是管线错配；truth 的 CV 与 valid 同峰 L20。}\label{tab:a7}
 \end{table}
 
-truth 的结果几乎完美复现：CV 与 valid 的 13 层 Spearman 相关 $\rho=0.968$（$p<10^{-6}$），两边都选 L20；CV 为 $0.8508\pm0.0124$，valid 为 0.8667；15 折里 L20 夺冠 11 次、L23 夺冠 4 次，折间准确率标准差仅 0.8--1.6 pp。L20 与 L23 的 0.5 pp 差异小于折间噪声，说明正文把 L17--L23 写成统计平台是准确的，而不是“L20 比 L23 真的好一档”。
+\textbf{（3）结果。}
 
-world 的头部则是一个统计等价的平台。CV 最优是 L8（$351.0\pm150.6$），valid 最优是 L2（157.6），两者在 CV 上的差只有 27.9 MSE、在 valid 上的差只有 1.29 MSE；CV 与 valid 的排序相关仍达 $\rho=0.703$（$p=0.007$），但具体名次由折噪声决定。折间 MSE 标准差为 147--201，而 13 层的均值整体跨度只有 94；单折冠军在 L8（7/15）、L2（3/15）等层之间跳动。这个量级对比说明：world 应报告“L2/L5/L8/L11 早层平台”，不能把 1.3 MSE 的冠军差当作真实效应。
+truth 的结果与思考中几乎一致：CV 与 valid 的 13 层 Spearman 相关 $\rho=0.968$（$p<10^{-6}$），两边都选 L20。
 
-两种“绝对水平差”也有明确解释。world 的 CV 均值 MSE 远高于 valid（约 351--445 对 158--242），但典型误差几乎一致：L2 的 CV/valid 中位平方误差为 47.1/45.1 deg$^2$，中位距离为 988/978 km；差距来自尾部——CV 的 OOF 前 5/500 条占 SSE 的 40.6\%，最大单点平方误差 22{,}235，而 valid 为 3{,}930；去掉前 5 条后 valid MSE 从 157.6 降到 77.0。truth 的方向相反：CV 多数层比 valid 低 0.4--6.5 pp，主要因为每折只有 80\% 的训练量。故 CV 与 valid 的绝对数不能直接相减，只能比较排序与平台。最后，train 指标不能用于选层：world 的 train--valid 相关为 $-0.247$（$p=0.415$），truth 的 train acc 从 L17 起饱和在 1.0，平台内部已没有分辨力。
+world 的 CV 最优是 L8（$351.0\pm150.6$），valid 最优是 L2（157.6），两者在 CV 上的差只有 27.9 MSE、在 valid 上的差只有 1.29 MSE，差异不是很显著；CV 与 valid 的排序相关为 $\rho=0.703$（$p=0.007$），但具体名次由在不同折中不同。
 
 \begin{figure}[htbp]
   \centering
@@ -490,93 +463,14 @@ world 的头部则是一个统计等价的平台。CV 最优是 L8（$351.0\pm15
   \caption{A7：13 层探针在 train 内 5 折交叉验证（3 次重复）与单次 train/valid 划分下的对照。左 world（MSE，对数轴）：CV 最优 L8 与 valid 最优 L2 同处早层平台，CV 选择的 valid regret 仅 $+1.3$ MSE；右 truth（准确率）：CV 与 valid 同形、同峰 L20（CV 0.851 对 valid 0.867）。灰点线为 A1 train in-sample 指标。}
 \end{figure}
 
-% ======================================================================
-\section{有趣的研究实验}\label{app:repr}
+\textbf{（4）结论。} world 的CV结果也进一步证实了 L2/L5/L8/L11 差异不显著，没有选择表现最好的L2，而选择了 L11 也是合理的。truth的 CV 结果进一步说明了 L20 选层的重要性。
 
-本节收集超出课程要求、以研究问题为导向的实验：先汇总正文放不下的跨任务表征观察，再从损失函数（A10）、读出方式（C1/C2）与数据边界（C3）三个方向检验线性探针的边界。
 
-\subsection{跨任务表征对照与现象观察}
+\subsection{prompt 变体与读点的消融}
 
-第一，两任务的\textbf{最优层带完全不同}：world 在浅层 L2–L11（157.6–167.0 的平台），truth 在中层 L17–L23（0.8733–0.8967 的平台），且两者都在 L32–L35 变差——位置/坐标信息与真假语义的“可线性解码深度”不同，说明不同类型的信息写在表征的不同深度上。一处与论文的差异如实报告：论文 [3] 在 LLaMA-70B 上报告 world 表征约在 60\% 深度处最佳，而我们在 Qwen3-4B 上的 world 最优却在很浅的层——模型、数据集与特征口径均不同，我们不做进一步归因。
+\textbf{（1）问题。}这是对 Q7 的追问：如果坐标的预测依赖国家名，那么把国家名拿掉，实验结果会发生什么变化？进一步想，如果改变句子问法或者改变实验讲义中给出读点，效果会发生什么变化？
 
-第二，raw 与 z-score 的相互作用是一个非平凡的观察：raw 特征的增益并非“浅层普遍更好”，而是 L11 特有的组合——raw L11 全场最低（150.43），但 raw L2 探针反而显著更差（198.78）；z-score 的意义也不是“提点”，而是\textbf{解锁深层}——把按层稳定界拉平（1800 倍差距缩到 1.5 倍）让深层可训，同时 L2 的浅层优势本身也依赖标准化解锁（raw 198.8 $\to$ std 157.6）。
-
-第三，一个只报告、暂不归因的现象：world 的曲线在深层\textbf{回升}——从 L20/L23 的低谷（$\approx241$）回到 L32 的 180.3、与浅层统计不可区分（L11 vs L32：t$=-0.46$；而 L23 vs L32 的回升在配对意义上显著）；truth 则没有这个现象，L26 起单调下降（L32 的 0.8367 $\to$ L35 的 0.6867）。两任务在尾部层的表现分化，其机制（残差流叠加读出、语义抽象稀释等解释）都在本实验证据之外，我们只报告观察。
-
-第四，把 Q6–Q8 的表征现象汇总：坐标信息以超越国家身份的形式存在——unseen 20 条上 improvement $+1023.93\ [513.94,\ 1654.14]$（这些国家按表查询在原理上不可能）；同国内纬度弱可解码（$r=0.201$）、经度近乎不可解码（$r=0.046$），与 Q6 地图上“经度误差 $\gg$ 纬度”（MAE 10.85$^\circ$ vs 4.25$^\circ$）相互印证，共同指向“气候带式”的粗粒度空间信息与有限的地名知识。噪声维度上，中深层表征对字符级扰动不敏感（typo 子集 acc 不低于 clean，浅层 L5–L11 才有 5–7pp 的差距）——与“表征是分布式语义编码”的直觉一致。
-
-第五，一条 token 口径备注：world 探针读的是“国名最后一个词元”处的激活——写入位置即国家实体本身的状态；结果表明该状态同时编码了超越国名的坐标信息（否则 unseen 国家上不可能大幅胜过全局基线）。这也可能与 Q7 观察到的“国家中心收缩”有关：从国名词元状态读出的位置天然带有国家先验，探针只能部分解出个体地点的偏移。
-
-\subsection{\texorpdfstring{A10：球面损失 $\theta^2$ 与 MSE 控制的对照}{A10：球面损失与 MSE 控制的对照}}
-
-A10 只改 world 的回归目标，不改特征与读出位置：在 L11 上学习 $p=90^\circ(Az+a)$，$A\in\mathbb{R}^{2\times2560}$，特征按训练折 z-score。三组分别是 MSE 控制、球面中心角平方 $\theta^2$、以及 hybrid $\theta^2+\beta\,\mathrm{MSE}_{\rm rad}$；球面角用 $\theta_\varepsilon=\mathrm{atan2}(\sqrt{\|u\times\hat u\|^2+\varepsilon},u\cdot\hat u)$ 稳定计算（$\varepsilon=10^{-12}$）。超参数与早停只在 train 内 5 折 $\times$ 3 个种子上选择，valid 只在最后用一次；ridge 锚点为 L11 z-score、$\lambda_2=1$ 的闭式解（valid MSE 167.17、中位 923.1 km）。
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \begin{tabular}{lrrrrr}
-    \toprule
-    方法 & 原始 MSE & 分支规范化 MSE & 中位 km & 平均 km & 反射数 \\
-    \midrule
-    Ridge（闭式参照） & 167.17 & 167.17 & 923.1 & 1203.1 & 0 \\
-    MSE 控制 & $357.40\pm23.82$ & 357.40 & $1718.4\pm117.1$ & $1977.3\pm119.2$ & 0 \\
-    球面 $\theta^2$ & $1801.45\pm11.74$ & 370.46 & $1157.0\pm29.5$ & $1395.7\pm13.9$ & $10\pm0$ \\
-    Hybrid $\beta=0.5$ & $239.71\pm2.63$ & 239.71 & $1187.5\pm28.3$ & $1460.9\pm10.6$ & 0 \\
-    \bottomrule
-  \end{tabular}
-  \caption{A10：valid（$n=130$）上四种方法的坐标 MSE 与大圆距离；括号内为 3 个 seed 的标准差（Ridge 为单次闭式解，无 seed 误差）。球面的原始 MSE 被 10 条反向纬度分支样本主导，分支规范化后与 MSE 控制基本持平；hybrid 用 0.5 倍的 MSE 罚项消除了反射。}
-\end{table}
-
-球面损失把 valid 平均大圆距离从 1977.3 km 降到 1395.7 km（$-29.4\%$），中位从 1718.4 km 降到 1157.0 km（$-32.7\%$），OOF 也同向（$1542.7$ 对 $1987.4$ km，$-22.4\%$）。但它制造了周期等价解：10/130 条输出落在纬度反向分支，原始纬度低至 $-184^\circ$，其中 9/10 集中在澳洲--大洋洲一带；这些点的 3D 位置其实学对了，只是坐标表示翻到了等价分支，唯一真正的 3D 失败是南极半岛的一条。于是课程口径的原始坐标 MSE 从 357 恶化到 1801，而分支规范化后为 370.46、周期经度口径为 289.93——\textbf{“球面 MSE 更差”主要是坐标表示问题，不是空间位置更差}。
-
-hybrid 用 $\beta=0.5$ 的 MSE-rad 罚项把反射率压到 0，valid 原始 MSE 239.71、中位 1187.5 km、平均 1460.9 km，在三个梯度训练组里是坐标 MSE 与距离的综合最优。但它的 MSE 优势在 OOF 上没有复现：hybrid 为 $484.66\pm16.85$，MSE 控制为 $472.46\pm17.86$（$+2.6\%$）；距离优势则两边都在（OOF $-7.2\%$，valid $-26.1\%$）。另外，球面组在 lr$=3\times10^{-3}$ 下会塌到 43.5\% 反射、OOF 平均 3728.6 km，说明球面目标对学习率与分支监控很敏感。闭式 ridge（167.17 MSE / 923.1 km）仍是全场最好，A10 的结论只适用于“梯度训练探针内部换损失”，不能写成“球面损失优于 ridge”。
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{experiments/A10/figures/a10_metric_bars.pdf}
-  \caption{A10：valid（$n=130$）上 MSE 控制、球面 $\theta^2$ 与 hybrid $\beta=0.5$ 的坐标 MSE 与距离。球面把中位/平均距离降低约 31\%/29\%，但 10/130 条输出落入反向纬度分支，原始坐标 MSE 升至 1801；分支规范化后为 370（与 MSE 控制的 357 持平）。hybrid 以 240 MSE、1187 km 中位同时优于 MSE 控制，且零反射。灰色为闭式 ridge 参照。}
-\end{figure}
-
-\subsection{C1：Qwen 直接生成坐标与线性探针的对照}
-
-C1 换了一个读出方式：不训练线性头，直接让 Qwen3-4B-Base 零样本生成经纬度。world 的 630 条问题全部输入，贪心解码、最多 64 个新词元、bf16；valid 130 条用于主对照。解析分三档（严格 JSON、嵌入 JSON、正则），有效回答还要求坐标在合法范围内；探针锚点为 world raw L11，valid MSE 150.4277、中位 953.8 km，train MSE 116.9279、中位 662.4 km。需要强调：生成式直接输出与线性头是两种不同的读出协议，以下只做并列比较，不能据此宣称“线性探针不如 Qwen”。
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \begin{tabular}{lrrrr}
-    \toprule
-    指标 & Qwen 直接（valid） & 线性探针（valid） & Qwen 直接（train） & 线性探针（train） \\
-    \midrule
-    中位距离 / km & 43.8 & 953.8 & 15.5 & 662.4 \\
-    平均距离 / km & 159.1 & 1141.7 & -- & -- \\
-    P90 距离 / km & 416.0 & 2391.0 & -- & -- \\
-    原始坐标 MSE & 505.76 & 150.43 & 159.64 & 116.93 \\
-    周期经度 MSE & 17.64 & 150.43 & 108.54 & 116.93 \\
-    \bottomrule
-  \end{tabular}
-  \caption{C1：Qwen3-4B-Base 零样本直接输出与 L11 线性探针的对照。直接输出的距离中位在 valid 上约为探针的 1/22；原始 MSE 的排序相反，因为 direct 的 valid MSE 有 96.5\% 来自一条跨日界线样本。}
-\end{table}
-
-直接输出在每一个距离分位上都优于探针：valid 中位 43.8 对 953.8 km（约 22 倍）、平均 159.1 对 1141.7 km、P90 416.0 对 2391.0 km；train 中位 15.5 对 662.4 km（约 43 倍）。逐条配对（valid，$n=130$）有 119/130 条直接输出更近，距离差（探针 $-$ 直接）均值 $+982.5$ km，bootstrap 95\% CI $[835.0,1138.9]$，不跨 0。这说明同一批 2560 维表征里并非“没有地理知识”，探针的误差更像是\textbf{读出侧瓶颈}；它与 Q6 的经度弱、Q7 的“超越国家身份”一起，构成对“线性可解码性上限”的补充观察。
-
-原始 MSE 在这里是一个易碎指标。valid 原始 MSE 505.76 的 96.52\% 来自单条 Mount Tomanivi（斐济）：真值 $(178.015,-17.611)$，预测 $(-178.250,-17.917)$，原始经度差 $-356.265^\circ$，但实际大圆距离只有 397.0 km；把经度差回绕后，valid 周期 MSE 仅 17.64。train 的原始 MSE 159.64 也有约 92\% 来自 5 条极地/海外属地极端样本（如南极站名、法属波利尼西亚的 Mount Otemanu）。因此“原始 MSE 下探针 150 反而小于直接 506”并不表示探针更好，只表示两条曲线被不同的极端样本主导。解析稳健性方面，严格 JSON 接受率为 train 99.8\%、valid 99.2\%，宽松口径 valid 100\%；两个边角案例分别是经纬度互换被范围检查拒绝、以及度分秒格式只取首数。
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{experiments/C1/figures/c1_distance_cdf.pdf}
-  \caption{C1：world 630 题上到标签的大圆距离经验 CDF。Qwen3-4B-Base 零样本直接输出在全部百分位优于 L11 线性探针：valid 中位 43.8 对 953.8 km（约 22 倍）；逐条配对 119/130 直接更近，均值差 $+982.5$ km（bootstrap 95\% CI $[835.0,1138.9]$）。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.92\linewidth]{experiments/C1/figures/c1_valid_map.pdf}
-  \caption{C1：valid 130 条 Qwen 直接输出的预测位置。空心圈为标签，实心点为预测（按大圆距离对数着色），标注 5 个最大误差样本；原始 MSE 的 96.5\% 来自单条 Mount Tomanivi（斐济，跨 $\pm180^\circ$ 日界线，实际仅偏 397 km）。底图仅使用 110m 海岸线，无国界线。}
-\end{figure}
-
-\subsection{C2：prompt 变体与读点消融}
-
-C2 从反面追问 Q7：如果坐标可读性真的依赖国家名，那么把国家名、指令或问法分别拿掉，误差应该怎么变？五个变体使用同一批 500/130 个地点，行序与 \texttt{datasets/world} 对齐：\texttt{origcountry}（原句，读国家名最后一个 subtoken）、\texttt{origlast}（原句，读句末问号）、\texttt{nocountry}（删去“, \{country\}”，读句末）、\texttt{nameonly}（只给“地名, 国家”，无指令，读国家名）、\texttt{rephrase}（换一种问法，读句末）。主口径为 std13-L11（train 统计量 z-score、lr 0.002、2000 轮、$\lambda_1=10^{-3}$、$\lambda_2=1.0$）；raw11 仅作历史配置辅助对照，且 \texttt{nameonly} 的 raw11 在 4 次降 lr 后仍于第 9--19 轮爆炸，故不纳入主结论。提取自检中 13/14 个锚点逐位一致，L35 因 float16 归约顺序差 $+0.7667$，按数值差记录，不当作管线错配。
+\textbf{（2）实验设置。}实验设置了五个变体，均使用同一批 500/130 个地点，行序与实验给的 \texttt{datasets/world} 对齐，分别为\texttt{origcountry}（原句，读国家名最后一个 subtoken）、\texttt{origlast}（原句，读句末）、\texttt{nocountry}（删去“, \{country\}”，读句末）、\texttt{nameonly}（只给“地名, 国家”，无指令，读国家名）、\texttt{rephrase}（换一种问法，读句末）。主训练选择 L11，做了标准化，超参数为lr 0.002、2000 轮、$\lambda_1=10^{-3}$、$\lambda_2=1.0$。
 
 \begin{table}[htbp]
   \centering
@@ -592,31 +486,83 @@ C2 从反面追问 Q7：如果坐标可读性真的依赖国家名，那么把�
     \texttt{rephrase}    & 492.6 & 2163 & 2515 & 4540 & 13.8\% \\
     \bottomrule
   \end{tabular}
-  \caption{C2：std13-L11 在 world valid（$n=130$）上的 prompt 变体对比。仅给“地名, 国家”不给指令基本保留可读性（MSE 225 对 167）；删去国家名使 MSE 翻倍（1069）、$\leq1000$ km 占比从 55.4\% 降到 9.2\%。}
+  \caption{C2：std13-L11 在 world valid（$n=130$）上的 prompt 变体对比。仅给“地名, 国家”不给指令基本保留可读性（MSE 225 对 167）；删去国家名使 MSE 翻倍（1069）、$\leq1000$ km 占比从 55.4\% 降到 9.2\%。}\label{tab:c2}
 \end{table}
 
-配对效应（变体 $-$ 参照，正数表示变体更差）把四个因素分得很清楚：删去国家名 $+1004.9$ km，CI $[623.5,1391.3]$，同时预测点平均漂移 2915.6 km；删去指令 $+232.6$ km，CI $[76.8,385.4]$；换问法 $-199.2$ km，CI $[-398.0,+0.3]$（上界刚碰到 0）；把读点从国家 token 换到句末问号 $+1511.4$ km，CI $[1238.9,1783.6]$。分层后，删国家名的效应集中在 train 见过的国家（$+1127$ km，CI $[725,1555]$），unseen 国家仅 $+335$ km 且 CI $[-640,1243]$ 跨 0，这与 Q7 的“国家$\to$坐标先验”解释一致。层间曲线还显示：删国家名在浅层最伤（L2 的 2598 对 \texttt{origlast} 的 421，6.2 倍），随层深收窄；\texttt{nameonly} 与 \texttt{origcountry} 在 L2 几乎重合（160 对 158），到 L11/L20 才拉开（225 对 167、350 对 242），说明指令主要帮助深层读出稳定，坐标信息本身在浅层就已强烈可读。
-
-结论是：\textbf{国家名是坐标可读性的主要信息来源，但不是唯一来源}——没有国家名时仍比“用 train 平均坐标预测所有 valid”的基线（MSE 3311、中位 7300 km）好 3.1 倍；指令是“锦上添花”，换问法影响很小，而读点位置的影响最大，跨变体比较必须固定读点。局限也很明确：单一模型、单一模板、valid 仅 130 条（unseen 20 条），CI 未做多重比较校正；std13 的绝对 MSE 不能与提交的 raw L11（150.43）直接比较，能比较的是同一口径下的配对效应。
+\textbf{（3）结果分析。}第一，删去国家名 $+1004.9$ km，同时预测点平均漂移 2915.6 km，说明国家名对模型效果具有较大影响；第二，删去指令 $+232.6$ km，换问法 $-199.2$ km，说明这两个对模型效果有一定影响，但不是主要因素；把读点从国家 token 换到句末问号 $+1511.4$ km，说明讲义中 world 选择取国名最后一个词元是有必要的。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{experiments/C2/figures/c2_paired_effects.pdf}
-  \caption{C2：prompt 变体的配对效应（world valid $n=130$，bootstrap 95\% CI）。左：到标签的平均距离变化（正 = 变体更差）；右：两种 prompt 下预测点之间的平均大圆距离。删国家名 $+1005$ km（CI $[624,1391]$）且答案平均移动 2916 km；去指令仅 $+233$ km；换问法 $-199$ km（CI 上界 $+0.3$）；读点从国家 token 换到句末问号 $+1511$ km。}
+  \caption{C2：prompt 变体的配对效应（world valid $n=130$，bootstrap 95\% CI）。左：到标签的平均距离变化（正 = 变体更差）；右：两种 prompt 下预测点之间的平均距离。}
 \end{figure}
 
-\subsection{C3：GeoNames 数据扩增与“未见国家”的边界}
 
-C3 检验一个更实际的问题：在 world 的 500 条之外重采样 GeoNames 地点、重新提取 Qwen 特征并训练探针，能否提升原任务或“未见国家”的泛化？数据来自 GeoNames \texttt{cities15000} 与 \texttt{countryInfo}，采样 12{,}000 条、235 个国家，其中 30 个国家整国留出；划分为 train 8{,}382（193 国）、valid 1{,}050、test 1{,}050、test\_unseen 1{,}518。训练集有 \texttt{orig}（world 500）、\texttt{new}（GeoNames 8{,}382）、\texttt{new\_noleak}、\texttt{union}（8{,}882）与 \texttt{union\_noleak} 五种，统一使用 13 层与 std13 探针；65 次训练全部有限，\texttt{orig} 的 13/13 个锚点与历史 std13 值逐位一致。L11 是课程预注册层；L2 与 L32 是在评估集上事后挑出的描述性层，不能当作无偏估计。
+\textbf{（4）结论与局限。}\textbf{本实验中模型的预测效果一定程度上依赖国家名}，国家名是坐标可读性的主要信息来源，但不是唯一来源：指令和换问法影响很小，而读点位置的影响最大，这些因素综合影响了模型的效果。
 
-一个关键的协议修正：\texttt{test\_unseen} 的 30 国中有 22 国其实出现在 world train，因此 \texttt{orig} 在该集上 L11 的 56.5 并不是“小数据泛化强”，而是“这 22 国它见过”。为得到干净的未见国家口径，C3 另外定义 \texttt{strict8}（8 个在 world train 与 C3 train 中都没有国家字符串的国家：Costa Rica、Denmark、Hungary、Lebanon、Niger、Palestine、Taiwan、Yemen，共 260 条）与 \texttt{hard6}（再去掉可能有复合字符串泄漏的 Niger/Palestine，共 212 条）；后文以 \texttt{strict8}/\texttt{hard6} 为主。
+
+% ======================================================================
+\section{有趣的研究实验}\label{app:repr}
+
+本节收集超出课程要求、以研究问题为导向的实验：从读出方式（C1）与数据边界（C3）两个方向检验线性探针的边界。
+
+\subsection{Qwen 直接生成坐标与线性探针的对照}
+
+\textbf{（1）问题。}前面的探针都是“读出某一层，再训一个线性头”。能不能跳过线性头，直接问 Qwen 本身：“这个地点在哪？”如果它答得比探针准，说明误差可能主要出在“怎么读”，而不是模型里没有地理知识。
+
+\textbf{（2）实验设置。}不训练任何头，直接让 Qwen3-4B-Base 零样本生成经纬度。输入是 world 的 630 道原题，后面追加一句固定的 JSON 指令；bf16、batch 4、贪心解码、最多 64 个新词元，valid 130 条用于主对照。回答按“严格 JSON、嵌入 JSON、正则”三档解析，坐标还要落在合法范围内才算有效。探针参照 world raw L11：valid MSE 150.4277、中位 953.8 km，train MSE 116.9279、中位 662.4 km。严格 JSON 的接受率是 train 99.8\%、valid 99.2\%，放宽后 valid 100\%。主要指标见表~\ref{tab:c1}。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{lrrrr}
+    \toprule
+    指标 & Qwen 直接（valid） & 线性探针（valid） & Qwen 直接（train） & 线性探针（train） \\
+    \midrule
+    中位距离 / km & 43.8 & 953.8 & 15.5 & 662.4 \\
+    平均距离 / km & 159.1 & 1141.7 & -- & -- \\
+    P90 距离 / km & 416.0 & 2391.0 & -- & -- \\
+    原始坐标 MSE & 505.76 & 150.43 & 159.64 & 116.93 \\
+    周期经度 MSE & 17.64 & 150.43 & 108.54 & 116.93 \\
+    \bottomrule
+  \end{tabular}
+  \caption{C1：Qwen3-4B-Base 零样本直接输出与 L11 线性探针的对照。直接输出的距离中位在 valid 上约为探针的 1/22；原始 MSE 的排序相反，因为直接输出的 valid MSE 有 96.5\% 来自一条跨日界线样本。}\label{tab:c1}
+\end{table}
+
+\textbf{（3）结果。}直接输出在距离上全面更好：valid 中位 43.8 对 953.8 km（约 22 倍），平均 159.1 对 1141.7 km，P90 416.0 对 2391.0 km；train 中位 15.5 对 662.4 km（约 43 倍）。逐条比，valid 130 条里有 119 条直接输出更近，探针减直接的距离差均值是 $+982.5$ km，bootstrap 95\% 区间 $[835.0,1138.9]$，不跨 0。
+
+但原始 MSE 会骗人。valid 的 505.76 里有 96.52\% 来自一条 Mount Tomanivi（斐济，跨 $\pm180^\circ$ 日界线，实际只偏 397.0 km）；把经度差回绕后，周期 MSE 只有 17.64。train 的 159.64 也有约 92\% 来自 5 条极地/海外属地样本（如南极站名、法属波利尼西亚的 Mount Otemanu）。所以“原始 MSE 下探针 150 小于直接 506”并不说明探针更好，只说明两边被不同的极端样本主导。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{experiments/C1/figures/c1_distance_cdf.pdf}
+  \caption{C1：world 630 题上到标签的大圆距离经验 CDF。Qwen3-4B-Base 零样本直接输出在全部百分位优于 L11 线性探针：valid 中位 43.8 对 953.8 km（约 22 倍）；逐条配对 119/130 直接更近，均值差 $+982.5$ km（bootstrap 95\% 区间 $[835.0,1138.9]$）。}
+\end{figure}
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.92\linewidth]{experiments/C1/figures/c1_valid_map.pdf}
+  \caption{C1：valid 130 条 Qwen 直接输出的预测位置。空心圈为标签，实心点为预测（按大圆距离对数着色），标注 5 个最大误差样本；原始 MSE 的 96.5\% 来自单条 Mount Tomanivi（斐济，跨 $\pm180^\circ$ 日界线，实际仅偏 397 km）。底图仅使用 110m 海岸线，无国界线。}
+\end{figure}
+
+\FloatBarrier
+
+\textbf{（4）结论与局限。}同一批 2560 维表征里并非“没有地理知识”，探针的误差更像是出在“怎么读”这一侧。这和 Q6 的经度弱、Q7 的“超越国家身份”一起，说明线性可解码性有一个不低的上限。要注意：生成式直接输出和线性头是两种不同的读出协议，只能并列参考，不能据此说“线性探针不如 Qwen”。
+
+\subsection{GeoNames 数据扩增与“未见国家”的边界}
+
+\textbf{（1）问题。}world 只有 500 条，比 2560 维特征还少，本身就是一个欠定问题。一个自然的想法是：拿 GeoNames 再造一批地点，把训练集扩大，预测会不会更好？尤其是在训练时没见过的国家上。
+
+\textbf{（2）实验设置。}数据来自 GeoNames \texttt{cities15000} 与 \texttt{countryInfo}：采样 12{,}000 条、235 个国家，其中 30 个国家整国留出；划分成 train 8{,}382（193 国）、valid 1{,}050、test 1{,}050、test\_unseen 1{,}518。训练集做了五种：\texttt{orig}（原 world 500 条）、\texttt{new}（GeoNames 8{,}382 条）、\texttt{new\_noleak}、\texttt{union}（8{,}882 条）和 \texttt{union\_noleak}；统一用 13 层特征和 std13 探针，共 65 次训练，全部有限，\texttt{orig} 的 13/13 个锚点与历史值逐位一致。L11 是课程预注册层；L2、L32 是看了评估结果后挑的，只能当描述性参考。
+
+这里有一个关键修正。\texttt{test\_unseen} 的 30 个国家里，有 22 个其实在 world train 出现过，所以 \texttt{orig} 在这个集合上 L11 的 56.5 不是“小数据也能泛化”，而是“这 22 个国家它见过”。为了得到干净的“未见国家”口径，另外定义 \texttt{strict8}：8 个在 world train 和 C3 train 里都没出现过的国家（Costa Rica、Denmark、Hungary、Lebanon、Niger、Palestine、Taiwan、Yemen），共 260 条；\texttt{hard6} 再去掉可能和国家名有重叠的 Niger/Palestine，共 212 条。下面以 \texttt{strict8}/\texttt{hard6} 为主。主要结果见表~\ref{tab:c3}。
 
 \begin{table}[htbp]
   \centering
   \small
   \begin{tabular}{lrrr}
     \toprule
-    评估集 / 对比 & $\Delta$MSE & item 95\% CI & cluster 95\% CI \\
+    评估集 / 对比 & $\Delta$MSE & 逐条 95\% 区间 & 按国家 95\% 区间 \\
     \midrule
     world valid，L2，union$-$orig & $-18.4$ & $[-56.5,+15.5]$ & $[-54.9,+13.5]$ \\
     world valid，L11，union$-$orig & $+5.9$ & $[-49.0,+61.7]$ & $[-29.5,+43.1]$ \\
@@ -627,18 +573,22 @@ C3 检验一个更实际的问题：在 world 的 500 条之外重采样 GeoName
     hard6，L11，union$-$new & $-22.7$ & $[-26.5,-18.9]$ & $[-47.6,-4.5]$ \\
     \bottomrule
   \end{tabular}
-  \caption{C3：GeoNames 增广的配对效应（负 = 前者更好）。item CI 把每条样本独立重抽；cluster CI 按国家整簇重抽，在只有 6--8 个国家时更诚实。world valid 上 union 与原模型的差异均跨 0；strict8 上 union 相对 GeoNames-only 的收益在两种 bootstrap 下都稳健，但相对 orig 的收益在 cluster CI 下不显著。}
+  \caption{C3：GeoNames 扩增的配对效应（负 = 前者更好）。逐条区间把每条样本独立重抽；按国家区间按国家整簇重抽，在只有 6--8 个国家时更诚实。world valid 上 union 与原模型的差异均跨 0；strict8 上 union 相对 GeoNames-only 的收益在两种重抽下都稳健，但相对 orig 的收益在按国家区间下不显著。}\label{tab:c3}
 \end{table}
 
-对原 world 任务，增广没有稳定收益：world valid 上 union$-$orig 在 L2 为 $-18.4$（CI 跨 0）、在 L11 为 $+5.9$（CI 跨 0）；L2 还是事后选层，L11 才是课程口径。\texttt{new} 单独训练会伤害原任务（L11 比 \texttt{orig} 高 58.2），而 union 把原 500 条加回来后相对 \texttt{new} 显著更好（$-52.4$，CI $[-97.2,-21.1]$）——\textbf{新数据不能替换旧数据，只能混合}。收益是“覆盖”而不是整体提升：world valid 的 12 条 unseen$\to$C3 上 union 比 orig 低 143.1 MSE（$-66.5\%$，CI $[-303.4,-25.1]$），而 seen 110 条反而高 27.4（CI 跨 0）；L11 的三个分层 MSE（orig/new/union）分别是 seen 163.8/253.0/191.2、unseen$\to$C3 215.2/65.3/72.1、unseen-both 138.7/83.9/72.2。
+\textbf{（3）结果。}对原来的 world 任务，扩增没有稳定收益。world valid 上，\texttt{union} 减 \texttt{orig} 在 L2 是 $-18.4$（区间跨 0），在 L11 是 $+5.9$（也跨 0）；L2 还是事后选层，L11 才是课程口径。只拿 \texttt{new} 训练会伤害原任务（L11 比 \texttt{orig} 高 58.2），但把原 500 条加回去的 \texttt{union} 明显好于 \texttt{new}（$-52.4$，逐条区间 $[-97.2,-21.1]$）。
 
-在严格未见国家上，增广相对 GeoNames-only 的收益是稳健的：\texttt{strict8} 的 L11 为 75.66 对 97.35（$-21.7$，item CI $[-25.1,-18.5]$、cluster CI $[-41.9,-7.8]$），\texttt{hard6} 为 86.76 对 109.43（$-22.7$，cluster CI $[-47.6,-4.5]$）；但相对 \texttt{orig} 的 $-18.1$ 在 8 国 cluster bootstrap 下不显著（CI $[-88.4,+25.6]$），不能写成“增广显著优于原模型”。逐国方向也高度异质：L11 上 union 在 Costa Rica/Palestine/Taiwan 最好，但 Denmark/Lebanon 是 \texttt{new} 最好、Hungary/Niger/Yemen 是 \texttt{orig} 最好；\texttt{strict8} 的 hit100 在 L11 仅 orig 0.8\%、new 4.6\%、union 1.9\%，说明 MSE 的总体优势主要来自少数高误差国家的尾部，而不是“更多点落进 100 km”。最后，增广没有突破 world 天花板：union 最好的 world valid（L2）139.2 仍高于国家均值 oracle 113.8。C3 不改变提交选择；局限包括 8 国样本太小、复合国家字符串、单一模型/prompt/seed，以及 GeoNames 标签噪声，绝对 MSE 也不能与指南中的数字直接比较。
+扩增的帮助主要体现在训练时没见过的地点上。world valid 里 12 条 unseen$\to$C3 的样本上，\texttt{union} 比 \texttt{orig} 低 143.1 MSE（$-66.5\%$，逐条区间 $[-303.4,-25.1]$）；seen 的 110 条反而高 27.4（区间跨 0）；L11 的三个分层 MSE（orig/new/union）分别是 seen 163.8/253.0/191.2、unseen$\to$C3 215.2/65.3/72.1、unseen-both 138.7/83.9/72.2。在 \texttt{strict8} 上，\texttt{union} 比 \texttt{new} 低 21.7（75.66 对 97.35），逐条和按国家两种区间都不跨 0；\texttt{hard6} 上低 22.7（86.76 对 109.43），也稳。但 \texttt{union} 比 \texttt{orig} 低 18.1 这件事，在只有 8 个国家时按国家重抽的区间是 $[-88.4,+25.6]$，不显著，所以不能写成“扩增显著优于原模型”。
+
+逐国看，方向很不一样：L11 上 \texttt{union} 在 Costa Rica/Palestine/Taiwan 最好，但 Denmark/Lebanon 是 \texttt{new} 最好，Hungary/Niger/Yemen 是 \texttt{orig} 最好。\texttt{strict8} 的 100 km 内命中率在 L11 只有 \texttt{orig} 0.8\%、\texttt{new} 4.6\%、\texttt{union} 1.9\%，说明 MSE 的优势主要来自少数高误差国家的尾部，而不是“更多点落进 100 km”。最后，扩增也没有突破 world 的天花板：\texttt{union} 最好的 world valid（L2）是 139.2，仍高于国家均值 oracle 的 113.8。
 
 \begin{figure}[!htbp]
   \centering
   \includegraphics[width=\linewidth]{experiments/C3/figures/c3_strata_unseen.pdf}
   \caption{C3：左：world valid 在 L11 的三个国家分层 $\times$ 三个训练集的 MSE；右：\texttt{strict8} 的 8 个国家在 L11/L32 的逐国 MSE（对数轴）。union 在 seen 国家变差、在 unseen$\to$C3 与 unseen-both 变好；\texttt{strict8} 的总体增益来自少数高误差国家，逐国方向高度异质。}
 \end{figure}
+
+\textbf{（4）结论与局限。}新数据不能替换旧数据，只能和旧数据混着用；扩增带来的是“覆盖面”的改善，不是整体提升。C3 不改变提交选择。局限有：\texttt{strict8}/\texttt{hard6} 只有 6--8 个国家，样本太小；国家字符串可能有重叠；只试了一种模型、一种 prompt、一个 seed；GeoNames 坐标本身也有噪声。另外，这里的绝对 MSE 不能和指南里的数字直接比较。
 
 \FloatBarrier
 
