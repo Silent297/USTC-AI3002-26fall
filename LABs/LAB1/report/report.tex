@@ -98,63 +98,34 @@
 \textbf{题面：}你的模型相比于 sklearn 的实现有拟合效果上的差异吗？（简要说明即可）
 （提示：可以在做完后两项实验后回答该题。）
 
-\textbf{（1）先把两边的正则强度对齐。}因为两边正则参数的写法不同，需要先对齐。不换算可能会把“超参不同”当成“实现不同”。本实验的目标函数是 $(1/N)\cdot\mathrm{loss}+\lambda_1\|w\|_1+\lambda_2\|w\|_2^2$，换算到 sklearn 是 Ridge $\alpha=N\lambda_2$、Lasso $\alpha=\lambda_1/2$、ElasticNet $\alpha\rho=\lambda_1/2$ 且 $\alpha(1-\rho)=\lambda_2$、逻辑回归 $C=1/(2N\lambda_2)$。对比用三组数据：world L11 的 z-score 版和 raw 版（$N=500$）、truth L20（raw，$N=5088$）；指标来自提交用的 \texttt{model.py}，收敛曲线用更新式一致的副本。
+\textbf{（1）先把正则对齐。}两边 $\lambda$ 的定义不同，先换算：ours 的目标是 $(1/N)\cdot\mathrm{loss}+\lambda_1\|w\|_1+\lambda_2\|w\|_2^2$；对应 sklearn 的 Ridge $\alpha=N\lambda_2$、Lasso $\alpha=\lambda_1/2$、ElasticNet $\alpha\rho=\lambda_1/2$ 且 $\alpha(1-\rho)=\lambda_2$、逻辑回归 $C=1/(2N\lambda_2)$。不换算就会把“超参不同”当成“实现不同”。
 
-\textbf{（2）结论：没有本质差异。}同一个目标函数只要都充分收敛，两边就是同一个解——A2/A4 行 $\cos=1.00000$、relL2 $=0.002$。看到的差别都来自三类“非模型因素”。一是优化器：手写 GD 是固定步长，步子不能超过稳定界；world raw L11 无正则时界约 $5.4\times10^{-4}$，取 lr$=10^{-3}$ 第 8 轮 loss 就爆到 $1.14\times10^{10}$，被自动中止，而 sklearn 用精确求解器，没有步长问题。二是训练预算：轮数有限，相当于提前停在一个权重较小的点，反而起到正则作用，valid 更好（A1 $306.55<311.56$、B1 $223.58<395.02$、T2 $0.8867>0.8600$）；继续训练会向 sklearn 的解靠拢（$\cos$ $0.897\to0.997$），valid 可能变差（B2b $162.4$ vs B2 $150.4$）。三是正则强度的定义：sklearn 默认 $C=1$ 时 truth valid 只有 $0.8500$，不换算就会误判。
-
-\textbf{（3）一处反例。}T1 行里，sklearn 不做正则（\texttt{penalty=None}）的 valid 对数损失高达 $27.77$。原因是 truth 训练集近似线性可分，无正则的最优解在无穷远，精确求解会把权重一路推大；手写 GD 只有有限轮，相当于提前停住（ll $0.255$），反而稳。一句话总结：差异是\textbf{优化差异}（步长、求解器、训练轮数、早停），不是模型或实现差异。
+\textbf{（2）结论：没有本质差异，差异在于优化上。}目标函数一样、都收敛后，两边就是同一个解：例如world z-score 的 Ridge 对比 $\cos=1.00000$、relL2 $=0.002$。差别都出在优化上：手写模型的学习率受稳定界限制，需要自行调整；sklearn 用精确求解器；手写的模型轮数有限相当于提前停住，继续训练会向 sklearn 靠拢。
 
 \begin{table}[htbp]
   \centering
   \small
-  \begin{tabular}{llrrrrr}
+  \begin{tabular}{llrrr}
     \toprule
-    行 & 设置（ours 口径） & sklearn 等价 & ours valid & sk valid & $\cos$ & relL2 \\
+    行 & 设置（ours 口径） & ours valid & sklearn valid & $\cos$ \\
     \midrule
-    A1 & world z-score，无正则，ep20000 & LinearRegression & 306.55 & 311.56 & 0.99929 & 0.039 \\
-    A2 & world z-score，$\lambda_2=1.0$ & Ridge $\alpha=500$ & 167.06 & 167.17 & 1.00000 & 0.002 \\
-    A3 & world z-score，$\lambda_1=10^{-3}$ & Lasso $\alpha=5\times10^{-4}$\textsuperscript{a} & 238.36 & 598.47 & 0.594 & 0.814 \\
-    A4 & world z-score，$\lambda_1=10^{-3}+\lambda_2=1.0$ & ElasticNet & 167.04 & 167.16 & 1.00000 & 0.002 \\
-    B1 & world raw，无正则，ep20000 & LinearRegression & 223.58 & 395.02 & 0.871 & 0.573 \\
-    B2 & world raw，历史最优，ep2000 & ElasticNet & 150.43 & 165.34 & 0.897 & 0.475 \\
-    B2b & world raw，历史最优，ep20000 & ElasticNet & 162.36 & 165.34 & 0.997 & 0.082 \\
+    \multicolumn{5}{l}{\emph{world（L11，MSE，小者好）}} \\
+    A2 & z-score，$\lambda_2=1.0$ & 167.06 & 167.17 & 1.00000 \\
+    B1 & raw，无正则，ep20000 & 223.58 & 395.02 & 0.871 \\
+    B2 & raw，历史最优，ep2000 & 150.43 & 165.34 & 0.897 \\
+    \midrule
+    \multicolumn{5}{l}{\emph{truth（L20，准确率，大者好）}} \\
+    T1 & 无正则，ep4000 & 0.8867 & 0.8533 & 0.772 \\
+    T3 & $\lambda_1=\lambda_2=10^{-3}$，ep5000 & 0.8967 & 0.8600 & 0.712 \\
     \bottomrule
   \end{tabular}
-  \caption[world L11 与 sklearn 逐配置对比]{world（L11，valid MSE；小者好）与 sklearn 逐配置对比。\textsuperscript{a}：A3 的 sklearn Lasso 未收敛到 tol（dual gap $\gg$ tol），数值仅供参考。}
-\end{table}
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \begin{tabular}{llrrrrr}
-    \toprule
-    行 & 设置 & ours acc & sk acc & ours ll & sk ll & $\cos$ \\
-    \midrule
-    T1 & 无正则，ep4000 & 0.8867 & 0.8533 & 0.255 & 27.77 & 0.772 \\
-    T2 & $\lambda_2=10^{-3}$（sk $C\approx0.098$），ep5000 & 0.8867 & 0.8600 & 0.257 & 0.383 & 0.802 \\
-    T2b & 同 T2，ep10000 & 0.8733 & 0.8600 & 0.269 & 0.383 & 0.883 \\
-    T3 & 最优配置 $\lambda_1=\lambda_2=10^{-3}$，ep5000 & 0.8967 & 0.8600 & 0.259 & 0.383 & 0.712 \\
-    \bottomrule
-  \end{tabular}
-  \caption{truth（L20，valid 准确率；大者好）与 sklearn 对比。T1 行 sklearn 无正则的 ll$=27.77$ 灾难：可分数据上 MLE 在无穷远。参考：sklearn 默认 $C=1$（更强正则）$\to$ valid 0.8500。}
+  \caption{ours 与 sklearn 的代表性对比（只列代表性行）。T1 的 sklearn valid 对数损失为 $27.77$（ours $0.255$）；B1 的 sklearn 为精确解，ours 为有限轮早停。}
 \end{table}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{question/figures/q3_weight_parity.pdf}
   \caption{对齐正则口径后权重逐点比对：world（$\lambda_2=1.0$）落在对角线上（$\cos=1.00000$）——同一目标函数充分收敛 $\Rightarrow$ 同解；truth 未充分收敛时权重整体压向 0（relL2 $=0.794$）。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{question/figures/q3_convergence.pdf}
-  \caption{收敛曲线：world（$p\gg n$ 病态）GD 20000 轮仅到 0.0047（精确 LS$=0$）；truth GD 5000 轮停于 0.181，未达 lbfgs 最优 0.066——有限预算 GD 天然早停、起正则化作用。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{question/figures/q3_valid_bars.pdf}
-  \caption{valid 指标总览：world raw 早停的 223.6 $\ll$ 精确 LS 的 395.0；lr$=10^{-3}$ 超稳定界第 8 轮发散（红叉）。truth：ours 全面不低于 lbfgs；灰线为 $C=1$ 口径陷阱。}
 \end{figure}
 
 
@@ -170,7 +141,7 @@
 
 \textbf{（3）原因分析。}world 的目标是位置坐标，这类信息在浅层表征中最接近线性可分；随层深增加，表征经过更多非线性变换、语义抽象增强，坐标的线性可读性下降，中层出现低谷。深层在 L29–L32 段 MSE 下降（L32 为局部最低 180.31），随后 L34/L35 又回升；下降的可能原因是深层把位置重新编码为更全局的线性方向。
 
-\textbf{（4）最终选层。}提交选中 \textbf{L11}，有三个原因：一是 L11 与 L2/L5/L8 差异并不显著（可以参见表3），L2虽然略微好一点但是与L11差异不大；二是 L11 是实验本身提供的，与实验本身关联性更好；三是标准化一定程度上影响了2，5，8，11四层之间细微的差距，例如笔者对 L2 和 L11 在不进行标准化、统一超参数做了训练，发现 L11 略微优于 L2。综上所述，笔者选择11层作为最终选层。
+\textbf{（4）最终选层。}提交选中 \textbf{L11}，有三个原因：一是 L11 与 L2/L5/L8 差异并不显著（可以参见表2），L2虽然略微好一点但是与L11差异不大；二是 L11 是实验本身提供的，与实验本身关联性更好；三是标准化一定程度上影响了2，5，8，11四层之间细微的差距，例如笔者对 L2 和 L11 在不进行标准化、统一超参数做了训练，发现 L11 略微优于 L2。综上所述，笔者选择11层作为最终选层。
 
 \begin{figure}[htbp]
   \centering
@@ -217,12 +188,12 @@
 
 \textbf{（3）学习率扫描。}学习率在稳定界内选（见后面对稳定界探索的说明），再用训练表现验证：原始的 L11 的稳定界是 $3.6\times10^{-3}$，取 lr$=5\times10^{-4}$，$1\times10^{-3}$，$2\times10^{-3}$，$5\times10^{-3}$。结果来看lr$=5\times10^{-3}$结果最好，故选择 lr$=5\times10^{-3}$。
 
-\textbf{（4）最终提交。}最终模型的提交是\textbf{raw L11}超参数为lr$=5\times10^{-4}$、2000 轮、$\lambda_2=0.1$，valid MSE \textbf{150.43}，$\lambda_2$ 由首轮 88653 的 raw 扫描在 $\{0,10^{-3},10^{-2},10^{-1}\}$ 中选出；备选 z-score L2（$157.57$，第 4 题 std 层里最好）。同层的 z-score 版（lr$=3\times10^{-3}$、$\lambda_2=1.0$）是 $167.06$，与第 4 题 L11 行（lr$=2\times10^{-3}$，$167.04$）只差平台内的 lr，说明两套配置对得上。raw L11 与 std L2 差 $7.1$，不显著（t$=-0.46$），按点估计和跨预处理稳健性选 raw（理由见第 4 题第（4）点）。训练脚本还带发散兜底：一旦发散就把 lr 减半重试，最多 4 次。推导见附录~\ref{app:math}，扫描全表见附录~\ref{app:exp}。
+\textbf{（4）最终提交。}最终模型的提交是\textbf{raw L11}，超参数为lr$=5\times10^{-4}$、2000 轮、$\lambda_2=0.1$，valid MSE \textbf{150.43}。选择理由见上面的分析，以及后面的图。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{results/q5_grid/plots/world_grid.pdf}
-  \caption{world 标准化重扫（20 次：原 16 次 + 补扫 $\lambda_1$ 4 次；layer 组已在第 4 题讨论）：lr、epochs、$\lambda_1$、$\lambda_2$ 对 valid MSE 的影响（$\lambda_1=0.1$ 点估计最低但配对不显著）；lr$=5\times10^{-3}$ 被正确标记为发散（finite=False）。}
+  \caption{world L11 的 raw 单变量扫描（各格只变一个超参，基线见图内 fixed 小字；最终提交为 lr$=5\times10^{-4}$、2000 轮、$\lambda_1=10^{-3}$、$\lambda_2=0.1$）：lr 在 $5\times10^{-4}$ 最低（150.9），$10^{-3}$ 已发散（第 3 题）；epochs 在 2000 轮最低（150.9）；$\lambda_1$ 四点为 150.42/150.43/150.51/152.11，$0$ 仅低 0.008，取 $10^{-3}$ 保留弱正则；$\lambda_2$ 在 $0.1$ 最低，对应提交权重 150.4277。}
 \end{figure}
 
 
@@ -233,11 +204,13 @@
 \textbf{题面：}给出你的模型在验证集上的预测结果，并可视化在地图上（推荐不含国界线）。
 （提示：此题推荐使用 AI 工具辅助可视化程序的编写。）
 
-\textbf{（1）绘图数据来源。}图和读数都基于最终提交的 world raw L11 探针（\texttt{world\_\allowbreak layer11\_\allowbreak extra0/\allowbreak weights.npz}，权重已折回原始特征空间，推理就是 $x@w^{\top}+b$）。本地复算把 valid MSE 还原为 $150.4277$（与训练记录逐位一致），$R^2=0.9545$，口径能对上。
+\textbf{（1）绘图数据来源。}图和读数都基于最终提交的 world raw L11 权重。
 
-\textbf{（2）地图读数。}130 个验证样本（78 国）画在世界地图上：灰空心圆是真值，彩点是预测，颜色表示单点误差 $\sqrt{\Delta lat^2+\Delta lon^2}$。模型大致学到的是“大洲级”定位：平均误差 $12.44^\circ$、中位 $9.52^\circ$（大圆距离约 $953.8$ km），四分位 $4.96/9.52/15.34^\circ$，误差超过 $30^\circ$ 的只有 $7/130$。
+\textbf{（2）地图读数。}130 个验证样本（78 国）画在世界地图上：灰空心圆是真值，彩点是预测，颜色表示单点误差 $\sqrt{\Delta lat^2+\Delta lon^2}$。
 
-\textbf{（3）误差结构。}有两个特点。第一，方向不对称：纬度平均只差 $4.25^\circ$，经度差 $10.85^\circ$，约 2.5 倍——模型对“什么气候带”这类纬度线索敏感，精确定位需要的经度信息弱得多。第二，见过的地方准、偏僻的地方差：欧洲、东非、中美等训练密集区误差普遍小于 $5^\circ$（最准 Denmark $0.79^\circ$）；失败集中高纬和孤立岛屿——两条南极样本排在最差前二（$89.6^\circ$、$73.8^\circ$，预测落到约 $28$–$34^\circ$E 的南大洋），纽芬兰样本纬度几乎全对（差 $0.23^\circ$），经度却差了 $40.7^\circ$。图上只画 110m 海岸线，\textbf{不含任何国界线}。
+\textbf{（3）数据分析。}模型大致学到的是“大洲级”定位：平均误差 $12.44^\circ$、中位 $9.52^\circ$（大圆距离约 $953.8$ km），四分位 $4.96/9.52/15.34^\circ$，误差超过 $30^\circ$ 的只有 $7/130$。
+
+\textbf{（4）误差分析。}误差呈现出两个特点。第一，方向不对称：纬度平均只差 $4.25^\circ$，经度差 $10.85^\circ$，约 2.5 倍。第二，见过的地方准、偏僻的地方差：欧洲、东非、中美等训练密集区误差普遍小于 $5^\circ$（最准 Denmark $0.79^\circ$）；失败集中高纬和孤立岛屿——两条南极样本排在最差前二（$89.6^\circ$、$73.8^\circ$，预测落到约 $28$–$34^\circ$E 的南大洋），纽芬兰样本纬度几乎全对（差 $0.23^\circ$），经度却差了 $40.7^\circ$。图上只画 110m 海岸线，\textbf{不含任何国界线}。
 
 \begin{figure}[htbp]
   \centering
@@ -252,24 +225,16 @@
 
 \textbf{题面：}从训练集和验证集的表现，是否能够强烈说明模型内部存在地理坐标的表征，而不是仅仅识别了输入中的国家？对于该题可以参考原始论文 [3] 的部分结论和上一题的可视化结果；也可与按训练集国家分组的平均坐标基线比较，考察同一国家内不同地点的预测。
 
-\textbf{（1）怎么区分“坐标表征”和“只认国家”。}思路很简单：如果模型只是认出了国家，那么把“国家平均坐标”直接告诉它，效果应该和模型差不多甚至更好。所以主基线用 \textbf{oracle 国家均值}：每条验证样本用真实国家标签，去查训练集里该国的坐标均值——这个基线是占便宜的（等于给了真标签 $+$ 训练记忆）；训练没见过的国家退回全局均值，MSE $3311.27$。improvement $=$ 基线 $-$ 模型，正数表示模型更好，置信区间用 paired bootstrap。分层：all 130 / seen 110 / multi 73 / single 37 / unseen 20（19 个训练未见国家，共 20 条）。
+\textbf{（1）判据与基线。}如果模型只是认出了国家，那么把“该国平均坐标”直接告诉它，效果应不差于模型。所以主基线用 \textbf{oracle 国家均值}：按真实国家标签查训练集里该国坐标的均值（等于给真标签 $+$ 训练记忆），未见国家退回全局均值；分层 all 130 / seen 110 / multi 73 / single 37 / unseen 20，improvement $=$ 基线 $-$ 模型，置信区间用 paired bootstrap。
 
-\textbf{（2）证据一：模型不只是认国家。}unseen 的 20 条在训练里完全没出现，按国家查表原理上不可能答对；模型 MSE $158.90$，全局均值基线 $1182.83$，improvement $\mathbf{+1023.93\ [513.94,\ 1654.14]}$。同一个国家内部也能看到一点定位能力：73 条多样本国家的样本相对本国训练均值的偏差中，纬度相关 $r=0.201\ [0.021,\ 0.389]$（弱显著，斜率 $0.115$），美国 8 条方向整体正确（中心化 $r=0.69/0.60$）——模型确实带了超出国家身份的位置信息。
+\textbf{（2）证据：有位置信息，但很弱。}unseen 的 20 条在训练中完全没出现，按国家查表原理上不可能：模型 MSE $158.90$，全局均值基线 $1182.83$，improvement $\mathbf{+1023.93\ [513.94,\ 1654.14]}$——模型仍把样本放到正确的大洲/区域。但全局均值基线本身很弱，这只说明“模型远不止一个全局平均”，不说明“模型精确”。限定到见过的国家，oracle 反而反超：seen 110 条上模型 $148.89$ vs 基线 $\mathbf{113.77}$（imp $-35.12\ [-60.90,\ -7.08]$），multi 同向（$205.0$ vs $159.6$），single 不显著；同国 73 条多样本样本相对本国训练均值的纬度相关 $r=0.201\ [0.021,\ 0.389]$（弱显著），经度 $r=0.046$（不显著）。可见模型确实带了超出国家身份的位置信息，但精细定位能力有限。
 
-\textbf{（3）证据二：但能力有限。}只看训练见过的国家，oracle 反而反超：seen 110 条上模型 $148.89$，基线 $\mathbf{113.77}$（imp $-35.12\ [-60.90,\ -7.08]$，CI 不含 0）；multi 也一样显著（$204.97$ vs $159.58$），single 不显著（$38.24$ vs $23.39$）。有三点旁证说明 seen 上主要靠“国家身份 $+$ 记住常见地点”：经度在国内几乎没有分辨力（$r=0.046$，不显著）；两个坐标的斜率都远小于 1（$0.115/0.027$），模型把同国地点往国家中心拉；验证样本到同国最近训练点的距离中位只有 $2.03^\circ$（$40/130<1^\circ$、$89/130<3^\circ$），oracle 基线相当于“查表 $+$ 近邻插值”，Jamaica 基线 MSE 只有 $0.01$ 就是地点几乎重合。稳健性：multi 去掉南极洲 2 条后结论不变（$115.87$ vs $65.24$）。
-
-\textbf{（4）结论：中等强度。}unseen 的 20 条预测整体落在对的区域（欧洲$\to$欧洲、中美$\to$中美），最差是 Mauritius $38.03^\circ$（经度从 $57.50$ 掉到 $19.49$）、Estonia/Russia $31.60^\circ$、Finland $24.53^\circ$，最好 Denmark $0.79^\circ$——失败模式和 Q6 一致。对 $+1024$ 要客观看：全局均值基线本身很弱，它只能说明“模型远不止一个全局平均”，不能说明“模型很精确”。所以综合判断是\textbf{中等强度}：强于“纯国家分类器”，弱于论文 [3] §5 那种神经元 $+$ 干预级别的证据（超出本实验范围）；与论文 §4.1 的 “weak evidence” 自评、课程 README “可解码 $\neq$ 生成时一定使用”的提醒一致。Q6 地图上经度和岛屿的大误差，正是 “relative position correct, absolute position often wrong” 的具体表现。
+\textbf{（3）结论：中等强度。}unseen 的预测整体落对区域（欧洲$\to$欧洲、中美$\to$中美），最差 Mauritius $38.03^\circ$、最好 Denmark $0.79^\circ$，失败模式与 Q6 一致（经度、岛屿）。综合看，证据强于“纯国家分类器”，弱于论文 [3] §5 的神经元 $+$ 干预级别，与论文 §4.1 的 “weak evidence” 自评、课程 README “可解码 $\neq$ 生成时一定使用” 的提醒一致；Q6 地图上经度和岛屿的大误差正是 “relative position correct, absolute position often wrong” 的具体表现。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{question/figures/q7_baseline_bars.pdf}
   \caption{模型 vs oracle 国家均值基线的分层 valid MSE。左：seen 国家按样本数分层；右：19 个训练未见国家。improvement $=$ 基线 $-$ 模型；误差棒为 paired bootstrap 95\% CI。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=\linewidth]{question/figures/q7_within_country.pdf}
-  \caption{同国内分辨力：73 条多样本国家样本相对该国训练均值的偏差（纬度 $r=0.20$ 弱显著，经度 $r=0.05$ ns）；右：美国 8 条样本真值$\to$预测箭头（方向大体正确、幅度收缩）。}
 \end{figure}
 
 \begin{figure}[htbp]
@@ -285,32 +250,22 @@
 
 \textbf{题面：}仔细阅读训练集和验证集，模型的训练集和验证集存在哪些分布上的差异？你是如何应对的？
 
-\textbf{（1）差异①：拼写噪声。}错误是形近错（mkaes$\to$makes 这种）。train 里有 $7.0\%$（$354/5088$）的句子带相邻字母交换型错拼，valid 有 $24.7\%$（$74/300$），约为 train 的 $3.5$ 倍。但在两类标签内都均衡（valid $25.3\%/24.0\%$、train $7.1\%/6.8\%$）。
+\textbf{（1）分布差异。}主要有三点。① \textbf{拼写噪声}：train 有 $7.0\%$（$354/5088$）的句子带相邻字母交换型错拼（mkaes$\to$makes 这种），valid 有 $24.7\%$（$74/300$），约为 train 的 $3.5$ 倍，但在两类标签内都均衡。② \textbf{主体新颖度}：valid 的 212 条可识别首实体中，164 条（\textbf{77.4\%}）在 train 里没出现过；从 train 随机抽 300 条做同样统计，零假设只有 $20.8\%\ [15.6,\ 25.6]$，valid 远在分布之外。③ \textbf{模板/长度}：train 特有的 “One can”/“If one” 句式约 $3.0\%$，valid 只剩 $0.7\%$；valid 的长句被截断（最长 $162$ vs $487$ 字符）。核心差异是“噪声 $+$ 新主体”。
 
-\textbf{（2）差异②：新出现的实体}valid 的 300 条里有 212 条能识别出首实体，其中 164 条（\textbf{77.4\%}）在 train 里没出现过。高频新实体比如 Dave Grohl（$\times8$）、Dwyane Wade（$\times7$）、The Offspring（$\times6$），在 train 都未出现。
+\textbf{（2）对模型的影响。}L20 总体 $0.8967$。带错拼的子集 $0.932\ [0.865,0.986]$，不比干净子集 $0.885\ [0.841,0.925]$ 差，差 $-0.047\ [-0.115,+0.024]$（CI 含 0）；主体 seen $0.917$ 对 unseen $0.884$，差 $+0.033\ [-0.063,+0.119]$，同样不显著——两类“难样本”都没有明显掉分。逐层看，错拼只在浅层造成伤害：L5–L11 的干净$-$错拼差为 $+5\sim7$pp，L17 起转负（L20 为 $-4.7$pp），说明文本噪声在中深层被平滑吸收了。
 
-\textbf{（3）差异③④：模板/长度}train 特有的情态否定句式在 valid 几乎消失：“One can” $129$ 条（$2.5\%$）对 valid $2$ 条，“If one” $24$ 条对 $0$ 条，合计约 $3.0\%$ 对 $0.7\%$；valid 的长句被截断（最长 $162$ 对 $487$ 字符）。valid 有 $20/130$ 条来自 19 个没见过的国家，$126/130$ 条地点字符串没在 train 出现，但多数在空间上仍然很近（$89/130$ 距同国最近训练点 $<3^\circ$），真正“又新又远”（$\ge3^\circ$）的只有 41 条——\textbf{字符串新不等于位置新}。truth 难在噪声 $+$ 新主体。
-
-\textbf{（4）对模型的影响。}L20 探针总体 $0.8967$。带错拼的子集 $0.932\ [0.865,0.986]$，不比干净子集 $0.885\ [0.841,0.925]$ 差，差 $-0.047\ [-0.115,+0.024]$（CI 含 0）；主体 seen $0.917\ [0.833,0.979]$ 对 unseen $0.884\ [0.835,0.933]$，差 $+0.033\ [-0.063,+0.119]$，同样不显著。typo$\times$主体四格的点估计排序是 clean$\times$unseen $<$ clean$\times$seen $<$ typo$\times$unseen $<$ typo$\times$seen，两个“难组”都没有明显掉分。稳健性：去掉 Grohl/Wade 两个重复家族后，typo 组仍有 $0.935$（$n=62$）；typo 子集的主体构成和 clean 接近。逐层看，错拼只在浅层造成伤害——L5–L11 的干净$-$错拼差为 $+5\sim7$pp，L17 起转负（L17 $-6.1$、L20 $-4.7$、L29 $-4.2$pp），说明文本噪声在中深层被平滑吸收了。小格子别过度解读：label$=0$ 的 typo 组 $0.972$、typo$\times$seen $1.000$ 的 $n$ 只有 8–36，CI 很宽。
-
-\textbf{（5）应对。}第一，读数方式：子集比较都配 bootstrap 95\% CI（$n=300$ 的单点差异约 $\pm3.5$pp、30 条子集约 $\pm10$pp），CI 跨 0 就不用来选层/选参；分层报告，不只看总 acc。第二，不向 valid 泄漏：层和超参来自扫描、分层训练报告和配对检验，训练预算固定，不按 valid 早停。第三，文本不清洗：特征直接从原始文本（含错拼）前向——如果清洗 train 侧的错拼，train（$7.0\%$）和 valid（$24.7\%$）的口径反而更不一致，而且部署时同样要面对噪声；选深层本身就是抗噪手段。所以 valid 指标是“OOD $+$ 加噪”的保守口径。作为同分布对照，train 内部做了 3 折 CV（L20、和仓库 \texttt{model.py} 同配置、$n=3785$）：随机划分 acc $0.869$（std $\approx0.010$），按主体分组 $0.877$（std $\approx0.004$，测试折主体 $100\%$ 未见对随机 $38\%$），差 $-0.8$pp，在折间噪声内——说明\textbf{L20 探针不依赖“记住主体”}，valid 的 $0.8967$ 没有被主体新颖度注水（CV 每折训练量比最终模型少、测试折来自 train 分布，不能和 valid 直接相减）。
+\textbf{（3）应对。}第一，读数方式：子集比较都配 bootstrap 95\% CI（$n=300$ 的单点差异约 $\pm3.5$pp），CI 跨 0 就不用它们来选层/选参，并分层报告而不是只看总 acc。第二，不向 valid 泄漏：层和超参来自扫描、配对检验，训练预算固定，不按 valid 早停。第三，文本不清洗：特征直接从原始文本（含错拼）前向——如果清洗 train 侧的错拼，train（$7.0\%$）和 valid（$24.7\%$）的口径反而更不一致，而且部署时同样要面对噪声；选深层本身就是抗噪手段。作为同分布对照，train 内部做了 3 折 CV（L20、和 \texttt{model.py} 同配置、$n=3785$）：随机划分 acc $0.869$，按主体分组 $0.877$，差 $-0.8$pp 在折间噪声内——说明 L20 探针不依赖“记住主体”，valid 的 $0.8967$ 没有被主体新颖度注水；valid 指标因此是“OOD $+$ 加噪”的保守口径。
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{question/figures/q8_split_diff.pdf}
-  \caption{分布差异总览：(a) 拼写噪声 valid $\approx$3.5$\times$ train；(b) 主体新颖度 77.4\% 远在零假设分布之外；(c) 长度 ECDF 与模板差异；(d) world 对照——字符串新颖而非空间新颖。}
+  \caption{分布差异总览：(a) 拼写噪声 valid $\approx$3.5$\times$ train；(b) 主体新颖度 77.4\% 远在零假设分布之外；(c) 长度 ECDF 与模板差异。}
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=\linewidth]{question/figures/q8_stratified_acc.pdf}
   \caption{L20 探针在 OOD valid 上的分层表现：(a) 主分层准确率；(b) typo $\times$ 主体交叉；(c) 13 层探针的 typo 敏感度。}
-\end{figure}
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics[width=0.85\linewidth]{question/figures/q8_cv_gap.pdf}
-  \caption{train 内部 3 折 CV 对照（L20、仓库 model.py 同配置、n$=$3785）：随机 vs 按主体分组划分（测试折主体未见比例 38\% vs 100\%）的 held-out 准确率——均值 0.869 vs 0.877（差 $-0.8$pp，在折间噪声内）；灰点线为实际 valid 0.8967。两种划分口径几乎无差 $\Rightarrow$ L20 探针不依赖主体记忆。}
 \end{figure}
 
 
