@@ -1,8 +1,8 @@
 # Q7 逐图解释说明
 
 > 题目：从训练集和验证集的表现，是否能够强烈说明模型内部存在地理坐标的表征，而不是仅仅识别了输入中的国家？可参考原始论文 [3]（Gurnee & Tegmark, *Language Models Represent Space and Time*, ICLR 2024）的部分结论和 Q6 的可视化结果；也可与按训练集国家分组的平均坐标基线比较，考察同一国家内不同地点的预测。
-> 本文档记录 3 张 `q7_*` 图：**画的是什么 / 关键读数 / 证明了什么 / 报告怎么用**，供写 LaTeX 报告时直接取材。
-> 读数口径：模型 = world raw L11 历史最优探针（同 Q6：`results/slurm_layers/world/weights/world_layer11_extra0/weights.npz`，standardize=false，推理时**不再 z-score**）；pred = X·wᵀ + b，目标列序 (latitude, longitude)；MSE = 两坐标平方误差平均（与训练管线 `train23.load_split` 一致）。基线 = **oracle 国家均值**：每国取**训练集**该国坐标均值，用**真实国家标签**查找（oracle 对基线有利——baseline 多出"真国家标签"信息），训练集未见国家回落全局均值 (15.67, 12.59)，其 MSE = **3311.27**（与 Q6 报告的元素平均口径锚点一致）。improvement = MSE_base − MSE_model（>0 表示模型更好），全部 CI 为 paired bootstrap（10k 重抽，seed 0，元素平均口径）。全部读数由 `code/q7_country_baseline.py` 打印、一键复现。
+> 本文档记录 3 张 `q7_*` 图：**画的是什么 / 关键读数 / 证明了什么 / 报告怎么用**，供写 LaTeX 报告时直接取材。2026-10-21 起报告正文只保留 `q7_baseline_bars` 与 `q7_unseen_map` 两张，`q7_within_country` 不再放入报告（其读数已压缩进正文一句话，本文件仍保留完整记录备查）。
+> 读数口径：模型 = world raw L11 历史最优探针（同 Q6：`results/slurm_layers/world/weights/world_layer11_extra0/weights.npz`，standardize=false，推理时**不再 z-score**）；pred = X·wᵀ + b，目标列序 (latitude, longitude)；MSE = 两坐标平方误差平均（与训练管线 `train23.load_split` 一致）。基线 = **oracle 国家均值**：每国取**训练集**该国坐标均值，用**真实国家标签**查找（oracle 对基线有利——baseline 多出"真国家标签"信息），训练集未见国家回落全局均值 (15.67, 12.59)，其 MSE = **3311.27**（与 Q6 报告的元素平均口径锚点一致）。improvement = MSE_base − MSE_model（>0 表示模型更好）；全部 CI 为 paired bootstrap（10k 重抽，seed 0，元素平均口径），仅脚本内部计算，**2026-10-21 起报告正文与 Q7 图中不展示任何置信区间**。全部读数由 `code/q7_country_baseline.py` 打印、一键复现。
 > 分层集合：all 130 / **seen** 110（训练集中出现过的国家）/ **multi** 73（seen 中同国 ≥2 条 valid）/ **single** 37（seen 中独苗）/ **unseen** 20（19 个训练集未出现的国家；Costa Rica 2 条）。valid 30 国家中除 Costa Rica 外未见国家均只有 1 条。
 > 维护约定：每完成一批绘图，在 `figures/` 下新建一份 `<题号>_figure_notes.md`，格式同本文与 `q2/q3/q6_figure_notes.md`。
 
@@ -11,7 +11,7 @@
 | 图 | 一句话 | 回答的内容 |
 |---|---|---|
 | `q7_baseline_bars` | 模型 vs oracle 国家均值基线的分层 MSE 对比（左：seen 四集合；右：unseen vs 全局均值） | 模型表现是否只是"识别国家 + 查该国平均坐标" |
-| `q7_within_country` | 同国中心化散点（lat / lon）+ US 地图放大（n=8，真值→预测箭头） | 同一国家内部不同地点能否被区分 |
+| `q7_within_country` | 同国中心化散点（lat / lon）+ US 地图放大（n=8，真值→预测箭头） | 同一国家内部不同地点能否被区分（**报告已不插图**，r 值写进正文） |
 | `q7_unseen_map` | 训练集未见国家的 20 条样本全球地图（真值→预测箭头，标注最差 3 国） | "查表不可能"时模型还剩多少定位能力 |
 
 一句话主线：**"仅识别国家"不足以解释全部表现**——未见国家样本上模型大幅胜过全局均值基线（improvement +1024 [514, 1654]，查表不可能），同国内**纬度**差异有弱但显著的跟踪（r=0.201 [0.021, 0.389]）；**但精细的国内定位很弱**——经度国内相关≈0（r=0.046，ns），seen 国家上 oracle 国家均值反而反超模型（−35.1 [−60.9, −7.1]），且验证集地点与训练集高度重叠（89/130 在 3° 内）使"记住常见地点"也能取得好成绩。综合证据强度为**中等**，与论文 §4.1 对同类 block-holdout 实验的自评 "*weak evidence*" 一致；"模型生成时确实使用该表征"的强证据（论文 §5 神经元/干预）超出本实验范围。
@@ -42,8 +42,8 @@
 3. Q6 的"大洲级精度"在此得到量化基线佐证：oracle 基线在全球尺度上就相当于"知道国家质心"，模型 all-130 上胜之 +127.8，主要来自它能处理未见国家。
 
 **报告怎么用**：Q7 正文第一层证据（量化表）；讨论"seen 上 oracle 反超"与"unseen 大胜"并存的张力，并给出数据重叠解释。
-图注候选（中文）：*"模型（world raw L11 探针）与 oracle 国家均值基线的 valid MSE 对比。左：训练集出现过的国家按样本数分层；右：19 个训练集未见国家（20 条）。improvement = 基线 MSE − 模型 MSE（>0 模型更好），误差棒为 paired bootstrap 95% CI。"*
-图注候选（English）：*"Valid MSE of the probe vs an oracle country-mean baseline (per-country train mean, looked up with true country labels). Left: countries seen in training, stratified by sample count; right: the 19 countries absent from training (20 samples). Improvement = baseline MSE − model MSE (positive: model better); whiskers are paired-bootstrap 95% CIs."*
+图注候选（中文）：*"模型（world raw L11 探针）与 oracle 国家均值基线的 valid MSE 对比。左：训练集出现过的国家按样本数分层；右：19 个训练集未见国家（20 条）。improvement = 基线 MSE − 模型 MSE（>0 模型更好）。"*
+图注候选（English）：*"Valid MSE of the probe vs an oracle country-mean baseline (per-country train mean, looked up with true country labels). Left: countries seen in training, stratified by sample count; right: the 19 countries absent from training (20 samples). Improvement = baseline MSE − model MSE (positive: model better)."*
 
 ---
 

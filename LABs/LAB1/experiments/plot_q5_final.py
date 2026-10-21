@@ -1,4 +1,4 @@
-"""Q5 figure: raw L11 sweeps behind the submitted weights, plus std L11 lambda1 diagnostic."""
+"""Q5 figure: raw L11 sweeps behind the submitted weights (lr, epochs, lambda1, lambda2)."""
 
 import json
 import sys
@@ -15,7 +15,7 @@ import plot_grid as pg
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW_RESULTS = ROOT / "results/slurm_grid/20261009_115559_88653/results.json"
-LAMBDA1_RESULTS = ROOT / "results/q5_grid/lambda1_results.json"
+LAMBDA1_RESULTS = ROOT / "results/q5_grid/raw_lambda1_results.json"
 OUT_DIR = ROOT / "results/q5_grid/plots"
 
 KEEP_RAW_GROUPS = {"world_lr", "world_epochs", "world_lambda2"}
@@ -34,7 +34,7 @@ def main() -> None:
     for rec in lambda1:
         if rec.get("task") == "world":
             rec = dict(rec)
-            rec["data_tag"] = "std L11 (diagnostic)"
+            rec["data_tag"] = "raw L11 (final)"
             records.append(rec)
 
     by_vary = {}
@@ -61,7 +61,7 @@ def main() -> None:
 
     pg.draw_panel(ax_epochs, by_vary["epochs"])
     pg.draw_panel(ax_l1, by_vary["lambda1"], mark_best=False)
-    ax_l1.set_title("L1 coefficient (λ1, std diagnostic)", fontsize=10)
+    ax_l1.set_title("L1 coefficient (λ1)", fontsize=10)
     l1_values = sorted({rec["lambda1"] for rec in by_vary["lambda1"]})
     x_keep = l1_values.index(0.001)
     y_keep = next(rec["metric"] for rec in by_vary["lambda1"] if rec["lambda1"] == 0.001)
@@ -76,22 +76,19 @@ def main() -> None:
         zorder=7,
     )
     ax_l1.text(
-        0.03,
-        0.05,
-        "green diamond: kept λ1=0.001\n(paired CI spans 0)",
+        0.5,
+        0.45,
+        "green diamond: kept λ1=0.001\nλ1=0 gives 150.419 (−0.008)",
         transform=ax_l1.transAxes,
-        ha="left",
-        va="bottom",
+        ha="center",
+        va="center",
         fontsize=7,
         color="green",
     )
 
     pg.draw_panel(ax_l2, by_vary["lambda2"])
 
-    fig.suptitle(
-        "world L11 final config: raw sweeps (λ1 panel: std diagnostic)",
-        fontsize=12,
-    )
+    fig.suptitle("world L11 final config: raw sweeps", fontsize=12)
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     for path in pg.save_figure(fig, OUT_DIR / "world_grid"):
         print(path)

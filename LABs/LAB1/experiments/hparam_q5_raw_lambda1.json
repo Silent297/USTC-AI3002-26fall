@@ -1,0 +1,24 @@
+{
+  "_readme": [
+    "Q5 补充：提交配置下的 raw L11 lambda1 扫描。",
+    "固定 lr=5e-4、epochs=2000、lambda2=0.1（即最终提交配置），只变 lambda1。",
+    "运行：python experiments/run_grid.py --config experiments/hparam_q5_raw_lambda1.json --groups world_raw_lambda1 --out results/q5_grid/raw_lambda1_results.json"
+  ],
+  "base": {
+    "lr": 0.0005,
+    "epochs": 2000,
+    "lambda1": 0.001,
+    "lambda2": 0.1
+  },
+  "groups": [
+    {
+      "name": "world_raw_lambda1",
+      "task": "world",
+      "layer": 11,
+      "standardize": false,
+      "note": "Q5 raw L11 最终配置下 lambda1 的影响，其余固定",
+      "fixed": {"lr": 0.0005, "epochs": 2000, "lambda2": 0.1},
+      "vary": {"lambda1": [0.0, 0.001, 0.01, 0.1]}
+    }
+  ]
+}

@@ -297,11 +297,11 @@ def fig_cv_curves(world, truth):
         cv_sd = [r["cv"][metric]["std_fold"] for r in res["records"]]
         valid = [r["valid"][valid_key] for r in res["records"]]
         ax.plot(x, train, ":", color="0.55", marker=".", markersize=4,
-                linewidth=1.2, label="train, in-sample (A1)")
+                linewidth=1.2, label="train, in-sample")
         ax.errorbar(x, cv, yerr=cv_sd, color="tab:blue", marker="o", markersize=4,
                     capsize=2.5, linewidth=1.4, label="5-fold CV, OOF (3 repeats)")
         ax.plot(x, valid, "--", color="tab:orange", marker="s", markersize=4,
-                linewidth=1.4, label="valid, OOD (A1 protocol)")
+                linewidth=1.4, label="valid, OOD (single-split protocol)")
         if logy:
             ax.set_yscale("log")
         cv_best = int(np.argmin(cv) if lower else np.argmax(cv))
@@ -316,7 +316,7 @@ def fig_cv_curves(world, truth):
         ax.set_xlabel("layer", fontsize=9)
         ax.grid(alpha=0.25, linewidth=0.6)
         ax.legend(fontsize=7.5, loc="best")
-    fig.suptitle("A7: 5-fold CV on train vs the single train/valid split "
+    fig.suptitle("5-fold CV on train vs the single train/valid split "
                  "(same closed-form protocol; CV z-scored per fold)", fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     fig.savefig(FIG / "a7_cv_curves.png", dpi=150)
@@ -348,7 +348,7 @@ def fig_cv_vs_valid(world, truth):
         ax.set_xlabel(xlabel, fontsize=9)
         ax.set_ylabel(ylabel, fontsize=9)
         ax.grid(alpha=0.25, linewidth=0.6)
-    fig.suptitle("A7: layer rankings under CV vs the OOD valid split across 13 layers",
+    fig.suptitle("layer rankings under CV vs the OOD valid split across 13 layers",
                  fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.92))
     fig.savefig(FIG / "a7_cv_vs_valid.png", dpi=150)
@@ -377,7 +377,7 @@ def fig_fold_stability(world, truth):
                       fontsize=6.5, rotation=0)
         ax.set_title(title, fontsize=9.5)
         fig.colorbar(im, ax=ax, shrink=0.85, pad=0.015, label="rank")
-    fig.suptitle("A7: fold-level layer-ranking stability (○ = fold winner; "
+    fig.suptitle("fold-level layer-ranking stability (○ = fold winner; "
                  "white lines separate the 3 repeats)", fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.95))
     fig.savefig(FIG / "a7_fold_stability.png", dpi=150)
@@ -447,7 +447,7 @@ def fig_world_error_tails(world_res, world_data):
         ax.legend(fontsize=7, loc="upper left")
     axes[0].set_title("squared error: heavy tails drive the mean", fontsize=9.5)
     axes[1].set_title("great-circle distance: typical cases agree", fontsize=9.5)
-    fig.suptitle("A7 world: CV vs valid per-sample errors (solid = CV OOF, dashed = valid; "
+    fig.suptitle("world: CV vs valid per-sample errors (solid = CV OOF, dashed = valid; "
                  f"L{sel['cv_best_layer']} = CV best, L{sel['valid_best_layer']} = valid best)",
                  fontsize=10)
     fig.tight_layout(rect=(0, 0, 1, 0.94))

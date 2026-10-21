@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-10-16T04:14:45Z",
-  "run_dir": "C:\\Users\\35150\\Desktop\\USTC-AI3002-26fall\\LABs\\LAB1\\results\\slurm_qwen_direct\\qwen_direct_v1",
+  "generated_utc": "2026-10-21T11:03:47Z",
+  "run_dir": "results/slurm_qwen_direct/qwen_direct_v1",
   "run_meta": {
     "argv": [
       "experiments/C1/c1_qwen_direct.py",

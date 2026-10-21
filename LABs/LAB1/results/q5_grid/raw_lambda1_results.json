@@ -1,0 +1,62 @@
+[
+  {
+    "group": "world_raw_lambda1",
+    "task": "world",
+    "layer": 11,
+    "vary": "lambda1",
+    "lambda1": 0.0,
+    "standardize": false,
+    "lr": 0.0005,
+    "epochs": 2000,
+    "lambda2": 0.1,
+    "metric_name": "mse",
+    "metric": 150.4193398020812,
+    "finite": true,
+    "seconds": 25.13
+  },
+  {
+    "group": "world_raw_lambda1",
+    "task": "world",
+    "layer": 11,
+    "vary": "lambda1",
+    "lambda1": 0.001,
+    "standardize": false,
+    "lr": 0.0005,
+    "epochs": 2000,
+    "lambda2": 0.1,
+    "metric_name": "mse",
+    "metric": 150.42772354798632,
+    "finite": true,
+    "seconds": 20.94
+  },
+  {
+    "group": "world_raw_lambda1",
+    "task": "world",
+    "layer": 11,
+    "vary": "lambda1",
+    "lambda1": 0.01,
+    "standardize": false,
+    "lr": 0.0005,
+    "epochs": 2000,
+    "lambda2": 0.1,
+    "metric_name": "mse",
+    "metric": 150.51342924610123,
+    "finite": true,
+    "seconds": 26.49
+  },
+  {
+    "group": "world_raw_lambda1",
+    "task": "world",
+    "layer": 11,
+    "vary": "lambda1",
+    "lambda1": 0.1,
+    "standardize": false,
+    "lr": 0.0005,
+    "epochs": 2000,
+    "lambda2": 0.1,
+    "metric_name": "mse",
+    "metric": 152.11449563896704,
+    "finite": true,
+    "seconds": 28.55
+  }
+]

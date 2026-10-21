@@ -10,7 +10,7 @@
   未见国家（train 无此国）退化为全局均值兜底；全局均值基线另算。
 
 分析集合：all 130 / seen 110 / multi(同国≥2条 valid) 73 / single 37 / unseen 20（19 国，Costa Rica 2 条）。
-配对 bootstrap（10k）给出 MSE 改善的 95% CI。
+配对 bootstrap（10k）用于比较，报告不计置信区间。
 同国内：以“该国 train 均值”为中心化，考察 Δpred 与 Δtrue 的相关（仅识别国家应为 0）。
 未见国家：查表式基线无从解释，单独报告。
 
@@ -165,7 +165,7 @@ axL.bar(xs + 0.18, bb, width=0.34, color=BLUE, label="oracle country-mean baseli
 for x, (a, b2) in enumerate(zip(mm, bb)):
     axL.text(x - 0.18, a + 4, f"{a:.0f}", ha="center", fontsize=8.5)
     axL.text(x + 0.18, b2 + 4, f"{b2:.0f}", ha="center", fontsize=8.5)
-    axL.text(x, min(a, b2) * 0.5, f"improvement\n{b2 - a:.0f} [{rows[x][6]:.0f},{rows[x][7]:.0f}]",
+    axL.text(x, min(a, b2) * 0.5, f"improvement\n{b2 - a:.0f}",
              ha="center", fontsize=8, color="0.25")
 axL.set_xticks(xs)
 axL.set_xticklabels([n.replace(" ", "\n", 1) for n in names], fontsize=9)
@@ -178,7 +178,7 @@ axR.bar([0 - 0.18], [r5[2]], width=0.34, color=RED)
 axR.bar([0 + 0.18], [r5[3]], width=0.34, color=GRAY, label="global-mean baseline")
 axR.text(-0.18, r5[2] * 1.03, f"{r5[2]:.0f}", ha="center", fontsize=9)
 axR.text(0.18, r5[3] * 1.03, f"{r5[3]:.0f}", ha="center", fontsize=9)
-axR.text(0, r5[3] * 0.55, f"improvement\n{r5[5]:.0f} [{r5[6]:.0f},{r5[7]:.0f}]", ha="center",
+axR.text(0, r5[3] * 0.55, f"improvement\n{r5[5]:.0f}", ha="center",
          fontsize=8, color="0.25")
 n_uns, n_uns_c = int((~seen).sum()), int(va.loc[~seen, "country"].nunique())
 axR.set_xticks([0])
@@ -258,7 +258,7 @@ for i in worst:
 r5 = rows[4]
 ax.set_title(f"Q7: valid samples from countries absent in training (n={int(un.sum())})\n"
              f"model MSE = {r5[2]:.0f} vs global-mean baseline {r5[3]:.0f} "
-             f"(improvement +{r5[5]:.0f} [{r5[6]:.0f},{r5[7]:.0f}], paired bootstrap)",
+             f"(improvement +{r5[5]:.0f})",
              fontsize=11)
 ax.legend(loc="lower left", fontsize=9, framealpha=0.9)
 fig.tight_layout()

@@ -255,7 +255,7 @@ def fig_distance_cdf(fig_dir, direct_distances, probe_distances):
     ax.set_ylim(0, 1.02)
     ax.set_xlabel("great-circle distance to ground truth (km, log scale)")
     ax.set_ylabel("empirical CDF")
-    ax.set_title("C1: positioning error CDF - Qwen direct output vs linear probe")
+    ax.set_title("Positioning error CDF: Qwen direct output vs linear probe")
     ax.grid(True, which="both", alpha=0.3)
     ax.legend(loc="lower right", fontsize=8.5)
     fig.tight_layout()
@@ -307,7 +307,7 @@ def fig_valid_map(fig_dir, valid_records, valid_distances, top_items):
 
     n_valid = len(subset)
     median_km = float(np.median(distances))
-    ax.set_title(f"C1: Qwen3-4B-Base direct coordinates on world valid "
+    ax.set_title(f"Qwen3-4B-Base direct coordinates on world valid "
                  f"(n={n_valid}/130 valid; median {median_km:.1f} km)\n"
                  f"hollow circles = truth; dots = prediction, colored by great-circle distance; top-5 errors annotated",
                  fontsize=11)
@@ -381,7 +381,7 @@ def fig_metric_bars(fig_dir, metrics, probe_stats):
     ax.set_title("great-circle distance (km, log scale)", fontsize=10)
     ax.legend(fontsize=7.5, loc="upper left")
 
-    fig.suptitle("C1: Qwen3-4B-Base direct output vs reference/probe (classmate report numbers are unofficial)", fontsize=10.5)
+    fig.suptitle("Qwen3-4B-Base direct output vs reference/probe (classmate report numbers are unofficial)", fontsize=10.5)
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     fig.savefig(fig_dir / "c1_metric_bars.png", dpi=150)
     fig.savefig(fig_dir / "c1_metric_bars.pdf")

@@ -3,16 +3,14 @@
 
 题面：仔细阅读训练集和验证集，模型的训练集和验证集存在哪些分布上的差异？你是如何应对的？
 
-对象：truth（主）train 5088 / valid 300 句真假分类（句尾 token 表征）；world（对照）train 500 / valid 130。
+对象：truth train 5088 / valid 300 句真假分类（句尾 token 表征）。
 
 [1] 分布差异（数字全部重算）：
     D1 噪声：相邻字母交换型错拼（typo）句率，truth train ~7% vs valid ~25%；
     D2 主体新颖度：valid 首实体（lead entity）未在 train 出现过的占比 ~77%，
        零假设 = 从 train 随机抽 300 条做同样统计（200 次重抽）~21% [15.6, 25.6]；
        稳健性 = "typo 落在主体内"的句子逐条核查（仅数行，修正后多数仍新颖）；
-    D3 模板/长度：train 含 "One can"/"If one" 句式 ~3.0% vs valid ~0.3%；句长上限 487 vs 162；
-    D4 world 对照：无错拼差异；20/130 来自 train 未见国家、126/130 地点字符串未见过
-       （但多数距同国训练点 <3°，字符串新颖 != 空间新颖）。
+    D3 模板/长度：train 含 "One can"/"If one" 句式 ~3.0% vs valid ~0.3%；句长上限 487 vs 162。
 
 [2] 探针分层评估：最终模型 truth L20 探针（锚点 valid acc 0.8967），
     在 valid 上按 typo x 主体见/未见 x 标签 分层，bootstrap 95% CI；
@@ -52,8 +50,6 @@ sp = SpellChecker(distance=1)
 
 TTR = pd.read_csv(ROOT / "datasets/truth/train.csv")
 TVA = pd.read_csv(ROOT / "datasets/truth/valid.csv")
-WTR = pd.read_csv(ROOT / "datasets/world/train.csv")
-WVA = pd.read_csv(ROOT / "datasets/world/valid.csv")
 
 LAYERS = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 34, 35]
 EXP_ACC = {2: 0.5667, 5: 0.5933, 8: 0.6567, 11: 0.7400, 14: 0.7900, 17: 0.8733,
@@ -152,11 +148,9 @@ def diff_ci(c1, c2, n=N_BOOT):
 
 # ================= [1] 分布差异 =================
 print("=" * 78)
-print("[1] train/valid distribution differences (truth primary, world contrast)")
+print("[1] train/valid distribution differences (truth)")
 f_tr, ty_tr, hits_tr = detect_typos(TTR)
 f_va, ty_va, hits_va = detect_typos(TVA)
-fw_tr, tyw_tr, _ = detect_typos(WTR)
-fw_va, tyw_va, _ = detect_typos(WVA)
 
 lab_tr = TTR["label"].to_numpy()
 lab_va = TVA["label"].to_numpy()
@@ -170,10 +164,6 @@ print("  truth train typo types (first 12):",
       ", ".join(f"{w}->{s}" for w, s in list(ty_tr.items())[:12]))
 print("  truth valid typo types (first 12):",
       ", ".join(f"{w}->{s}" for w, s in list(ty_va.items())[:12]))
-print(f"  world typo sentences: train {fw_tr.sum()}/{len(WTR)} ({100 * fw_tr.mean():.1f}%) | "
-      f"valid {fw_va.sum()}/{len(WVA)} ({100 * fw_va.mean():.1f}%)")
-for i in np.where(fw_tr)[0][:2]:
-    print(f"    (world train flag: {WTR['sentence'].iloc[i]})")
 for i in np.where(f_va)[0][:5]:
     print(f"    (truth valid example: {TVA['sentence'].iloc[i]})")
 
@@ -230,28 +220,6 @@ Ltr = TTR.sentence.str.len().to_numpy()
 Lva = TVA.sentence.str.len().to_numpy()
 print(f"       length: train mean {Ltr.mean():.1f} p95 {np.percentile(Ltr, 95):.0f} max {Ltr.max()} | "
       f"valid mean {Lva.mean():.1f} p95 {np.percentile(Lva, 95):.0f} max {Lva.max()}")
-
-# D4 world 对照
-wp_re = re.compile(r"^What's the longitude and latitude of (.+?), (.+)\?$")
-tr_places = {wp_re.match(s).group(1) for s in WTR.sentence if wp_re.match(s)}
-va_places = [wp_re.match(s).group(1) if wp_re.match(s) else None for s in WVA.sentence]
-print(f"\n  [D4] world template match: train {sum(1 for s in WTR.sentence if wp_re.match(s))}/{len(WTR)} "
-      f"| valid {sum(1 for p in va_places if p)}/{len(WVA)}")
-tr_countries = set(WTR["country"])
-new_ctry = (~WVA["country"].isin(tr_countries)).to_numpy()
-new_place = np.array([p is not None and p not in tr_places for p in va_places])
-# 到同国最近训练点的距离（q7 口径）
-tr_coords = WTR[["latitude", "longitude"]].to_numpy()
-grp = {c: g[["latitude", "longitude"]].to_numpy()
-       for c, g in WTR.groupby("country")}
-va_coords = WVA[["latitude", "longitude"]].to_numpy()
-nn_d = np.empty(len(WVA))
-for i in range(len(WVA)):
-    pool = grp.get(WVA["country"].iloc[i], tr_coords)
-    nn_d[i] = np.sqrt(((pool - va_coords[i]) ** 2).sum(1)).min()
-newfar = new_place & (nn_d >= 3)
-print(f"       new country: {new_ctry.sum()}/{len(WVA)} | new place string: {new_place.sum()}/{len(WVA)}"
-      f" | new string AND >=3 deg from same-country train point: {newfar.sum()}")
 
 # ================= [2] L20 探针分层评估 =================
 print("\n" + "=" * 78)
@@ -391,22 +359,21 @@ if not skip_cv:
     print(f"  gap random - grouped = {np.mean([r['test_acc'] for r in cv_random]) - np.mean([r['test_acc'] for r in cv_grouped]):+.4f}")
 
 # ================= 图 1：分布差异 =================
-fig, axes = plt.subplots(2, 2, figsize=(12.8, 8.4))
+fig, axes = plt.subplots(1, 3, figsize=(13.4, 4.3))
 
-ax = axes[0, 0]
-vals = [100 * f_tr.mean(), 100 * f_va.mean(), 100 * fw_tr.mean(), 100 * fw_va.mean()]
-ns = [(f_tr.sum(), len(TTR)), (f_va.sum(), len(TVA)), (fw_tr.sum(), len(WTR)), (fw_va.sum(), len(WVA))]
-cols = [GRAY, RED, GRAY, RED]
-ax.bar(range(4), vals, color=cols, width=0.62)
+ax = axes[0]
+vals = [100 * f_tr.mean(), 100 * f_va.mean()]
+ns = [(f_tr.sum(), len(TTR)), (f_va.sum(), len(TVA))]
+ax.bar(range(2), vals, color=[GRAY, RED], width=0.5)
 for x, (v, n) in enumerate(zip(vals, ns)):
     ax.text(x, v + 0.7, f"{v:.1f}%\n{n[0]}/{n[1]}", ha="center", fontsize=9)
-ax.set_xticks(range(4))
-ax.set_xticklabels(["truth\ntrain", "truth\nvalid", "world\ntrain", "world\nvalid"], fontsize=9)
-ax.set_ylabel("% sentences with a transposition typo")
-ax.set_ylim(0, max(vals) * 1.28)
-ax.set_title("(a) misspelling noise: truth valid ~3.5x train", fontsize=10)
+ax.set_xticks(range(2))
+ax.set_xticklabels(["train", "valid"], fontsize=9)
+ax.set_ylabel("% sentences with a transposition typo", fontsize=11)
+ax.set_ylim(0, max(vals) * 1.35)
+ax.set_title("(a) misspelling noise: valid ~3.5x train", fontsize=12)
 
-ax = axes[0, 1]
+ax = axes[1]
 ax.hist(100 * null_fracs, bins=18, color=BLUE, alpha=0.75,
         label=f"null: random 300 of train\n({N_REP} reps)")
 ax.axvline(100 * frac_va, color=RED, lw=2.2, label=f"truth valid: {100 * frac_va:.1f}%")
@@ -414,12 +381,12 @@ if abs(frac_va_adj - frac_va) > 1e-9:
     ax.axvline(100 * frac_va_adj, color=RED, lw=1.4, ls=":",
                label=f"valid, subject-typo adjusted: {100 * frac_va_adj:.1f}%")
 ax.axvline(100 * nh, color="0.35", lw=1.1, ls="--", label=f"null 97.5% = {100 * nh:.1f}%")
-ax.set_xlabel("% samples with lead entity unseen in train")
-ax.set_ylabel("reps")
-ax.set_title("(b) subject novelty far beyond the null", fontsize=10)
+ax.set_xlabel("% samples with lead entity unseen in train", fontsize=10)
+ax.set_ylabel("reps", fontsize=10)
+ax.set_title("(b) subject novelty far beyond the null", fontsize=12)
 ax.legend(fontsize=8)
 
-ax = axes[1, 0]
+ax = axes[2]
 for df, c, nm in [(TTR, GRAY, "train"), (TVA, RED, "valid")]:
     L = np.sort(df.sentence.str.len().to_numpy())
     ax.plot(L, np.arange(1, len(L) + 1) / len(L), color=c, lw=1.6, label=f"{nm} (max {L.max()})")
@@ -427,26 +394,14 @@ for tmpl, c in [("One can", BLUE), ("If one", ORANGE)]:
     k = int(TTR.sentence.str.contains(tmpl).sum())
     kv = int(TVA.sentence.str.contains(tmpl).sum())
     ax.plot([], [], color=c, lw=1.4, label=f"'{tmpl}': train {k} vs valid {kv}")
-ax.set_xlabel("sentence length (characters)")
-ax.set_ylabel("ECDF")
+ax.set_xlabel("sentence length (characters)", fontsize=10)
+ax.set_ylabel("ECDF", fontsize=10)
 ax.set_xlim(0, 500)
-ax.set_title("(c) length ECDF + template skew", fontsize=10)
-ax.legend(fontsize=8)
-
-ax = axes[1, 1]
-v4 = [int(new_ctry.sum()), int(new_place.sum()), int(newfar.sum())]
-ax.bar(range(3), v4, color=[RED, BLUE, ORANGE], width=0.58)
-for x, v in enumerate(v4):
-    ax.text(x, v + 2, str(v), ha="center", fontsize=10)
-ax.set_xticks(range(3))
-ax.set_xticklabels(["new country\n(absent in train)", "new place string\n(exact match)",
-                    "new string &\n>3$^\\circ$ from any same-\ncountry train point"], fontsize=8.5)
-ax.set_ylabel("valid samples (of 130)")
-ax.set_ylim(0, 145)
-ax.set_title("(d) world: string novelty, not spatial", fontsize=10)
+ax.set_title("(c) length ECDF + template skew", fontsize=12)
+ax.legend(fontsize=9)
 
 fig.suptitle("Q8: train vs valid distribution differences", fontsize=12.5)
-fig.tight_layout(rect=(0, 0, 1, 0.97))
+fig.tight_layout(rect=(0, 0, 1, 0.94))
 fig.savefig(FIG / "q8_split_diff.png", dpi=150)
 fig.savefig(FIG / "q8_split_diff.pdf")
 
@@ -456,12 +411,8 @@ ax = fig.add_subplot(1, 3, 1)
 main = ["all", "clean", "typo", "subject seen", "subject unseen", "subject n/a"]
 xs = np.arange(len(main))
 acs = [strata_res[m][1] for m in main]
-los = [strata_res[m][2] for m in main]
-his = [strata_res[m][3] for m in main]
 cMap = {m: c for m, _, c in strata}
 ax.bar(xs, acs, color=[cMap[m] for m in main], width=0.66)
-ax.errorbar(xs, acs, yerr=[np.array(acs) - np.array(los), np.array(his) - np.array(acs)],
-            fmt="none", ecolor="k", capsize=3, lw=1)
 for x, m in zip(xs, main):
     n, a = strata_res[m][0], strata_res[m][1]
     ax.text(x, min(a + 0.03, 1.045), f"{a:.3f}", ha="center", fontsize=8.5)
@@ -471,15 +422,12 @@ ax.set_xticks(xs)
 ax.set_xticklabels([m.replace(" ", "\n", 1) for m in main], fontsize=8)
 ax.set_ylim(0.6, 1.1)
 ax.set_ylabel("valid accuracy (L20 probe)")
-ax.set_title("(a) stratified accuracy (bootstrap 95% CI)", fontsize=10)
+ax.set_title("(a) stratified accuracy", fontsize=10)
 ax.legend(fontsize=7.5, loc="lower right")
 
 ax = fig.add_subplot(1, 3, 2)
 xs = np.arange(len(cross_res))
 ax.bar(xs, [r[2] for r in cross_res], color=[r[5] for r in cross_res], width=0.62)
-ax.errorbar(xs, [r[2] for r in cross_res],
-            yerr=[[r[2] - r[3] for r in cross_res], [r[4] - r[2] for r in cross_res]],
-            fmt="none", ecolor="k", capsize=3, lw=1)
 for x, r in zip(xs, cross_res):
     ax.text(x, min(r[2] + 0.03, 1.045), f"{r[2]:.3f}", ha="center", fontsize=8.5)
     ax.text(x, 1.065, f"n={r[1]}", ha="center", fontsize=8, color="0.25")
@@ -495,10 +443,6 @@ ax = fig.add_subplot(1, 3, 3)
 xi = np.arange(len(LAYERS))
 a_c = np.array([per_layer[L][1] for L in LAYERS])
 a_t = np.array([per_layer[L][2] for L in LAYERS])
-ax.fill_between(xi, [per_layer[L][3] for L in LAYERS], [per_layer[L][4] for L in LAYERS],
-                color=BLUE, alpha=0.18)
-ax.fill_between(xi, [per_layer[L][5] for L in LAYERS], [per_layer[L][6] for L in LAYERS],
-                color=RED, alpha=0.18)
 ax.plot(xi, a_c, "-o", color=BLUE, lw=1.8, ms=4.5, label=f"clean (n={int((~f_va).sum())})")
 ax.plot(xi, a_t, "-s", color=RED, lw=1.8, ms=4.5, label=f"typo (n={int(f_va.sum())})")
 ax.plot(xi, [per_layer[L][0] for L in LAYERS], "--", color="0.45", lw=1.4, label="all valid")

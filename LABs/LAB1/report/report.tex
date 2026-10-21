@@ -10,10 +10,13 @@
 \usepackage{graphicx}
 \usepackage{anyfontsize}
 \usepackage{siunitx}
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{booktabs}
 \usepackage{xcolor}
 \usepackage{placeins}
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.05}
 \usepackage{capt-of}
 
 % 图片相对仓库根（本文件在 report/ 下时走 ../，从根编译时回落到 ./）
@@ -29,8 +32,8 @@
 \makeatother
 
 \title{FAIML Lab1 实验报告}
-\author{常志强 \\ PB25030753}   % TODO：填写姓名与学号
-\date{2026 年 10 月 21 日}            % TODO：按提交日期修改
+\author{常志强 \\ PB25030753}
+\date{2026 年 10 月 21 日}
 
 \begin{document}
 \maketitle
@@ -336,20 +339,16 @@ Qwen3-4B-Base 共 36 个 decoder block（编号 0–35），隐藏维度 $D=2560
 
 两个任务的规模与角色不同。world 为回归任务：train 500 / valid 130，目标为（纬度, 经度）双输出（单位度，北纬、东经为正），按 MSE 评测；$N=500\ll D=2560$ 为欠定问题，必须借助正则化与特征层选择获得泛化能力。truth 为二分类任务：train 5088 / valid 300，标签 1 为真、0 为假，两个集合内真假各半；样本数大于特征维度。
 
-\section{复现清单与文件结构}\label{app:repro}
+\section{提交的文件结构}\label{app:repro}
 
-本报告的仓库结构与产物分布如下。根目录的 \texttt{model.py} 是提交的手写模型（线性/逻辑回归，全批量梯度下降）；\texttt{datasets/} 存放两任务各 13 层的特征数组与标签 csv；\texttt{experiments/} 是训练与分析的执行器与配置（\texttt{train\_layers.py}、\texttt{run\_grid.py}、\texttt{plot\_layers.py}、\texttt{stability\_bound.py} 及配置 json）；\texttt{scripts/} 是集群 sbatch 与分块提交脚本；\texttt{question/code} 存放思考题 Q1–Q3、Q6–Q8 的复现脚本；\texttt{results/} 汇总全部扫描/分层训练/提取的结果与图；\texttt{report/} 为本报告源文件。
+提交包解压后，根目录只有四项：\texttt{code/}、\texttt{report.pdf}、\texttt{linear.11.npz}、\texttt{logistic.20.npz}。\texttt{code/} 是去掉数据集后的 LAB1 代码目录，只保留报告实际用到的脚本、图、结果与配置（含少量复现依赖）；\texttt{report.pdf} 是本报告；两个 \texttt{.npz} 是最终提交权重，均为 float64，且已折回原始特征空间。
 
-环境方面，本地与集群统一使用 ai26 环境（numpy / sklearn / matplotlib / cartopy / pyspellchecker）；集群跑在 Students 分区，且必须钉 A100（\texttt{-{}-gres=gpu:A100:1}）——RTX5090 节点与当前 torch 驱动不兼容，需避开。关键复现命令：训练 13 层 \texttt{python experiments/\allowbreak train\_\allowbreak layers.py --skip-\allowbreak existing}；稳定界全表 \texttt{python experiments/\allowbreak stability\_\allowbreak bound.py}；Q1 系数路径 \texttt{python question/\allowbreak code/\allowbreak q1\_\allowbreak coefficient\_\allowbreak paths.py}；Q6 地图 \texttt{python question/\allowbreak code/\allowbreak q6\_\allowbreak valid\_\allowbreak map.py}；Q4/Q5/Q9 的分析复用 \texttt{experiments/} 下的扫描与分层训练产物。
+\texttt{code/} 根目录的 \texttt{model.py} 是手写模型（线性/逻辑回归，全批量梯度下降），\texttt{extract\_intrep.py} 负责隐藏状态提取，\texttt{train23.py} 是单层训练入口，\texttt{train1.py} 是两模型的小型冒烟测试，\texttt{requirements.txt} 记录依赖；\texttt{experiments/} 放训练、扫描、绘图的执行器与配置，以及三组拓展实验；\texttt{scripts/} 是集群 sbatch 脚本；\texttt{question/code} 是 Q1--Q3、Q6--Q8 的复现脚本，\texttt{question/data} 只带 Q1/Q2 使用的 KC 房价 csv；\texttt{results/} 保存报告引用的扫描/分层训练结果、最终权重与图；\texttt{report/} 放本报告的 \texttt{report.tex}。
 
-提交产物（首选/备选）：world——raw L11 探针（\texttt{results/\allowbreak slurm\_layers/\allowbreak world/weights/\allowbreak world\_layer11\_extra0/\allowbreak weights.npz}，MSE 150.43），备选 z-score L2（157.57）；truth——raw L20（\texttt{results/\allowbreak slurm\_layers/\allowbreak truth\_b/weights/\allowbreak truth\_layer20/\allowbreak weights.npz}，acc 0.8967），备选 L23（0.8900）。所有权重均已折回原始特征空间，推理时不需再做标准化。
+环境方面，本地与集群统一使用讲义中给出的 ai26 环境。
 
-追溯与归档：KC 房价数据（Q1/Q2）与 OpenML 全表的逐格对拍记录在 \texttt{question/\allowbreak execution\_\allowbreak log.md} §1.2；truth 数据集的来源指纹见第 8 题；每轮集群运行的全部日志按时间戳归档在 \texttt{results/\allowbreak slurm\_*} 对应目录下。
-
-拓展实验的入口与产物：交叉验证、Qwen 直接生成、prompt 与读点消融三组实验的脚本，分别放在 \texttt{experiments/} 下的各自子目录，结果与图归档在 \texttt{results/} 的对应目录；其中 Qwen 生成与消融实验的特征提取/训练在 A100 上完成。复现细节见各脚本的 docstring 与同目录的 \texttt{*\_figure\_notes.md}。
 
 % ======================================================================
-\clearpage
 \section{拓展实验列表和动机}\label{app:overview}
 
 下面两个附录（D、E）汇总正文 Q1--Q9 之外的补充实验。附录~D 是思考题的补充：一组为 train 的交叉验证复核选层结论，一组是 prompt 与读点消融检验 Q7 的坐标可读性来源。附录~E 是一个探索性实验：让 Qwen 直接生成坐标，与线性探针对照（见表~\ref{tab:overview}，细节见对应小节）。
@@ -367,7 +366,7 @@ Qwen3-4B-Base 共 36 个 decoder block（编号 0–35），隐藏维度 $D=2560
     \midrule
     \multicolumn{3}{l}{\textbf{附录 E：有趣的研究实验}} \\
     \addlinespace[2pt]
-    Qwen 直接生成坐标 & 误差来自表征还是线性读出 & valid 中位 43.8 对 953.8 km，119/130 条直接输出更近 \\
+    Qwen 直接生成坐标 & 线性探针和直接输出的区别是什么 & valid 中位 43.8 对 953.8 km，119/130 条直接输出更近 \\
     \bottomrule
   \end{tabular}
   \captionof{table}{拓展实验总览。}\label{tab:overview}

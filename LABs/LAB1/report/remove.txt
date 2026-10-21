@@ -1,0 +1,64 @@
+\subsection{GeoNames 扩增前后，world 效果有没有变化？}\label{sec:c3-world}
+
+\textbf{（1）问题。}world 只有 500 条训练样本，而读出的特征有 2{,}560 维，本身是一个欠定问题。一个自然的假设是：从 GeoNames 再采一批地点、用同一个 Qwen 提特征，把训练集扩大一个数量级，world 的验证误差会下降。本小节只回答一个问题：\textbf{在原始 world 任务上，扩增前后的预测效果有没有稳定变化？} GeoNames 自己的 test 表现只作为旁证，不作为主结论；否则容易把“新任务变好”误当成“原任务变好”。
+
+\textbf{（2）实验设置。}数据来自 GeoNames \texttt{cities15000} 与 \texttt{countryInfo}：采样 12{,}000 条、235 个国家，其中 30 个国家整国留出；划分为 train 8{,}382（193 国）、valid 1{,}050、test 1{,}050、test\_unseen 1{,}518。比较三个训练集：\texttt{orig}（原 world 500 条）、\texttt{new}（GeoNames 8{,}382 条）、\texttt{union}（8{,}882 条）。prompt 与 world 完全一致，统一用 13 层特征和 std13 探针（train 统计量 z-score、lr $=0.002$、2{,}000 轮、$\lambda_1=10^{-3}$、$\lambda_2=1.0$），与 \texttt{model.py} 及历史 std13 结果同口径。主口径是课程预注册的 L11；L2 是事后在 orig\_valid 上挑出的最优层，L32 是事后在 full unseen 上挑出的层，二者只作描述性参考。课程未提供带标签的 world test，130 条 valid（78 国）是唯一可用的带标签评估集；所有 $\Delta$ 都是配对差（A$-$B，负 $=$ A 更好），区间同时给逐条 bootstrap 和按国家整簇 bootstrap。
+
+\texttt{orig} 的 13 层 MSE 与历史 std13 结果 13/13 一致（最大差 $<10^{-4}$），65 次训练全部有限；这排除了扩增管线与课程口径错配。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \begin{tabular}{lrrrrrr}
+    \toprule
+    层 & \texttt{orig} & \texttt{new} & \texttt{union} & $\Delta$MSE & 逐条 95\% CI & 国家簇 95\% CI \\
+    \midrule
+    L2（事后） & 157.57 & 186.65 & \textbf{139.21} & $-18.36$ & $[-56.50,+15.53]$ & $[-54.89,+13.52]$ \\
+    L11（预注册） & \textbf{167.04} & 225.29 & 172.92 & $+5.88$ & $[-49.04,+61.65]$ & $[-29.48,+43.13]$ \\
+    L32（事后） & \textbf{180.31} & 268.03 & 212.04 & $+31.73$ & — & — \\
+    \bottomrule
+  \end{tabular}
+  \caption{C3：world valid（$n=130$，78 国）上的扩增效应。MSE 为原始坐标尺度；$\Delta$MSE $=$ \texttt{union}$-$\texttt{orig}，负表示 union 更好。L11 是课程预注册层，L2/L32 为事后最优层；L32 未做配对 bootstrap。}\label{tab:c3-world-overall}
+\end{table}
+
+\textbf{（3）world 总体：L11 没有稳定变化。}课程口径 L11 上，\texttt{orig}、\texttt{new}、\texttt{union} 分别为 167.04、225.29、172.92；\texttt{union} 比 \texttt{orig} 高 5.88 MSE（$+3.5\%$），逐条 95\% 区间 $[-49.04,+61.65]$、按国家整簇区间 $[-29.48,+43.13]$，都跨 0。点估计略差，但以现有 130 条样本不能拒绝“无变化”。\texttt{new} 单独训练的点估计更差（$+58.25$，$+34.9\%$；逐条区间 $[-12.85,+150.40]$ 仍跨 0，但方向与分层结果一致），说明 8{,}382 条新样本不能替代原来的 500 条。
+
+事后最优层 L2 上，\texttt{union} 为 139.21、\texttt{orig} 为 157.57，低 18.36 MSE（$-11.7\%$），但逐条区间 $[-56.50,+15.53]$、国家簇区间 $[-54.89,+13.52]$ 仍跨 0；而且 L2 是在同一批 130 条 valid 上挑出来的，这个比较是乐观的。L32 上 \texttt{union} 又比 \texttt{orig} 高 31.73。把 13 层曲线一起看更清楚：\texttt{union} 只在 L2（139.2 对 157.6）和 L5（154.9 对 163.0）低于 \texttt{orig}，从 L8 起全面变差；三者的最优层都仍是 L2，但 L11$-$L2 的差距从 \texttt{orig} 的 9.5 扩大到 \texttt{union} 的 33.7。扩增没有改变“浅层最好”的定性结论，却让课程层 L11 的相对代价更大。
+
+从距离分布看，L11 上 \texttt{union} 的中位误差反而低 62 km（856.7 对 918.8），但 P90 高 274 km（2788.8 对 2514.5）、均值高 32.7 km；MSE 的略差主要来自尾部，而不是所有样本整体变差。L2 上 \texttt{union} 的中位/均值/P90 都更低（839.1 对 973.8、1079.5 对 1125.2、2075.5 对 2120.6），但如上述区间仍跨 0。
+
+\begin{table}[htbp]
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{lrrrrrrr}
+    \toprule
+    分层 & $n$ & \texttt{orig} & \texttt{new} & \texttt{union} & $\Delta$MSE & 逐条 95\% CI & 国家簇 95\% CI \\
+    \midrule
+    seen & 110 & 163.85 & 253.02 & 191.24 & $+27.39$ & $[-33.89,+91.53]$ & $[-5.99,+67.13]$ \\
+    unseen$\to$C3 & 12 & 215.19 & 65.35 & 72.14 & $-143.05$ & $[-303.44,-25.09]$ & $[-303.19,-25.76]$ \\
+    unseen both & 8 & 138.74 & 83.87 & 72.15 & $-66.58$ & $[-209.03,+36.19]$ & $[-210.42,+36.66]$ \\
+    \bottomrule
+  \end{tabular}
+  \caption{C3：world valid 在 L11 上的国家分层（$\Delta$MSE $=$ \texttt{union}$-$\texttt{orig}）。seen：world train 出现过的国家；unseen$\to$C3：world train 没有、GeoNames train 有；unseen both：两者都没有。区间分别为逐条 bootstrap 与按国家整簇 bootstrap；后两行只有 12/8 个国家，国家簇区间更诚实。}\label{tab:c3-world-strata}
+\end{table}
+
+\FloatBarrier
+
+\textbf{（4）平局从哪里来：seen 与 unseen 的抵消。}总量几乎不变，但内部并不是什么都没发生。按国家字符串是否在 world train 中出现分层（表~\ref{tab:c3-world-strata}），L11 上 seen 的 110 条 \texttt{orig} 为 163.85、\texttt{union} 为 191.24，\texttt{union} 高 27.39（$+16.7\%$）；unseen$\to$C3 的 12 条 \texttt{orig} 为 215.19、\texttt{union} 为 72.14，低 143.05（$-66.5\%$，逐条与国家簇区间都不跨 0）；unseen both 的 8 条 \texttt{orig} 为 138.74、\texttt{union} 为 72.15，低 66.58（区间跨 0）。L2 上方向相同：seen $+15.18$、unseen$\to$C3 $-287.29$、unseen both $-76.14$。
+
+这组分解解释了“总量为什么是平的”：扩增在已见国家上稀释了原分布的国家级先验，在未见国家上补了覆盖；两个方向在 130 条上几乎抵消。逐条胜负也一致：L11 上 \texttt{union} 更近的只有 62/130，L2 上为 75/130，优势并不普遍。
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\linewidth]{experiments/C3/figures/c3_paired_effects.pdf}
+  \caption{C3：world valid 上的配对扩增效应（负 $=$ 前者更好；细线 $=$ 逐条 bootstrap 95\% 区间，粗灰线 $=$ 按国家整簇 bootstrap 95\% 区间）。左：本小节主结果——\texttt{union}$-$\texttt{orig} 在 L11 为 $+5.9$、L2 为 $-18.4$，两种区间都跨 0；seen 国家变差、unseen 国家变好。右：GeoNames 任务与 strict unseen 的对照，仅用于说明收益发生在未见国家，不是本小节的主结论。}\label{fig:c3-world-paired}
+\end{figure}
+
+\textbf{（5）为什么没有提升？}原因不是“样本多了反而不好”，而是新数据的分布与目标分布不一致，且数量上压倒原数据。GeoNames 是城市级、全球采样的地点，和 world 的 500 条不是同一分布；\texttt{union} 中 94.4\% 是 \texttt{new}，线性探针的损失被新分布主导。于是已见国家被稀释（\texttt{new} 单独训练在 seen 上高 89.2 MSE，\texttt{union} 仍有 $+27.4$），未见国家被覆盖（unseen$\to$C3 低 143.1）。反过来，\texttt{orig} 只占 \texttt{union} 的 5.6\%，却把 \texttt{new} 的 L11 MSE 从 225.29 拉回 172.92（$-52.37$，逐条区间 $[-97.19,-21.10]$ 不跨 0），说明原 500 条不能被替换，只能作为目标分布的锚点与 \texttt{new} 混用；但混合后仍不足以让 world 总体变好。一种解释是：浅层 L2 的误差以方差为主，增广降低了方差；中深层 L11 的误差以分布偏差为主，增广放大了偏差。
+
+\textbf{（6）稳健性与局限。}泄漏控制排除了“背 valid 答案”：剔除 14 条与 world valid 同名同国的样本后，\texttt{union\_noleak} 与 \texttt{union} 在 L11 只差 $+0.55$ MSE（国家簇区间 $[-0.04,+1.29]$），L2 差 $+0.15$。局限有四类：第一，world valid 只有 130 条（78 国），国家簇区间仍包含约 30 MSE 量级的变化，不能把“不显著”当成“等价于没变”；第二，L2/L32 是事后层，L2 的 $-18.4$ 是乐观比较；第三，只试了一种模型、一个 prompt、一个 seed，GeoNames 坐标本身也有噪声，分层比较还是探索性的、未做多重比较校正；第四，没有做样本加权或分布匹配。更准确的说法是“在现有样本量下没有检测到稳定收益”，而不是“证明扩增无效”。另外，原实验的 test\_unseen 30 国中有 22 国其实在 world train 出现，不能用来论证“未见国家泛化”；本小节不使用这个口径。
+
+\textbf{（7）结论。}回到本小节的问题：扩增后 world 效果有没有变化？在课程口径 L11 上，没有可检测的稳定变化（$+5.9$ MSE，$+3.5\%$，两种区间都跨 0）；在事后最优的 L2 上有一个 $-18.4$（$-11.7\%$）的描述性改善，但同样不显著，且 L2 是在同一 valid 上挑的。扩增改变了误差构成——seen 国家变差、unseen 国家变好——但没有改变 world 的整体水平，也没有突破 Q7 在 seen 国家上的国家均值 oracle（最好的 \texttt{union} L2 为 139.2，仍高于 113.8）。因此本实验不改变提交选择：最终仍提交原始 500 条训练的 raw L11。
+
+\FloatBarrier
