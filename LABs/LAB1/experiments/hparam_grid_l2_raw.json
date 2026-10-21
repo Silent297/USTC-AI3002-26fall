@@ -1,0 +1,62 @@
+{
+  "_readme": [
+    "raw L2 粗筛：4 个 lr × 3 个 lambda2，外加 lr=5e-3 的发散验证点。",
+    "L2 raw 稳定界 4.95e-3（约为 raw L11 5.45e-4 的 9 倍），因此 lr 网格整体上移；",
+    "L11 的 lr=5e-4 只到 L2 界的 0.10x，旧探针 198.78 基本是欠拟合。",
+    "每组固定其余超参，只扫 lambda2；lr 组只扫 lr。运行：",
+    "python experiments/run_grid.py --config experiments/hparam_grid_l2_raw.json --out results/l2_sweep/raw_coarse/results.json --artifacts-dir results/l2_sweep/raw_coarse/weights"
+  ],
+  "base": {
+    "lr": 0.002,
+    "epochs": 2000,
+    "lambda1": 0.001,
+    "lambda2": 0.01
+  },
+  "groups": [
+    {
+      "name": "l2_raw_l2_at_lr_5e-4",
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "note": "锚定旧探针：L11 的 lr=5e-4 下扫 lambda2",
+      "fixed": {"lr": 0.0005, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "l2_raw_l2_at_lr_1e-3",
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "note": "lr=1e-3（0.20x 界）下扫 lambda2",
+      "fixed": {"lr": 0.001, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "l2_raw_l2_at_lr_2e-3",
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "note": "lr=2e-3（0.40x 界）下扫 lambda2",
+      "fixed": {"lr": 0.002, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "l2_raw_l2_at_lr_4e-3",
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "note": "lr=4e-3（0.81x 界）下扫 lambda2",
+      "fixed": {"lr": 0.004, "epochs": 2000, "lambda1": 0.001},
+      "vary": {"lambda2": [0.001, 0.01, 0.1]}
+    },
+    {
+      "name": "l2_raw_lr_divergence",
+      "task": "world",
+      "layer": 2,
+      "standardize": false,
+      "note": "lr=5e-3 略高于 raw L2 界 4.95e-3，预期发散（finite=False）",
+      "fixed": {"epochs": 2000, "lambda1": 0.001, "lambda2": 0.001},
+      "vary": {"lr": [0.005]}
+    }
+  ]
+}

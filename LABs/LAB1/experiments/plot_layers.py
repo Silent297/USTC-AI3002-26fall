@@ -97,16 +97,20 @@ def config_label(record: dict) -> str:
     )
 
 
-def plot_task(records: list[dict], task: str, out_dir: Path) -> list[Path]:
+def plot_task(
+    records: list[dict], task: str, out_dir: Path, include_extra: bool = True
+) -> list[Path]:
     task_records = [record for record in records if record["task"] == task]
     std = sorted(
         (rec for rec in task_records if rec["kind"] == "layer" and rec["finite"]),
         key=lambda rec: rec["layer"],
     )
-    extras = sorted(
-        (rec for rec in task_records if rec["kind"] == "extra" and rec["finite"]),
-        key=lambda rec: rec["layer"],
-    )
+    extras = []
+    if include_extra:
+        extras = sorted(
+            (rec for rec in task_records if rec["kind"] == "extra" and rec["finite"]),
+            key=lambda rec: rec["layer"],
+        )
     if not std and not extras:
         return []
 
@@ -254,6 +258,11 @@ def main() -> None:
         help="output directory (default: <first results dir>/plots)",
     )
     parser.add_argument("--tasks", default=None, help="comma-separated task filter")
+    parser.add_argument(
+        "--no-extra",
+        action="store_true",
+        help="drop 'extra' runs and show the std layer comparison only",
+    )
     args = parser.parse_args()
 
     plt.rcParams.update(
@@ -273,7 +282,7 @@ def main() -> None:
 
     saved: list[Path] = []
     for task in tasks:
-        saved += plot_task(records, task, out_dir)
+        saved += plot_task(records, task, out_dir, include_extra=not args.no_extra)
 
     print(f"\nWrote {len(saved)} files:")
     for path in saved:
