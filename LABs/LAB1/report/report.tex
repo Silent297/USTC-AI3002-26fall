@@ -338,44 +338,7 @@
 
 提交物为两份 \texttt{.npz} 权重（\texttt{float64}）：world 为 \texttt{weights} $(2,2560)$（两行依次对应纬度、经度）与 \texttt{bias} $(2,)$；truth 为 \texttt{weights} $(2560,)$ 与零维 \texttt{bias}；另附所选特征层的层号（$[0,35]$ 整数）。两个数据集均为课程自建、与论文原实验所用不同，构造细节未公布；关于它们的构造线索与训练/验证分布差异，见第 8 题。
 
-\subsection{数学原理：稳定界、闭式解与 KKT}\label{app:math}
-
-world 用均方误差 $L=\|Xw+b\mathbf 1-y\|^2/N$（与 \texttt{model.py} 一致），它是关于参数的凸二次函数，Hessian $H=2X^{\top}X/N$。全批量梯度下降的误差传播为 $e_{t+1}=(I-\mathrm{lr}\,H)e_t$（$e$ 为参数误差），收敛当且仅当谱半径小于 1，即 $\mathrm{lr}<\dfrac{2}{\lambda_{\max}(H)}=\dfrac{N}{\|X\|_2^2}$——只依赖特征矩阵、与 $y$ 无关，每层各有一个值（$N$ 为该任务训练样本数）。越界后，误差沿最大特征方向每轮乘以 $|1-\mathrm{lr}\,\lambda_{\max}|>1$ 指数放大——这正是 world 未标准化时 loss 奔向 inf 的机制。
-
-truth 用交叉熵，其 Hessian 为 $X^{\top}\mathrm{diag}(p(1-p))X/N\preceq X^{\top}X/(4N)$，最坏情形（$p=1/2$）的充分稳定界放宽到约 $8N/\|X\|_2^2$（二次界的 8 倍）；更重要的是 logistic 的梯度有界（$p-y\in[-1,1]$），没有 MSE“残差随 $w$ 线性增长”的正反馈，越界一般表现为震荡/饱和、准确率下降，而不是爆炸——这是 truth 可以不标准化、直接用 raw 特征配 lr$=5\times10^{-3}$ 的原因。
-
-下表给出 13 层 $\times$ 两任务 $\times$ raw/z-score 的全部稳定界，两个读法。其一，\textbf{raw 界随深度暴跌}——world 从 L2 的 $4.95\times10^{-3}$ 降到 L35 的 $2.77\times10^{-6}$，跨约 1800 倍；激活幅度逐层增大（残差流行范数从 51 到 623，约 12 倍，平方进入 $\|X\|_2^2$ 就是两个数量级），固定 lr 必然在深层越界。其二，\textbf{z-score 把界“拉平”}到 $3.1$–$4.8\times10^{-3}$（仅 1.5 倍差距）——z-score 只归一化每列尺度，剩下的差异来自特征间的相关结构；正因为拉平了，同一个 lr 才能对所有层公平。truth 的 raw 界同样随深度收缩，但如上所述 logistic 对越界是“软”的，其配置不依赖这把尺子。
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \begin{tabular}{rrrrr}
-    \toprule
-    层 & world raw & world z-score & truth raw & truth z-score \\
-    \midrule
-    2 & $4.95\times10^{-3}$ & $4.07\times10^{-3}$ & $6.51\times10^{-3}$ & $2.67\times10^{-3}$ \\
-    5 & $1.14\times10^{-3}$ & $\mathbf{3.08\times10^{-3}}$ & $1.14\times10^{-3}$ & $4.85\times10^{-3}$ \\
-    8 & $6.90\times10^{-4}$ & $3.15\times10^{-3}$ & $1.09\times10^{-3}$ & $9.20\times10^{-3}$ \\
-    11 & $5.45\times10^{-4}$ & $3.59\times10^{-3}$ & $7.37\times10^{-4}$ & $9.74\times10^{-3}$ \\
-    14 & $4.47\times10^{-4}$ & $3.40\times10^{-3}$ & $6.10\times10^{-4}$ & $1.05\times10^{-2}$ \\
-    17 & $3.19\times10^{-4}$ & $3.48\times10^{-3}$ & $5.01\times10^{-4}$ & $1.03\times10^{-2}$ \\
-    20 & $1.93\times10^{-4}$ & $3.42\times10^{-3}$ & $3.04\times10^{-4}$ & $7.00\times10^{-3}$ \\
-    23 & $8.37\times10^{-5}$ & $3.16\times10^{-3}$ & $1.33\times10^{-4}$ & $5.38\times10^{-3}$ \\
-    26 & $3.94\times10^{-5}$ & $3.16\times10^{-3}$ & $4.08\times10^{-5}$ & $4.72\times10^{-3}$ \\
-    29 & $1.89\times10^{-5}$ & $3.46\times10^{-3}$ & $1.63\times10^{-5}$ & $5.42\times10^{-3}$ \\
-    32 & $7.48\times10^{-6}$ & $3.92\times10^{-3}$ & $6.17\times10^{-6}$ & $6.70\times10^{-3}$ \\
-    34 & $3.02\times10^{-6}$ & $4.40\times10^{-3}$ & $2.93\times10^{-6}$ & $7.25\times10^{-3}$ \\
-    35 & $2.77\times10^{-6}$ & $\mathbf{4.77\times10^{-3}}$ & $1.68\times10^{-6}$ & $5.84\times10^{-3}$ \\
-    \bottomrule
-  \end{tabular}
-  \caption{13 层稳定界 $N/\|X\|_2^2$ 全表（SVD 精确值；raw 界随深度跨 1800$\times$，z-score 后压至 1.5$\times$）。}
-\end{table}
-
-理论与实测逐条吻合：raw L11 界 $5.4\times10^{-4}$——lr$=5\times10^{-4}$ 稳定（贴线，MSE 150.9），$10^{-3}$ 直接溢出；raw L23 界 $8.4\times10^{-5}$——实测 $2\times10^{-4}$（超 2.4 倍）收敛前爆炸；raw L35 界 $2.8\times10^{-6}$——实测超 72 倍、71 轮即炸；std L11 界 $3.6\times10^{-3}$——lr$=3\times10^{-3}$（0.83 倍）得 167.06、$5\times10^{-3}$（1.39 倍）发散；std L35 界 $4.8\times10^{-3}$——lr$=4\times10^{-3}$（0.84 倍）冒烟 300 轮稳定、$8\times10^{-3}$（1.68 倍）第 9 轮爆炸。反向一例：truth raw L35 用 lr$=5\times10^{-4}$ 已超二次界约 300 倍，训练仍然有限（acc 63.0\%）——logistic 的非爆炸性由此得到实证。
-
-Q1/Q2 的实现用到两条精确算法。其一，Ridge 的 SVD 闭式解：$X=U\Sigma V^{\top}$ 时 $\hat w= V\,\mathrm{diag}\!\big(\sigma_i/(\sigma_i^2+\lambda)\big)\,U^{\top}y$，$\lambda=0$ 退化为伪逆的最小范数最小二乘解；系数路径即由它精确计算（与 sklearn 对拍 $10^{-9}$）。其二，Lasso 的 KKT/软阈值：驻点条件 $\partial L/\partial w_j=\frac{2}{N}[X^{\top}(Xw-y)]_j+\lambda_1\, \mathrm{sgn}(w_j)+2\lambda_2 w_j=0$ 由坐标下降 $+$ warm start 求解；精确零来自优化几何本身、零集沿 $\lambda$ 嵌套——这正是 Q2 中“阈值化 ridge 无法复现 lasso 零集”对照的数学背景。逻辑回归的梯度（\texttt{model.py} 实现）为 $\nabla_w L=\frac{1}{N}X^{\top}(\hat y-y)+\lambda_1\,\mathrm{sgn}(w)+2\lambda_2 w$；数值上用 $\log(1+e^{-z})=\mathrm{logaddexp}(0,-z)$ 稳定计算。sklearn 换算表（Q3 对拍用）：Ridge $\alpha=N\lambda_2$；Lasso $\alpha=\lambda_1/2$；ElasticNet $\alpha\rho=\lambda_1/2$、$\alpha(1-\rho)=\lambda_2$；Logistic $C=1/(2N\lambda_2)$——注意 sklearn 的正则量纲是“平方误差总和”口径，直接对比会差一个 $N$ 倍。最后是基线口径：train 均值基线的元素平均口径 MSE $=3311.27$（与模型指标同口径），坐标求和口径 $=6622.54$；两者混用会把 $R^2$ 抬高约 2.3pp。统一口径后，world 最佳 $R^2=0.9546$（RMSE $\approx$ 12.3$^\circ$）。
-
-\subsection{复现清单与文件结构}\label{app:repro}
+\section{复现清单与文件结构}\label{app:repro}
 
 本报告的仓库结构与产物分布如下。根目录的 \texttt{model.py} 是提交的手写模型（线性/逻辑回归，全批量梯度下降）；\texttt{datasets/} 存放两任务各 13 层的特征数组与标签 csv；\texttt{experiments/} 是训练与分析的执行器与配置（\texttt{train\_layers.py}、\texttt{run\_grid.py}、\texttt{plot\_layers.py}、\texttt{stability\_bound.py} 及配置 json）；\texttt{scripts/} 是集群 sbatch 与分块提交脚本；\texttt{question/code} 是思考题 Q1–Q8 的复现脚本；\texttt{results/} 汇总全部扫描/分层训练/提取的结果与图；\texttt{report/} 为本报告源文件。
 
@@ -508,9 +471,11 @@ world 的 CV 最优是 L8（$351.0\pm150.6$），valid 最优是 L2（157.6）�
 
 \subsection{Qwen 直接生成坐标与线性探针的对照}
 
-\textbf{（1）问题。}前面的探针都是“读出某一层，再训一个线性头”。能不能跳过线性头，直接问 Qwen 本身：“这个地点在哪？”如果它答得比探针准，说明误差可能主要出在“怎么读”，而不是模型里没有地理知识。
+\textbf{（1）问题。}前面的探针都是“读出某一层，再训一个线性头”。能不能跳过线性头，直接问 Qwen 本身：“这个地点在哪？”
 
-\textbf{（2）实验设置。}不训练任何头，直接让 Qwen3-4B-Base 零样本生成经纬度。输入是 world 的 630 道原题，后面追加一句固定的 JSON 指令；bf16、batch 4、贪心解码、最多 64 个新词元，valid 130 条用于主对照。回答按“严格 JSON、嵌入 JSON、正则”三档解析，坐标还要落在合法范围内才算有效。探针参照 world raw L11：valid MSE 150.4277、中位 953.8 km，train MSE 116.9279、中位 662.4 km。严格 JSON 的接受率是 train 99.8\%、valid 99.2\%，放宽后 valid 100\%。主要指标见表~\ref{tab:c1}。
+\textbf{（2）实验设置。}不训练任何头，直接让 Qwen3-4B-Base 零样本生成经纬度。模型用官方权重（revision \texttt{906bfd4b}），以 bf16 载入。输入是 world 的 630 道原题：逐字保留原句，只在末尾追加固定指令 “Output only JSON with numeric latitude and longitude in decimal degrees. Answer:”；不加聊天模板、不给示例、不额外提示国家或坐标。生成用 batch 4，贪心解码，最多 64 个新词元。贪心是为了可复现；valid 130 条用于主对照，train 500 条只作同分布参照。
+
+回答按“严格 JSON、嵌入 JSON、正则”三档解析，不做符号纠正、不交换经纬度、不自动回绕，同时检查了回答中坐标的合法性。探针的参照选择的是 world raw L11。严格 JSON 的接受率是 train 99.8\%、valid 99.2\%，放宽后 valid 100\%。
 
 \begin{table}[htbp]
   \centering
@@ -526,12 +491,10 @@ world 的 CV 最优是 L8（$351.0\pm150.6$），valid 最优是 L2（157.6）�
     周期经度 MSE & 17.64 & 150.43 & 108.54 & 116.93 \\
     \bottomrule
   \end{tabular}
-  \caption{C1：Qwen3-4B-Base 零样本直接输出与 L11 线性探针的对照。直接输出的距离中位在 valid 上约为探针的 1/22；原始 MSE 的排序相反，因为直接输出的 valid MSE 有 96.5\% 来自一条跨日界线样本。}\label{tab:c1}
+  \caption{Qwen3-4B-Base 零样本直接输出与 L11 线性探针的对照。}\label{tab:c1}
 \end{table}
 
-\textbf{（3）结果。}直接输出在距离上全面更好：valid 中位 43.8 对 953.8 km（约 22 倍），平均 159.1 对 1141.7 km，P90 416.0 对 2391.0 km；train 中位 15.5 对 662.4 km（约 43 倍）。逐条比，valid 130 条里有 119 条直接输出更近，探针减直接的距离差均值是 $+982.5$ km，bootstrap 95\% 区间 $[835.0,1138.9]$，不跨 0。
-
-但原始 MSE 会骗人。valid 的 505.76 里有 96.52\% 来自一条 Mount Tomanivi（斐济，跨 $\pm180^\circ$ 日界线，实际只偏 397.0 km）；把经度差回绕后，周期 MSE 只有 17.64。train 的 159.64 也有约 92\% 来自 5 条极地/海外属地样本（如南极站名、法属波利尼西亚的 Mount Otemanu）。所以“原始 MSE 下探针 150 小于直接 506”并不说明探针更好，只说明两边被不同的极端样本主导。
+\textbf{（3）结果。}直接输出在距离上全面更好：valid 中位 43.8 对 953.8 km（约 22 倍），平均 159.1 对 1141.7 km，P90 416.0 对 2391.0 km；train 中位 15.5 对 662.4 km（约 43 倍）。逐条比，valid 130 条里有 119 条直接输出更近，探针减直接的距离差均值是 $+982.5$ km，bootstrap 95\% 区间 $[835.0,1138.9]$，不跨 0。但原始 MSE 存在问题。valid 的 505.76 里有 96.52\% 来自一条 Mount Tomanivi（斐济，跨 $\pm180^\circ$ 日界线），把经度周期带来的差距消除后，周期 MSE 只有 17.64。
 
 \begin{figure}[htbp]
   \centering
@@ -547,50 +510,7 @@ world 的 CV 最优是 L8（$351.0\pm150.6$），valid 最优是 L2（157.6）�
 
 \FloatBarrier
 
-\textbf{（4）结论与局限。}同一批 2560 维表征里并非“没有地理知识”，探针的误差更像是出在“怎么读”这一侧。这和 Q6 的经度弱、Q7 的“超越国家身份”一起，说明线性可解码性有一个不低的上限。要注意：生成式直接输出和线性头是两种不同的读出协议，只能并列参考，不能据此说“线性探针不如 Qwen”。
-
-\subsection{GeoNames 数据扩增与“未见国家”的边界}
-
-\textbf{（1）问题。}world 只有 500 条，比 2560 维特征还少，本身就是一个欠定问题。一个自然的想法是：拿 GeoNames 再造一批地点，把训练集扩大，预测会不会更好？尤其是在训练时没见过的国家上。
-
-\textbf{（2）实验设置。}数据来自 GeoNames \texttt{cities15000} 与 \texttt{countryInfo}：采样 12{,}000 条、235 个国家，其中 30 个国家整国留出；划分成 train 8{,}382（193 国）、valid 1{,}050、test 1{,}050、test\_unseen 1{,}518。训练集做了五种：\texttt{orig}（原 world 500 条）、\texttt{new}（GeoNames 8{,}382 条）、\texttt{new\_noleak}、\texttt{union}（8{,}882 条）和 \texttt{union\_noleak}；统一用 13 层特征和 std13 探针，共 65 次训练，全部有限，\texttt{orig} 的 13/13 个锚点与历史值逐位一致。L11 是课程预注册层；L2、L32 是看了评估结果后挑的，只能当描述性参考。
-
-这里有一个关键修正。\texttt{test\_unseen} 的 30 个国家里，有 22 个其实在 world train 出现过，所以 \texttt{orig} 在这个集合上 L11 的 56.5 不是“小数据也能泛化”，而是“这 22 个国家它见过”。为了得到干净的“未见国家”口径，另外定义 \texttt{strict8}：8 个在 world train 和 C3 train 里都没出现过的国家（Costa Rica、Denmark、Hungary、Lebanon、Niger、Palestine、Taiwan、Yemen），共 260 条；\texttt{hard6} 再去掉可能和国家名有重叠的 Niger/Palestine，共 212 条。下面以 \texttt{strict8}/\texttt{hard6} 为主。主要结果见表~\ref{tab:c3}。
-
-\begin{table}[htbp]
-  \centering
-  \small
-  \begin{tabular}{lrrr}
-    \toprule
-    评估集 / 对比 & $\Delta$MSE & 逐条 95\% 区间 & 按国家 95\% 区间 \\
-    \midrule
-    world valid，L2，union$-$orig & $-18.4$ & $[-56.5,+15.5]$ & $[-54.9,+13.5]$ \\
-    world valid，L11，union$-$orig & $+5.9$ & $[-49.0,+61.7]$ & $[-29.5,+43.1]$ \\
-    world valid，L11，union$-$new & $-52.4$ & $[-97.2,-21.1]$ & $[-112.2,-12.3]$ \\
-    unseen$\to$C3 12 条，L11，union$-$orig & $-143.1$ & $[-303.4,-25.1]$ & $[-303.2,-25.8]$ \\
-    strict8，L11，union$-$new & $-21.7$ & $[-25.1,-18.5]$ & $[-41.9,-7.8]$ \\
-    strict8，L11，union$-$orig & $-18.1$ & $[-30.4,-6.4]$ & $[-88.4,+25.6]$ \\
-    hard6，L11，union$-$new & $-22.7$ & $[-26.5,-18.9]$ & $[-47.6,-4.5]$ \\
-    \bottomrule
-  \end{tabular}
-  \caption{C3：GeoNames 扩增的配对效应（负 = 前者更好）。逐条区间把每条样本独立重抽；按国家区间按国家整簇重抽，在只有 6--8 个国家时更诚实。world valid 上 union 与原模型的差异均跨 0；strict8 上 union 相对 GeoNames-only 的收益在两种重抽下都稳健，但相对 orig 的收益在按国家区间下不显著。}\label{tab:c3}
-\end{table}
-
-\textbf{（3）结果。}对原来的 world 任务，扩增没有稳定收益。world valid 上，\texttt{union} 减 \texttt{orig} 在 L2 是 $-18.4$（区间跨 0），在 L11 是 $+5.9$（也跨 0）；L2 还是事后选层，L11 才是课程口径。只拿 \texttt{new} 训练会伤害原任务（L11 比 \texttt{orig} 高 58.2），但把原 500 条加回去的 \texttt{union} 明显好于 \texttt{new}（$-52.4$，逐条区间 $[-97.2,-21.1]$）。
-
-扩增的帮助主要体现在训练时没见过的地点上。world valid 里 12 条 unseen$\to$C3 的样本上，\texttt{union} 比 \texttt{orig} 低 143.1 MSE（$-66.5\%$，逐条区间 $[-303.4,-25.1]$）；seen 的 110 条反而高 27.4（区间跨 0）；L11 的三个分层 MSE（orig/new/union）分别是 seen 163.8/253.0/191.2、unseen$\to$C3 215.2/65.3/72.1、unseen-both 138.7/83.9/72.2。在 \texttt{strict8} 上，\texttt{union} 比 \texttt{new} 低 21.7（75.66 对 97.35），逐条和按国家两种区间都不跨 0；\texttt{hard6} 上低 22.7（86.76 对 109.43），也稳。但 \texttt{union} 比 \texttt{orig} 低 18.1 这件事，在只有 8 个国家时按国家重抽的区间是 $[-88.4,+25.6]$，不显著，所以不能写成“扩增显著优于原模型”。
-
-逐国看，方向很不一样：L11 上 \texttt{union} 在 Costa Rica/Palestine/Taiwan 最好，但 Denmark/Lebanon 是 \texttt{new} 最好，Hungary/Niger/Yemen 是 \texttt{orig} 最好。\texttt{strict8} 的 100 km 内命中率在 L11 只有 \texttt{orig} 0.8\%、\texttt{new} 4.6\%、\texttt{union} 1.9\%，说明 MSE 的优势主要来自少数高误差国家的尾部，而不是“更多点落进 100 km”。最后，扩增也没有突破 world 的天花板：\texttt{union} 最好的 world valid（L2）是 139.2，仍高于国家均值 oracle 的 113.8。
-
-\begin{figure}[!htbp]
-  \centering
-  \includegraphics[width=\linewidth]{experiments/C3/figures/c3_strata_unseen.pdf}
-  \caption{C3：左：world valid 在 L11 的三个国家分层 $\times$ 三个训练集的 MSE；右：\texttt{strict8} 的 8 个国家在 L11/L32 的逐国 MSE（对数轴）。union 在 seen 国家变差、在 unseen$\to$C3 与 unseen-both 变好；\texttt{strict8} 的总体增益来自少数高误差国家，逐国方向高度异质。}
-\end{figure}
-
-\textbf{（4）结论与局限。}新数据不能替换旧数据，只能和旧数据混着用；扩增带来的是“覆盖面”的改善，不是整体提升。C3 不改变提交选择。局限有：\texttt{strict8}/\texttt{hard6} 只有 6--8 个国家，样本太小；国家字符串可能有重叠；只试了一种模型、一种 prompt、一个 seed；GeoNames 坐标本身也有噪声。另外，这里的绝对 MSE 不能和指南里的数字直接比较。
-
-\FloatBarrier
+\textbf{（4）结论。} Qwen模型本身具有的地理识别能力，只是线性探针探测时产生了误差，导致预测效果没有qwen本身好。
 
 % ======================================================================
 \section{实验建议与反馈}\label{app:feedback}
