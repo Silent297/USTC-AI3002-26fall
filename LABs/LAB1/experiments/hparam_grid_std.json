@@ -41,6 +41,15 @@
       "vary": {"epochs": [250, 500, 1000, 2000]}
     },
     {
+      "name": "world_std_lambda1",
+      "task": "world",
+      "layer": 11,
+      "standardize": true,
+      "note": "标准化后 L1 的影响；固定 L11 与 lr/lambda2 最优配置",
+      "fixed": {"lr": 0.003, "epochs": 2000, "lambda2": 1.0},
+      "vary": {"lambda1": [0.0, 0.001, 0.01, 0.1]}
+    },
+    {
       "name": "world_std_layer",
       "task": "world",
       "layer": null,

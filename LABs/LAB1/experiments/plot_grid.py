@@ -111,7 +111,7 @@ def setup_xaxis(ax, recs: list[dict], vary: str) -> dict:
     return {value: value for value in values}
 
 
-def draw_panel(ax, recs: list[dict]) -> None:
+def draw_panel(ax, recs: list[dict], mark_best: bool = True) -> None:
     vary = recs[0]["vary"]
     metric_name = recs[0]["metric_name"]
     positions = setup_xaxis(ax, recs, vary)
@@ -164,7 +164,7 @@ def draw_panel(ax, recs: list[dict]) -> None:
             color="0.4",
         )
 
-    best = best_finite(recs)
+    best = best_finite(recs) if mark_best else None
     if best is not None:
         x_best = positions[best[vary]]
         ax.scatter(
@@ -176,15 +176,21 @@ def draw_panel(ax, recs: list[dict]) -> None:
             linewidths=1.4,
             zorder=6,
         )
-        # 面板顶部已留白，标注统一放点上方
+        # 面板顶部已留白，标注放点上方；靠右时改为左对齐，避免被坐标框裁掉
+        x0, x1 = ax.get_xlim()
+        frac = (x_best - x0) / (x1 - x0) if x1 > x0 else 0.5
+        ha = "right" if frac > 0.6 else "left"
+        dx = -8 if ha == "right" else 8
         ax.annotate(
             f"best: {best['metric']:.4g} @ {vary}={fmt_value(best[vary])}",
             (x_best, best["metric"]),
-            xytext=(8, 8),
+            xytext=(dx, 8),
             textcoords="offset points",
+            ha=ha,
             fontsize=7,
             color="red",
             zorder=6,
+            bbox=dict(boxstyle="round,pad=0.15", facecolor="white", edgecolor="none", alpha=0.85),
         )
 
     # 面板小字：把钉死的超参数写出来，让每块图自解释；λ1=λ2 时合并显示
@@ -203,11 +209,15 @@ def draw_panel(ax, recs: list[dict]) -> None:
         else:
             pinned_parts.append(f"{SHORT_BY_KEY[key]}={fmt_value(recs[0][key])}")
     pinned = ", ".join(pinned_parts)
+    tag = recs[0].get("data_tag")
+    pinned_text = f"fixed: {pinned}"
+    if tag:
+        pinned_text = f"{tag}\n{pinned_text}"
     ax.set_title(TITLE_BY_VARY[vary], fontsize=10)
     ax.text(
         0.03,
         0.97,
-        f"fixed: {pinned}",
+        pinned_text,
         transform=ax.transAxes,
         ha="left",
         va="top",
@@ -227,7 +237,9 @@ def save_figure(fig, stem: Path) -> list[Path]:
     return saved
 
 
-def figure_task(records: list[dict], task: str, out_dir: Path) -> list[Path]:
+def figure_task(
+    records: list[dict], task: str, out_dir: Path, exclude_vary: set[str] | None = None
+) -> list[Path]:
     task_records = [rec for rec in records if rec["task"] == task]
     if not task_records:
         return []
@@ -235,14 +247,19 @@ def figure_task(records: list[dict], task: str, out_dir: Path) -> list[Path]:
     for rec in task_records:
         by_vary.setdefault(rec["vary"], []).append(rec)
 
-    fig, axes = plt.subplots(2, 3, figsize=(15, 7.5))
+    excluded = exclude_vary or set()
+    panels = [vary for vary in TITLE_BY_VARY if vary in by_vary and vary not in excluded]
+    if not panels:
+        return []
+    ncols = 2 if len(panels) <= 4 else 3
+    nrows = (len(panels) + ncols - 1) // ncols
+    fig, axes = plt.subplots(
+        nrows, ncols, figsize=(5.2 * ncols, 3.7 * nrows), squeeze=False
+    )
     flat = axes.ravel()
-    for ax, vary in zip(flat, TITLE_BY_VARY):
-        if vary in by_vary:
-            draw_panel(ax, by_vary[vary])
-        else:
-            ax.axis("off")
-    for ax in flat[len(TITLE_BY_VARY):]:
+    for ax, vary in zip(flat, panels):
+        draw_panel(ax, by_vary[vary])
+    for ax in flat[len(panels):]:
         ax.axis("off")
 
     metric_name = task_records[0]["metric_name"]
@@ -280,6 +297,11 @@ def main() -> None:
         default=None,
         help="output directory (default: <results dir>/plots)",
     )
+    parser.add_argument(
+        "--exclude-vary",
+        default="",
+        help="comma-separated panel keys to omit (e.g. layer)",
+    )
     args = parser.parse_args()
 
     records = load_records(args.results)
@@ -291,9 +313,10 @@ def main() -> None:
         unusable = sum(1 for rec in task_records if not is_usable(rec))
         print(f"{task}: {len(task_records)} runs, {unusable} diverged")
 
+    excluded = {item.strip() for item in args.exclude_vary.split(",") if item.strip()}
     saved: list[Path] = []
     for task in ("truth", "world"):
-        saved += figure_task(records, task, out_dir)
+        saved += figure_task(records, task, out_dir, exclude_vary=excluded)
 
     per_group_dir = out_dir / "per_group"
     per_group_dir.mkdir(parents=True, exist_ok=True)
