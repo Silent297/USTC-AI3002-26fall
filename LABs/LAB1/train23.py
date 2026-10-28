@@ -9,10 +9,8 @@ import pandas as pd
 from model import LinearRegressionModel, LogisticRegressionModel
 
 
-# 加载 task 任务的 train/valid 数据集，特征取自 layer 层
 def load_split(task: str, split: str, layer: int) -> tuple[np.ndarray, np.ndarray]:
 
-    # 在 Python 中，Path(__file__) 表示当前脚本文件的路径
     data_dir = Path(__file__).parent / "datasets" / task
 
     features = np.load(data_dir / f"{split}.layer{layer}.npy", allow_pickle=False)
@@ -41,11 +39,9 @@ def main() -> None:
     parser.add_argument("--lambda2", type=float, default=0.01, help="L2 regularization (default 0.01)")
     args = parser.parse_args()
 
-    # 加载数据
     train_x, train_y = load_split(args.task, "train", args.layer)
     valid_x, valid_y = load_split(args.task, "valid", args.layer)
 
-    # 收集超参数，统一传给 fit
     fit_kwargs = {
         "lr": args.lr,
         "epochs": args.epochs,
@@ -58,7 +54,6 @@ def main() -> None:
     )
 
     if args.task == "world":
-        # 纬度和经度各训练一个一维线性回归模型。
         latitude_targets = train_y[:, 0]
         longitude_targets = train_y[:, 1]
 
@@ -87,10 +82,8 @@ def main() -> None:
     else:
         print(f"Validation accuracy: {np.mean((prediction >= 0.5) == valid_y):.4f}")
 
-    # 创造输出目录（如果不存在的话）
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
-    # 输出文件的名称被 output 参数指定，文件格式为 .npz
     np.savez(
         args.output,
         weights=np.asarray(weights, dtype=np.float64),

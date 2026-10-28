@@ -223,4 +223,4 @@ __marimo__/
 .vscode
 
 # 打包实验
-LAB1_submit/
+*.zip

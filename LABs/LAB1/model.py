@@ -20,7 +20,6 @@ class LinearRegressionModel:
         lambda2: float = 0.01,
     ) -> None:
         # 训练模型；features 为 (N, D)，targets 为 (N,)。
-        # lr 为学习率，epochs 为训练轮数，lambda1/lambda2 为 L1/L2 正则化系数。
         def cal_loss(Phi:np.ndarray, y:np.ndarray ,w:np.ndarray, b:np.float64, lambda1:np.float64, lambda2:np.float64) -> np.float64:
             residual = Phi @ w + b - y
             return np.sum(residual ** 2) / len(y) + lambda1 * np.sum(np.abs(w)) + lambda2 * np.dot(w,w)
@@ -29,7 +28,7 @@ class LinearRegressionModel:
             N = len(y)
             return 2.0 / N * Phi.T @ residual + lambda1 * np.sign(w) + 2.0 * lambda2 * w  , np.float64(2.0)/ N * np.sum(residual)
 
-        # 允许传入 int/float，统一成 numpy 标量便于后续计算。
+
         lr = np.float64(lr)
         lambda1 = np.float64(lambda1)
         lambda2 = np.float64(lambda2)
@@ -53,14 +52,12 @@ class LinearRegressionModel:
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
             if not np.isfinite(loss):
-                # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
                 diverged = True
                 break
             if loss0 is None:
                 loss0 = loss
             elif loss > 1e6 * loss0:
-                # 发散早期 loss 还没到 inf，仅靠 isfinite 检测不到，按初始 loss 的 1e6 倍视为爆炸
                 print(
                     f"loss exploded at epoch {epoch} (loss={loss:.3e} vs initial {loss0:.3e}), "
                     "training has stopped"
@@ -102,7 +99,6 @@ class LogisticRegressionModel:
         lambda2: float = 0.01,
     ) -> None:
         # 训练模型；features 为 (N, 2560)，targets 为 (N,) 的 0/1 标签。
-        # lr 为学习率，epochs 为训练轮数，lambda1/lambda2 为 L1/L2 正则化系数。
         def sigmoid(z):
             z = np.asarray(z, dtype=float)
             return np.exp(-np.logaddexp(0.0, -z))
@@ -115,7 +111,6 @@ class LogisticRegressionModel:
             N = len(y)
             return 1.0 / N * Phi.T @ residual + lambda1 * np.sign(w) + 2.0 * lambda2 * w  , np.float64(1.0)/ N * np.sum(residual)
 
-        # 允许传入 int/float，统一成 numpy 标量便于后续计算。
         lr = np.float64(lr)
         lambda1 = np.float64(lambda1)
         lambda2 = np.float64(lambda2)
@@ -139,14 +134,12 @@ class LogisticRegressionModel:
                 break
             loss = cal_loss(features, targets, w, b, lambda1, lambda2)
             if not np.isfinite(loss):
-                # 权重爆炸溢出成 inf 时 isclose(inf, inf) 也为真，必须与收敛分开判断
                 print(f"loss became non-finite at epoch {epoch} (loss={loss}), training has stopped")
                 diverged = True
                 break
             if loss0 is None:
                 loss0 = loss
             elif loss > 1e6 * loss0:
-                # 发散早期 loss 还没到 inf，仅靠 isfinite 检测不到，按初始 loss 的 1e6 倍视为爆炸
                 print(
                     f"loss exploded at epoch {epoch} (loss={loss:.3e} vs initial {loss0:.3e}), "
                     "training has stopped"
