@@ -1,5 +1,7 @@
 guide/
 .qoder-credits/
+extra_experiments/
+test/
 
 # LaTeX 编译中间产物（报告源码在 report/；report.pdf 为产物，保留可提交）
 report/*.aux
