@@ -28,6 +28,9 @@ def train(model, x, y, *, steps, learning_rate, optimizer="sgd", diagnostics=Fal
 
         # 此处需要补全
         # TODO：在此实现一次更新，使用当前模型、优化器和全部 x、y。
-        raise NotImplementedError("请补全单次训练更新，并删除这一行占位异常。")
+        updater.zero_grad()
+        loss = (model(x) - y).square().mean()
+        loss.backward()
+        updater.step()
         # 补全位置结束
     return history
