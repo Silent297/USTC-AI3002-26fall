@@ -1,5 +1,7 @@
 # Lab2：神经网络与无监督聚类
 
+本工作区的文件存放、任务提交与人工验收规则见 [WORKSPACE.md](WORKSPACE.md)。
+
 最终只需提交覆盖两题的 `report.pdf`、第一题的 `models.py` 和 `train.py`、第二题的 `submission.py` 及最终 `clusters.npy`。报告格式自定，提交目录见[实验文档](lab2.pdf)的“提交”一节。其他原始输出无需上传，请在本地保留至验收结束。
 
 <a id="environment"></a>

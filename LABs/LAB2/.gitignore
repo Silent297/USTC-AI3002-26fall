@@ -1,2 +1,12 @@
 .qoder-credits/
 logs/
+AGENTS.md
+_progress.md
+
+# Local collaboration state and generated artifacts.
+/_tasklog/
+/_tmp/
+/submit/
+/code/q1_neural_network/outputs/
+/code/q1_neural_network/outputs_*/
+/code/q2_clustering/outputs*/
