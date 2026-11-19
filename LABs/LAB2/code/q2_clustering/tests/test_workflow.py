@@ -34,7 +34,28 @@ class WorkflowTests(unittest.TestCase):
                             development=True, **options)
 
     def test_unfinished_submission_saves_status_without_final_output(self):
-        self.assertEqual(self.run_experiment(), 1)
+        # 补全 submission.py 后无法用真实实现复现“未实现”状态；
+        # 改用显式抛 NotImplementedError 的临时实现，原断言保持不变。
+        implementation = self.root / "unfinished.py"
+        implementation.write_text(
+            "def init_centers_kmeanspp(*args):\n"
+            "    raise NotImplementedError('TODO 1')\n"
+            "def assign_clusters(*args):\n"
+            "    raise NotImplementedError('TODO 2')\n"
+            "def update_centers(*args):\n"
+            "    raise NotImplementedError('TODO 3')\n"
+            "def gmm_estep(*args):\n"
+            "    raise NotImplementedError('TODO 4')\n"
+            "def gmm_mstep(*args):\n"
+            "    raise NotImplementedError('TODO 5')\n"
+            "def silhouette_score(*args):\n"
+            "    raise NotImplementedError('TODO E1')\n"
+            "def calinski_harabasz_score(*args):\n"
+            "    raise NotImplementedError('TODO E2')\n"
+            "def davies_bouldin_score(*args):\n"
+            "    raise NotImplementedError('TODO E3')\n"
+        )
+        self.assertEqual(self.run_experiment(implementation_path=implementation), 1)
         manifest = json.loads((self.output / "manifest.json").read_text())
         self.assertEqual(manifest["status"], "not_implemented")
         self.assertFalse((self.output / "clusters.npy").exists())
