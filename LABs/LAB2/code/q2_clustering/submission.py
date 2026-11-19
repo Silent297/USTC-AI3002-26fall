@@ -12,96 +12,150 @@ generator=rng。不要修改输入。框架负责转换、迭代、重启、评�
 评价函数只接收特征与预测分区，不接收真实标签。
 """
 import torch
+import math
 from utils.runtime import device
 
 
 # KMeans：初始化、分配与中心更新。
 def init_centers_kmeanspp(X, n_clusters, rng):
-    """TODO 1：返回 (K,D) 初始中心。
+    """TODO 1：返回 (K,D) 初始中心。"""
+    N, D = X.shape
+    centers = X.new_empty((n_clusters, D))
+    min_sq = X.new_full((N,), float("inf"))
+    selected = torch.zeros(N, dtype=torch.bool, device=X.device)
 
-    X:(N,D)，rng:torch.Generator。第一个中心均匀抽取；其余
-    按到最近已有中心的平方距离加权抽取。所有距离为0时，从尚未选过的
-    样本行中均匀选取。不要修改 X；不要构造 (N,N) 距离矩阵；抽样权重保持为 Tensor。
-    可使用 torch.randint / torch.multinomial，传入 generator=rng；新张量放在 device 上。
-    """
-    raise NotImplementedError("TODO 1: k-means++ 初始化")
+    first = int(torch.randint(0, N, (1,), generator=rng, device=X.device).item())
+    centers[0] = X[first]
+    selected[first] = True
+    min_sq = torch.minimum(min_sq, (X - X[first]).square().sum(dim=1))
+
+    for k in range(1, n_clusters):
+        if bool(min_sq.sum() > 0):    
+            index = int(torch.multinomial(min_sq, 1, generator=rng).item())
+        else:    
+            remain = torch.nonzero(~selected, as_tuple=False).flatten()    
+            position = int(torch.randint(0, remain.numel(), (1,),generator=rng, device=X.device).item())  
+            index = int(remain[position].item())
+        centers[k] = X[index]
+        selected[index] = True
+        min_sq = torch.minimum(min_sq, (X - X[index]).square().sum(dim=1))
+
+    return centers
 
 
 def assign_clusters(X, centers):
-    """TODO 2：返回 labels:(N,) 整数、min_sq_dist:(N,)。
-
-    按最近中心的平方欧氏距离分配，并列时选择较小编号。
-    允许构造 (N,K) 距离矩阵，避免 (N,K,D) 大数组；将浮点消去造成的
-    负平方距离截到0。计算式：||x||²+||mu||²-2*x@mu。
-    """
-    raise NotImplementedError("TODO 2: 最近中心分配")
+    """TODO 2：返回 labels:(N,) 整数、min_sq_dist:(N,)。"""
+    x_sq = X.square().sum(dim=1)
+    mu_sq = centers.square().sum(dim=1)
+    dist = x_sq.unsqueeze(1) + mu_sq.unsqueeze(0) - 2 * (X @ centers.t())
+    dist = dist.clamp_min(0)
+    min_sq_dist, labels = torch.min(dist, dim=1)
+    return labels, min_sq_dist
 
 
 def update_centers(X, labels, old_centers):
-    """TODO 3：返回更新后的 (K,D) 中心，不修改输入。
-
-    非空簇取均值；空簇保留旧中心。空簇策略不保证声明K等于实际K，
-    最终实际非空簇数由框架单独检查。
-    """
-    raise NotImplementedError("TODO 3: 均值更新与空簇处理")
+    """TODO 3：返回更新后的 (K,D) 中心，不修改输入。"""
+    K, D = old_centers.shape
+    sums = X.new_zeros((K, D))
+    index = labels.long()
+    sums.index_add_(dim=0, index=index, source=X)
+    counts = torch.bincount(index, minlength=K)
+    _counts = counts.clamp_min(1).to(X.dtype).unsqueeze(1)
+    means = sums / _counts
+    is_new_centers = (counts > 0).unsqueeze(1)
+    new_centers = torch.where(is_new_centers, means, old_centers)
+    return new_centers
 
 
 # GMM：对角协方差下的 E 步与 M 步。
 def gmm_estep(X, weights, means, variances):
-    """TODO 4：对角协方差 GMM 的 E 步。
+    """TODO 4：对角协方差 GMM 的 E 步。"""
+    log_weights = torch.log(weights)
+    var_reciprocal = 1.0 / variances
+    mean_term = (means.square() * var_reciprocal).sum(dim=1)
+    x_sq = X.square() @ var_reciprocal.t()
+    cross = X @ (means * var_reciprocal).t()        
+    quad = x_sq - 2.0 * cross + mean_term
 
-    weights:(K,), means/variances:(K,D)，权重与方差为正。
-    返回 resp:(N,K) 及每样本平均观测对数似然 mean_log_likelihood。
-    责任度每行和为1；在对数空间计算高斯密度与混合权重，使用
-    log-sum-exp 归一化，不能先算高维密度再取log。
-    """
-    raise NotImplementedError("TODO 4: 稳定的 GMM E 步")
+    D = X.shape[1]
+    log_var = torch.log(variances).sum(dim=1)
+    log_joint = log_weights - 0.5 * (D* math.log(2 * math.pi) + log_var + quad)
+    lse = torch.logsumexp(log_joint, dim=1)
+    resp = torch.exp(log_joint - lse.unsqueeze(1))
+    mean_log_likelihood = lse.mean()
+
+    return resp, mean_log_likelihood
 
 
 def gmm_mstep(X, resp, reg_covar):
-    """TODO 5：返回 weights:(K,), means:(K,D), variances:(K,D)。
+    """TODO 5：返回 weights:(K,), means:(K,D), variances:(K,D)。"""
+    Nk = resp.sum(dim=0)
+    if bool((Nk <= 1e-12).any()):
+        raise ValueError("gmm_mstep: component with zero effective count")
+    weights = Nk / Nk.sum()
+    means = (resp.t() @ X) / Nk.unsqueeze(1)
+    variances = (resp.t() @ X.square()) / Nk.unsqueeze(1) - means.square()
+    variances = variances.clamp_min(0) + reg_covar
 
-    N_k=sum_i resp[i,k]；更新权重、加权均值与对角加权方差。
-    方差先消除舍入误差导致的负值，再加 reg_covar（正数）。
-    任一 N_k <= 1e-12 时 raise ValueError，框架会记录本次初始化失败。
-    不要把失败重启算作收敛；不要修改输入。
-    """
-    raise NotImplementedError("TODO 5: GMM M 步与方差正则化")
+    return weights, means, variances
 
 
 # 评价：框架提供原始特征与预测分区，以下函数负责计算指标。
 def silhouette_score(X, labels):
-    """TODO E1：返回平均 Silhouette，使用欧氏距离（不是平方距离）。
-
-    框架仅在 2 <= 实际簇数 < N 时调用并接受本指标；全为单点簇时指标未定义。
-    a_i：同簇其他样本的平均距离；b_i：到其他每个簇的平均距离的最小值。
-    s_i=(b_i-a_i)/max(a_i,b_i)，最后对样本平均。
-    单样本簇的 s_i 为0；a_i=b_i=0 时也为0。
-    X 已经是固定评价子集，不在本函数中再抽样。
-    可以构造 (N,N) 距离矩阵，但不要构造 (N,N,D) 中间数组。
-    """
-    raise NotImplementedError("TODO E1: Silhouette")
+    """TODO E1：返回平均 Silhouette，使用欧氏距离（不是平方距离）。"""
+    dist = torch.cdist(X, X)
+    unique, inverse = torch.unique(labels, return_inverse=True)
+    K = unique.numel()
+    one_hot = torch.nn.functional.one_hot(inverse, K).to(X.dtype)
+    counts = one_hot.sum(dim=0)      
+    sum_dist = dist @ one_hot         
+    mean_dist = sum_dist / counts
+    
+    own = mean_dist.gather(1, inverse.unsqueeze(1)).squeeze(1)
+    n_i = counts[inverse]
+    a = own * n_i / (n_i - 1).clamp_min(1)
+    others = mean_dist.masked_fill(one_hot.bool(), float("inf"))
+    b = others.min(dim=1).values
+    max_ab = torch.maximum(a, b)
+    s = torch.where(max_ab > 0, (b-a)/max_ab, torch.zeros_like(a))
+    s = torch.where(n_i > 1, s, torch.zeros_like(s))
+    return s.mean()
 
 
 def calinski_harabasz_score(X, labels):
-    """TODO E2：返回 CH，框架传入全量原始特征。
+    """TODO E2：返回 CH，框架传入全量原始特征。"""
+    unique, inverse = torch.unique(labels, return_inverse=True)
+    K = unique.numel()
+    one_hot = torch.nn.functional.one_hot(inverse, K).to(X.dtype)
+    counts = one_hot.sum(dim=0)
+    means = (one_hot.t() @ X) / counts.unsqueeze(1)
+    all_means = X.mean(dim=0)
+    B = ((means - all_means).square().sum(dim=1) * counts).sum()
+    x_sq = (one_hot.t() @ X.square()).sum(dim=1)
+    w = x_sq - counts * means.square().sum(dim=1)
+    W = w.clamp_min(0).sum()
+    if float(W) == 0:
+        return 1.0
+    CH = (B /(K - 1)) / (W / (X.shape[0]-K))
+    return CH
 
-    框架仅在 2 <= 实际簇数 < N 时调用并接受本指标。
-    B=sum_q n_q*||mu_q-mu||²；W=sum_q sum_{i in q} ||x_i-mu_q||²。
-    CH=(B/(K-1))/(W/(N-K))。K 为实际非空簇数。
-    为兼容原有指标口径，W 恰为0时返回1.0。
-    """
-    raise NotImplementedError("TODO E2: Calinski-Harabasz")
 
 
 def davies_bouldin_score(X, labels):
-    """TODO E3：返回 DB，框架传入全量原始特征。
-
-    S_q 为簇内到中心的平均欧氏距离，M_qr 为两中心的欧氏距离。
-    DB=mean_q max_{r!=q}(S_q+S_r)/M_qr。
-    近零判断固定使用 atol=1e-8、rtol=0，float32/float64 使用同一阈值：
-    所有 S_q <= 1e-8 或所有 M_qr <= 1e-8 时返回0；
-    其余情况下中心距离恰为0的对不参与最大值（距离置为无穷）。
-    正的中心距离仍参与计算，不按近零阈值逐对截断。
-    """
-    raise NotImplementedError("TODO E3: Davies-Bouldin")
+    """TODO E3：返回 DB，框架传入全量原始特征。"""
+    unique, inverse = torch.unique(labels, return_inverse=True)
+    K = unique.numel()
+    one_hot = torch.nn.functional.one_hot(inverse, K).to(X.dtype)
+    counts = one_hot.sum(dim=0)
+    means = (one_hot.t() @ X) / counts.unsqueeze(1)
+    mean_dist = torch.cdist(X, means)
+    S = (mean_dist * one_hot).sum(dim=0) / counts
+    M = torch.cdist(means, means)
+    if bool((S <= 1e-8).all()):
+        return 0.0
+    if bool((M <= 1e-8).all()):
+        return 0.0
+    M_mask = M.masked_fill(M == 0, float("inf"))
+    R = ((S.unsqueeze(1) + S.unsqueeze(0)) / M_mask).max(dim=1).values
+    DB = R.mean()
+    return DB
