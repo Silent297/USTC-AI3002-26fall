@@ -1,0 +1,5 @@
+=== GPU check ===
+torch 2.11.0+cu128 (CUDA 12.8)
+device: NVIDIA A100-SXM4-80GB
+=== RUN: self-check-float32: extras.py self-check --device cuda
+python: can't open file '/var/spool/slurmd/job177587/extras.py': [Errno 2] No such file or directory

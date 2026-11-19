@@ -1,0 +1,10 @@
+mkdir: cannot create directory ‘/var/spool/logs’: Permission denied
+mv: cannot move '/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB2/code/q2_clustering/lab2-q2-full_177587.out' to '/var/spool/logs/T0008/20261119_213307_177587_177587/': No such file or directory
+WARNING: cannot archive /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB2/code/q2_clustering/lab2-q2-full_177587.out
+mv: cannot move '/home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB2/code/q2_clustering/lab2-q2-full_177587.err' to '/var/spool/logs/T0008/20261119_213307_177587_177587/': No such file or directory
+WARNING: cannot archive /home/scc/pb25030753/USTC-AI3002-26fall/LABs/LAB2/code/q2_clustering/lab2-q2-full_177587.err
+tee: /var/spool/logs/T0008/20261119_213307_177587_177587/job.log: No such file or directory
+tee: /var/spool/logs/T0008/20261119_213307_177587_177587/job.log: No such file or directory
+tee: /var/spool/logs/T0008/20261119_213307_177587_177587/job.log: No such file or directory
+tee: /var/spool/logs/T0008/20261119_213307_177587_177587/job.log: No such file or directory
+FAIL(2): self-check-float32

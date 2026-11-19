@@ -4,7 +4,7 @@
 #SBATCH --qos=qos_stu_default
 #SBATCH --gres=gpu:A100:1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem=32G
+#SBATCH --mem=16G
 #SBATCH --time=04:00:00
 #SBATCH --output=%x_%j.out
 #SBATCH --error=%x_%j.err
