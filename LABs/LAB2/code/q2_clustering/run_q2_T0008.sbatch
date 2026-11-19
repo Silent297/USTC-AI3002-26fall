@@ -12,11 +12,26 @@
 
 set -uo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Slurm 会把批处理脚本复制到 spool 目录执行，不能用 BASH_SOURCE 反推仓库位置。
+SCRIPT_DIR=""
+for candidate in \
+  "${SLURM_SUBMIT_DIR:-}" \
+  "${SLURM_SUBMIT_DIR:-}/LABs/LAB2/code/q2_clustering" \
+  "$(cd "$(dirname "${BASH_SOURCE[0]}")" 2>/dev/null && pwd)"; do
+  if [[ -n "${candidate}" && -f "${candidate}/extras.py" ]]; then
+    SCRIPT_DIR="$(cd "${candidate}" && pwd)"
+    break
+  fi
+done
+if [[ -z "${SCRIPT_DIR}" ]]; then
+  echo "ERROR: cannot locate code/q2_clustering (extras.py); submit from LABs/LAB2/code/q2_clustering" >&2
+  exit 1
+fi
 LAB_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 LOG_ROOT="${LOG_ROOT:-${LAB_ROOT}/logs/T0008}"
-STAMP="$(date +%Y%m%d_%H%M%S)_${SLURM_JOB_ID:-local}"
-run_root="${LOG_ROOT}/${STAMP}_${SLURM_JOB_ID:-local}"
+STAMP="$(date +%Y%m%d_%H%M%S)"
+RUN_ID="${STAMP}_${SLURM_JOB_ID:-local}"
+run_root="${LOG_ROOT}/${RUN_ID}"
 mkdir -p "${run_root}"
 run_log="${run_root}/job.log"
 
@@ -72,8 +87,8 @@ run_step() {
 run_step "self-check-float32" extras.py self-check --device cuda || exit 1
 run_step "self-check-float64" extras.py self-check --device cuda --dtype float64 || exit 1
 
-fit_out="outputs_fit_T0008_${STAMP}"
-eval_out="outputs_eval_T0008_${STAMP}"
+fit_out="outputs_fit_T0008_${RUN_ID}"
+eval_out="outputs_eval_T0008_${RUN_ID}"
 
 run_step "fit" extras.py run --stage fit --device cuda --config config.json --output "${fit_out}" || exit 1
 run_step "evaluate" extras.py evaluate --device cuda --experiment "${fit_out}" --output "${eval_out}" || exit 1
