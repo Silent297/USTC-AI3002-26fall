@@ -1,0 +1,13 @@
+{
+  "depths": [2, 4, 8],
+  "width": 32,
+  "activations": ["sigmoid", "relu"],
+  "seeds": [17, 42, 123],
+  "steps": 1000,
+  "learning_rate": 0.05,
+  "optimizer": "sgd",
+  "dtype": "float32",
+  "threads": 1,
+  "diagnostic_samples": 128,
+  "data_sha256": "b3b3d27308694a343dfd1fc5b0376929b9a25f5cdd15f1e54bcd8e319e02977f"
+}
