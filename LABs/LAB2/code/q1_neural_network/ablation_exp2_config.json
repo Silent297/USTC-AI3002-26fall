@@ -1,0 +1,12 @@
+{
+  "structures": {"shallow": [16], "deep": [8, 4]},
+  "seeds": [17, 42, 123, 2026, 20261123],
+  "checkpoints": [0, 3000, 9000],
+  "activation": "relu",
+  "optimizer": "adam",
+  "learning_rate": 0.01,
+  "dtype": "float32",
+  "threads": 1,
+  "history_every": 100,
+  "data_sha256": "a84cc2c77a617d6efb5cf6049683fb59d2b57ffce034b59d989b32d05fed1c60"
+}
