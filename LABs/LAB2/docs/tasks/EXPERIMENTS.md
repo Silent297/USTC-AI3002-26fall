@@ -32,4 +32,4 @@
 
 ## 待做实验入口
 
-P1“小学习率慢收敛反例”仍待做；P2已有正式结果，已单列于后续补充实验，不再作为待运行项目。完整事前设计及其他尚未实施的GMM/KMeans比较思路见[待做方案](../reports/pending_experiments.md)。
+P1“小学习率慢收敛反例”已完成[T0018提交准备](T0018.md)与toy自检，正式作业待用户提交，见[P1执行说明](../reports/p1_learning_rate.md)，不计入已执行正式实验；P2已有正式结果，已单列于后续补充实验。完整事前设计及其他尚未实施的GMM/KMeans比较思路见[待做方案](../reports/pending_experiments.md)。

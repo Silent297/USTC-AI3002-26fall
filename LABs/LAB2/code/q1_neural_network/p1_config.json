@@ -1,0 +1,9 @@
+{
+  "seeds": [17, 42, 123],
+  "learning_rates": [0.05, 0.00001],
+  "steps": 1000,
+  "optimizer": "sgd",
+  "dtype": "float32",
+  "threads": 1,
+  "data_sha256": "b3b3d27308694a343dfd1fc5b0376929b9a25f5cdd15f1e54bcd8e319e02977f"
+}
